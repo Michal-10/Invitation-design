@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperDreams-Server", "PaperDreams-Server\PaperDreams-Server.csproj", "{AEFE52F5-35AD-4248-B0DE-68B3AECA94CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaperDreams-Server.Api", "PaperDreams-Server\PaperDreams-Server.Api.csproj", "{AEFE52F5-35AD-4248-B0DE-68B3AECA94CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperDreams-Server.Data", "PaperDreams-Server.Data\PaperDreams-Server.Data.csproj", "{D9AB2343-A7E6-4856-AFCC-A6DCEB538E52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperDreams-Server.Service", "PaperDreams-Server.Service\PaperDreams-Server.Service.csproj", "{6DEB6A2A-88D9-456C-A882-3AF5EE617C91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperDreams-Server.Core", "PaperDreams-Server.Core\PaperDreams-Server.Core.csproj", "{9A4DB105-B7AD-40B6-9634-41986BB6DD94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{AEFE52F5-35AD-4248-B0DE-68B3AECA94CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEFE52F5-35AD-4248-B0DE-68B3AECA94CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEFE52F5-35AD-4248-B0DE-68B3AECA94CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9AB2343-A7E6-4856-AFCC-A6DCEB538E52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9AB2343-A7E6-4856-AFCC-A6DCEB538E52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9AB2343-A7E6-4856-AFCC-A6DCEB538E52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9AB2343-A7E6-4856-AFCC-A6DCEB538E52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DEB6A2A-88D9-456C-A882-3AF5EE617C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DEB6A2A-88D9-456C-A882-3AF5EE617C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DEB6A2A-88D9-456C-A882-3AF5EE617C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DEB6A2A-88D9-456C-A882-3AF5EE617C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A4DB105-B7AD-40B6-9634-41986BB6DD94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A4DB105-B7AD-40B6-9634-41986BB6DD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A4DB105-B7AD-40B6-9634-41986BB6DD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A4DB105-B7AD-40B6-9634-41986BB6DD94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
