@@ -38,10 +38,8 @@ export default (({ status }: { status: string }) => {
         e.preventDefault();
 
         try {
-            
             if( status == 'register'){
                 console.log("register****");
-                
                 const res = await axios.post(`http://localhost:5077/api/user/register`, {
                     FirstName : firstNameRef.current?.value,
                     LastName :lastNameRef.current?.value,
@@ -53,7 +51,6 @@ export default (({ status }: { status: string }) => {
             }
             else {
                 console.log("login****");
-
                 const res = await axios.post(`http://localhost:5077/api/user/login`, {
                     Email :emailRef.current?.value,
                     Password: passwordRef.current!.value
