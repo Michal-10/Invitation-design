@@ -33,7 +33,7 @@ namespace PaperDreams_Server.Controllers
         }
 
         [HttpGet("category/{category}")]
-        public async Task<IActionResult> GetByCategory(string category)
+        public async Task<IActionResult> GetByCategory(int category)
         {
             var templates = await _templateService.GetByCategoryAsync(category);
             return Ok(templates);

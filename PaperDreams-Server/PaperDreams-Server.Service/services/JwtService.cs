@@ -39,8 +39,10 @@ namespace PaperDreams_Server.Service.services
             //new Claim(ClaimTypes.Role, user.Roles),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
-            claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role.RoleName)));
-
+            if (user.Roles != null)
+            {
+                claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role.RoleName)));
+            }
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secret));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

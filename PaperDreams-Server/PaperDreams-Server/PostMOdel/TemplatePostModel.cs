@@ -11,7 +11,7 @@ namespace PaperDreams_Server.PostMOdel
 
         //public string ImageUrl { get; set; }
         [Required]
-        public string Category { get; set; }
+        public uint Category { get; set; }
     }
 
 }

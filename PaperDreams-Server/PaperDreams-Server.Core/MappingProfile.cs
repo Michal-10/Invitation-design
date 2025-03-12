@@ -17,6 +17,7 @@ namespace PaperDreams_Server.Core
             CreateMap<Template, TemplateDTO>().ReverseMap();
             CreateMap<CompletedInvitation, CompletedInvitationDTO>().ReverseMap();
             CreateMap<TextUpload, TextUploadDTO>().ReverseMap();
+
             CreateMap<User, RegisterDTO>().ReverseMap();
 
 

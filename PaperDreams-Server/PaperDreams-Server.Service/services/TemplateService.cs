@@ -30,7 +30,7 @@ namespace PaperDreams_Server.Service.services
             return _mapper.Map<IEnumerable<TemplateDTO>>(templates);
         }
 
-        public async Task<IEnumerable<TemplateDTO>> GetByCategoryAsync(string category)
+        public async Task<IEnumerable<TemplateDTO>> GetByCategoryAsync(int category)
         {
             var templates = await _templateRepository.GetByCategoryAsync(category);
             return _mapper.Map<IEnumerable<TemplateDTO>>(templates);

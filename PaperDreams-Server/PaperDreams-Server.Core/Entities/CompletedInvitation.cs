@@ -27,15 +27,18 @@ namespace PaperDreams_Server.Core.Entities
         public uint TextUploadId { get; set; }
         public TextUpload TextUpload { get; set; } //קשר לטקסט
 
+
         public string ImageUrl { get; set; }
 
         public string EventType { get; set; }
 
         public string Content { get; set; }
+        public uint Category { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
 
     }
+
 }

@@ -11,6 +11,7 @@ namespace PaperDreams_Server.Core.IRpositories
     {
         Task<IEnumerable<CompletedInvitation>> GetAllCompletedInvitationsAsync();
         Task<IEnumerable<CompletedInvitation>> GetCompletedInvitationsByUserAsync(uint userId);
+        Task<IEnumerable<CompletedInvitation>> GetCompletedInvitationsByCategoryAsync(uint category);
 
         Task<CompletedInvitation> CreateCompletedInvitationAsync(CompletedInvitation invitation);
         Task<bool> DeleteCompletedInvitationAsync(uint id);

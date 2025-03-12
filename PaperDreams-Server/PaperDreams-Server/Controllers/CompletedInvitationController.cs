@@ -58,6 +58,18 @@ namespace PaperDreams_Server.Controllers
             return Ok(invitations);
         }
 
+        // קבלת כל ההזמנות לפי קטגוריה
+        [HttpGet("user/{category}")]
+        public async Task<IActionResult> GetCompletedInvitationsByCategory(uint category)
+        {
+            var invitations = await _completedInvitationService.GetAllCompletedInvitationsByCategoryAsync(category);
+            if (invitations == null || !invitations.Any())
+            {
+                return NotFound("No invitations found for this user.");
+            }
+            return Ok(invitations);
+        }
+
         // מחיקת הזמנה
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCompletedInvitation(uint id)

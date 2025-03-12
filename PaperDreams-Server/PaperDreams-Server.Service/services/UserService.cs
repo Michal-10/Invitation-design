@@ -35,7 +35,7 @@ namespace PaperDreams_Server.Service.services
                 return null; // משתמש כבר קיים
 
             var newUser = _mapper.Map<User>(registerDto);
-            newUser.Password = HashPassword(registerDto.Password); // הצפנת הסיסמה ✅
+            newUser.PasswordHash = HashPassword(registerDto.Password); // הצפנת הסיסמה ✅
             await _userRepository.AddUserAsync(newUser);
 
             return await LoginAsync(_mapper.Map<LoginDTO>(registerDto));
@@ -46,7 +46,7 @@ namespace PaperDreams_Server.Service.services
         public async Task<string> LoginAsync(LoginDTO loginDto)
         {
             var user = (await _userRepository.GetUsersAsync()).FirstOrDefault(u => u.Email == loginDto.Email);
-            if (user == null || !VerifyPassword(loginDto.Password, user.Password))
+            if (user == null || !VerifyPassword(loginDto.Password, user.PasswordHash))
                 return null; // אימייל או סיסמה שגויים
 
             return _jwtService.GenerateToken(user);

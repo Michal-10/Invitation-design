@@ -12,7 +12,7 @@ namespace PaperDreams_Server.Core.Iservices
     {
 
         Task<IEnumerable<TemplateDTO>> GetAllAsync();
-        Task<IEnumerable<TemplateDTO>> GetByCategoryAsync(string category);
+        Task<IEnumerable<TemplateDTO>> GetByCategoryAsync(int category);
         Task<TemplateDTO> GetByIdAsync(uint id);
         Task<bool> AddAsync(TemplateDTO model);
         Task<bool> UpdateAsync(uint id, TemplateDTO model);

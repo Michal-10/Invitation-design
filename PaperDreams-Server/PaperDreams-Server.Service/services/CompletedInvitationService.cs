@@ -29,6 +29,13 @@ namespace PaperDreams_Server.Service.services
             return _mapper.Map<IEnumerable<CompletedInvitationDTO>>(invitations);
         }
 
+        //קבלת כל ההזמנות לפי קטגוריה 
+        public async Task<IEnumerable<CompletedInvitationDTO>> GetAllCompletedInvitationsByCategoryAsync(uint category)
+        {
+            var invitations = await _completedInvitationRepository.GetCompletedInvitationsByCategoryAsync(category);
+            return _mapper.Map<IEnumerable<CompletedInvitationDTO>>(invitations);
+        }
+
         // קבלת כל ההזמנות לפי משתמש
         public async Task<IEnumerable<CompletedInvitationDTO>> GetCompletedInvitationsByUserAsync(uint userId)
         {

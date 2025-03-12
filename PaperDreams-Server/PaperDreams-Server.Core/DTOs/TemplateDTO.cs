@@ -11,7 +11,7 @@ namespace PaperDreams_Server.Core.DTOs
         public uint Id { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
-        public string Category { get; set; }
+        public uint Category { get; set; }
     }
  
 }

@@ -30,6 +30,13 @@ namespace PaperDreams_Server.Data.Repositories
             return await _context.CompletedInvitations.Where(i => i.UserId == userId).ToListAsync();
         }
 
+        // קבלת כל ההזמנות לפי קטגוריה
+        public async Task<IEnumerable<CompletedInvitation>> GetCompletedInvitationsByCategoryAsync(uint category)
+        {
+            return await _context.CompletedInvitations.Where(i => i.Category == category).ToListAsync();
+        }
+
+
         // הוספת הזמנה חדשה
         public async Task<CompletedInvitation> CreateCompletedInvitationAsync(CompletedInvitation invitation)
         {
@@ -48,5 +55,7 @@ namespace PaperDreams_Server.Data.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        
     }
 }

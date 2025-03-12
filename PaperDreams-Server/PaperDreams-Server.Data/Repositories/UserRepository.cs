@@ -50,10 +50,10 @@ namespace PaperDreams_Server.Data.Repositories
                 userEntity.Email = user.Email;
 
             // אם המשתמש סיפק סיסמה חדשה, נצפין אותה
-            if (!string.IsNullOrEmpty(user.Password))
-                userEntity.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            if (!string.IsNullOrEmpty(user.PasswordHash))
+                userEntity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
 
-            userEntity.Role = userEntity.Role;
+            userEntity.Roles = userEntity.Roles;
 
 
             _dataContext.Users.Update(userEntity);

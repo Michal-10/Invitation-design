@@ -23,7 +23,7 @@ namespace PaperDreams_Server.Data.Repositories
             return await _context.Templates.ToListAsync();
         }
 
-        public async Task<IEnumerable<Template>> GetByCategoryAsync(string category)
+        public async Task<IEnumerable<Template>> GetByCategoryAsync(int category)
         {
             return await _context.Templates.Where(t => t.Category == category).ToListAsync();
         }
