@@ -3,6 +3,7 @@ import { FormEvent, useContext, useRef, useState } from "react";
 import axios from "axios";
 import ShowUserNameAndAvatar from "./UserDetails";
 import { stat } from "fs";
+import { log } from "console";
 // import { observer } from "mobx-react";
 // import LoginStore from "../global-state/mobX/LoginStore";
 // import { UserContext } from "../UserContextReducer";
@@ -37,40 +38,27 @@ export default (({ status }: { status: string }) => {
         e.preventDefault();
 
         try {
+            
+            if( status == 'register'){
+                console.log("register****");
+                
+                const res = await axios.post(`http://localhost:5077/api/user/register`, {
+                    FirstName : firstNameRef.current?.value,
+                    LastName :lastNameRef.current?.value,
+                    Email :emailRef.current?.value,
+                    Password: passwordRef.current!.value,
+                    Role :'user',
+                    UpdatedAt: new Date()
+                });
+            }
+            else {
+                console.log("login****");
 
-            /**
-             * register
-             * public string FirstName { get; set; }
-                public string LastName { get; set; }
-                public string Email { get; set; }
-                public string Password { get; set; }
-                public string Role { get; set; }
-                public DateTime UpdatedAt { get; set; }
-
-             */
-
-            /**
-             * login
-                    * 
-                public string Email { get; set; }
-                public string Password { get; set; }
-             */
-            if(status == 'login '){
-            const res = await axios.post(`https://localhost:7158/api/user/${status}`, {
-                FirstName : firstNameRef.current?.value,
-                LastName :lastNameRef.current?.value,
-                Email :emailRef.current?.value,
-                Password: passwordRef.current!.value,
-                Role :'user',
-                UpdatedAt: new Date()
-            });
-        }
-        else {
-            const res = await axios.post(`https://localhost:7158/api/user/${status}`, {
-                Email :emailRef.current?.value,
-                Password: passwordRef.current!.value
-            });
-        }
+                const res = await axios.post(`http://localhost:5077/api/user/login`, {
+                    Email :emailRef.current?.value,
+                    Password: passwordRef.current!.value
+                });
+            }
 
             // if (status == 'login')
             //     LoginStore.UserId = res.data.user.id;
