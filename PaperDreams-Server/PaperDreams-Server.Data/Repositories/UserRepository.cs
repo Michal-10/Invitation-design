@@ -1,4 +1,5 @@
-﻿using PaperDreams_Server.Core.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using PaperDreams_Server.Core.DTOs;
 using PaperDreams_Server.Core.Entities;
 using PaperDreams_Server.Core.IRpositories;
 using System;
@@ -16,47 +17,25 @@ namespace PaperDreams_Server.Data.Repositories
         {
             _dataContext = dataContext;
         }
-        public IEnumerable<User> GetUsers()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            return _dataContext.Users;
+                return await _dataContext.Users.ToListAsync();
         }
 
-        public User? getUserById(uint id)
+        public async Task<User> GetUserByIdAsync(uint id)
         {
-            return _dataContext.Users.FirstOrDefault(u => u.Id == id);
+            return await _dataContext.Users.FindAsync(id);
         }
 
-        public bool AddUser(User user)
-        { 
-            _dataContext.Users.Add(user);
-            _dataContext.SaveChanges();
-            return true;
+        public async Task<bool> AddUserAsync(User user)
+        {
+            await _dataContext.Users.AddAsync(user);
+            return await _dataContext.SaveChangesAsync() > 0;
         }
 
-        public bool UpdateUser(uint id, User user)
+        public async Task<bool> UpdateUserAsync(uint id, User user)
         {
-            var userForUpdate = getUserById(id);
-
-            //if (user.Email != null && !string.IsNullOrEmpty(user.Email))
-            //    userForUpdate.Email = user.Email;
-
-            //if (user.FirstName != null && !string.IsNullOrEmpty(user.FirstName))
-            //    userForUpdate.FirstName = user.FirstName;
-
-            //if (user.LastName != null && !string.IsNullOrEmpty(user.LastName))
-            //    userForUpdate.LastName = user.LastName;
-
-            //if (!string.IsNullOrEmpty(user.Password))
-            //{
-            //    userForUpdate.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-            //}
-
-            //_dataContext.SaveChanges();
-            //return true;
-
-
-
-            var userEntity = getUserById(id);
+            var userEntity = await GetUserByIdAsync(id);
             if (userEntity == null)
                 return false;
 
@@ -76,15 +55,22 @@ namespace PaperDreams_Server.Data.Repositories
 
             userEntity.Role = userEntity.Role;
 
-            _dataContext.SaveChanges();
-            return true;
+
+            _dataContext.Users.Update(userEntity);
+            return await _dataContext.SaveChangesAsync() > 0;
         }
 
-        public bool DeleteUser(uint id)
+        public async Task<bool> DeleteUserAsync(uint id)
         {
-            _dataContext.Users.Remove(getUserById(id));
-            _dataContext.SaveChanges();
-            return true;
-        }      
+            var user = await GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return false; // לא נמצא, מחזיר false
+            }
+
+            _dataContext.Users.Remove(user);
+            return await _dataContext.SaveChangesAsync() > 0; //נמחק בהצלחה
+        }
+
     }
 }

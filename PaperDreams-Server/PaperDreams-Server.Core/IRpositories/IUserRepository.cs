@@ -10,10 +10,10 @@ namespace PaperDreams_Server.Core.IRpositories
 {
     public interface IUserRepository
     {
-        public IEnumerable<User> GetUsers();
-        User? getUserById(uint id);
-        public bool AddUser(User card);
-        public bool UpdateUser(uint id, User card);
-        public bool DeleteUser(uint id);
+        public Task<IEnumerable<User>> GetUsersAsync();
+        Task<User> GetUserByIdAsync(uint id);
+        public Task<bool> AddUserAsync(User card);
+        public Task<bool> UpdateUserAsync(uint id, User card);
+        public Task<bool> DeleteUserAsync(uint id);
     }
 }

@@ -12,6 +12,9 @@ namespace PaperDreams_Server.Data
     public class DataContext : DbContext 
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Template> Templates { get; set; }
+        public DbSet<TextUpload> TextUploads { get; set; }
+        public DbSet<CompletedInvitation> CompletedInvitations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

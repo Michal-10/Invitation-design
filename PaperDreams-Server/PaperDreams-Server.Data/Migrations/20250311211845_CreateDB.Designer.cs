@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PaperDreams_Server.Data;
 
@@ -11,9 +12,11 @@ using PaperDreams_Server.Data;
 namespace PaperDreams_Server.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250311211845_CreateDB")]
+    partial class CreateDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,11 +44,10 @@ namespace PaperDreams_Server.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<long>("TemplateId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("TemplateId1")
                         .HasColumnType("bigint");
 
                     b.Property<long>("TextUploadId")
@@ -60,6 +62,8 @@ namespace PaperDreams_Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("TemplateId");
+
+                    b.HasIndex("TemplateId1");
 
                     b.HasIndex("TextUploadId");
 
@@ -177,21 +181,25 @@ namespace PaperDreams_Server.Data.Migrations
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.CompletedInvitation", b =>
                 {
                     b.HasOne("PaperDreams_Server.Core.Entities.Template", "Template")
-                        .WithMany("CompletedInvitations")
+                        .WithMany()
                         .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("PaperDreams_Server.Core.Entities.Template", null)
+                        .WithMany("CompletedInvitations")
+                        .HasForeignKey("TemplateId1");
 
                     b.HasOne("PaperDreams_Server.Core.Entities.TextUpload", "TextUpload")
                         .WithMany()
                         .HasForeignKey("TextUploadId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("PaperDreams_Server.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Template");

@@ -12,6 +12,9 @@ namespace PaperDreams_Server.Core.DTOs
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime created_at { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+
         public string? FirstName { get; set; }
         public string LastName { get; set; }
         public string Role { get; set; }

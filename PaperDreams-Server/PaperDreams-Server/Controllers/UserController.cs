@@ -11,148 +11,6 @@ using System.Security.Claims;
 
 namespace PaperDreams_Server.Controllers
 {
-    //[Route("api/[controller]")]
-    //[ApiController]
-    //public class UserController : ControllerBase
-    //{
-    //    private readonly IUserService _userService;
-    //    public UserController(IUserService userService)
-    //    {
-    //        _userService = userService;
-    //    }
-    //    // GET: api/<UserController>
-    //    [HttpGet]
-    //    public ActionResult<IEnumerable<UserDTO>> Get()
-    //    {
-    //        return Ok(_userService.GetAllUsers());
-    //    }
-
-    //    // GET api/<UserController>/5
-    //    [HttpGet("{id}")]
-    //    public ActionResult<UserDTO> Get(uint id)
-    //    {
-    //        if (id <= 0)
-    //            return BadRequest();
-    //        var user = _userService.getUserById(id);
-    //        if (user == null)
-    //            return NotFound();
-    //        return user;
-    //    }
-
-    //    // POST api/<UserController>
-    //    [HttpPost]
-    //    public ActionResult Post([FromBody] UserDTO user)
-    //    {
-    //        //var userDTO = _mapper.Map<BuyingDTO>(value);
-    //        bool isSuccess = _userService.AddUser(user);
-    //        //bool isSuccess = _buyingService.AddBuying(value);
-    //        if (isSuccess)
-    //            return Ok(true);
-    //        return BadRequest("ID exists in the system"); ;
-    //    }
-
-    //    // PUT api/<UserController>/5
-    //    [HttpPut("{id}")]
-    //    public ActionResult Put(uint id, [FromBody] UserDTO user)
-    //    {
-    //        //var buyingDTO = _mapper.Map<BuyingDTO>(value);
-    //        bool isSuccess = _userService.UpdateUser(id, user);
-    //        if (isSuccess)
-    //            return Ok(true);
-    //        return NotFound();
-    //    }
-
-    //    // DELETE api/<UserController>/5
-    //    [HttpDelete("{id}")]
-    //    public ActionResult Delete(uint id)
-    //    {
-    //        bool isSuccess = _userService.DeleteUser(id);
-    //        if (isSuccess)
-    //            return Ok(true);
-    //        return NotFound();
-    //    }
-    //}
-
-
-
-
-
-
-
-
-
-
-
-    //[Route("api/[controller]")]
-    //[ApiController]
-    //[Authorize] // דורש אימות לכל הבקשות
-    //public class UserController : ControllerBase
-    //{
-    //    private readonly IUserService _userService;
-
-    //    public UserController(IUserService userService)
-    //    {
-    //        _userService = userService;
-    //    }
-
-    //    // רק מנהל יכול לראות את כל המשתמשים
-    //    [HttpGet]
-    //    [Authorize(Roles = "Admin")]
-    //    public ActionResult<IEnumerable<UserDTO>> Get()
-    //    {
-    //        return Ok(_userService.GetAllUsers());
-    //    }
-
-    //    // כל משתמש יכול לראות רק את עצמו
-    //    [HttpGet("{id}")]
-    //    [Authorize]
-    //    public ActionResult<UserDTO> Get(uint id)
-    //    {
-    //        var user = _userService.getUserById(id);
-    //        if (user == null)
-    //            return NotFound();
-
-    //        // בדיקה שהמשתמש מחפש רק את עצמו, אלא אם הוא Admin
-    //        var userIdFromToken = uint.Parse(User.FindFirst("sub")?.Value);
-    //        var userRole = User.FindFirst("role")?.Value;
-    //        if (userIdFromToken != id && userRole != "Admin")
-    //        {
-    //            return Forbid(); // חסימת גישה
-    //        }
-
-    //        return user;
-    //    }
-    //    [HttpPut("update-profile")]
-    //    [Authorize] // רק משתמשים מחוברים יכולים לגשת
-    //    public ActionResult UpdateProfile([FromBody] UserDTO userDto)
-    //    {
-    //        var userIdFromToken = uint.Parse(User.FindFirst("sub")?.Value);
-
-    //        // אסור למשתמש לשנות את התפקיד שלו
-    //        if (!string.IsNullOrEmpty(userDto.Role))
-    //            return BadRequest("You cannot change your role.");
-
-    //        bool isSuccess = _userService.UpdateUser(userIdFromToken, userDto);
-    //        if (isSuccess)
-    //            return Ok("Profile updated successfully.");
-
-    //        return BadRequest("Failed to update profile.");
-    //    }
-
-    //    // DELETE api/<UserController>/5
-    //    [HttpDelete("{id}")]
-    //    [Authorize]
-    //    [Authorize(Roles = "Admin")]
-    //    public ActionResult Delete(uint id)
-    //    {
-    //        bool isSuccess = _userService.DeleteUser(id);
-    //        if (isSuccess)
-    //            return Ok(true);
-    //        return NotFound();
-    //    }
-    //}
-
-
 
     [Route("api/user")]
     [ApiController]
@@ -164,23 +22,21 @@ namespace PaperDreams_Server.Controllers
         {
             _userService = userService;
         }
-
-        // ✅ רישום משתמש חדש
         [HttpPost("register")]
-        public IActionResult Register([FromBody] RegisterDTO registerDto)
+        public async Task<IActionResult> Register([FromBody] RegisterDTO registerDto)
         {
-            var success = _userService.Register(registerDto);
-            if (!success)
-                return BadRequest("Email already exists");
+            var token = await _userService.RegisterAsync(registerDto);
+            if (token == null)
+                return Unauthorized("Email already exists");
 
-            return Ok("User registered successfully");
+            return Ok(token);
         }
 
         // ✅ התחברות
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginDTO loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
         {
-            var token = _userService.Login(loginDto);
+            var token = await _userService.LoginAsync(loginDto);
             if (token == null)
                 return Unauthorized("Invalid email or password");
 
@@ -190,21 +46,20 @@ namespace PaperDreams_Server.Controllers
         // ✅ רק מנהל יכול לראות את כל המשתמשים
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public ActionResult<IEnumerable<UserDTO>> GetAllUsers()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
         {
-            return Ok(_userService.GetAllUsers());
+            return Ok(await _userService.GetAllUsersAsync());
         }
 
         // ✅ כל משתמש יכול לראות רק את עצמו
         [HttpGet("{id}")]
         [Authorize]
-        public ActionResult<UserDTO> GetUserById(uint id)
+        public async Task<ActionResult<UserDTO>> GetUserById(uint id)
         {
-            var user = _userService.getUserById(id);
+            var user = await _userService.getUserByIdAsync(id);
             if (user == null)
                 return NotFound();
 
-            // בדיקה שהמשתמש מחפש רק את עצמו, אלא אם הוא Admin
             var userIdFromToken = uint.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
 
@@ -215,29 +70,49 @@ namespace PaperDreams_Server.Controllers
         }
 
         // ✅ עדכון פרופיל אישי (משתמש יכול לעדכן רק את עצמו)
-        [HttpPut("update-profile")]
+
+
+        //[HttpPut("update-profile")]
+        //[Authorize]
+        //public async Task<ActionResult> UpdateUser(uint id, [FromBody] UserDTO userDto)
+        //{
+        //    var userIdFromToken = uint.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+        //    if (!string.IsNullOrEmpty(userDto.Role) && userDto.Role != "string")
+        //        return BadRequest("You cannot change your role.");
+
+        //    bool isSuccess = await _userService.UpdateUserAsync(id, userDto);
+        //    if (isSuccess)
+        //        return Ok("Profile updated successfully.");
+
+        //    return BadRequest("Failed to update profile.");
+        //}
+        [HttpPut("update-profile/{id}")]
         [Authorize]
-        public ActionResult UpdateUser(uint id,[FromBody] UserDTO userDto)
+        public async Task<ActionResult> UpdateUser(uint id, [FromBody] UserDTO userDto)
         {
             var userIdFromToken = uint.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
-            // אסור למשתמש לשנות את התפקיד שלו
-            if (userDto.Role!="string"&& !string.IsNullOrEmpty(userDto.Role))
+            if (userIdFromToken != id)
+                return Forbid(); // חסימת גישה אם ה-ID לא תואם
+
+            if (!string.IsNullOrEmpty(userDto.Role) && userDto.Role != "string")
                 return BadRequest("You cannot change your role.");
 
-            bool isSuccess = _userService.UpdateUser(id,userDto);
+            bool isSuccess = await _userService.UpdateUserAsync(id, userDto);
             if (isSuccess)
                 return Ok("Profile updated successfully.");
 
             return BadRequest("Failed to update profile.");
         }
 
+
         // ✅ מחיקת משתמש (Admin בלבד)
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
-        public ActionResult DeleteUser(uint id)
+        public async Task<ActionResult> DeleteUser(uint id)
         {
-            bool isSuccess = _userService.DeleteUser(id);
+            bool isSuccess = await _userService.DeleteUserAsync(id);
             if (isSuccess)
                 return Ok("User deleted successfully.");
 

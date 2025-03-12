@@ -16,86 +16,6 @@ namespace PaperDreams_Server.Service.services
     public class UserService:IUserService //שירות משתמשים
     {
 
-
-        //private readonly IUserRepository _userRepository;
-        //private readonly IMapper _mapper;
-        //private readonly JwtService _jwtService;
-
-        //public UserService(IUserRepository userRepository, IMapper mapper, JwtService jwtService)
-        //{
-        //    _userRepository = userRepository;
-        //    _mapper = mapper;
-        //    _jwtService = jwtService;
-        //}
-
-        //public string Login(string email, string password)
-        //{
-        //    var user = _userRepository.GetUsers().FirstOrDefault(u => u.Email == email && u.Password == password);
-        //    if (user == null)
-        //    {
-        //        return null; // או לזרוק שגיאה מתאימה
-        //    }
-
-        //    return _jwtService.GenerateToken(user);
-        //}
-
-        ////public readonly IUserRepository _userRepository;
-        ////readonly IMapper _mapper;
-        ////public UserService(IUserRepository userRepository, IMapper mapper)
-        ////{
-        ////    _userRepository = userRepository;
-        ////    _mapper = mapper;
-        ////}
-        //public IEnumerable<UserDTO> GetAllUsers()
-        //{
-        //    var users = _userRepository.GetUsers();
-        //    return _mapper.Map<IEnumerable<UserDTO>>(users);
-        //}
-
-        //public UserDTO getUserById(uint id)
-        //{
-        //    return _mapper.Map<UserDTO>(_userRepository.getUserById(id));
-        //}
-        //public bool AddUser(UserDTO user)
-        //{
-        //    var userEntity = _mapper.Map<User>(user);
-        //    var userFind = _userRepository.getUserById(userEntity.Id);
-        //    if (userFind == null)
-        //    {
-        //        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-        //        _userRepository.AddUser(userEntity);
-        //        //_repositoryManager.save();
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
-
-        //public bool UpdateUser(uint id, UserDTO user)
-        //{
-        //    var userFind = _userRepository.getUserById(id);
-        //    if (userFind != null)
-        //    {
-        //        var userEntity = _mapper.Map<User>(user);
-        //        _userRepository.UpdateUser(id, userEntity);
-        //        //_repositoryManager.save();
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
-        //public bool DeleteUser(uint id)
-        //{
-        //    var userFind = _userRepository.getUserById(id);
-        //    if (userFind != null)
-        //    {
-        //        _userRepository.DeleteUser(id);
-        //        //_repositoryManager.save();
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IJwtService _jwtService;
@@ -108,28 +28,24 @@ namespace PaperDreams_Server.Service.services
         }
 
         // ✅ רישום משתמש חדש
-        public bool Register(RegisterDTO registerDto)
+        
+        public async Task<string> RegisterAsync(RegisterDTO registerDto)
         {
-            if (_userRepository.GetUsers().Any(u => u.Email == registerDto.Email))
-                return false; // משתמש כבר קיים
+            if ((await _userRepository.GetUsersAsync()).ToList().Any(u => u.Email == registerDto.Email))
+                return null; // משתמש כבר קיים
 
-            var newUser = new User
-            {
-                FirstName = registerDto.FirstName,
-                LastName = registerDto.LastName,
-                Email = registerDto.Email,
-                Password = HashPassword(registerDto.Password),
-                Role = registerDto.Role ?? "User" // ברירת מחדל: User
-            };
+            var newUser = _mapper.Map<User>(registerDto);
+            newUser.Password = HashPassword(registerDto.Password); // הצפנת הסיסמה ✅
+            await _userRepository.AddUserAsync(newUser);
 
-            _userRepository.AddUser(newUser);
-            return true;
+            return await LoginAsync(_mapper.Map<LoginDTO>(registerDto));
+            //return _jwtService.GenerateToken(newUser); // מחזיר את ה-token לאחר הרשמה מוצלחת
         }
 
         // ✅ התחברות
-        public string Login(LoginDTO loginDto)
+        public async Task<string> LoginAsync(LoginDTO loginDto)
         {
-            var user = _userRepository.GetUsers().FirstOrDefault(u => u.Email == loginDto.Email);
+            var user = (await _userRepository.GetUsersAsync()).FirstOrDefault(u => u.Email == loginDto.Email);
             if (user == null || !VerifyPassword(loginDto.Password, user.Password))
                 return null; // אימייל או סיסמה שגויים
 
@@ -137,69 +53,76 @@ namespace PaperDreams_Server.Service.services
         }
 
         // ✅ החזרת רשימת משתמשים (Admin בלבד)
-        public IEnumerable<UserDTO> GetAllUsers()
+        public async Task<IEnumerable<UserDTO>> GetAllUsersAsync()
         {
-            var users = _userRepository.GetUsers();
+            var users = await _userRepository.GetUsersAsync();
             return _mapper.Map<IEnumerable<UserDTO>>(users);
         }
 
         // ✅ החזרת משתמש לפי ID
-        public UserDTO getUserById(uint id)
+        public async Task<UserDTO> getUserByIdAsync(uint id)
         {
-            return _mapper.Map<UserDTO>(_userRepository.getUserById(id));
+            return _mapper.Map<UserDTO>(await _userRepository.GetUserByIdAsync(id));
+        }
+
+        public async Task<bool> AddUserAsync(UserDTO user)
+        {
+            var userEntity = _mapper.Map<User>(user);
+            var userFind = await _userRepository.GetUserByIdAsync(userEntity.Id);
+            if (userFind == null)
+            {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                await _userRepository.AddUserAsync(userEntity);
+                return true;
+            }
+            return false;
         }
 
         // ✅ עדכון משתמש (משתמש יכול לעדכן רק את עצמו)
-        public bool UpdateUser(uint id, UserDTO userDto)
+        public async Task<bool> UpdateUserAsync(uint id, UserDTO userDto)
         {
-            var userFind = _userRepository.getUserById(id);
+            var userFind = await _userRepository.GetUserByIdAsync(id);
             if (userFind != null)
             {
                 var userEntity = _mapper.Map<User>(userDto);
-                _userRepository.UpdateUser(id, userEntity);
-                //_repositoryManager.save();
+                //userEntity.UpdatedAt = DateTime.Now;
+                //await _userRepository.UpdateUserAsync(id, userEntity);
+                if (!string.IsNullOrEmpty(userDto.FirstName))
+                    userEntity.FirstName = userDto.FirstName;
+
+                if (!string.IsNullOrEmpty(userDto.LastName))
+                    userEntity.LastName = userDto.LastName;
+
+                if (!string.IsNullOrEmpty(userDto.Email))
+                    userEntity.Email = userDto.Email;
+
                 return true;
             }
             return false;
         }
 
         // ✅ מחיקת משתמש (Admin בלבד)
-        public bool DeleteUser(uint id)
+        public async Task<bool> DeleteUserAsync(uint id)
         {
-            var userFind = _userRepository.getUserById(id);
-            if (userFind != null)
+            var userFind = await _userRepository.GetUserByIdAsync(id);
+            if (userFind == null)
             {
-                _userRepository.DeleteUser(id);
-                //_repositoryManager.save();
-                return true;
+                return false; // משתמש לא נמצא
             }
-            return false;
+            await _userRepository.DeleteUserAsync(id);
+            return true;
         }
+
 
         // ✅ פונקציות עזר להצפנה
         private string HashPassword(string password)
-        { 
-          return  BCrypt.Net.BCrypt.HashPassword(password); 
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password);
         }
         private bool VerifyPassword(string inputPassword, string storedPassword)
         {
            return BCrypt.Net.BCrypt.Verify(inputPassword, storedPassword);
         }
-
-        public bool AddUser(UserDTO user)
-        {
-            var userEntity = _mapper.Map<User>(user);
-            var userFind = _userRepository.getUserById(userEntity.Id);
-            if (userFind == null)
-            {
-                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                _userRepository.AddUser(userEntity);
-                //_repositoryManager.save();
-                return true;
-            }
-            return false;
-        }
-
 
     }
 }

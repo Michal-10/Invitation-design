@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using PaperDreams_Server;
 using PaperDreams_Server.Core;
 using PaperDreams_Server.Core.IRpositories;
 using PaperDreams_Server.Core.Iservices;
@@ -9,10 +10,15 @@ using PaperDreams_Server.Data;
 using PaperDreams_Server.Data.Repositories;
 using PaperDreams_Server.Service.services;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
+////התעלמות מהפניה מעגלית 
+//builder.Services.AddControllers().AddJsonOptions(options =>
+//{
+//   options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+//   options.JsonSerializerOptions.WriteIndented = true;
+//});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -58,17 +64,21 @@ builder.Services.AddDbContext<DataContext>();
 
 
 /*---------------------Irepository-------------------*/
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
+builder.Services.AddScoped<ITextUploadRepository, TextUploadRepository>();
 
 /*---------------------AutoMapper--------------------*/
-builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(typeof(MappingProfile), typeof(PostModelMappingProfile));
+
+/*--------Service-------------*/
+builder.Services.AddSingleton<IJwtService, JwtService>();
+builder.Services.AddScoped<ITemplateService, TemplateService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITextUploadService, TextUploadService>();
 
 
-builder.Services.AddSingleton<JwtService>();
-
-
-builder.Services.AddCors();
+builder.Services.AddCors(); 
 
 
 

@@ -14,6 +14,17 @@ namespace PaperDreams_Server.Core
         public MappingProfile()
         {
             CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<Template, TemplateDTO>().ReverseMap();
+            CreateMap<CompletedInvitation, CompletedInvitationDTO>().ReverseMap();
+            CreateMap<TextUpload, TextUploadDTO>().ReverseMap();
+            CreateMap<User, RegisterDTO>().ReverseMap();
+
+
+            /*-----------------------------*/
+            CreateMap<LoginDTO,RegisterDTO>().ReverseMap();
+            //CreateMap<TemplatePostModel, TemplateDTO>().ReverseMap();
+
+           
         }
     }
 }
