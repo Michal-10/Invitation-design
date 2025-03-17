@@ -8,8 +8,8 @@ namespace PaperDreams_Server.Core.DTOs
 {
     public class CompletedInvitationDTO
     {
-        public uint Id { get; set; }
-        public uint UserId { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
         public string EventType { get; set; }
         public string ImageUrl { get; set; }
 

@@ -11,10 +11,10 @@ namespace PaperDreams_Server.Core.Entities
     public class TextUpload
     {
         [Key]
-        public uint Id { get; set; }              // מזהה ייחודי
+        public int Id { get; set; }              // מזהה ייחודי
 
         [ForeignKey(nameof(UserId))]
-        public uint UserId { get; set; }          // מזהה המשתמש המעלה את הקובץ
+        public int UserId { get; set; }          // מזהה המשתמש המעלה את הקובץ
         public User User { get; set; }
 
         [Required]

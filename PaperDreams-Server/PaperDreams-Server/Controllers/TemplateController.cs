@@ -40,7 +40,7 @@ namespace PaperDreams_Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(uint id)
+        public async Task<IActionResult> GetById(int id)
         {
             var template = await _templateService.GetByIdAsync(id);
             if (template == null) return NotFound();
@@ -52,35 +52,22 @@ namespace PaperDreams_Server.Controllers
         public async Task<IActionResult> Create([FromForm] TemplatePostModel model)
         {
             var templateDto = _mapper.Map<TemplateDTO>(model);
-
-            // ✅ שמירת התמונה
-            if (model.Image != null)
-            {
-                templateDto.ImageUrl = await _templateService.SaveImageAsync(model.Image);
-            }
-
             await _templateService.AddAsync(templateDto);
             return CreatedAtAction(nameof(GetAll), new { }, templateDto);
         }
 
         // ✅ עדכון Template עם תמונה חדשה
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(uint id, [FromForm] TemplatePostModel model)
+        public async Task<IActionResult> Update(int id, [FromForm] TemplatePostModel model)
         {
             var templateDto = _mapper.Map<TemplateDTO>(model);
-
-            // ✅ שמירת תמונה חדשה אם הועלתה
-            if (model.Image != null)
-            {
-                templateDto.ImageUrl = await _templateService.SaveImageAsync(model.Image);
-            }
 
             await _templateService.UpdateAsync(id, templateDto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(uint id)
+        public async Task<IActionResult> Delete(int id)
         {
             bool isSuccess = await _templateService.DeleteAsync(id);
             if (isSuccess)

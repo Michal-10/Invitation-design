@@ -28,7 +28,7 @@ namespace PaperDreams_Server.Data.Repositories
             return await _context.Templates.Where(t => t.Category == category).ToListAsync();
         }
 
-        public async Task<Template> GetByIdAsync(uint id)
+        public async Task<Template> GetByIdAsync(int id)
         {
             return await _context.Templates.FindAsync(id);
         }
@@ -45,7 +45,7 @@ namespace PaperDreams_Server.Data.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeleteAsync(uint id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var template = await GetByIdAsync(id);
             if (template == null)

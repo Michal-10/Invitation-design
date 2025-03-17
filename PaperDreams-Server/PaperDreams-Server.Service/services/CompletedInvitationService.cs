@@ -30,14 +30,14 @@ namespace PaperDreams_Server.Service.services
         }
 
         //קבלת כל ההזמנות לפי קטגוריה 
-        public async Task<IEnumerable<CompletedInvitationDTO>> GetAllCompletedInvitationsByCategoryAsync(uint category)
+        public async Task<IEnumerable<CompletedInvitationDTO>> GetAllCompletedInvitationsByCategoryAsync(int category)
         {
             var invitations = await _completedInvitationRepository.GetCompletedInvitationsByCategoryAsync(category);
             return _mapper.Map<IEnumerable<CompletedInvitationDTO>>(invitations);
         }
 
         // קבלת כל ההזמנות לפי משתמש
-        public async Task<IEnumerable<CompletedInvitationDTO>> GetCompletedInvitationsByUserAsync(uint userId)
+        public async Task<IEnumerable<CompletedInvitationDTO>> GetCompletedInvitationsByUserAsync(int userId)
         {
             var invitations = await _completedInvitationRepository.GetCompletedInvitationsByUserAsync(userId);
             return _mapper.Map<IEnumerable<CompletedInvitationDTO>>(invitations);
@@ -47,12 +47,14 @@ namespace PaperDreams_Server.Service.services
         public async Task<CompletedInvitationDTO> CreateCompletedInvitationAsync(CompletedInvitationDTO invitationDTO)
         {
             var invitationEntity = _mapper.Map<CompletedInvitation>(invitationDTO);
+            invitationEntity.CreatedAt = DateTime.Now;
+            invitationEntity.UpdatedAt = DateTime.Now;
             var createdInvitation = await _completedInvitationRepository.CreateCompletedInvitationAsync(invitationEntity);
             return _mapper.Map<CompletedInvitationDTO>(createdInvitation);
         }
 
         // מחיקת הזמנה
-        public async Task<bool> DeleteCompletedInvitationAsync(uint id)
+        public async Task<bool> DeleteCompletedInvitationAsync(int id)
         {
             return await _completedInvitationRepository.DeleteCompletedInvitationAsync(id);
         }

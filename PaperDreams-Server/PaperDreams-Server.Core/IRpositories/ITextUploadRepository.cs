@@ -9,11 +9,11 @@ namespace PaperDreams_Server.Core.IRpositories
 {
     public interface ITextUploadRepository
     {
-        Task<TextUpload> AddTextUploadAsync(TextUpload textUpload);
-        Task<TextUpload> GetTextUploadByIdAsync(uint id);
-        Task<IEnumerable<TextUpload>> GetTextUploadsByUserIdAsync(uint userId);
-        Task<TextUpload> UpdateTextUploadAsync(TextUpload textUpload);
+        Task<TextUpload> GetTextUploadByIdAsync(int id);
+        Task<IEnumerable<TextUpload>> GetTextUploadsByUserIdAsync(int userId);
+        Task<bool> AddTextUploadAsync(TextUpload textUpload);
+        Task<bool> UpdateTextUploadAsync(TextUpload textUpload);
 
-        Task<bool> DeleteTextUploadAsync(uint id);
+        Task<bool> DeleteTextUploadAsync(int id);
     }
 }

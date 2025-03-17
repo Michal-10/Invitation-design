@@ -48,7 +48,7 @@ namespace PaperDreams_Server.Controllers
 
         // קבלת כל ההזמנות לפי משתמש
         [HttpGet("user/{userId}")]
-        public async Task<IActionResult> GetCompletedInvitationsByUser(uint userId)
+        public async Task<IActionResult> GetCompletedInvitationsByUser(int userId)
         {
             var invitations = await _completedInvitationService.GetCompletedInvitationsByUserAsync(userId);
             if (invitations == null || !invitations.Any())
@@ -60,7 +60,7 @@ namespace PaperDreams_Server.Controllers
 
         // קבלת כל ההזמנות לפי קטגוריה
         [HttpGet("user/{category}")]
-        public async Task<IActionResult> GetCompletedInvitationsByCategory(uint category)
+        public async Task<IActionResult> GetCompletedInvitationsByCategory(int category)
         {
             var invitations = await _completedInvitationService.GetAllCompletedInvitationsByCategoryAsync(category);
             if (invitations == null || !invitations.Any())
@@ -72,7 +72,7 @@ namespace PaperDreams_Server.Controllers
 
         // מחיקת הזמנה
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCompletedInvitation(uint id)
+        public async Task<IActionResult> DeleteCompletedInvitation(int id)
         {
             var success = await _completedInvitationService.DeleteCompletedInvitationAsync(id);
             if (!success)

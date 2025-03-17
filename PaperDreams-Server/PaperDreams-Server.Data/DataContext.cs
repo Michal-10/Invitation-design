@@ -21,5 +21,27 @@ namespace PaperDreams_Server.Data
             optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=invitation_db");
             //optionsBuilder.LogTo(m => Debug.WriteLine(m));
         }
+        // הוסף את הקוד הבא:
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // הגדרת Foreign Key עם NO ACTION או RESTRICT (מונע Cascade)
+            modelBuilder.Entity<CompletedInvitation>()
+                .HasOne(c => c.TextUpload)
+                .WithMany()
+                .HasForeignKey(c => c.TextUploadId)
+                .OnDelete(DeleteBehavior.Restrict);  // או DeleteBehavior.NoAction
+
+            modelBuilder.Entity<CompletedInvitation>()
+                .HasOne(c => c.Template)
+                .WithMany()
+                .HasForeignKey(c => c.TemplateId)
+                .OnDelete(DeleteBehavior.Restrict);  // או DeleteBehavior.NoAction
+
+            modelBuilder.Entity<CompletedInvitation>()
+                .HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);  // או DeleteBehavior.NoAction
+        }
     }
 }

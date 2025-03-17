@@ -10,10 +10,10 @@ namespace PaperDreams_Server.Core.IRpositories
     public interface ICompletedInvitationRepository
     {
         Task<IEnumerable<CompletedInvitation>> GetAllCompletedInvitationsAsync();
-        Task<IEnumerable<CompletedInvitation>> GetCompletedInvitationsByUserAsync(uint userId);
-        Task<IEnumerable<CompletedInvitation>> GetCompletedInvitationsByCategoryAsync(uint category);
+        Task<IEnumerable<CompletedInvitation>> GetCompletedInvitationsByUserAsync(int userId);
+        Task<IEnumerable<CompletedInvitation>> GetCompletedInvitationsByCategoryAsync(int category);
 
         Task<CompletedInvitation> CreateCompletedInvitationAsync(CompletedInvitation invitation);
-        Task<bool> DeleteCompletedInvitationAsync(uint id);
+        Task<bool> DeleteCompletedInvitationAsync(int id);
     }
 }

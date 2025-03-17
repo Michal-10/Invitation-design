@@ -15,7 +15,6 @@ namespace PaperDreams_Server.Service.services
 {
     public class UserService:IUserService //שירות משתמשים
     {
-
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IJwtService _jwtService;
@@ -29,24 +28,27 @@ namespace PaperDreams_Server.Service.services
 
         // ✅ רישום משתמש חדש
         
-        public async Task<string> RegisterAsync(RegisterDTO registerDto)
+        public async Task<string> RegisterAsync(UserDTO userDto)
         {
-            if ((await _userRepository.GetUsersAsync()).ToList().Any(u => u.Email == registerDto.Email))
+            if ((await _userRepository.GetUsersAsync()).ToList().Any(u => u.Email == userDto.Email))
                 return null; // משתמש כבר קיים
 
-            var newUser = _mapper.Map<User>(registerDto);
-            newUser.PasswordHash = HashPassword(registerDto.Password); // הצפנת הסיסמה ✅
+            var newUser = _mapper.Map<User>(userDto);
+            var role = _mapper.Map<Role>(userDto.Role);
+            newUser.created_at = DateTime.Now;
+            newUser.UpdatedAt = DateTime.Now;
+            newUser.PasswordHash = HashPassword(userDto.Password); // הצפנת הסיסמה ✅
             await _userRepository.AddUserAsync(newUser);
 
-            return await LoginAsync(_mapper.Map<LoginDTO>(registerDto));
+            return await LoginAsync(userDto);
             //return _jwtService.GenerateToken(newUser); // מחזיר את ה-token לאחר הרשמה מוצלחת
         }
 
         // ✅ התחברות
-        public async Task<string> LoginAsync(LoginDTO loginDto)
+        public async Task<string> LoginAsync(UserDTO userDto)
         {
-            var user = (await _userRepository.GetUsersAsync()).FirstOrDefault(u => u.Email == loginDto.Email);
-            if (user == null || !VerifyPassword(loginDto.Password, user.PasswordHash))
+            var user = (await _userRepository.GetUsersAsync()).FirstOrDefault(u => u.Email == userDto.Email);
+            if (user == null || !VerifyPassword(userDto.Password, user.PasswordHash))
                 return null; // אימייל או סיסמה שגויים
 
             return _jwtService.GenerateToken(user);
@@ -60,7 +62,7 @@ namespace PaperDreams_Server.Service.services
         }
 
         // ✅ החזרת משתמש לפי ID
-        public async Task<UserDTO> getUserByIdAsync(uint id)
+        public async Task<UserDTO> getUserByIdAsync(int id)
         {
             return _mapper.Map<UserDTO>(await _userRepository.GetUserByIdAsync(id));
         }
@@ -79,30 +81,22 @@ namespace PaperDreams_Server.Service.services
         }
 
         // ✅ עדכון משתמש (משתמש יכול לעדכן רק את עצמו)
-        public async Task<bool> UpdateUserAsync(uint id, UserDTO userDto)
+        public async Task<bool> UpdateUserAsync(int id, UserDTO userDto)
         {
             var userFind = await _userRepository.GetUserByIdAsync(id);
             if (userFind != null)
             {
                 var userEntity = _mapper.Map<User>(userDto);
-                //userEntity.UpdatedAt = DateTime.Now;
-                //await _userRepository.UpdateUserAsync(id, userEntity);
-                if (!string.IsNullOrEmpty(userDto.FirstName))
-                    userEntity.FirstName = userDto.FirstName;
-
-                if (!string.IsNullOrEmpty(userDto.LastName))
-                    userEntity.LastName = userDto.LastName;
-
-                if (!string.IsNullOrEmpty(userDto.Email))
-                    userEntity.Email = userDto.Email;
-
-                return true;
+                userEntity.UpdatedAt = DateTime.Now;
+                userEntity.PasswordHash = userDto.Password;
+                //userEntity.PasswordHash = HashPassword(userDto.Password);
+                return await _userRepository.UpdateUserAsync(id,userEntity);
             }
             return false;
         }
 
         // ✅ מחיקת משתמש (Admin בלבד)
-        public async Task<bool> DeleteUserAsync(uint id)
+        public async Task<bool> DeleteUserAsync(int id)
         {
             var userFind = await _userRepository.GetUserByIdAsync(id);
             if (userFind == null)
@@ -113,7 +107,6 @@ namespace PaperDreams_Server.Service.services
             return true;
         }
 
-
         // ✅ פונקציות עזר להצפנה
         private string HashPassword(string password)
         {
@@ -121,7 +114,7 @@ namespace PaperDreams_Server.Service.services
         }
         private bool VerifyPassword(string inputPassword, string storedPassword)
         {
-           return BCrypt.Net.BCrypt.Verify(inputPassword, storedPassword);
+            return BCrypt.Net.BCrypt.Verify(inputPassword, storedPassword);
         }
 
     }

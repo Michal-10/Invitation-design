@@ -10,7 +10,7 @@ namespace PaperDreams_Server.Core.Entities
     public class User
     {
         [Key]
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
 
         [Required]
@@ -32,7 +32,7 @@ namespace PaperDreams_Server.Core.Entities
 
         public ICollection<TextUpload> TextUploads { get; set; }  // קבצים שהמשתמש העלה
                                                                   //public ICollection<CompletedInvitation> CompletedInvitations { get; set; }  // הזמנות שיצר המשתמש
-        public ICollection<Role> Roles { get; set; }
+        public ICollection<Role> Roles { get; set; } = new List<Role>();
 
     }
 }

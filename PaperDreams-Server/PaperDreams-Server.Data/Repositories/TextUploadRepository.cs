@@ -18,36 +18,47 @@ namespace PaperDreams_Server.Data.Repositories
             _context = context;
         }
 
-        // יצירת רשומת טקסט חדשה בטבלה
-        public async Task<TextUpload> AddTextUploadAsync(TextUpload textUpload)
-        {
-            _context.TextUploads.Add(textUpload);
-            await _context.SaveChangesAsync();
-            return textUpload;
-        }
-
         // קבלת קובץ לפי מזהה
-        public async Task<TextUpload> GetTextUploadByIdAsync(uint id)
+        public async Task<TextUpload> GetTextUploadByIdAsync(int id)
         {
             return await _context.TextUploads .FirstOrDefaultAsync(tu => tu.Id == id);
         }
 
         // שליפת כל הקבצים של משתמש מסוים
-        public async Task<IEnumerable<TextUpload>> GetTextUploadsByUserIdAsync(uint userId)
+        public async Task<IEnumerable<TextUpload>> GetTextUploadsByUserIdAsync(int userId)
         {
             return await _context.TextUploads.Where(tu => tu.UserId == userId).ToListAsync();
         }
 
+        // יצירת רשומת טקסט חדשה בטבלה
+        public async Task<bool> AddTextUploadAsync(TextUpload textUpload)
+        {
+            _context.TextUploads.Add(textUpload);
+            //return await _context.SaveChangesAsync() > 0;
+            {
+                try
+                {
+                    _context.TextUploads.Add(textUpload);
+                    return await _context.SaveChangesAsync() > 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error saving to DB: {ex.Message}");
+                    throw; // זורקים את השגיאה שוב כדי לקבל פרטים נוספים ב- API
+                }
+            }
+        }
+
         // עדכון קובץ
-        public async Task<TextUpload> UpdateTextUploadAsync(TextUpload textUpload)
+        public async Task<bool> UpdateTextUploadAsync(TextUpload textUpload)
         {
             _context.TextUploads.Update(textUpload);
-            await _context.SaveChangesAsync();
-            return textUpload;
+            return await _context.SaveChangesAsync() > 0;
+             
         }
 
         // מחיקת קובץ לפי מזהה
-        public async Task<bool> DeleteTextUploadAsync(uint id)
+        public async Task<bool> DeleteTextUploadAsync(int id)
         {
             var file = await _context.TextUploads.FindAsync(id);
             if (file != null)

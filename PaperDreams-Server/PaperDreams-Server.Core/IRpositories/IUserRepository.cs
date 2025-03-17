@@ -11,9 +11,9 @@ namespace PaperDreams_Server.Core.IRpositories
     public interface IUserRepository
     {
         public Task<IEnumerable<User>> GetUsersAsync();
-        Task<User> GetUserByIdAsync(uint id);
+        Task<User> GetUserByIdAsync(int id);
         public Task<bool> AddUserAsync(User card);
-        public Task<bool> UpdateUserAsync(uint id, User card);
-        public Task<bool> DeleteUserAsync(uint id);
+        public Task<bool> UpdateUserAsync(int id, User card);
+        public Task<bool> DeleteUserAsync(int id);
     }
 }

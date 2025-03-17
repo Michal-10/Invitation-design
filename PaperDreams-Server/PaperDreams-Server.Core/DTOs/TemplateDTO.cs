@@ -8,10 +8,10 @@ namespace PaperDreams_Server.Core.DTOs
 {
     public class TemplateDTO
     {
-        public uint Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
-        public uint Category { get; set; }
+        public int Category { get; set; }
     }
  
 }

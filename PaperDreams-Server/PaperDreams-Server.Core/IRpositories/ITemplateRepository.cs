@@ -11,9 +11,9 @@ namespace PaperDreams_Server.Core.IRpositories
     {
         Task<IEnumerable<Template>> GetAllAsync();
         Task<IEnumerable<Template>> GetByCategoryAsync(int category);
-        Task<Template> GetByIdAsync(uint id);
+        Task<Template> GetByIdAsync(int id);
         Task<bool> AddAsync(Template template);
         Task<bool> UpdateAsync(Template template);
-        Task<bool> DeleteAsync(uint id);
+        Task<bool> DeleteAsync(int id);
     }
 }

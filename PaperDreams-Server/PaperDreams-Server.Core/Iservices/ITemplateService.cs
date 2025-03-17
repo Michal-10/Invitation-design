@@ -13,12 +13,12 @@ namespace PaperDreams_Server.Core.Iservices
 
         Task<IEnumerable<TemplateDTO>> GetAllAsync();
         Task<IEnumerable<TemplateDTO>> GetByCategoryAsync(int category);
-        Task<TemplateDTO> GetByIdAsync(uint id);
+        Task<TemplateDTO> GetByIdAsync(int id);
         Task<bool> AddAsync(TemplateDTO model);
-        Task<bool> UpdateAsync(uint id, TemplateDTO model);
-        Task<bool> DeleteAsync(uint id);
+        Task<bool> UpdateAsync(int id, TemplateDTO model);
+        Task<bool> DeleteAsync(int id);
 
         // ✅ הוספנו פונקציה לשמירת קובץ
-        Task<string> SaveImageAsync(IFormFile image);
+        //Task<string> SaveImageAsync(string image);
     }
 }

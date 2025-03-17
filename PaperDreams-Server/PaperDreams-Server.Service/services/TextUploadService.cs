@@ -33,52 +33,54 @@ namespace PaperDreams_Server.Service.services
         }
 
         // שמירת הקובץ והחזרת המודל
-        public async Task<TextUpload> UploadTextAsync(TextUploadDTO textUploadDTO)
+        public async Task<bool> UploadTextAsync(TextUploadDTO textUploadDTO)
         {
             // שמירת הקובץ לוקלית
-            var fileUrl = await SaveFileLocallyAsync(textUploadDTO.File);
+            //var fileUrl = await SaveFileLocallyAsync(textUploadDTO.File);
 
             // יצירת אובייקט TextUpload חדש
             var textUpload = _mapper.Map<TextUpload>(textUploadDTO);
-            textUpload.FileUrl = fileUrl; 
+            textUpload.FileUrl = textUploadDTO.File;
+            textUpload.CreatedAt = DateTime.Now;
+            textUpload.UpdatedAt = DateTime.Now;
             return await _textUploadRepository.AddTextUploadAsync(textUpload);
         }
 
-        // שמירת הקובץ בתיקיית Uploads
-        private async Task<string> SaveFileLocallyAsync(IFormFile file)
-        {
-            var fileName = $"{Guid.NewGuid()}_{file.FileName}";
-            var filePath = Path.Combine(_uploadDirectory, fileName);
+        //// שמירת הקובץ בתיקיית Uploads
+        //private async Task<string> SaveFileLocallyAsync(IFormFile file)
+        //{
+        //    var fileName = $"{Guid.NewGuid()}_{file.FileName}";
+        //    var filePath = Path.Combine(_uploadDirectory, fileName);
 
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
+        //    using (var stream = new FileStream(filePath, FileMode.Create))
+        //    {
+        //        await file.CopyToAsync(stream);
+        //    }
 
-            return fileName;
-        }
+        //    return fileName;
+        //}
 
         // קבלת הנתיב של הקובץ
-        public async Task<string> GetTextFileUrlAsync(uint id)
+        public async Task<string> GetTextFileUrlAsync(int id)
         {
             var textUpload = await _textUploadRepository.GetTextUploadByIdAsync(id);
             return textUpload?.FileUrl;
         }
 
         // שליפת קובץ לפי מזהה
-        public async Task<TextUpload> GetTextUploadByIdAsync(uint id)
+        public async Task<TextUpload> GetTextUploadByIdAsync(int id)
         {
             return await _textUploadRepository.GetTextUploadByIdAsync(id);
         }
 
         // עדכון קובץ (לא בהכרח עדכון של התוכן, אלא פרטים על הקובץ)
-        public async Task<TextUpload> UpdateTextUploadAsync(uint id, TextUploadDTO textUploadDTO)
+        public async Task<bool> UpdateTextUploadAsync(int id, TextUploadDTO textUploadDTO)
         {
             var textUpload = await _textUploadRepository.GetTextUploadByIdAsync(id);
 
             if (textUpload == null)
             {
-                return null;
+                return false;
             }
 
             // אם צריך, אפשר לעדכן את המידע בפרטי הקובץ
@@ -89,20 +91,20 @@ namespace PaperDreams_Server.Service.services
         }
 
         // מחיקת קובץ לפי מזהה
-        public async Task<bool> DeleteTextUploadAsync(uint id)
+        public async Task<bool> DeleteTextUploadAsync(int id)
         {
             return await _textUploadRepository.DeleteTextUploadAsync(id);
         }
 
 
         // שליפת כל הקבצים של משתמש מסוים
-        public async Task<IEnumerable<TextUpload>> GetAllFilesByUserAsync(uint userId)
+        public async Task<IEnumerable<TextUpload>> GetAllFilesByUserAsync(int userId)
         {
             return await _textUploadRepository.GetTextUploadsByUserIdAsync(userId);
         }
 
         // מחיקת כל הקבצים של משתמש מסוים
-        public async Task<bool> DeleteAllFilesByUserAsync(uint userId)
+        public async Task<bool> DeleteAllFilesByUserAsync(int userId)
         {
             var userFiles = await _textUploadRepository.GetTextUploadsByUserIdAsync(userId);
 
@@ -123,5 +125,6 @@ namespace PaperDreams_Server.Service.services
             return true;
         }
 
+     
     }
 }

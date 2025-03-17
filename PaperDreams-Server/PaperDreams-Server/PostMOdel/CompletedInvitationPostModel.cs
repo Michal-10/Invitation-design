@@ -9,7 +9,7 @@ namespace PaperDreams_Server.PostMOdel
         [Required]
         public string EventType { get; set; }
         [Required]
-        public IFormFile ImageUrl { get; set; }
+        public string ImageUrl { get; set; }
         [Required]
         public int TemplateId { get; set; }
         [Required]

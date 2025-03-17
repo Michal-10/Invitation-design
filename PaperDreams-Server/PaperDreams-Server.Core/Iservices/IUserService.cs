@@ -12,17 +12,17 @@ namespace PaperDreams_Server.Core.Iservices
     public interface IUserService
     {
 
-        public Task<string> RegisterAsync(RegisterDTO registerDto);
+        public Task<string> RegisterAsync(UserDTO userDto);
 
-        public Task<string> LoginAsync(LoginDTO loginDto);
+        public Task<string> LoginAsync(UserDTO userDto);
 
         public Task<IEnumerable<UserDTO>> GetAllUsersAsync();
 
-        public Task<UserDTO> getUserByIdAsync(uint id);
+        public Task<UserDTO> getUserByIdAsync(int id);
 
-        public Task<bool> UpdateUserAsync(uint id, UserDTO userDto);
+        public Task<bool> UpdateUserAsync(int id, UserDTO userDto);
 
-        public Task<bool> DeleteUserAsync(uint id);
+        public Task<bool> DeleteUserAsync(int id);
 
         public Task<bool> AddUserAsync(UserDTO user);
 

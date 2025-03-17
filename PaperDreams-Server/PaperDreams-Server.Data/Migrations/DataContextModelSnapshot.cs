@@ -24,11 +24,11 @@ namespace PaperDreams_Server.Data.Migrations
 
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.CompletedInvitation", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<long>("Category")
                         .HasColumnType("bigint");
@@ -48,21 +48,26 @@ namespace PaperDreams_Server.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("TemplateId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("int");
 
-                    b.Property<long>("TextUploadId")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("TemplateId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TextUploadId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TemplateId");
+
+                    b.HasIndex("TemplateId1");
 
                     b.HasIndex("TextUploadId");
 
@@ -121,14 +126,14 @@ namespace PaperDreams_Server.Data.Migrations
 
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.Template", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Category")
-                        .HasColumnType("bigint");
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -148,8 +153,8 @@ namespace PaperDreams_Server.Data.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -160,11 +165,11 @@ namespace PaperDreams_Server.Data.Migrations
 
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.TextUpload", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -176,8 +181,8 @@ namespace PaperDreams_Server.Data.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -188,11 +193,11 @@ namespace PaperDreams_Server.Data.Migrations
 
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -241,8 +246,8 @@ namespace PaperDreams_Server.Data.Migrations
                     b.Property<int>("RolesId")
                         .HasColumnType("int");
 
-                    b.Property<long>("UsersId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
 
                     b.HasKey("RolesId", "UsersId");
 
@@ -254,21 +259,25 @@ namespace PaperDreams_Server.Data.Migrations
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.CompletedInvitation", b =>
                 {
                     b.HasOne("PaperDreams_Server.Core.Entities.Template", "Template")
-                        .WithMany("CompletedInvitations")
+                        .WithMany()
                         .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("PaperDreams_Server.Core.Entities.Template", null)
+                        .WithMany("CompletedInvitations")
+                        .HasForeignKey("TemplateId1");
 
                     b.HasOne("PaperDreams_Server.Core.Entities.TextUpload", "TextUpload")
                         .WithMany()
                         .HasForeignKey("TextUploadId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("PaperDreams_Server.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Template");

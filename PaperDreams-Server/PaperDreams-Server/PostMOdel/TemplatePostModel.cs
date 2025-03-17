@@ -7,11 +7,11 @@ namespace PaperDreams_Server.PostMOdel
         [Required]
         public string Name { get; set; }
         [Required]
-        public IFormFile Image { get; set; } // ✅ קובץ תמונה להעלאה
+        public string Image { get; set; } // ✅ קובץ תמונה להעלאה
 
         //public string ImageUrl { get; set; }
         [Required]
-        public uint Category { get; set; }
+        public int Category { get; set; }
     }
 
 }

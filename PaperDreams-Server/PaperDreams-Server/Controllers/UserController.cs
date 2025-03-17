@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PaperDreams_Server.Core.DTOs;
 using PaperDreams_Server.Core.Entities;
 using PaperDreams_Server.Core.Iservices;
+using PaperDreams_Server.PostMOdel;
 using PaperDreams_Server.Service.services;
 using System.Data;
 using System.Security.Claims;
@@ -14,18 +16,22 @@ namespace PaperDreams_Server.Controllers
 
     [Route("api/user")]
     [ApiController]
+   
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDTO registerDto)
+        public async Task<IActionResult> Register([FromBody] RegisterPostModel registerPostModel)
         {
-            var token = await _userService.RegisterAsync(registerDto);
+            var userDTO = _mapper.Map<UserDTO>(registerPostModel);
+            var token = await _userService.RegisterAsync(userDTO);
             if (token == null)
                 return Unauthorized("Email already exists");
 
@@ -34,9 +40,10 @@ namespace PaperDreams_Server.Controllers
 
         // ✅ התחברות
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginPostModel loginPostModel)
         {
-            var token = await _userService.LoginAsync(loginDto);
+            var userDTO = _mapper.Map<UserDTO>(loginPostModel);
+            var token = await _userService.LoginAsync(userDTO);
             if (token == null)
                 return Unauthorized("Invalid email or password");
 
@@ -45,7 +52,8 @@ namespace PaperDreams_Server.Controllers
 
         // ✅ רק מנהל יכול לראות את כל המשתמשים
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Policy = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
         {
             return Ok(await _userService.GetAllUsersAsync());
@@ -54,7 +62,8 @@ namespace PaperDreams_Server.Controllers
         // ✅ כל משתמש יכול לראות רק את עצמו
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<UserDTO>> GetUserById(uint id)
+        [Authorize(Policy = "Admin")]
+        public async Task<ActionResult<UserDTO>> GetUserById(int id)
         {
             var user = await _userService.getUserByIdAsync(id);
             if (user == null)
@@ -71,30 +80,16 @@ namespace PaperDreams_Server.Controllers
 
         // ✅ עדכון פרופיל אישי (משתמש יכול לעדכן רק את עצמו)
 
-
-        //[HttpPut("update-profile")]
-        //[Authorize]
-        //public async Task<ActionResult> UpdateUser(uint id, [FromBody] UserDTO userDto)
-        //{
-        //    var userIdFromToken = uint.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-
-        //    if (!string.IsNullOrEmpty(userDto.Role) && userDto.Role != "string")
-        //        return BadRequest("You cannot change your role.");
-
-        //    bool isSuccess = await _userService.UpdateUserAsync(id, userDto);
-        //    if (isSuccess)
-        //        return Ok("Profile updated successfully.");
-
-        //    return BadRequest("Failed to update profile.");
-        //}
         [HttpPut("update-profile/{id}")]
-        [Authorize]
-        public async Task<ActionResult> UpdateUser(uint id, [FromBody] UserDTO userDto)
+        //[Authorize]
+        //[Authorize(Policy = "Admin")]
+        public async Task<ActionResult> UpdateUser(int id, [FromBody] UserPostModel userPostModel)
         {
-            var userIdFromToken = uint.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-
+            var userDto = _mapper.Map<UserDTO>(userPostModel);
+            var userIdFromToken =  int.Parse(User.FindFirst("userId")?.Value);
+              
             if (userIdFromToken != id)
-                return Forbid(); // חסימת גישה אם ה-ID לא תואם
+                return Forbid("userIdFromToken != id"); // חסימת גישה אם ה-ID לא תואם
 
             if (!string.IsNullOrEmpty(userDto.Role) && userDto.Role != "string")
                 return BadRequest("You cannot change your role.");
@@ -109,8 +104,9 @@ namespace PaperDreams_Server.Controllers
 
         // ✅ מחיקת משתמש (Admin בלבד)
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> DeleteUser(uint id)
+        [Authorize(Policy = "Admin")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<ActionResult> DeleteUser(int id)
         {
             bool isSuccess = await _userService.DeleteUserAsync(id);
             if (isSuccess)

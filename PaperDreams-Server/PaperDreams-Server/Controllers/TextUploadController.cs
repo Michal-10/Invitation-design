@@ -23,7 +23,7 @@ namespace PaperDreams_Server.Controllers
         }
 
         [HttpPost("upload")]
-        public async Task<IActionResult> UploadText([FromForm] TextUploadPostModel textUploadPostModel)
+        public async Task<IActionResult> UploadText([FromBody] TextUploadPostModel textUploadPostModel)
         {
             var file = textUploadPostModel.File;
             var textUploadDTO = _mapper.Map<TextUploadDTO>(textUploadPostModel);
@@ -33,24 +33,16 @@ namespace PaperDreams_Server.Controllers
                 return BadRequest("No file uploaded.");
             }
 
-            var fileExtension = Path.GetExtension(file.FileName).ToLower();
-
-            // מגביל לקבצי PDF ו-Word (בפורמטים של .pdf, .docx, .doc)
-            if (fileExtension != ".pdf" && fileExtension != ".docx" && fileExtension != ".doc")
-            {
-                return BadRequest("Only PDF or Word files are allowed.");
-            }
-
             var result = await _textUploadService.UploadTextAsync(textUploadDTO);
             if (result != null)
             {
-                return Ok(result);
+                return Ok("TextUpload sucessfull");
             }
             return BadRequest("Failed to upload text.");
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetFile(uint id)
+        public async Task<IActionResult> GetFile(int id)
         {
             var fileUrl = await _textUploadService.GetTextFileUrlAsync(id);
             if (string.IsNullOrEmpty(fileUrl))
@@ -58,16 +50,12 @@ namespace PaperDreams_Server.Controllers
                 return NotFound("File not found.");
             }
 
-            //var filePath = Path.Combine("Uploads", fileUrl);
-            //var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
-
-            //return File(fileBytes, "application/octet-stream", fileUrl);
             return Ok(fileUrl);
         }
 
         // PUT - עדכון פרטי קובץ
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTextUpload(uint id, [FromBody] TextUploadPostModel textUploadPostModel)
+        public async Task<IActionResult> UpdateTextUpload(int id, [FromBody] TextUploadPostModel textUploadPostModel)
         {
             var textUploadDTO = _mapper.Map<TextUploadDTO>(textUploadPostModel);
             var updatedTextUpload = await _textUploadService.UpdateTextUploadAsync(id, textUploadDTO);
@@ -82,7 +70,7 @@ namespace PaperDreams_Server.Controllers
         
         // DELETE - מחיקת קובץ לפי מזהה
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTextUpload(uint id)
+        public async Task<IActionResult> DeleteTextUpload(int id)
         {
             var success = await _textUploadService.DeleteTextUploadAsync(id);
             if (success)
@@ -95,7 +83,7 @@ namespace PaperDreams_Server.Controllers
 
         // שליפת כל הקבצים למשתמש מסוים
         [HttpGet("user/{userId}")]
-        public async Task<IActionResult> GetUserFiles(uint userId)
+        public async Task<IActionResult> GetUserFiles(int userId)
         {
             var files = await _textUploadService.GetAllFilesByUserAsync(userId);
             if (files == null || !files.Any())
@@ -108,7 +96,7 @@ namespace PaperDreams_Server.Controllers
 
         // מחיקת כל הקבצים של משתמש מסוים
         [HttpDelete("user/{userId}")]
-        public async Task<IActionResult> DeleteUserFiles(uint userId)
+        public async Task<IActionResult> DeleteUserFiles(int userId)
         {
             var success = await _textUploadService.DeleteAllFilesByUserAsync(userId);
             if (success)

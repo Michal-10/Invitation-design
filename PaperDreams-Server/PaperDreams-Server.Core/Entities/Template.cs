@@ -11,13 +11,13 @@ namespace PaperDreams_Server.Core.Entities
     public class Template
     {
         [Key]
-        public uint Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         // ✅ נתיב התמונה (URL)
 
         [Required]
         public string ImageUrl { get; set; } 
-        public uint Category { get; set; }
+        public int Category { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public string Description { get; set; }
@@ -25,7 +25,7 @@ namespace PaperDreams_Server.Core.Entities
         /*--------------------------------*/
 
         [ForeignKey(nameof(UserId))]
-        public uint UserId { get; set; }          // מזהה המשתמש המעלה את הקובץ
+        public int UserId { get; set; }          // מזהה המשתמש המעלה את הקובץ
         public User User { get; set; }
 
         public ICollection<CompletedInvitation> CompletedInvitations { get; set; }  // הזמנות שמשתמשים עשו עם תבנית זו

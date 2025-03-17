@@ -11,18 +11,18 @@ namespace PaperDreams_Server.Core.Iservices
     public interface ITextUploadService
     {
         // פונקציה להעלאת טקסט (עם קובץ) עבור הזמנה
-        Task<TextUpload> UploadTextAsync(TextUploadDTO textUploadDTO);
+        Task<bool> UploadTextAsync(TextUploadDTO textUploadDTO);
 
         // פונקציה לקבלת כתובת URL של קובץ טקסט לפי מזהה הזמנה
-        Task<string> GetTextFileUrlAsync(uint id);
+        Task<string> GetTextFileUrlAsync(int id);
 
-        Task<IEnumerable<TextUpload>> GetAllFilesByUserAsync(uint userId);
+        Task<IEnumerable<TextUpload>> GetAllFilesByUserAsync(int userId);
 
-        Task<TextUpload> UpdateTextUploadAsync(uint id, TextUploadDTO textUploadDTO);
+        Task<bool> UpdateTextUploadAsync(int id, TextUploadDTO textUploadDTO);
 
-        Task<bool> DeleteTextUploadAsync(uint id);
+        Task<bool> DeleteTextUploadAsync(int id);
 
-        Task<bool> DeleteAllFilesByUserAsync(uint userId);
+        Task<bool> DeleteAllFilesByUserAsync(int userId);
 
     }
 }
