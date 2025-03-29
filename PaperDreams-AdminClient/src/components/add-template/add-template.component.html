@@ -1,0 +1,125 @@
+const addTemplate = async () => {
+    try {
+        // שליחת התבנית החדשה
+        const templateResponse = await axios.post("http://localhost:5077/api/templates/add-template", {
+            name: "הזמנת חתונה מפוארת",
+            imageUrl: "https://example.com/wedding-template.png",
+            categoryId: 1,
+            userId: 123,  // מזהה המשתמש המעלה
+        });
+
+        const templateId = templateResponse.data.id;
+
+        // הגדרת השדות עבור התבנית החדשה
+        const fields = [
+            { templateId, fieldName: "שם החתן", x: 100, y: 200, fontSize: 24, color: "#000000" },
+            { templateId, fieldName: "שם הכלה", x: 300, y: 200, fontSize: 24, color: "#000000" },
+            { templateId, fieldName: "תאריך", x: 200, y: 300, fontSize: 20, color: "#FF0000" },
+        ];
+
+        // שליחת השדות לשרת
+        await axios.post("http://localhost:5077/api/templates/add-fields", fields);
+
+        alert("התבנית נשמרה בהצלחה!");
+    } catch (error) {
+        console.error("שגיאה בהוספת תבנית:", error);
+        alert("אירעה שגיאה בעת שמירת התבנית.");
+    }
+};
+
+
+import React, { useEffect, useRef, useState } from "react";
+import { fabric } from "fabric";
+import axios from "axios";
+
+const TemplateEditor = ({ imageName }: { imageName: string }) => {
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
+    const [imageURL, setImageURL] = useState<string>("");
+    const [fields, setFields] = useState<{ x: number; y: number; name: string }[]>([]);
+
+    useEffect(() => {
+        const fetchFileUrl = async () => {
+            try {
+                const res = await axios.get(`http://localhost:5077/api/upload/download-url/${imageName}`);
+                setImageURL(res.data);
+            } catch (error) {
+                console.error("שגיאה בהבאת ה-URL:", error);
+                alert(`שגיאה בהבאת ה-URL: ${error}`);
+            }
+        };
+
+        fetchFileUrl();
+    }, [imageName]);
+
+    useEffect(() => {
+        if (!canvasRef.current || !imageURL) return;
+
+        const newCanvas = new fabric.Canvas(canvasRef.current, {
+            width: 600,
+            height: 400,
+            backgroundColor: "white",
+        });
+
+        const imgElement = new Image();
+        imgElement.crossOrigin = "Anonymous";
+        imgElement.src = imageURL;
+        imgElement.onload = () => {
+            const img = new fabric.Image(imgElement, {
+                left: 0,
+                top: 0,
+                selectable: false,
+            });
+
+            newCanvas.setBackgroundImage(img, newCanvas.renderAll.bind(newCanvas));
+            newCanvas.renderAll();
+        };
+
+        setCanvas(newCanvas);
+
+        newCanvas.on("mouse:down", (event) => {
+            if (!event.pointer) return;
+            const { x, y } = event.pointer;
+
+            const fieldName = prompt("הכנס את שם השדה (לדוג' שם החתן, שם הכלה):");
+            if (!fieldName) return;
+
+            setFields((prev) => [...prev, { x, y, name: fieldName }]);
+
+            const text = new fabric.Text(fieldName, {
+                left: x,
+                top: y,
+                fontSize: 16,
+                fill: "red",
+            });
+
+            newCanvas.add(text);
+        });
+
+        return () => {
+            newCanvas.dispose();
+        };
+    }, [imageURL]);
+
+    const saveTemplate = async () => {
+        try {
+            await axios.post("http://localhost:5077/api/templates/add-fields", {
+                templateId: 1, // מזהה התבנית
+                fields,
+            });
+
+            alert("השדות נשמרו בהצלחה!");
+        } catch (error) {
+            console.error("שגיאה בשמירת השדות:", error);
+        }
+    };
+
+    return (
+        <div>
+            <canvas ref={canvasRef} />
+            <button onClick={saveTemplate}>שמור שדות</button>
+        </div>
+    );
+};
+
+export default TemplateEditor;

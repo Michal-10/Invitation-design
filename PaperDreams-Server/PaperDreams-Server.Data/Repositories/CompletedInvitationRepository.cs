@@ -38,11 +38,11 @@ namespace PaperDreams_Server.Data.Repositories
 
 
         // הוספת הזמנה חדשה
-        public async Task<CompletedInvitation> CreateCompletedInvitationAsync(CompletedInvitation invitation)
+        public async Task<bool> CreateCompletedInvitationAsync(CompletedInvitation invitation)
         {
             _context.CompletedInvitations.Add(invitation);
-            await _context.SaveChangesAsync();
-            return invitation;
+            return await _context.SaveChangesAsync()>0;
+             
         }
 
         // מחיקת הזמנה
@@ -55,7 +55,5 @@ namespace PaperDreams_Server.Data.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
-
-        
     }
 }

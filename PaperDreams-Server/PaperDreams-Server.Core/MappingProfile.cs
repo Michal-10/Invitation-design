@@ -18,13 +18,16 @@ namespace PaperDreams_Server.Core
             CreateMap<CompletedInvitation, CompletedInvitationDTO>().ReverseMap();
             CreateMap<TextUpload, TextUploadDTO>().ReverseMap();
             CreateMap<User, RegisterDTO>().ReverseMap();
+            CreateMap<Category, CategoryDTO>().ReverseMap();
 
             /*-----------------------------*/
             CreateMap<LoginDTO,RegisterDTO>().ReverseMap();
             CreateMap<string,Role>().ReverseMap();
             //CreateMap<TemplatePostModel, TemplateDTO>().ReverseMap();
+            CreateMap<TemplateDTO, Template>().ReverseMap(); // מיפוי של מזהה הקטגוריה (Category) ל-CategoryId ב-Template
+            CreateMap<TemplateFieldDTO, TemplateField>().ReverseMap();
 
-           
+
         }
     }
 }

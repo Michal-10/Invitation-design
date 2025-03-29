@@ -16,7 +16,7 @@ namespace PaperDreams_Server.Core.Entities
         [ForeignKey(nameof(UserId))]
         public int UserId { get; set; }          // מזהה המשתמש המעלה את הקובץ
         public User User { get; set; }
-
+        public string Name { get; set; }
         [Required]
         public string FileUrl { get; set; }      // כתובת הקובץ (במקרה הזה, הנתיב המקומי)
         

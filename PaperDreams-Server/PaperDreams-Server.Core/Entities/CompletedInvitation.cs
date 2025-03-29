@@ -12,6 +12,7 @@ namespace PaperDreams_Server.Core.Entities
     {
         [Key]
         public int Id { get; set; }
+        public string Name { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public int UserId { get; set; }
@@ -23,22 +24,16 @@ namespace PaperDreams_Server.Core.Entities
         public Template Template { get; set; }  // קשר לתבנית שנבחרה להזמנה
 
 
-        [ForeignKey(nameof(TextUploadId))]
-        public int TextUploadId { get; set; }
-        public TextUpload TextUpload { get; set; } //קשר לטקסט
-
-
         public string ImageUrl { get; set; }
 
-        public string EventType { get; set; }
+        //public int EventType { get; set; }
 
         public string Content { get; set; }
-        public uint Category { get; set; }
+        public int Category { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
-
     }
 
 }

@@ -7,6 +7,8 @@ namespace PaperDreams_Server.PostMOdel
         [Required]
         public int UserId { get; set; }        // מזהה המשתמש
         [Required]    
-        public string File { get; set; }    // קובץ הטקסט המועלה
+        public string FileUrl { get; set; }    // קובץ הטקסט המועלה
+        [Required]
+        public string Name { get; set; }
     }
 }

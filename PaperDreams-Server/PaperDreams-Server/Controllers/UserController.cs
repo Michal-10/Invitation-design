@@ -30,24 +30,36 @@ namespace PaperDreams_Server.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterPostModel registerPostModel)
         {
-            var userDTO = _mapper.Map<UserDTO>(registerPostModel);
-            var token = await _userService.RegisterAsync(userDTO);
-            if (token == null)
-                return Unauthorized("Email already exists");
+            var userDto = _mapper.Map<UserDTO>(registerPostModel);
 
-            return Ok(token);
+            var (token, user) = await _userService.RegisterAsync(userDto);
+
+            if (user == null)
+                return BadRequest("User already exists.");
+
+            return Ok(new
+            {
+                Token = token,
+                User = user
+            });
         }
 
         // ✅ התחברות
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginPostModel loginPostModel)
         {
-            var userDTO = _mapper.Map<UserDTO>(loginPostModel);
-            var token = await _userService.LoginAsync(userDTO);
-            if (token == null)
+            var userDto = _mapper.Map<UserDTO>(loginPostModel);
+
+            var (token, user) = await _userService.LoginAsync(userDto);
+
+            if (user == null)
                 return Unauthorized("Invalid email or password");
 
-            return Ok(token);
+            return Ok(new
+            {
+                Token = token,
+                User = user
+            });
         }
 
         // ✅ רק מנהל יכול לראות את כל המשתמשים

@@ -27,31 +27,41 @@ namespace PaperDreams_Server.Service.services
         }
 
         // ✅ רישום משתמש חדש
-        
-        public async Task<string> RegisterAsync(UserDTO userDto)
+        public async Task<(string Token, UserDTO User)> RegisterAsync(UserDTO userDto)
         {
-            if ((await _userRepository.GetUsersAsync()).ToList().Any(u => u.Email == userDto.Email))
-                return null; // משתמש כבר קיים
+            if ((await _userRepository.GetUsersAsync()).Any(u => u.Email == userDto.Email))
+                return (null, null); // משתמש כבר קיים
 
             var newUser = _mapper.Map<User>(userDto);
             var role = _mapper.Map<Role>(userDto.Role);
             newUser.created_at = DateTime.Now;
             newUser.UpdatedAt = DateTime.Now;
             newUser.PasswordHash = HashPassword(userDto.Password); // הצפנת הסיסמה ✅
+
             await _userRepository.AddUserAsync(newUser);
 
-            return await LoginAsync(userDto);
-            //return _jwtService.GenerateToken(newUser); // מחזיר את ה-token לאחר הרשמה מוצלחת
+            // יצירת טוקן עבור המשתמש החדש
+            var token = _jwtService.GenerateToken(newUser);
+
+            // מיפוי המשתמש חזרה ל-DTO כדי לא לחשוף מידע רגיש
+            var userResponse = _mapper.Map<UserDTO>(newUser);
+
+            return (token, userResponse);
         }
 
         // ✅ התחברות
-        public async Task<string> LoginAsync(UserDTO userDto)
+        public async Task<(string Token, UserDTO User)> LoginAsync(UserDTO userDto)
         {
             var user = (await _userRepository.GetUsersAsync()).FirstOrDefault(u => u.Email == userDto.Email);
             if (user == null || !VerifyPassword(userDto.Password, user.PasswordHash))
-                return null; // אימייל או סיסמה שגויים
+                return (null, null); // אימייל או סיסמה שגויים
 
-            return _jwtService.GenerateToken(user);
+            var token = _jwtService.GenerateToken(user);
+
+            // מיפוי המשתמש חזרה ל-DTO כדי לא לחשוף מידע רגיש
+            var userResponse = _mapper.Map<UserDTO>(user);
+
+            return (token, userResponse);
         }
 
         // ✅ החזרת רשימת משתמשים (Admin בלבד)
@@ -89,7 +99,6 @@ namespace PaperDreams_Server.Service.services
                 var userEntity = _mapper.Map<User>(userDto);
                 userEntity.UpdatedAt = DateTime.Now;
                 userEntity.PasswordHash = userDto.Password;
-                //userEntity.PasswordHash = HashPassword(userDto.Password);
                 return await _userRepository.UpdateUserAsync(id,userEntity);
             }
             return false;

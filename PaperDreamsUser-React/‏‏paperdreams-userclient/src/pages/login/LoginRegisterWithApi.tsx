@@ -1,0 +1,90 @@
+import { Box, Button, Modal, IconButton, TextField, Typography } from "@mui/material"
+import { Dispatch, FormEvent, useRef, useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import { styleModal } from "../../models/style";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/Store";
+import { User } from "../../models/User";
+import { loginRegister } from "../../redux/UserSlice";
+
+
+export default (({ status, setHideBtns, handleCloseModal }: { status: string, setHideBtns: Dispatch<boolean>, handleCloseModal: Dispatch<void> }) => {
+
+    const [openModal, setOpenModal] = useState(true);
+    const dispatch = useDispatch<AppDispatch>();
+    // const [, userDispatch] = useContext(UserContext);
+
+    const passwordRef = useRef<HTMLInputElement>(null);
+    const emailRef = useRef<HTMLInputElement>(null);
+    const firstNameRef = useRef<HTMLInputElement>(null);
+    const lastNameRef = useRef<HTMLInputElement>(null);
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+
+        try {
+            const userData : Partial<User>= status == 'register' ? {
+                firstName: firstNameRef.current?.value,
+                lastName: lastNameRef.current?.value,
+                email: emailRef.current?.value,
+                password: passwordRef.current!.value,
+            } :
+                {
+                    email: emailRef.current?.value,
+                    password: passwordRef.current!.value
+                }
+
+
+           const res = await dispatch(loginRegister({ user: { ...userData }, status }));
+            sessionStorage.setItem('userToken', res.payload.token);
+       
+            console.log("afetr login before session");
+
+            // sessionStorage.setItem('userToken', res.data);
+
+            setOpenModal(false);
+            setHideBtns(true);//מעבר לעמוד בית והסתרת הכפתורים
+
+            // navigate('/homePage');
+
+        } catch (e: any) {
+
+            if (e.status === 400 || e.status === 422 && status == 'register') {
+                alert('user already sign up 🥲');
+            }
+            else if (e.status == 401 && status == 'login')
+                alert('user is not register 🥲');
+            handleCloseModal()
+        }
+    };
+
+    return (<>
+
+
+        <Modal open={openModal} >
+            <Box sx={styleModal}>
+                <IconButton onClick={() => handleCloseModal()} sx={{ position: 'absolute', top: 13, right: 13 }}>
+                    <CloseIcon />
+                </IconButton>
+                <form onSubmit={handleSubmit} style={{ direction: "ltr" }}>
+                    <Typography variant="h5" sx={{ color: 'black', margin: '20px', fontWeight: 'bold', textAlign: 'center' }}>{status === 'login' ? "sign in" : "sign up"}</Typography>
+                    {status == 'login' ?
+                        <>
+                            <TextField label='Email' variant="filled" margin="normal" type="email" fullWidth inputRef={emailRef} required />
+                            <TextField label='Password' variant="filled" margin="normal" type="password" fullWidth inputRef={passwordRef} required />
+                        </>
+                        :
+                        <>
+                            <TextField label='Email' variant="filled" margin="normal" type="email" fullWidth inputRef={emailRef} required />
+                            <TextField label='Password' variant="filled" margin="normal" type="password" fullWidth inputRef={passwordRef} required />
+                            <TextField label='FisrtName' variant="filled" margin="normal" type="text" fullWidth inputRef={firstNameRef} required />
+                            <TextField label='LastName' variant="filled" margin="normal" type="text" fullWidth inputRef={lastNameRef} required />
+                        </>
+                    }
+                    <Button sx={{ marginTop: '2px', backgroundColor: 'var(--primary-color)' }} fullWidth variant="contained" type="submit">התחברות</Button>
+                </form>
+            </Box>
+        </Modal>
+    </>)
+})
+

@@ -44,13 +44,14 @@ namespace PaperDreams_Server.Service.services
         }
 
         // הוספת הזמנה חדשה
-        public async Task<CompletedInvitationDTO> CreateCompletedInvitationAsync(CompletedInvitationDTO invitationDTO)
+        public async Task<bool> CreateCompletedInvitationAsync(CompletedInvitationDTO invitationDTO)
         {
             var invitationEntity = _mapper.Map<CompletedInvitation>(invitationDTO);
             invitationEntity.CreatedAt = DateTime.Now;
             invitationEntity.UpdatedAt = DateTime.Now;
-            var createdInvitation = await _completedInvitationRepository.CreateCompletedInvitationAsync(invitationEntity);
-            return _mapper.Map<CompletedInvitationDTO>(createdInvitation);
+            //var createdInvitation = await _completedInvitationRepository.CreateCompletedInvitationAsync(invitationEntity);
+            return await _completedInvitationRepository.CreateCompletedInvitationAsync(invitationEntity);
+            //return _mapper.Map<CompletedInvitationDTO>(createdInvitation);
         }
 
         // מחיקת הזמנה

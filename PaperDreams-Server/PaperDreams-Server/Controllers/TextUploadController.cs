@@ -25,7 +25,7 @@ namespace PaperDreams_Server.Controllers
         [HttpPost("upload")]
         public async Task<IActionResult> UploadText([FromBody] TextUploadPostModel textUploadPostModel)
         {
-            var file = textUploadPostModel.File;
+            var file = textUploadPostModel.FileUrl;
             var textUploadDTO = _mapper.Map<TextUploadDTO>(textUploadPostModel);
 
             if (file == null)

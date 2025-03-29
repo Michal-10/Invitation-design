@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PaperDreams_Server.Core.DTOs;
 using PaperDreams_Server.Core.Iservices;
 using PaperDreams_Server.PostMOdel;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,20 +24,19 @@ namespace PaperDreams_Server.Controllers
         }
 
         // הוספת הזמנה חדשה
-        [HttpPost("create")]
+        [HttpPost("add")]
         public async Task<IActionResult> CreateCompletedInvitation([FromBody] CompletedInvitationPostModel model)
         {
             // המרת המודל ל-DTO
             var completedInvitationDTO = _mapper.Map<CompletedInvitationDTO>(model);
-
             var createdInvitation = await _completedInvitationService.CreateCompletedInvitationAsync(completedInvitationDTO);
 
-            if (createdInvitation == null)
+            if (!createdInvitation )
             {
                 return BadRequest("Failed to create invitation.");
             }
 
-            return CreatedAtAction(nameof(GetCompletedInvitations), new { id = createdInvitation.Id }, createdInvitation);
+            return Ok(createdInvitation);
         }
 
         // קבלת כל ההזמנות
@@ -47,7 +48,8 @@ namespace PaperDreams_Server.Controllers
         }
 
         // קבלת כל ההזמנות לפי משתמש
-        [HttpGet("user/{userId}")]
+        [HttpGet("userInvitation/{userId}")]
+       // [Authorize]
         public async Task<IActionResult> GetCompletedInvitationsByUser(int userId)
         {
             var invitations = await _completedInvitationService.GetCompletedInvitationsByUserAsync(userId);
@@ -58,7 +60,7 @@ namespace PaperDreams_Server.Controllers
             return Ok(invitations);
         }
 
-        // קבלת כל ההזמנות לפי קטגוריה
+        // קבלת כל ההזמנות המושלמות לפי קטגוריה
         [HttpGet("user/{category}")]
         public async Task<IActionResult> GetCompletedInvitationsByCategory(int category)
         {

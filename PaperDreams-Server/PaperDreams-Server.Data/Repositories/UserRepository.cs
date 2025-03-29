@@ -56,7 +56,7 @@ namespace PaperDreams_Server.Data.Repositories
             userEntity.Roles = userEntity.Roles;
 
             //_dataContext.Users.Update(userEntity);
-            _dataContext.Users.Update(userEntity); 
+            _dataContext.Users.Update(userEntity);
             return await _dataContext.SaveChangesAsync() > 0;
         }
 

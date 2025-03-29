@@ -17,7 +17,6 @@ namespace PaperDreams_Server.Core.Entities
 
         [Required]
         public string ImageUrl { get; set; } 
-        public int Category { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public string Description { get; set; }
@@ -28,7 +27,14 @@ namespace PaperDreams_Server.Core.Entities
         public int UserId { get; set; }          // מזהה המשתמש המעלה את הקובץ
         public User User { get; set; }
 
+
+        [ForeignKey(nameof(Category))]
+        public int CategoryId { get; set; }          // מזהה המשתמש המעלה את הקובץ
+        public Category Category { get; set; }
+
         public ICollection<CompletedInvitation> CompletedInvitations { get; set; }  // הזמנות שמשתמשים עשו עם תבנית זו
+
+        public ICollection<TemplateField> Fields { get; set; }
 
     }
 }

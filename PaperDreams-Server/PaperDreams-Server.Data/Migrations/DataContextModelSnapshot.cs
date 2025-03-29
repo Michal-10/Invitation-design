@@ -22,6 +22,37 @@ namespace PaperDreams_Server.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("PaperDreams_Server.Core.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.CompletedInvitation", b =>
                 {
                     b.Property<int>("Id")
@@ -30,8 +61,8 @@ namespace PaperDreams_Server.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Category")
-                        .HasColumnType("bigint");
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -40,11 +71,11 @@ namespace PaperDreams_Server.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EventType")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -52,9 +83,6 @@ namespace PaperDreams_Server.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("TemplateId1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TextUploadId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -68,8 +96,6 @@ namespace PaperDreams_Server.Data.Migrations
                     b.HasIndex("TemplateId");
 
                     b.HasIndex("TemplateId1");
-
-                    b.HasIndex("TextUploadId");
 
                     b.HasIndex("UserId");
 
@@ -132,7 +158,7 @@ namespace PaperDreams_Server.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Category")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -158,9 +184,39 @@ namespace PaperDreams_Server.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Templates");
+                });
+
+            modelBuilder.Entity("PaperDreams_Server.Core.Entities.TemplateField", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FieldName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("X")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Y")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("TemplateField");
                 });
 
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.TextUpload", b =>
@@ -175,6 +231,10 @@ namespace PaperDreams_Server.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FileUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -256,6 +316,17 @@ namespace PaperDreams_Server.Data.Migrations
                     b.ToTable("RoleUser");
                 });
 
+            modelBuilder.Entity("PaperDreams_Server.Core.Entities.Category", b =>
+                {
+                    b.HasOne("PaperDreams_Server.Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.CompletedInvitation", b =>
                 {
                     b.HasOne("PaperDreams_Server.Core.Entities.Template", "Template")
@@ -268,12 +339,6 @@ namespace PaperDreams_Server.Data.Migrations
                         .WithMany("CompletedInvitations")
                         .HasForeignKey("TemplateId1");
 
-                    b.HasOne("PaperDreams_Server.Core.Entities.TextUpload", "TextUpload")
-                        .WithMany()
-                        .HasForeignKey("TextUploadId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("PaperDreams_Server.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -282,20 +347,37 @@ namespace PaperDreams_Server.Data.Migrations
 
                     b.Navigation("Template");
 
-                    b.Navigation("TextUpload");
-
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.Template", b =>
                 {
+                    b.HasOne("PaperDreams_Server.Core.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("PaperDreams_Server.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Category");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PaperDreams_Server.Core.Entities.TemplateField", b =>
+                {
+                    b.HasOne("PaperDreams_Server.Core.Entities.Template", "Template")
+                        .WithMany("Fields")
+                        .HasForeignKey("TemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Template");
                 });
 
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.TextUpload", b =>
@@ -342,6 +424,8 @@ namespace PaperDreams_Server.Data.Migrations
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.Template", b =>
                 {
                     b.Navigation("CompletedInvitations");
+
+                    b.Navigation("Fields");
                 });
 
             modelBuilder.Entity("PaperDreams_Server.Core.Entities.User", b =>

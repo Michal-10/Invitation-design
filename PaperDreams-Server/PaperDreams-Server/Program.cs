@@ -13,6 +13,7 @@ using PaperDreams_Server.Data.Repositories;
 using PaperDreams_Server.Service.services;
 using System.Text;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -66,6 +67,8 @@ builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
 builder.Services.AddScoped<ITextUploadRepository, TextUploadRepository>();
+builder.Services.AddScoped<ICompletedInvitationRepository, CompletedInvitationRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 // הוספת AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile), typeof(PostModelMappingProfile));
@@ -75,6 +78,8 @@ builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITextUploadService, TextUploadService>();
+builder.Services.AddScoped<ICompletedInvitationService, CompletedInvitationService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 
 

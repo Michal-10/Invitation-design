@@ -15,7 +15,10 @@ namespace PaperDreams_Server
             CreateMap<RegisterPostModel, UserDTO>().ReverseMap();
             CreateMap<LoginPostModel, UserDTO>().ReverseMap();
             CreateMap<LoginDTO, UserDTO>().ReverseMap(); ;
-            CreateMap<RegisterDTO, UserDTO>().ReverseMap(); ;
+            CreateMap<RegisterDTO, UserDTO>().ReverseMap(); 
+            CreateMap<CategoryDTO, CategoryPostModel>().ReverseMap(); 
+            CreateMap<TemplateDTO, TemplatePostModel>().ReverseMap(); 
+            
         }
     }
 }

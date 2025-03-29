@@ -40,7 +40,7 @@ namespace PaperDreams_Server.Service.services
 
             // יצירת אובייקט TextUpload חדש
             var textUpload = _mapper.Map<TextUpload>(textUploadDTO);
-            textUpload.FileUrl = textUploadDTO.File;
+            textUpload.FileUrl = textUploadDTO.FileUrl;
             textUpload.CreatedAt = DateTime.Now;
             textUpload.UpdatedAt = DateTime.Now;
             return await _textUploadRepository.AddTextUploadAsync(textUpload);
