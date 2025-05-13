@@ -34,6 +34,10 @@ namespace PaperDreams_Server.Service.services
 
             var newUser = _mapper.Map<User>(userDto);
             var role = _mapper.Map<Role>(userDto.Role);
+            role.Description = "";
+            role.RoleName = userDto.Role;
+            newUser.Roles = new List<Role> { role };
+            // newUser.Roles.Add(role);
             newUser.created_at = DateTime.Now;
             newUser.UpdatedAt = DateTime.Now;
             newUser.PasswordHash = HashPassword(userDto.Password); // הצפנת הסיסמה ✅
@@ -69,6 +73,11 @@ namespace PaperDreams_Server.Service.services
         {
             var users = await _userRepository.GetUsersAsync();
             return _mapper.Map<IEnumerable<UserDTO>>(users);
+        }
+
+        public async Task<List<string>> GetEmailUsersAsync()
+        {
+            return await _userRepository.GetEmailUsersAsync();
         }
 
         // ✅ החזרת משתמש לפי ID

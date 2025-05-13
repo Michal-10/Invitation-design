@@ -19,7 +19,10 @@ namespace PaperDreams_Server.Core.Entities
         public Template Template { get; set; }
 
         [Required]
-        public string FieldName { get; set; } // שם השדה ("שם החתן", "שם הכלה", "שעה" וכו')
+        //public string FieldName { get; set; } // שם השדה ("שם החתן", "שם הכלה", "שעה" וכו')
+        [ForeignKey(nameof(Field))]
+        public int FieldId { get; set; }
+        public Field Field { get; set; }
 
         public int X { get; set; } // מיקום אופקי
         public int Y { get; set; } // מיקום אנכי

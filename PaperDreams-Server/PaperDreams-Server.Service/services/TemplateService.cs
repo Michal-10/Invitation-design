@@ -91,12 +91,14 @@ namespace PaperDreams_Server.Service.services
             return _mapper.Map<TemplateDTO>(template);
         }
 
-        public async Task<bool> AddAsync(TemplateDTO model)
+        public async Task<TemplateDTO> AddAsync(TemplateDTO model)
         {
             var template = _mapper.Map<Template>(model);
+            template.Name = template.Name;
             template.CreatedAt = DateTime.Now;
             template.UpdatedAt = DateTime.Now;
-            return await _templateRepository.AddAsync(template);
+            var templateAdd = await _templateRepository.AddAsync(template);
+            return _mapper.Map<TemplateDTO>(templateAdd);
         }
 
         public async Task<bool> UpdateAsync(int id, TemplateDTO model)

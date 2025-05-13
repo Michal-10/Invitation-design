@@ -101,6 +101,8 @@ namespace PaperDreams_Server.Controllers
             return Ok(templates);
         }
 
+      
+
         [HttpGet("category/{category}")]
         public async Task<IActionResult> GetByCategory(int category)
         {
@@ -118,10 +120,13 @@ namespace PaperDreams_Server.Controllers
 
         // יצירת Template עם תמונה
         [HttpPost("add")] 
-        public async Task<IActionResult> Create([FromBody] TemplatePostModel model)
+        public async Task<ActionResult<TemplateDTO>> Create([FromBody] TemplatePostModel model)
         {
-            var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            if (!User.Identity.IsAuthenticated)
+                return Unauthorized("משתמש לא מחובר");
 
+            var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            
             // אם יש תמונה, נטפל בה
             string imageUrl = model.ImageUrl;  // נניח שאתה מקבל את ה-URL של התמונה מהלקוח
 
@@ -130,8 +135,8 @@ namespace PaperDreams_Server.Controllers
             templateDto.UserId = userIdFromToken;
             templateDto.ImageUrl = imageUrl;
 
-            await _templateService.AddAsync(templateDto);
-            return CreatedAtAction(nameof(GetAll), new { }, templateDto);
+            return await _templateService.AddAsync(templateDto);
+            //return CreatedAtAction(nameof(GetAll), new { }, templateDto);
         }
 
         // עדכון Template עם תמונה חדשה

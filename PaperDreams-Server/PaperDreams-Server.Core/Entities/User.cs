@@ -30,7 +30,7 @@ namespace PaperDreams_Server.Core.Entities
         public DateTime UpdatedAt { get; set; }
         /*-----------------------------------------------*/
 
-        public ICollection<TextUpload> TextUploads { get; set; }  // קבצים שהמשתמש העלה
+        //public ICollection<TextUpload> TextUploads { get; set; }  // קבצים שהמשתמש העלה
                                                                   //public ICollection<CompletedInvitation> CompletedInvitations { get; set; }  // הזמנות שיצר המשתמש
         public ICollection<Role> Roles { get; set; } = new List<Role>();
 

@@ -26,7 +26,7 @@ namespace PaperDreams_Server.PostMOdel
         public int CategoryId { get; set; }
 
         // ✅ נוסיף את רשימת השדות של התבנית
-        public List<TemplateFieldDTO> Fields { get; set; }
+        //public List<TemplateFieldDTO> Fields { get; set; }
     }
 
 }

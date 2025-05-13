@@ -16,15 +16,15 @@ namespace PaperDreams_Server.Data.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<Category>> GetAllAsync()
+        public async Task<IEnumerable<CategoryDto>> GetAllAsync()
         {
             return await _context.Categories.ToListAsync();
         }
-        public async Task<Category> GetByIdAsync(int id)
+        public async Task<CategoryDto> GetByIdAsync(int id)
         {
             return await _context.Categories.FindAsync(id);
         }
-        public async Task<bool> AddAsync(Category category)
+        public async Task<bool> AddAsync(CategoryDto category)
         {
             await _context.Categories.AddAsync(category);
             return await _context.SaveChangesAsync() > 0;

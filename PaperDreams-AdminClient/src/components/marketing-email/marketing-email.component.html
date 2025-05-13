@@ -1,0 +1,38 @@
+
+
+<div class="email-container">
+    <h2>שליחת מייל שיווקי</h2>
+  
+      
+      
+      
+        <textarea 
+        id="emailContent"
+         [(ngModel)]="emailContent" 
+         rows="10" 
+         cols="80"
+         placeholder="כתוב כאן את הטקסט שברצונך לשלוח...">
+    </textarea>
+    <!-- <quill-editor
+    id="emailContent"
+    [(ngModel)]="emailContent"
+    [modules]="quillConfig"
+    (onEditorCreated)="editorCreated($event)"
+    (onContentChanged)="contentChanged($event)"
+    style="height: 300px;">
+  </quill-editor> -->
+
+     
+        <br><br>
+
+        <button (click)="generateMarketingText()">✍️ צור תוכן שיווקי (AI)</button>
+        <button (click)="sendEmails()" [disabled]="!emailContent.trim()">
+            <i class="material-icons">send</i> שלח לכל המשתמשים
+        </button>
+
+        <br><br>
+        @if(statusMessage)
+        {<div class="status-box">
+            {{ statusMessage }}
+        </div>}
+    </div>

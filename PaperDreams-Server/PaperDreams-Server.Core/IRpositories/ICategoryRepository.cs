@@ -9,9 +9,9 @@ namespace PaperDreams_Server.Core.IRpositories
 {
     public interface ICategoryRepository
     {
-        Task<IEnumerable<Category>> GetAllAsync();
-        Task<Category> GetByIdAsync(int id);
-        Task<bool> AddAsync(Category template);
+        Task<IEnumerable<CategoryDto>> GetAllAsync();
+        Task<CategoryDto> GetByIdAsync(int id);
+        Task<bool> AddAsync(CategoryDto template);
         Task<bool> DeleteAsync(int id);
     }
 }

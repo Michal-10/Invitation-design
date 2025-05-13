@@ -1,0 +1,187 @@
+<!-- 
+
+
+
+   <div style="padding: 20px;">
+    <h2>רשימת משתמשים</h2>
+  <button mat-button color="primary" (click)="[add_user = true,openDialog()]">+ הוספת משתמש</button>
+    @for (user of users; track user.id) {
+      <mat-card style="margin-bottom: 10px;">
+        <mat-card-content>
+          <strong>אימייל:</strong> {{ user.email }}<br />
+          <strong>שם:</strong> {{ user.firstName }} {{ user.lastName }}<br />
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="startEdit(user)">✏️ ערוך</button>
+          <button mat-button color="warn" (click)="deleteUser(user.id)">🗑️ מחק</button>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+  
+
+
+  <ng-template #editDialog>
+    <h2 mat-dialog-title>עריכת משתמש</h2>
+    <div mat-dialog-content>
+      <form [formGroup]="userForm" style="width: 100%;">
+        <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 15px;">
+          <mat-label>אימייל</mat-label>
+          <input matInput formControlName="email">
+          <mat-error *ngIf="userForm.get('email')?.hasError('required')">שדה חובה</mat-error>
+          <mat-error *ngIf="userForm.get('email')?.hasError('email')">אנא הזן כתובת אימייל תקינה</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 15px;">
+          <mat-label>סיסמה</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-hint>השאר ריק אם אינך רוצה לשנות את הסיסמה</mat-hint>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 15px;">
+          <mat-label>שם פרטי</mat-label>
+          <input matInput formControlName="firstName">
+         @if(userForm.get('firstName')?.hasError('required')){
+           <mat-error >שדה חובה</mat-error>
+         }
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 15px;">
+          <mat-label>שם משפחה</mat-label>
+          <input matInput formControlName="lastName">
+          <mat-error *ngIf="userForm.get('lastName')?.hasError('required')">שדה חובה</mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+    <div mat-dialog-actions >
+      <button mat-button (click)="cancelEdit()">ביטול</button>
+      <button mat-button color="primary" [disabled]="userForm.invalid" (click)="add_user!== true? saveUser():addUser()">שמור</button>
+    </div>
+  </ng-template> 
+ -->
+
+
+
+
+
+
+
+
+
+<div class="users-container">
+  <div class="page-header">
+    <h1>ניהול משתמשים</h1>
+    <!-- <button mat-raised-button color="primary" (click)="openAddUserDialog()">
+      <mat-icon>person_add</mat-icon>
+      הוסף משתמש חדש
+    </button> -->
+    <div class="add-user-container">
+      <button mat-raised-button color="primary" (click)="openAddUserDialog()">
+        <mat-icon class="add-icon">person_add</mat-icon>
+        הוסף משתמש חדש
+      </button>
+    </div>
+  </div>
+
+  <div class="users-grid">
+    @for (user of users; track user.id) {
+    <div class="user-card">
+      <div class="user-avatar">
+        <div class="avatar-circle">
+          {{ getUserInitials(user) }}
+        </div>
+      </div>
+      <div class="user-info">
+        <h3>{{ user.firstName }} </h3>
+        <h3>{{ user.lastName }} </h3>
+        <p class="user-email">
+          <mat-icon class="email-icon">email</mat-icon>
+          <span class="email-text">{{ user.email }}</span>
+        </p>
+      </div>
+      <div class="user-actions">
+        <button mat-icon-button color="primary" (click)="startEdit(user)" matTooltip="ערוך משתמש">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteUser(user.id)" matTooltip="מחק משתמש">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+
+  @if (users.length === 0) {
+  <div class="empty-state">
+    <mat-icon>people_outline</mat-icon>
+    <h2>אין משתמשים להצגה</h2>
+    <p>לחץ על "הוסף משתמש חדש" כדי להתחיל</p>
+  </div>
+  }
+</div>
+
+
+
+
+
+<ng-template #editDialog>
+  <div class="dialog-container">
+    <h2 mat-dialog-title>{{ add_user ? 'הוספת משתמש חדש' : 'עריכת משתמש' }}</h2>
+    <mat-dialog-content>
+      <form [formGroup]="userForm" class="user-form">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>שם פרטי</mat-label>
+            <input matInput formControlName="firstName">
+            <mat-icon matPrefix>person</mat-icon>
+            @if(userForm.get('firstName')?.hasError('required')){
+            <mat-error>שדה חובה</mat-error>
+            }.
+
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>שם משפחה</mat-label>
+            <input matInput formControlName="lastName">
+            <mat-icon matPrefix>person</mat-icon>
+            @if(userForm.get('lastName')?.hasError('required')){
+            <mat-error>שדה חובה</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>אימייל</mat-label>
+          <input matInput formControlName="email" type="email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="userForm.get('email')?.hasError('required')">שדה חובה</mat-error>
+          <mat-error *ngIf="userForm.get('email')?.hasError('email')">אנא הזן כתובת אימייל תקינה</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>סיסמה</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if(userForm.get('password')?.hasError('required')){
+          <mat-error>שדה חובה</mat-error>
+          }
+          @if(!add_user) {
+          <mat-hint>השאר ריק אם אינך רוצה לשנות את הסיסמה</mat-hint>
+          }
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="cancelEdit()">ביטול</button>
+      <button mat-raised-button color="primary"
+        [disabled]="userForm.invalid || (add_user && !userForm.get('password')?.value)"
+        (click)="add_user ? addUser() : saveUser()">
+        {{ add_user ? 'הוסף' : 'שמור' }}
+      </button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>

@@ -1,0 +1,58 @@
+/* @import '~quill/dist/quill.snow.css'; */
+@import '../../../node_modules/quill/dist/quill.snow.css';
+.email-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    direction: rtl;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  textarea {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .status-box {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #e0ffe0;
+    border: 1px solid #00aa00;
+    border-radius: 5px;
+  }
+
+/* אלמנט מקיף שמכיל את ה-Quill Editor */
+.quill-editor-wrapper {
+    width: 80%; 
+    min-height: 200px; 
+    max-height: 250px; 
+    resize: vertical; 
+    overflow: auto; 
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 15px;
+  }
+  
+  /* עיצוב של ה-Quill Editor עצמו */
+  .resizable-quill {
+    color:'red';
+    width: 100%; /* מרחיב את ה-Quill Editor לכל רוחב האלמנט המקיף */
+    height: 100%; /* גובה של 100% של האלמנט המקיף */
+  }
+  
+  

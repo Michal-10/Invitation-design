@@ -14,13 +14,20 @@ using PaperDreams_Server.Service.services;
 using System.Text;
 
 
+DotNetEnv.Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 
 var credentials = new BasicAWSCredentials(
     builder.Configuration["AWS:AccessKey"],
     builder.Configuration["AWS:SecretKey"]
 );
+
+var fromEmail = builder.Configuration["Email:User"];
+var password = builder.Configuration["Email:Password"];
+var apiKey = builder.Configuration["MailboxLayer:ApiKey"];
 
 var region = Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"]); // בדקי שהאזור נכון
 
@@ -66,9 +73,12 @@ builder.Services.AddDbContext<DataContext>();
 // הוספת Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
-builder.Services.AddScoped<ITextUploadRepository, TextUploadRepository>();
+//builder.Services.AddScoped<ITextUploadRepository, TextUploadRepository>();
 builder.Services.AddScoped<ICompletedInvitationRepository, CompletedInvitationRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryFieldRepository, CategoryFieldRepository>();
+builder.Services.AddScoped<ITemplateFieldRepository, TemplateFieldRepository>();
+builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
 
 // הוספת AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile), typeof(PostModelMappingProfile));
@@ -77,9 +87,15 @@ builder.Services.AddAutoMapper(typeof(MappingProfile), typeof(PostModelMappingPr
 builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<ITextUploadService, TextUploadService>();
+//builder.Services.AddScoped<ITextUploadService, TextUploadService>();
 builder.Services.AddScoped<ICompletedInvitationService, CompletedInvitationService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryFieldService, CategoryFieldService>();
+builder.Services.AddScoped<ITemplateFieldService, TemplateFieldService>();
+builder.Services.AddScoped<IStatisticsService, StatisticsService>();
+builder.Services.AddScoped<ITokenContextService, TokenContextService>();
+builder.Services.AddHttpContextAccessor();
+
 
 
 
@@ -126,8 +142,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();

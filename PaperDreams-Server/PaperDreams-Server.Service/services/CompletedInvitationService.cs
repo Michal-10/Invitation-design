@@ -15,11 +15,13 @@ namespace PaperDreams_Server.Service.services
     {
         private readonly ICompletedInvitationRepository _completedInvitationRepository;
         private readonly IMapper _mapper;
+        private readonly ITokenContextService _tokenContextService;
 
-        public CompletedInvitationService(ICompletedInvitationRepository completedInvitationRepository, IMapper mapper)
+        public CompletedInvitationService(ICompletedInvitationRepository completedInvitationRepository, IMapper mapper, ITokenContextService tokenContextService)
         {
             _completedInvitationRepository = completedInvitationRepository;
             _mapper = mapper;
+            _tokenContextService = tokenContextService;
         }
 
         // קבלת כל ההזמנות
@@ -37,8 +39,10 @@ namespace PaperDreams_Server.Service.services
         }
 
         // קבלת כל ההזמנות לפי משתמש
-        public async Task<IEnumerable<CompletedInvitationDTO>> GetCompletedInvitationsByUserAsync(int userId)
+        public async Task<IEnumerable<CompletedInvitationDTO>> GetCompletedInvitationsByUserAsync()
         {
+            int userId = _tokenContextService.GetUserId();
+
             var invitations = await _completedInvitationRepository.GetCompletedInvitationsByUserAsync(userId);
             return _mapper.Map<IEnumerable<CompletedInvitationDTO>>(invitations);
         }

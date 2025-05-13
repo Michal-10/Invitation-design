@@ -32,7 +32,7 @@ namespace PaperDreams_Server.Core.DTOs
         public int UserId { get; set; }
 
         // ✅ נוסיף את רשימת השדות של התבנית
-        public List<TemplateFieldDTO> Fields { get; set; }
+        public List<TemplateFieldDTO> TemplateFields { get; set; }
     }
  
 }

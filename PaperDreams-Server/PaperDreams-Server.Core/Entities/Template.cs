@@ -30,11 +30,11 @@ namespace PaperDreams_Server.Core.Entities
 
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }          // מזהה המשתמש המעלה את הקובץ
-        public Category Category { get; set; }
+        public CategoryDto Category { get; set; }
 
-        public ICollection<CompletedInvitation> CompletedInvitations { get; set; }  // הזמנות שמשתמשים עשו עם תבנית זו
+        //public ICollection<CompletedInvitation> CompletedInvitations { get; set; }  // הזמנות שמשתמשים עשו עם תבנית זו
 
-        public ICollection<TemplateField> Fields { get; set; }
+        public ICollection<TemplateField> TemplateFields { get; set; }
 
     }
 }

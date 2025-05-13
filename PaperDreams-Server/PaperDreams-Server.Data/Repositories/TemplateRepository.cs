@@ -65,12 +65,16 @@ namespace PaperDreams_Server.Data.Repositories
 
         public async Task<IEnumerable<Template>> GetAllAsync()
         {
-            return await _context.Templates.Include(t=>t.Fields).ToListAsync();
+            return await _context.Templates
+                //.Include(t=>t.Fields)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Template>> GetByCategoryAsync(int category)
         {
-            return await _context.Templates.Where(t => t.CategoryId == category).Include(t=>t.Fields).ToListAsync();
+            return await _context.Templates.Where(t => t.CategoryId == category)
+                .Include(t=>t.TemplateFields).ThenInclude(f=>f.Field)
+                .ToListAsync();
         }
 
         public async Task<Template> GetByIdAsync(int id)
@@ -78,10 +82,11 @@ namespace PaperDreams_Server.Data.Repositories
             return await _context.Templates.FindAsync(id);
         }
 
-        public async Task<bool> AddAsync(Template template)
+        public async Task<Template> AddAsync(Template template)
         {
             await _context.Templates.AddAsync(template);
-            return await _context.SaveChangesAsync() > 0;
+            await _context.SaveChangesAsync() ;
+            return template;
         }
 
         public async Task<bool> UpdateAsync(Template template)

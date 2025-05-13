@@ -64,13 +64,22 @@ namespace PaperDreams_Server.Controllers
 
         // ✅ רק מנהל יכול לראות את כל המשתמשים
         [HttpGet]
-        //[Authorize(Policy = "Admin")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Policy = "Admin")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
         {
             return Ok(await _userService.GetAllUsersAsync());
         }
 
+        //[HttpGet("AllEmailsUsers")]
+        //[Authorize(Policy = "Admin")]
+        //public async Task<ActionResult<IEnumerable<string>>> GetAllEmailUsers()
+        //{
+        //    var emails = await _userService.GetEmailUsersAsync();
+        //    return Ok(emails);
+        //}
+        
+
+        
         // ✅ כל משתמש יכול לראות רק את עצמו
         [HttpGet("{id}")]
         [Authorize]
@@ -93,22 +102,23 @@ namespace PaperDreams_Server.Controllers
         // ✅ עדכון פרופיל אישי (משתמש יכול לעדכן רק את עצמו)
 
         [HttpPut("update-profile/{id}")]
+
         //[Authorize]
         //[Authorize(Policy = "Admin")]
         public async Task<ActionResult> UpdateUser(int id, [FromBody] UserPostModel userPostModel)
         {
             var userDto = _mapper.Map<UserDTO>(userPostModel);
-            var userIdFromToken =  int.Parse(User.FindFirst("userId")?.Value);
-              
-            if (userIdFromToken != id)
-                return Forbid("userIdFromToken != id"); // חסימת גישה אם ה-ID לא תואם
+            //var userIdFromToken =  int.Parse(User.FindFirst("userId")?.Value);
+             
+            ///if (userIdFromToken != id)
+               // return Forbid("userIdFromToken != id"); // חסימת גישה אם ה-ID לא תואם
 
             if (!string.IsNullOrEmpty(userDto.Role) && userDto.Role != "string")
                 return BadRequest("You cannot change your role.");
 
             bool isSuccess = await _userService.UpdateUserAsync(id, userDto);
             if (isSuccess)
-                return Ok("Profile updated successfully.");
+                return Ok(new { message = "Profile updated successfully." });
 
             return BadRequest("Failed to update profile.");
         }
@@ -122,7 +132,7 @@ namespace PaperDreams_Server.Controllers
         {
             bool isSuccess = await _userService.DeleteUserAsync(id);
             if (isSuccess)
-                return Ok("User deleted successfully.");
+                return Ok(new { message = "User deleted successfully." });
 
             return NotFound("User not found.");
         }

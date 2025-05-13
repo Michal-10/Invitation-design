@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PaperDreams_Server.Core.Entities
 {
-    public class Category
+    public class CategoryDto
     {
 
         [Key]
@@ -23,5 +23,9 @@ namespace PaperDreams_Server.Core.Entities
         [ForeignKey(nameof(UserId))]
         public int UserId { get; set; }
         public User User { get; set; }
+
+
+        //public ICollection<CategoryField> CategoryFields { get; set; }
+
     }
 }

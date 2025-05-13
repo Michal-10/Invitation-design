@@ -1,0 +1,53 @@
+<!-- <p>auth works!</p>
+
+<div style="max-width: 400px; margin: auto; padding-top: 100px;">
+    <mat-card>
+      <mat-card-title>התחברות</mat-card-title>
+      <mat-card-content>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>אימייל</mat-label>
+          <input matInput [(ngModel)]="email" type="email" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <label>סיסמה</label>
+          <input matInput [(ngModel)]="password" type="password" />
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="login()">התחבר</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+   -->
+
+   <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <h1>ברוכים הבאים</h1>
+        <p>התחבר למערכת הניהול</p>
+      </div>
+      
+      <div class="login-form">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>אימייל</mat-label>
+          <input matInput [(ngModel)]="email" type="email" required>
+          <mat-icon matPrefix>email</mat-icon>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>סיסמה</mat-label>
+          <input matInput [(ngModel)]="password" [type]="hidePassword ? 'password' : 'text'" required>
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" class="login-button" (click)="login()">
+          <mat-icon>login</mat-icon>
+          התחבר
+        </button>
+      </div>
+    </div>
+  </div>

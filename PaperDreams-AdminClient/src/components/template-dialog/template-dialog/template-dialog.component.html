@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>העלאת תבנית</h1>
+<form [formGroup]="templateForm" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 16px;">
+    <mat-label>שם תבנית</mat-label>
+    <input matInput formControlName="name" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 16px;">
+    <mat-label>תיאור</mat-label>
+    <input matInput formControlName="description" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 16px;">
+    <mat-label>קטגוריה</mat-label>
+    <mat-select formControlName="categoryId" required>
+      <mat-option *ngFor="let c of data.categories" [value]="c.id">{{ c.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div style="margin-bottom: 16px;">
+    <label style="display: block; margin-bottom: 8px;">בחר קובץ תבנית:</label>
+    <input type="file" (change)="onFileSelected($event)" />
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">סגור</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="templateForm.invalid">
+      העלה ושמור תבנית
+    </button>
+  </div>
+</form>

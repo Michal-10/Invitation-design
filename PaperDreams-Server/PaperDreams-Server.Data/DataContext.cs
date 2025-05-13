@@ -13,9 +13,11 @@ namespace PaperDreams_Server.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Template> Templates { get; set; }
-        public DbSet<TextUpload> TextUploads { get; set; }
+        //public DbSet<TextUpload> TextUploads { get; set; }
         public DbSet<CompletedInvitation> CompletedInvitations { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryDto> Categories { get; set; }
+        public DbSet<CategoryField> CategoryField { get; set; }
+        public DbSet<TemplateField> TemplateField { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -66,14 +68,14 @@ namespace PaperDreams_Server.Data
                 .HasOne(c => c.User)
                 .WithMany()
                 .HasForeignKey(c => c.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
-            //✅ 4.מניעת Cascade בין CompletedInvitation ל-TextUpload(אם קיים קשר כזה)
-            modelBuilder.Entity<CompletedInvitation>()
-                .HasOne(c => c.User)
-                .WithMany()
-                .HasForeignKey(c => c.UserId)
-                .OnDelete(DeleteBehavior.Restrict);  // או DeleteBehavior.NoAction
+     //       modelBuilder.Entity<TemplateField>()
+     //.HasOne(tf => tf.Field)
+     //.WithMany()
+     //.HasForeignKey(tf => tf.FieldId)
+     //.OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 

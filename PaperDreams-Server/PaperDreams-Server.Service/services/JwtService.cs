@@ -94,13 +94,13 @@ namespace PaperDreams_Server.Service.services
                 };
 
                 // הוספת תפקידים כ-Claims
-                if (user.Roles != null)
-                {
+                //if (user.Roles != null)
+                //{
                     foreach (var role in user.Roles)
                     {
-                        claims.Add(new Claim(ClaimTypes.Role, role.RoleName)); // הוספת תפקיד כ-Claim
+                        claims.Add(new Claim("roles", role.RoleName)); // הוספת תפקיד כ-Claim
                     }
-                }
+                //}
 
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secret));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

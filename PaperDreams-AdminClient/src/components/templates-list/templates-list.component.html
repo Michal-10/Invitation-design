@@ -1,0 +1,38 @@
+<!-- <p>templates-list works!</p> -->
+
+<div style="max-width: 700px; margin: auto; padding: 20px;">
+    <mat-card style="direction: ltr;">
+      <mat-card-title>בחר קטגוריה להצגת תבניות</mat-card-title>
+      <mat-card-content>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>קטגוריה</mat-label>
+          <mat-select [(ngModel)]="selectedCategory" (selectionChange)="loadTemplates()">
+            @for(c of categories; track c.name) {
+               <mat-option  [value]="c">{{ c.name }}</mat-option>
+            }
+              </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+  
+    @if(templates.length > 0){
+      <mat-card style="margin-top: 20px;">
+        <mat-card-title>תבניות בקטגוריה: {{ selectedCategory.name }}</mat-card-title>
+        <mat-card-content>
+          @for(template of templates; track template.id) {
+            <mat-card style="margin-bottom: 10px;">
+              <mat-card-content>
+                @if(template.imageUrl){
+                  <img [src]="template.imageUrl" alt="template image" width="200" />
+                }
+              </mat-card-content>
+            </mat-card>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+    @else {
+      <p>אין תבניות להצגה</p>
+    }
+  </div>
+  

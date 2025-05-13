@@ -37,7 +37,7 @@ namespace PaperDreams_Server.Service.services
 
         public async Task<bool> AddAsync(CategoryDTO model)
         {
-            var category = _mapper.Map<Category>(model);
+            var category = _mapper.Map<CategoryDto>(model);
             category.CreatedAt = DateTime.Now;
             category.UpdateAt = DateTime.Now;
             return await _categoryRepository.AddAsync(category);

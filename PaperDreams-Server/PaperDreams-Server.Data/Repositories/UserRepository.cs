@@ -19,12 +19,18 @@ namespace PaperDreams_Server.Data.Repositories
         }
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
-                return await _dataContext.Users.ToListAsync();
+             return await _dataContext.Users.Include(u => u.Roles).ToListAsync();
+        }
+        public async Task<List<string>> GetEmailUsersAsync()
+        {
+            return await _dataContext.Users
+                .Select(u => u.Email)
+                .ToListAsync();
         }
 
         public async Task<User> GetUserByIdAsync(int id)
         {
-            return await _dataContext.Users.FindAsync(id);
+            return await _dataContext.Users.Include(u=>u.Roles).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<bool> AddUserAsync(User user)
@@ -63,9 +69,10 @@ namespace PaperDreams_Server.Data.Repositories
         public async Task<bool> DeleteUserAsync(int id)
         {
             var user = await GetUserByIdAsync(id);
+           
             if (user == null)
             {
-                return false; // לא נמצא, מחזיר false
+                return false; // לא נמצא, מחזיר false 
             }
 
             _dataContext.Users.Remove(user);

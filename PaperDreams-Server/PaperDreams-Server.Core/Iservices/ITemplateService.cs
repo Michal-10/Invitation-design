@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using PaperDreams_Server.Core.DTOs;
+﻿using PaperDreams_Server.Core.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +13,7 @@ namespace PaperDreams_Server.Core.Iservices
         Task<IEnumerable<TemplateDTO>> GetAllAsync();
         Task<IEnumerable<TemplateDTO>> GetByCategoryAsync(int category);
         Task<TemplateDTO> GetByIdAsync(int id);
-        Task<bool> AddAsync(TemplateDTO model);
+        Task<TemplateDTO> AddAsync(TemplateDTO model);
         Task<bool> UpdateAsync(int id, TemplateDTO model);
         Task<bool> DeleteAsync(int id);
 
