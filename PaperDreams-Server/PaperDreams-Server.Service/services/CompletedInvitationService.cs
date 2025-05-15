@@ -39,10 +39,9 @@ namespace PaperDreams_Server.Service.services
         }
 
         // קבלת כל ההזמנות לפי משתמש
-        public async Task<IEnumerable<CompletedInvitationDTO>> GetCompletedInvitationsByUserAsync()
+        public async Task<IEnumerable<CompletedInvitationDTO>> GetCompletedInvitationsByUserAsync(int userId)
         {
-            int userId = _tokenContextService.GetUserId();
-
+            //int userId = _tokenContextService.GetUserId();
             var invitations = await _completedInvitationRepository.GetCompletedInvitationsByUserAsync(userId);
             return _mapper.Map<IEnumerable<CompletedInvitationDTO>>(invitations);
         }

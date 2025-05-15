@@ -100,7 +100,6 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/Store";
 import { User } from "../../models/User";
 import { loginRegister } from "../../redux/UserSlice";
-import { UserId } from "../../Services/User";
 
 export default function LoginRegisterWithApi({
   status,
@@ -137,11 +136,11 @@ export default function LoginRegisterWithApi({
       const res = await dispatch(loginRegister({ user: { ...userData }, status }));
       console.log("after login before session");
       console.log(res);
-      
-      sessionStorage.setItem("userToken", res.payload.token ||'');
+      //  sessionStorage.setItem("userToken", res.payload.token);
+
       console.log("after login after session");
+      console.log(sessionStorage.getItem("userToken"));
       console.log(res.payload.token);
-      console.log(UserId);
       
       setHideBtns(true);
       handleCloseModal(); // סגירת מודל

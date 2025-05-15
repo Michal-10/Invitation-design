@@ -60,7 +60,6 @@ const UpdateUser = () => {
         dispatch(updateUser({ user: userData }))
 
         setOpenModal(false);
-
     }
 
     return (<>

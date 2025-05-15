@@ -198,7 +198,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-templates',
@@ -207,13 +209,14 @@ import { Router } from '@angular/router';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   templateUrl: './templates.component.html',
   styleUrls: ['./templates.component.css']
 })
 export class TemplatesComponent implements OnInit {
   templateForm: FormGroup;
+  isUploading: boolean = false;
   categories: any[] = [];
   selectedFile!: File;
 
@@ -246,6 +249,7 @@ export class TemplatesComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
+    this.isUploading = true; // Set the uploading state to true
     console.log("in submit function in template component");
     console.log("this.selectedFile: before rename" );
     
@@ -305,7 +309,7 @@ export class TemplatesComponent implements OnInit {
         
         await this.templateService.uploadToS3(this.selectedFile, presignedUrl);
 
-
+this.isUploading = false; // Set the uploading state to false after the upload is complete
         // sessionStorage.setItem('templateId', res.id);
         this.router.navigate(['/positions', res.id]);
       });

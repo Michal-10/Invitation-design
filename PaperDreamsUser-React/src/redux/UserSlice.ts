@@ -1,7 +1,6 @@
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { UserId } from "../Services/User";
+import { decodeToken } from "../Services/User";
 import { User } from "../models/User";
 
 export const loginRegister = createAsyncThunk("loginRegister",
@@ -22,6 +21,11 @@ export const loginRegister = createAsyncThunk("loginRegister",
 
       const response = await axios.post(`http://localhost:5077/api/user/${status}`, data);
       console.log("response", response);
+      console.log("in userSlice", response.data.token);
+      console.log("in userSlice", response.data.user);
+      sessionStorage.setItem("userToken", response.data.token);
+      
+
 
       return response.data;
 
@@ -35,10 +39,9 @@ export const updateUser = createAsyncThunk("updateUser",
   async ({ user }: { user: Partial<User> }, thunkAPI) => {
     try {
       console.log("userId");
-      console.log(UserId);
 
 
-      const response = await axios.put(`http://localhost:5077/api/user/update-profile/${UserId}`, user,
+      const response = await axios.put(`http://localhost:5077/api/user/update-profile/${decodeToken()?.decoded.userId}`, user,
         { headers: { Authorization: `Bearer ${sessionStorage.getItem('userToken')}` } }
       );
       return response.data;
@@ -72,14 +75,30 @@ const userSlice = createSlice({
         console.log(action.payload.user);
         console.log("--------------------------------");
 
+        console.log(decodeToken());
+        const decodedToken = decodeToken();
+       console.log(action.payload.user);
+       console.log({...action.payload.user});
+            state.user = {
+                id: decodedToken?.decoded.userId ?? action.payload.user.id,
+                firstName: decodedToken?.decoded.firstName ?? action.payload.user.firstName,
+                lastName: action.payload.user.lastName,
+                email: decodedToken?.decoded.email ?? action.payload.user.email,
+                password: action.payload.user.password,
+                role: action.payload.user.role,
+                created_at: action.payload.user.created_at,
+                updatedAt: action.payload.user.updatedAt,
 
-        state.user = action.payload.user;
-      })
+
+            };
+        console.log(state.user)
+    })
       .addCase(loginRegister.rejected, (state, action) => {
         state.loading = false;
         state.error = typeof action.payload === "string"
           ? action.payload
           : action.error.message || "Error login to system";
+          
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true;

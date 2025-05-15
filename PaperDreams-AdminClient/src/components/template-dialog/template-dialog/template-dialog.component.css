@@ -1,0 +1,62 @@
+:host {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .template-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px 0;
+  }
+  
+  .file-upload {
+    margin-bottom: 8px;
+  }
+  
+  .file-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .file-input-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .file-button {
+    min-width: 120px;
+    
+    mat-icon {
+      margin-left: 8px;
+    }
+  }
+  
+  .file-name {
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+  
+  .file-placeholder {
+    font-size: 14px;
+    color: #999;
+  }
+  
+  mat-dialog-actions {
+    padding: 8px 0;
+  }

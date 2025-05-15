@@ -1,4 +1,4 @@
-/* template-editor.component.scss */
+ template-editor.component.scss
 .template-editor-container {
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -303,4 +303,5 @@
         background-color: #0e3e1a;
       }
     }
-  }
+  } 
+

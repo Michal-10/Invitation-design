@@ -23,30 +23,7 @@ export default () => {
 
     // // State for contact dialog
     const [contactOpen, setContactOpen] = useState(false)
-    // const [email, setEmail] = useState("")
-    // const [message, setMessage] = useState("")
-
-    // State for mobile drawer
-    // const [drawerOpen, setDrawerOpen] = useState(false)
-
-    // Check if user is logged in
-    // const isLoggedIn = !!sessionStorage.getItem("userToken")
-
-    // // Handle avatar menu
-    // const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    //     setAnchorEl(event.currentTarget)
-    // }
-
-    // const handleClose = () => {
-    //     setAnchorEl(null)
-    // }
-
-    // Handle logout
-    // const logOut = () => {
-    //     sessionStorage.removeItem("userToken")
-    //     navigate("/")
-    //     handleClose()
-    // }
+   
 
     // // Handle contact form
     const handleContactOpen = () => {

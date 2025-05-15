@@ -55,9 +55,9 @@ namespace PaperDreams_Server.Controllers
         }
 
         // קבלת כל ההזמנות לפי משתמש
-        [HttpGet("userInvitation")]
+        [HttpGet("userInvitation/{userId}")]
         // [Authorize]
-        public async Task<IActionResult> GetCompletedInvitationsByUser()
+        public async Task<IActionResult> GetCompletedInvitationsByUser(int userId)
         {
             //var userIdClaim = User?.Claims?.FirstOrDefault(c => c.Type == "userId");
             //if (userIdClaim == null)
@@ -67,7 +67,7 @@ namespace PaperDreams_Server.Controllers
 
             //int userId = int.Parse(userIdClaim.Value);
 
-            var invitations = await _completedInvitationService.GetCompletedInvitationsByUserAsync();
+            var invitations = await _completedInvitationService.GetCompletedInvitationsByUserAsync(userId);
             if (invitations == null || !invitations.Any())
             {
                 return NotFound("No invitations found for this user.");

@@ -1,4 +1,7 @@
 export type jwtType ={
     Token:String,
-    userId:number
+    userId:number,
+    email:String,
+    firstName:String
+
 }

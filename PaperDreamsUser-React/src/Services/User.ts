@@ -3,7 +3,7 @@ import { jwtType } from "../models/JwtType";
 
 
 
-export const UserId = (() => {
+export const decodeToken = () => {
     
     const token = sessionStorage.getItem("userToken");;
     console.log(token);
@@ -27,11 +27,11 @@ export const UserId = (() => {
             const userId = decoded.userId;
             console.log(userId);
             
-            return decoded.userId;
+            return {decoded};
         } catch (error) {
             console.error("Invalid token", error);
             return null;
         }
     }
     return null;
-})();
+};

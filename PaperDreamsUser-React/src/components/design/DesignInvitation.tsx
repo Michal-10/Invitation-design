@@ -11,8 +11,8 @@ import PrintIcon from "@mui/icons-material/Print";
 import SaveIcon from "@mui/icons-material/Save";
 import { getDownloadURL } from "../../Services/FileService";
 import { uploadFileToAWS } from "../../Services/UploadFileToAWS";
-import { UserId } from "../../Services/User";
 import TextEditorSidebar from "./TextEditorSideBar";
+import { decodeToken } from "../../Services/User";
 
 export default () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -181,7 +181,7 @@ console.log(myTtemplate.templateFields[0].name);
                 category: JSON.parse(sessionStorage.getItem("category") || '')?.id,
                 name: newFile.name,
                 imageUrl: fileUrl,
-                userId: UserId,
+                userId: decodeToken()?.decoded.userId,
                 templateId: myTtemplate.id, //template.id,
                 content: "הזמנה מושלמת",
             };

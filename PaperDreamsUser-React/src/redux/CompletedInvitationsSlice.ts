@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { UserId } from "../Services/User";
+import { decodeToken } from "../Services/User";
 import { RootState } from "./Store";
 import { CompletedInvitation } from "../models/CompletedTemplates";
 
@@ -9,10 +9,11 @@ export const fetchCompletedInvitation = createAsyncThunk("completedInvitation/fe
     try {
 
       console.log("in fetchCompletedInvitation");
-      console.log(UserId);
+      console.log(decodeToken());
       console.log("UserId");
       
-      const res = await axios.get(`http://localhost:5077/api/CompletedInvitation/userInvitation`);
+      // http://localhost:5077/api/CompletedInvitation/userInvitation
+      const res = await axios.get(`http://localhost:5077/api/CompletedInvitation/userInvitation/${decodeToken()?.decoded.userId}`);
 
       console.log("fetch all complete");
       console.log(res.data);

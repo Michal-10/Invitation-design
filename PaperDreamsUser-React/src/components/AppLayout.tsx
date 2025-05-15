@@ -35,7 +35,7 @@ import { useSelector } from "react-redux"
 import UpdateUser from "../pages/login/UpdateUser"
 import SingInAndUp from "../pages/login/SingInAndUp";
 import { RootState } from "../redux/Store";
-import { UserId } from "../Services/User";
+import { decodeToken } from "../Services/User";
 
 export default () => {
     const theme = useTheme()
@@ -60,9 +60,9 @@ export default () => {
 
     useEffect(() => {
         console.log("👤 המשתמש השתנה:", user);
-        // if (sessionStorage.getItem("userToken") ) {
+         if (sessionStorage.getItem("userToken") ) {
             setIsLogin(true);
-        // }
+        }
         console.log("isLogin: in useEffect applayout", isLogin);
     }, [user]);
 
@@ -165,7 +165,7 @@ export default () => {
                                         }}
                                         onClick={handleMenu}
                                     >
-                                        {user.user.firstName?.charAt(0)}
+                                        {decodeToken()?.decoded.firstName?.charAt(0) ?? user.user.firstName?.charAt(0)}
                                     </Avatar>
                                     <Menu
                                         anchorEl={anchorEl}

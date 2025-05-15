@@ -94,7 +94,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 5px; /* ריווח בין האייקון לטקסט */
+    gap: 5px;
     margin: 0;
     font-size: 25px;
     color: #555;
@@ -102,13 +102,12 @@ body {
   
   .email-icon {
     font-size: 25px;
-    margin: 12px ; /* ריווח בין האייקון לטקסט */
-    color: #5e72e4; /* גוון כחול-סגול */
+    margin: 12px ; 
+    color: #5e72e4; 
   }
   
   .email-text {
-    direction: ltr; /* לשמירה על מבנה נכון של כתובת מייל */
-  }
+    direction: ltr; }
   
   .add-user-container {
     display: flex;
@@ -117,7 +116,7 @@ body {
   }
   
   .add-user-container button {
-    background-color: #3766f3; /* כחול נעים */
+    background-color: #3766f3; 
     color: white;
 
     font-family: 'Segoe UI', sans-serif;

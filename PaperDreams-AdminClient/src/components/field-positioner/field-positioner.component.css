@@ -5,7 +5,7 @@
   color: #333;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   flex-direction: row;
-  overflow-x: hidden; /* מניעת גלילה אופקית */
+  overflow-x: hidden; 
   overflow-y: hidden;
 }
 
@@ -192,4 +192,4 @@
 
 .loading-template mat-spinner {
   margin-bottom: 10px;
-}
+} 
