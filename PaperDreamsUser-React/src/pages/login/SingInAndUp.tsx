@@ -9,7 +9,7 @@ export default ()=> {
     // export default observer(() => {
 
     const [signInOrUp, setSignInOrUp] = useState<'login' | 'register' | null>(null);
-    const [hideBtns, setHideBtns] = useState<boolean>(false);
+    const [, setHideBtns] = useState<boolean>(false);
 
     const handleCloseModal = () => {
         
