@@ -19,7 +19,7 @@ import { useNavigate } from "react-router"
 
 export default function ChooseCategoryTemplate() {
   const [selectedCategory, setSelectedCategory] = useState<string>("")
-  const [openModal, setOpenModal] = useState<boolean>(true)
+  const [openModal, ] = useState<boolean>(true)
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const navigate = useNavigate()

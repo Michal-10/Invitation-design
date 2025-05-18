@@ -44,7 +44,7 @@ export default function ShowCompletedInvitation({ fileName, time }: { fileName: 
     }
 
     try {
-      const response = await axios.post("http://localhost:5077/api/CompletedInvitation/send", {
+       await axios.post("http://localhost:5077/api/CompletedInvitation/send", {
         To: emailTo,
         Message: message,
         ImageUrl: imageUrl,

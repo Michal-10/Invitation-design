@@ -119,6 +119,8 @@ console.log(myTtemplate.templateFields[0].name);
             
             
             const matchingEntry = exaText.find(([key]) => key === field.field.name);
+            console.log("matchingEntry");
+            console.log(matchingEntry);
             const matchingText = matchingEntry ? matchingEntry[1] : undefined;
 
             if (matchingText) {
@@ -134,8 +136,9 @@ console.log(myTtemplate.templateFields[0].name);
                     top: scaledY,
                     fontSize: 50 * scaleFactor,
                     fill: "black",
-                    fontWeight: "bold",
+                    fontWeight: "bold"
                 });
+                (textObj as any).fieldName = field.field.name;
 
                 canvas.add(textObj);
             }

@@ -1,28 +1,22 @@
 
-import type React from "react"
 import { useState } from "react"
 import {
-     Typography, Button, Avatar, Grid, Card, CardContent, CardActions,Box,useMediaQuery
+     Typography, Button, Avatar, Grid, Card, CardContent, CardActions,Box,
 } from "@mui/material"
-import { useTheme } from "@mui/material/styles"
 import { FaEnvelope } from "react-icons/fa"
 import { useNavigate } from "react-router"
-import { useSelector } from "react-redux"
 
 export default () => {
-    const theme = useTheme()
     // const isMobile = useMediaQuery(theme.breakpoints.down("md"))
     const navigate = useNavigate()
     // const user = useSelector((state: RootState) => state.user.user)
 
-    // State for avatar menu
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
     //state for setting
     // const [setting, setSetsetting] = useState<boolean>(false)
-    const open = Boolean(anchorEl)
+    // const open = Boolean(anchorEl)
 
     // // State for contact dialog
-    const [contactOpen, setContactOpen] = useState(false)
+    const [, setContactOpen] = useState(false)
    
 
     // // Handle contact form

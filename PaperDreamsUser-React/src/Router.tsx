@@ -1,12 +1,10 @@
 import { createBrowserRouter } from "react-router";
 import ChooseCategoryTemplate from "./components/ChooseCategoryTemplate";
-import MyCompletedInvitation from "./components/completedInvitation/MyCompletedInvitation";
 import DesignInvitation from "./components/design/DesignInvitation";
 import UpdateUser from "./pages/login/UpdateUser";
 import HomePage from "./components/HomePage";
 import AppLayout from "./components/AppLayout";
 import ChooseTemplatesAnduplooadFile from "./components/Templates/ChooseTemplatesAnduplooadFile";
-import SingInAndUp from "./pages/login/SingInAndUp";
 import MyCompletedInvitationPage from "./components/completedInvitation/MyCompletedInvitation";
 
 export const Router = createBrowserRouter([
