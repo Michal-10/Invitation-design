@@ -21,7 +21,8 @@ namespace PaperDreams_Server.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=invitation_db");
+            optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("invitationlineDB"));
+            //"Server=(localdb)\\MSSQLLocalDB;Database=invitation_db");
             //optionsBuilder.LogTo(m => Debug.WriteLine(m));
         }
         // הוסף את הקוד הבא:
