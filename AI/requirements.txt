@@ -1,1 +1,9 @@
-flask
+fastapi
+uvicorn[standard]
+python-dotenv
+pillow
+pytesseract
+pdfplumber
+python-docx
+PyMuPDF
+openai
