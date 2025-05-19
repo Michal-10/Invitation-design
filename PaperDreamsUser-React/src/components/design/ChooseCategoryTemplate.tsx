@@ -24,11 +24,15 @@ export default function ChooseCategoryPage() {
       try {
         setLoading(true)
         console.log("before getCategories");
+        console.log(`${import.meta.env.VITE_API_URL}/Category`);
+        
         
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/Category`)
         console.log("after getCategories");
-        console.log(res.data);
+        console.log("------------------");
         
+        console.log(res.data);
+      
         setCategories(res.data)
       } catch (error) {
         console.error("שגיאה בשליפת הקטגוריות:", error)
