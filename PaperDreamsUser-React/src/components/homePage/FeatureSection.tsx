@@ -1,4 +1,3 @@
-import React from 'react';
 import { Grid, Typography, Box } from '@mui/material';
 import { Bolt, Security, Brush } from '@mui/icons-material';
 import { motion } from 'framer-motion';

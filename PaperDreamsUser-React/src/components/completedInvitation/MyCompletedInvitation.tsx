@@ -1,4 +1,4 @@
-import { Grid, Typography, Box, CircularProgress, Container, Paper, Stack } from "@mui/material";
+import { Grid, Typography, Box, CircularProgress, Container, Paper } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ShowCompletedInvitation from "./ShowCompletedInvitation";

@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Button, CircularProgress, Box, Typography, Paper, Snackbar, Alert } from "@mui/material"
 import { Download, CheckCircle } from "@mui/icons-material"
 import { getDownloadURL } from "../../Services/FileService"
-import { color } from "framer-motion"
 
 interface FileDownloadProps {
   fileName: string
