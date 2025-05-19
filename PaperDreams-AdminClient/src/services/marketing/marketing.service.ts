@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class MarketingService {
   // טעינת כתובות האימייל מהשרת
   loadEmails(): Observable<string[]> {
     return this.http.get<string[]>(
-      'http://localhost:5077/api/user/AllEmailsUsers',
+      `${environment.apiUrl}/api/user/AllEmailsUsers`,
       this.getAuthHeaders()
     );
   }

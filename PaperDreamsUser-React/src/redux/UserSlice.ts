@@ -23,6 +23,10 @@ export const loginRegister = createAsyncThunk("loginRegister",
       console.log("in userSlice", data);
 
       console.log("axios.defaults.baseURL");
+      console.log("import.meta.env.VITE_API_URL");
+      console.log(import.meta.env.VITE_API_URL);
+      
+      
       
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/${status}`, data);
       console.log("----------------------");

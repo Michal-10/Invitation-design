@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class AnalyticsService {
   //   return this.http.get<{ date: string, count: number }[]>(`${this.apiUrl}/daily-logins`);
   // }
 
-  private apiUrl = 'http://localhost:5077/api/statistics';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

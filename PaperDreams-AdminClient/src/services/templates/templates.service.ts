@@ -12,6 +12,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { from, map, Observable, of } from 'rxjs';
 import axios from 'axios';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -131,7 +132,7 @@ export class TemplatesService {
 
 
   createTemplate(data: any) {
-    return this.http.post<any>('http://localhost:5077/api/templates/add', data,
+    return this.http.post<any>(`${environment.apiUrl}/api/templates/add`, data,
       this.getAuthHeaders()
     );
   }

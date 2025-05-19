@@ -38,6 +38,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class TemplateFieldService {
@@ -48,7 +49,7 @@ export class TemplateFieldService {
   addFieldToTemplate(data: any): Observable<any>  {
     console.log("in templateFieldService before addFieldToTemplate");
     console.log(data);
-    return this.http.post('http://localhost:5077/api/TemplateField/add', data);
+    return this.http.post(`${environment.apiUrl}/TemplateField/add`, data);
   }
 
   updateTemplateFieldPosition(id:number, data: any): Observable<any> {
