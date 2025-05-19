@@ -25,6 +25,8 @@ export default function ChooseCategoryPage() {
         setLoading(true)
         console.log("before getCategories");
         console.log(`${import.meta.env.VITE_API_URL}/Category`);
+        console.log("meta.env");
+        console.log(import.meta.env);
         
         console.log("------------------");
         
