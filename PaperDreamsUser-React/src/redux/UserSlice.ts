@@ -19,7 +19,7 @@ export const loginRegister = createAsyncThunk("loginRegister",
       }
       console.log("in userSlice", status);
 
-      const response = await axios.post(`http://localhost:5077/api/user/${status}`, data);
+      const response = await axios.post(`user/${status}`, data);
       console.log("response", response);
       console.log("in userSlice", response.data.token);
       console.log("in userSlice", response.data.user);

@@ -18,13 +18,28 @@ namespace PaperDreams_Server.Data
         public DbSet<CategoryDto> Categories { get; set; }
         public DbSet<CategoryField> CategoryField { get; set; }
         public DbSet<TemplateField> TemplateField { get; set; }
+       
+       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("invitationlineDB"));
+
+            var connectionString = Environment.GetEnvironmentVariable("invitationlineDB");
+            var serverVersion = ServerVersion.AutoDetect(connectionString);
+            optionsBuilder.UseMySql(connectionString, serverVersion);
+
+
+            //optionsBuilder.UseMySql(Environment.GetEnvironmentVariable("invitationlineDB"));
+
+
+            //optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("invitationlineDB"));
+
+
             //"Server=(localdb)\\MSSQLLocalDB;Database=invitation_db");
             //optionsBuilder.LogTo(m => Debug.WriteLine(m));
         }
+
+
         // הוסף את הקוד הבא:
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
@@ -50,6 +65,10 @@ namespace PaperDreams_Server.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
+            
+
             // ✅ 1. מניעת Cascade בין Templates ל- Categories
             modelBuilder.Entity<Template>()
                 .HasOne(t => t.Category)
