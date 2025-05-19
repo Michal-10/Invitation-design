@@ -98,9 +98,8 @@
 </div> -->
 
 
-
+<!-- 
 <div class="app-container">
-  <!-- Sidebar -->
   <div class="sidebar" [class.collapsed]="sidebarCollapsed">
     <div class="sidebar-header">
       <div class="logo">
@@ -156,9 +155,7 @@
     }
   </div>
 
-  <!-- Main Content -->
   <div class="main-content" [class.expanded]="sidebarCollapsed">
-    <!-- Top Bar -->
     <div class="top-bar">
       <div class="page-title">
         <h1>{{ getPageTitle() }}</h1>
@@ -179,6 +176,99 @@
           </mat-menu>
         } @else {
           <a mat-button routerLink="/login">
+            <i class="material-icons">login</i>
+            <span>התחברות כמנהל</span>
+          </a>
+        }
+      </div>
+    </div>
+
+    <div class="content-wrapper page-transition">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="app-container">
+  <!-- Sidebar -->
+  <div class="sidebar" [class.collapsed]="sidebarCollapsed">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span>📄 PaperDreams</span>
+      </div>
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        <i class="material-icons"></i>
+      </button>
+    </div>
+
+    @if (isLoggedIn()) {
+      <div class="sidebar-content">
+        <div class="nav-item" routerLink="/users" routerLinkActive="active">
+          <i class="material-icons">people</i>
+          @if (!sidebarCollapsed) {
+            <span>משתמשים</span>
+          }
+        </div>
+        <div class="nav-item" routerLink="/templates" routerLinkActive="active">
+          <i class="material-icons">note_add</i>
+          @if (!sidebarCollapsed) {
+            <span>ליצירת תבנית</span>
+          }
+        </div>
+        <div class="nav-item" routerLink="/template-list" routerLinkActive="active">
+          <i class="material-icons">view_list</i>
+          @if (!sidebarCollapsed) {
+            <span>רשימת תבניות</span>
+          }
+        </div>
+        <div class="nav-item" routerLink="/analytics" routerLinkActive="active">
+          <i class="material-icons">analytics</i>
+          @if (!sidebarCollapsed) {
+            <span>דוחות ואנליטיקה</span>
+          }
+        </div>
+        <div class="nav-item" routerLink="/sendEmail" routerLinkActive="active">
+          <i class="material-icons">send</i>
+          @if (!sidebarCollapsed) {
+            <span>לשליחת מייל שיווקי</span>
+          }
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="nav-item logout-menu-item" (click)="logout()">
+          <i class="material-icons">exit_to_app</i>
+          @if (!sidebarCollapsed) {
+            <span>התנתק</span>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" [class.expanded]="sidebarCollapsed">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="page-title">
+        <h1>{{ getPageTitle() }}</h1>
+      </div>
+      <div class="user-menu">
+        @if (isLoggedIn()) {
+          <button mat-button [matMenuTriggerFor]="menu" class="user-button">
+            <!-- <i class="material-icons">arrow_drop_down</i> -->
+            <span>מנהל מערכת</span>
+            <i class="material-icons"></i>
+          </button>
+          <mat-menu #menu="matMenu">
+            <!-- <button mat-menu-item class="logout-menu-item" (click)="logout()">
+              <i class="material-icons">logout</i>
+              <span>התנתק</span>
+            </button> -->
+          </mat-menu>
+        } @else {
+          <a mat-button class="user-button" routerLink="/login">
             <i class="material-icons">login</i>
             <span>התחברות כמנהל</span>
           </a>

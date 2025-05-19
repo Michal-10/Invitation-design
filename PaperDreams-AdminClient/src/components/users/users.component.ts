@@ -242,6 +242,15 @@ export class UsersComponent implements OnInit {
         this.users = data.filter(user => user.email !== adminEmail);
       },
       error: (err) => {
+        if ( err.status == 401 ){
+          Swal.fire({
+            title: 'שגיאה',
+            text: 'משתמש לא מחובר',
+            icon: 'error',
+            confirmButtonText: 'אישור',
+            confirmButtonColor: '#2575fc'
+          });
+        }
         console.error('שגיאה בטעינת משתמשים:', err);
         Swal.fire({
           title: 'שגיאה',

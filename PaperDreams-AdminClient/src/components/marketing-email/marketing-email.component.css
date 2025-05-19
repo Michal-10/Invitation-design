@@ -1,4 +1,4 @@
-.email-container {
+/* .email-container {
     max-width: 800px;
     margin: auto;
     padding: 20px;
@@ -52,4 +52,257 @@
   }
 
 
+ */
 
+
+ /* Base Styles */
+:host {
+  display: block;
+  direction: rtl;
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 25px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #f0f2f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.card-title i {
+  margin-left: 10px;
+  color: #1e88e5;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* Editor Styles */
+.editor-container {
+  margin-bottom: 20px;
+}
+
+/* Override Quill styles for RTL */
+::ng-deep .ql-editor {
+  direction: rtl;
+  text-align: right;
+  min-height: 200px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+::ng-deep .ql-snow .ql-toolbar {
+  border-radius: 8px 8px 0 0;
+  background-color: #f8f9fa;
+  border-color: #e0e0e0;
+}
+
+::ng-deep .ql-container {
+  border-radius: 0 0 8px 8px;
+  border-color: #e0e0e0;
+  font-family: inherit;
+}
+
+::ng-deep .ql-toolbar button {
+  margin: 0 2px;
+}
+
+::ng-deep .ql-snow.ql-toolbar button:hover, 
+::ng-deep .ql-snow .ql-toolbar button:hover,
+::ng-deep .ql-snow.ql-toolbar button.ql-active, 
+::ng-deep .ql-snow .ql-toolbar button.ql-active {
+  color: #1e88e5;
+}
+
+::ng-deep .ql-snow.ql-toolbar button:hover .ql-fill, 
+::ng-deep .ql-snow .ql-toolbar button:hover .ql-fill,
+::ng-deep .ql-snow.ql-toolbar button.ql-active .ql-fill, 
+::ng-deep .ql-snow .ql-toolbar button.ql-active .ql-fill {
+  fill: #1e88e5;
+}
+
+::ng-deep .ql-snow.ql-toolbar button:hover .ql-stroke, 
+::ng-deep .ql-snow .ql-toolbar button:hover .ql-stroke,
+::ng-deep .ql-snow.ql-toolbar button.ql-active .ql-stroke, 
+::ng-deep .ql-snow .ql-toolbar button.ql-active .ql-stroke {
+  stroke: #1e88e5;
+}
+
+/* Textarea alternative */
+.text-editor {
+  width: 100%;
+  min-height: 200px;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  direction: rtl;
+}
+
+.text-editor:focus {
+  outline: none;
+  border-color: #1e88e5;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+/* Preview Section */
+.preview-section {
+  margin-top: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.preview-header {
+  background-color: #f8f9fa;
+  padding: 10px 15px;
+  font-weight: 500;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+}
+
+.preview-header i {
+  margin-left: 8px;
+  color: #1e88e5;
+}
+
+.email-preview {
+  padding: 15px;
+  min-height: 100px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+}
+
+/* Button Styles */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.btn i {
+  font-size: 18px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2196f3 0%, #0d47a1 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-primary:disabled {
+  background: #b0bec5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: #f0f2f5;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #e3f2fd;
+  color: #1e88e5;
+}
+
+/* Status Box */
+.status-box {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #e3f2fd;
+  color: #1e88e5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.status-box.loading {
+  background-color: #e8f5e9;
+  color: #43a047;
+}
+
+.status-box.error {
+  background-color: #ffebee;
+  color: #e53935;
+}
+
+.status-box i {
+  font-size: 20px;
+}
+
+.rotating {
+  animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}

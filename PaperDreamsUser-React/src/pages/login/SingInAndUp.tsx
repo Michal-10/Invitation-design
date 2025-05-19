@@ -1,40 +1,59 @@
-import { Box, Grid2, Button } from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Box, Button } from "@mui/material";
 import LoginRegisterWithApi from "./LoginRegisterWithApi";
 
+export default function LoginPage() {
+  const [signInOrUp, setSignInOrUp] = useState<"login" | "register" | null>(null);
+  const [, setHideBtns] = useState<boolean>(false);
 
+  const handleCloseModal = () => {
+    setSignInOrUp(null);
+  };
 
+  return (
+    <Box
+      sx={{
+        height: "100vh", // גובה מלא של חלון הדפדפן
+        width: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center", // יישור אנכי למרכז
+        alignItems: "center", // יישור אופקי למרכז
+        gap: 3, // רווח בין האלמנטים
+        bgcolor: "#f9f9f9", // רקע בהיר לדוגמה
+        p: 2,
+      }}
+    >
+      {/* כפתורי הרשמה והתחברות */}
+      <Box sx={{ display: "flex", gap: 4 }}>
+        <Button
+          variant={signInOrUp === "register" ? "contained" : "outlined"}
+          color="primary"
+          sx={{ fontWeight: 600, px: 4 }}
+          onClick={() => setSignInOrUp("register")}
+        >
+          הרשמה
+        </Button>
+        <Button
+          variant={signInOrUp === "login" ? "contained" : "outlined"}
+          color="primary"
+          sx={{ fontWeight: 600, px: 4 }}
+          onClick={() => setSignInOrUp("login")}
+        >
+          התחברות
+        </Button>
+      </Box>
 
-export default ()=> {
-    // export default observer(() => {
-
-    const [signInOrUp, setSignInOrUp] = useState<'login' | 'register' | null>(null);
-    const [, setHideBtns] = useState<boolean>(false);
-
-    const handleCloseModal = () => {
-        
-        setSignInOrUp(null);
-    };
-
-    return (
-        <>           
-             <Box sx={{top:'20px' }}>
-                <Grid2 container>
-                    <Box sx={{ display: 'flex', justifyContent:'center', marginRight: '40px' }}>
-                        <Button color="inherit" sx={{ marginLeft: '50px', fontWeight:500, border:'2px solid var(--primary-color)' ,paddingLeft:'9px',paddingRight:'9px',
-                        '&:hover': {
-                            color: 'black',
-                        }}}
-                        onClick={() => setSignInOrUp('register')} >הרשמה </Button>
-                        <Button color="inherit" sx={{ marginLeft: '30px', fontWeight:500, border:'2px solid var(--primary-color)',paddingLeft:'13px',paddingRight:'13px', 
-                        '&:hover': { 
-                            color: 'black', 
-                        }}}  onClick={() => setSignInOrUp('login')}> התחברות</Button>
-                    </Box>
-                </Grid2>
-            </Box >
-            {signInOrUp && <LoginRegisterWithApi status={signInOrUp!} setHideBtns={setHideBtns} handleCloseModal={handleCloseModal} />}
-        </>
-    )
+      {/* הטופס לפי הבחירה */}
+      {signInOrUp && (
+        <Box sx={{ width: { xs: "90vw", sm: 400 }, mt: 3 }}>
+          <LoginRegisterWithApi
+            status={signInOrUp}
+            setHideBtns={setHideBtns}
+            handleCloseModal={handleCloseModal}
+          />
+        </Box>
+      )}
+    </Box>
+  );
 }
-

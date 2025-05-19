@@ -67,7 +67,7 @@
 
 
 
-
+<!-- 
 
 <form [formGroup]="templateForm" (ngSubmit)="submit()" style="max-width: 500px; margin: auto;">
   <mat-card>
@@ -100,11 +100,11 @@
     </mat-card-content>
   </mat-card>
 </form> 
+ -->
 
 
 
-
-
+<!-- 
 <form [formGroup]="templateForm" (ngSubmit)="submit()" dir="rtl" style="max-width: 600px; margin: auto;">
   <mat-card>
     <mat-card-header>
@@ -144,4 +144,77 @@
   </mat-card>
 </form> 
 
+ -->
 
+
+ <div class="content-wrapper page-transition">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="material-icons">cloud_upload</i>
+        העלאת תבנית
+      </div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="templateForm" (ngSubmit)="submit()">
+        <mat-form-field appearance="outline" class="custom-form-field">
+          <mat-label>שם תבנית</mat-label>
+          <input matInput formControlName="name" />
+          <mat-error *ngIf="templateForm.get('name')?.invalid && templateForm.get('name')?.touched">
+            שם תבנית הוא שדה חובה
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="custom-form-field">
+          <mat-label>תיאור</mat-label>
+          <input matInput formControlName="description" />
+          <mat-error *ngIf="templateForm.get('description')?.invalid && templateForm.get('description')?.touched">
+            תיאור הוא שדה חובה
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="custom-form-field">
+          <mat-label>קטגוריה</mat-label>
+          <mat-select formControlName="categoryId">
+            @for(c of categories; track c.id) {
+              <mat-option [value]="c.id">{{ c.name }}</mat-option>
+            }
+          </mat-select>
+          <mat-error *ngIf="templateForm.get('categoryId')?.invalid && templateForm.get('categoryId')?.touched">
+            יש לבחור קטגוריה
+          </mat-error>
+        </mat-form-field>
+
+        <div class="file-upload-container">
+          <label for="file-upload" class="file-upload-label">
+            <i class="material-icons">attach_file</i>
+            <span>בחר קובץ</span>
+          </label>
+          <input 
+            id="file-upload" 
+            type="file" 
+            class="file-input" 
+            (change)="onFileSelected($event)" 
+          />
+          <div class="selected-file" *ngIf="selectedFile">
+            <i class="material-icons">description</i>
+            <span>{{ selectedFile.name }}</span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button 
+            mat-raised-button 
+            type="submit" 
+            class="btn-primary" 
+            [disabled]="templateForm.invalid || !selectedFile || isUploading"
+          >
+            <i class="material-icons">cloud_upload</i>
+            <span>העלה ושמור תבנית</span>
+            <mat-spinner *ngIf="isUploading" diameter="20" class="spinner"></mat-spinner>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,7 @@
   <div class="page-header">
     <h1>ניהול משתמשים</h1>
     <div class="add-user-container">
-      <button mat-raised-button color="primary" (click)="openAddUserDialog()">
+      <button mat-raised-button (click)="openAddUserDialog()">
         <mat-icon class="add-icon">person_add</mat-icon>
         הוסף משתמש חדש
       </button>
@@ -15,7 +15,7 @@
 
   <div class="users-grid">
     @for (user of users; track user.id) {
-    <div class="user-card">
+    <!-- <div class="user-card">
       <div class="user-avatar">
         <div class="avatar-circle">
           {{ getUserInitials(user) }}
@@ -28,6 +28,10 @@
           <mat-icon class="email-icon">email</mat-icon>
           <span class="email-text">{{ user.email }}</span>
         </p>
+        <p>
+          <mat-icon class="info-icon">calendar_today</mat-icon>
+          <span>{{ user.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+        </p>
       </div>
       <div class="user-actions">
         <button mat-icon-button color="primary" (click)="startEdit(user)" matTooltip="ערוך משתמש">
@@ -37,7 +41,35 @@
           <mat-icon>delete</mat-icon>
         </button>
       </div>
+    </div> -->
+    <div class="user-card">
+      <div class="user-header">
+        <div class="avatar-circle">{{this.getUserInitials(user)}}</div>
+        <div class="user-name"> {{user.firstName + ' ' + user.lastName}}</div>
+      </div>
+    
+      <div class="user-details">
+        <div class="user-detail-row">
+          <mat-icon class="email-icon">email</mat-icon>
+          <span>{{user.email}}</span>
+        </div>
+        <div class="user-detail-row">
+          <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          <span>{{user.createdAt|date}}</span>
+        </div>
+      </div>
+    
+      <div class="user-actions">
+        <button mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </div>
+    
+    
     }
   </div>
 

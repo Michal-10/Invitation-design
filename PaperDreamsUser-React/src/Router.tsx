@@ -1,25 +1,26 @@
 import { createBrowserRouter } from "react-router";
-import ChooseCategoryTemplate from "./components/ChooseCategoryTemplate";
 import DesignInvitation from "./components/design/DesignInvitation";
 import UpdateUser from "./pages/login/UpdateUser";
-import HomePage from "./components/HomePage";
 import AppLayout from "./components/AppLayout";
 import ChooseTemplatesAnduplooadFile from "./components/Templates/ChooseTemplatesAnduplooadFile";
 import MyCompletedInvitationPage from "./components/completedInvitation/MyCompletedInvitation";
+import LoginPage from "./pages/login/LoginPage";
+import ChooseCategoryTemplate from "./components/design/ChooseCategoryTemplate";
+import HomePage from "./components/homePage/HomePage";
 
 export const Router = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: (<><AppLayout /></>),
     children: [
       {
         index: true, // This is the default route when the path is "/"
         element: <HomePage />,
       },
-      // {
-      //   path: "login",
-      //   element: <SingInAndUp />,
-      // },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
       {
         path: "chooseCategory",
         element: <ChooseCategoryTemplate />,

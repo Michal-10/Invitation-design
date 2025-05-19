@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Button, CircularProgress, Box, Typography, Paper, Snackbar, Alert } from "@mui/material"
 import { Download, CheckCircle } from "@mui/icons-material"
 import { getDownloadURL } from "../../Services/FileService"
+import { color } from "framer-motion"
 
 interface FileDownloadProps {
   fileName: string
@@ -81,15 +82,15 @@ export default function FileDownload({
       <Button
         onClick={handleDownload}
         variant={variant}
-        color="primary"
         size={size}
         startIcon={showIcon ? isDownloading ? <CircularProgress size={20} color="inherit" /> : <Download /> : undefined}
         disabled={isDownloading}
+        color={variant === "contained" ? "primary" : undefined}
         sx={{
-          borderRadius: "20px",
-          bgcolor: variant === "contained" ? "var(--primary-color)" : undefined,
+          borderRadius: "20px"
+        ,
           "&:hover": {
-            bgcolor: variant === "contained" ? "#e05e52" : undefined,
+            bgcolor: variant === "contained" ? "#primary" : undefined,
           },
         }}
       >

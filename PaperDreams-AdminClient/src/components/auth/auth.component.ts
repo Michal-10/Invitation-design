@@ -90,7 +90,7 @@ export class AuthComponent {
         text: 'אנא מלא את כל השדות',
         icon: 'error',
         confirmButtonText: 'אישור',
-        confirmButtonColor: '#5c6bc0'
+        confirmButtonColor: '#2575fc'
       });
       return;
     }
@@ -106,7 +106,7 @@ export class AuthComponent {
             text: 'אין לך הרשאות גישה למערכת.',
             icon: 'warning',
             confirmButtonText: 'אישור',
-            confirmButtonColor: '#5c6bc0'
+            confirmButtonColor: '#2575fc'
           });
           localStorage.removeItem('token');
           return;

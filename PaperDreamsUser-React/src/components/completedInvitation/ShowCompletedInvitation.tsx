@@ -72,14 +72,14 @@ export default function ShowCompletedInvitation({ fileName, time }: { fileName: 
       <Card sx={{ width: 350, boxShadow: "0 8px 24px rgba(0,0,0,0.12)", borderRadius: 4, overflow: "hidden", position: "relative", transition: "transform 0.3s ease, box-shadow 0.3s ease", "&:hover": { transform: "translateY(-8px)", boxShadow: "0 12px 28px rgba(0,0,0,0.2)", }, }}>
         {loading ? (
           <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: 250, bgcolor: "#f8f9fa" }}>
-            <CircularProgress size={50} sx={{ color: "var(--primary-color)" }} />
+            <CircularProgress size={50}  color="secondary" />
           </Box>
         ) : (
           <>
             <CardMedia component="img" height={250} image={imageUrl || "/placeholder.svg?height=250&width=350"} alt={fileName} sx={{ objectFit: "contain", bgcolor: "white", p: 2 }} />
             <CardContent sx={{ pb: 1, direction: "rtl" }}>
               <Box sx={{ display: "flex", alignItems: "center", color: "text.secondary", mb: 1 }}>
-                <CalendarToday fontSize="small" sx={{ color: "var(--primary-color)" }} />
+                <CalendarToday fontSize="small" color="primary" />
                 <Typography variant="body2" sx={{ ml: 1, paddingRight:'5px'}}>
                   {' תאריך יצירה '+ new Date(time).toLocaleDateString('he-IL')}
                 </Typography>
