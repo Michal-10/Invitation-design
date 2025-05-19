@@ -26,6 +26,7 @@ export default function ChooseCategoryPage() {
         console.log("before getCategories");
         console.log(`${import.meta.env.VITE_API_URL}/Category`);
         
+        console.log("------------------");
         
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/Category`)
         console.log("after getCategories");
