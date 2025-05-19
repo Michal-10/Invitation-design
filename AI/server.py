@@ -72,6 +72,10 @@ def extract_date_from_text(text):
                 continue
     return None
 
+@app.get("/")
+def root():
+    return {"status": "Server running"}
+
 @app.post("/upload/")
 async def upload_file(file: UploadFile = File(...), event_type: str = Form(...)):
     file_bytes = await file.read()
@@ -218,4 +222,6 @@ async def generate_marketing_text():
         return {"error": str(e)}
 
 if __name__ == "__main__":
-    uvicorn.run("server:app", host="0.0.0.0", port=5000, reload=True)
+    # uvicorn.run("server:app", host="0.0.0.0", port=5000, reload=True)
+    port = int(os.environ.get("PORT", 5000))  # ברירת מחדל ל־5000 להרצה מקומית
+    uvicorn.run("server:app", host="0.0.0.0", port=port)
