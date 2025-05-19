@@ -27,15 +27,15 @@ export class UserService {
   }
   updateUser(id: number, user: User) {
     console.log("in userService before updateUser");
-    return this.http.put(`${this.apiUrl}/update-profile/${id}`, user, this.getAuthHeaders());
+    return this.http.put(`${this.apiUrl}/user/update-profile/${id}`, user, this.getAuthHeaders());
   }
   addUser( user: User) {
     console.log("in userService before add");
-    return this.http.post(`${this.apiUrl}/register`, user, this.getAuthHeaders());
+    return this.http.post(`${this.apiUrl}/user/register`, user, this.getAuthHeaders());
   }
   deleteUser(id: number): Observable<any> {
     console.log("in userService before deleteUser");
-    return this.http.delete(`${this.apiUrl}/${id}`, this.getAuthHeaders());
+    return this.http.delete(`${this.apiUrl}/user/${id}`, this.getAuthHeaders());
   }
 
   private getAuthHeaders() {

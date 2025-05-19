@@ -17,7 +17,7 @@ import { environment } from '../../environments/environment.prod';
   providedIn: 'root'
 })
 export class CategoryService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = `${environment.apiUrl}/Category`;
 
   constructor(private http: HttpClient) {}
 

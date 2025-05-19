@@ -42,14 +42,14 @@ import { environment } from '../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class TemplateFieldService {
-  private apiUrl = 'http://localhost:5077/api/TemplateField'; // הגדרת כתובת ה-API
+  private apiUrl = `${environment.apiUrl}/TemplateField`; // הגדרת כתובת ה-API
 
   constructor(private http: HttpClient) {}
 
   addFieldToTemplate(data: any): Observable<any>  {
     console.log("in templateFieldService before addFieldToTemplate");
     console.log(data);
-    return this.http.post(`${environment.apiUrl}/TemplateField/add`, data);
+    return this.http.post(`${environment.apiUrl}/add`, data);
   }
 
   updateTemplateFieldPosition(id:number, data: any): Observable<any> {

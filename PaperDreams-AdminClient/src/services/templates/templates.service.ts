@@ -18,7 +18,7 @@ import { environment } from '../../environments/environment.prod';
   providedIn: 'root'
 })
 export class TemplatesService {
-  private apiUrl = 'http://localhost:5077/api/templates/';
+  private apiUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) { }
 
@@ -57,7 +57,7 @@ export class TemplatesService {
   async getDownloadURL(fileName: string) {
     try {
       console.log("getDownloadURL fileName: " + fileName);
-      const res = await axios.get(`http://localhost:5077/api/upload/download-url/${fileName}`);
+      const res = await axios.get(`${this.apiUrl}/upload/download-url/${fileName}`);
       return res.data;
     } catch (error) {
       console.error('שגיאה בהבאת ה-URL:', error);
@@ -76,7 +76,7 @@ export class TemplatesService {
   }
 
   getTemplatesByCategory(category: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}category/${category}`,
+    return this.http.get<any[]>(`${this.apiUrl}/category/${category}`,
       this.getAuthHeaders()
     );
   }
@@ -93,7 +93,7 @@ export class TemplatesService {
     if (!file) return;
 
     try {
-      const res = await axios.get(`http://localhost:5077/api/upload/presigned-url?fileName=${file.name}`);
+      const res = await axios.get(`${this.apiUrl}/upload/presigned-url?fileName=${file.name}`);
       console.log("res");
       
       console.log(res);
@@ -132,7 +132,7 @@ export class TemplatesService {
 
 
   createTemplate(data: any) {
-    return this.http.post<any>(`${environment.apiUrl}/api/templates/add`, data,
+    return this.http.post<any>(`${this.apiUrl}/templates/add`, data,
       this.getAuthHeaders()
     );
   }

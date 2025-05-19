@@ -29,7 +29,7 @@ export class AnalyticsService {
   //   return this.http.get<{ date: string, count: number }[]>(`${this.apiUrl}/daily-logins`);
   // }
 
-  private apiUrl = environment.apiUrl;
+  private apiUrl = `${environment.apiUrl}/statistics`;
 
   constructor(private http: HttpClient) {}
 
