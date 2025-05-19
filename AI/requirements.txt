@@ -7,3 +7,4 @@ pdfplumber
 python-docx
 PyMuPDF
 openai
+python-multipart
