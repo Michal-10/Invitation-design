@@ -127,7 +127,7 @@ export default () => {
 
         try {
             const response = await axios.get(
-                `http://localhost:5077/api/upload/presigned-url?fileName=${newFile.name}`
+                `${import.meta.env.VITE_API_URL}/upload/presigned-url?fileName=${newFile.name}`
             );
 
             const fileUrl = response.data;
@@ -141,7 +141,7 @@ export default () => {
                 content: "הזמנה מושלמת",
             };
 
-            await axios.post("http://localhost:5077/api/CompletedInvitation/add", invitationData);
+            await axios.post(`${import.meta.env.VITE_API_URL}/CompletedInvitation/add`, invitationData);
 
             await uploadFileToAWS(newFile);
 

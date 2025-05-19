@@ -52,7 +52,7 @@ export default function EmailSend({
 
     try {
       setSending(true);
-      await axios.post("http://localhost:5077/api/CompletedInvitation/send", {
+      await axios.post(`${import.meta.env.VITE_API_URL}/CompletedInvitation/send`, {
         To: emailTo,
         Message: message,
         ImageUrl: imageUrl,

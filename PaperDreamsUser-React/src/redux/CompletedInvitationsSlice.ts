@@ -12,8 +12,7 @@ export const fetchCompletedInvitation = createAsyncThunk("completedInvitation/fe
       console.log(decodeToken());
       console.log("UserId");
       
-      // http://localhost:5077/api/CompletedInvitation/userInvitation
-      const res = await axios.get(`http://localhost:5077/api/CompletedInvitation/userInvitation/${decodeToken()?.decoded.userId}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/CompletedInvitation/userInvitation/${decodeToken()?.decoded.userId}`);
 
       console.log("fetch all complete");
       console.log(res.data);

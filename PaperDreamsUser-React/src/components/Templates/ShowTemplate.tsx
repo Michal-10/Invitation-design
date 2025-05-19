@@ -20,7 +20,7 @@ export default ({ fileName }: { fileName: string }) => {
                 console.log(fileName);
 
                 //לקבלת ה-Presigned URL
-                const res = await axios.get(`http://localhost:5077/api/upload/download-url/${fileName}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/upload/download-url/${fileName}`);
 
                 setImageUrl(res.data); // הגדרת ה-URL לקבלת התמונה
 

@@ -26,7 +26,7 @@ export const uploadFileToAWS = async (file: File) => {
     if (!file) return;
 
     try {
-        const res = await axios.get(`http://localhost:5077/api/upload/presigned-url?fileName=${file.name}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/upload/presigned-url?fileName=${file.name}`);
         console.log(res);
         console.log(file);
 

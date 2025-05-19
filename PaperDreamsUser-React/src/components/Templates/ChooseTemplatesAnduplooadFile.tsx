@@ -47,7 +47,7 @@ export default function CategoryTemplatesPage() {
         }
 
         const res = await axios.get(
-          `http://localhost:5077/api/templates/category/${category.id}`,
+          `${import.meta.env.VITE_API_URL}/templates/category/${category.id}`,
           {
             headers: { Authorization: `Bearer ${sessionStorage.getItem("userToken")}` },
           }

@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+// import axios from "axios";
 import { decodeToken } from "../Services/User";
 import { User } from "../models/User";
+import axios from "axios";
 
 export const loginRegister = createAsyncThunk("loginRegister",
   async ({ user, status }: { user: Partial<User>, status: string }, thunkAPI) => {
@@ -19,13 +20,18 @@ export const loginRegister = createAsyncThunk("loginRegister",
       }
       console.log("in userSlice", status);
 
-      const response = await axios.post(`user/${status}`, data);
+      console.log("in userSlice", data);
+
+      console.log("axios.defaults.baseURL");
+      
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/${status}`, data);
+      console.log("----------------------");
+      
       console.log("response", response);
       console.log("in userSlice", response.data.token);
       console.log("in userSlice", response.data.user);
       sessionStorage.setItem("userToken", response.data.token);
       
-
 
       return response.data;
 
@@ -41,7 +47,7 @@ export const updateUser = createAsyncThunk("updateUser",
       console.log("userId");
 
 
-      const response = await axios.put(`http://localhost:5077/api/user/update-profile/${decodeToken()?.decoded.userId}`, user,
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/user/update-profile/${decodeToken()?.decoded.userId}`, user,
         { headers: { Authorization: `Bearer ${sessionStorage.getItem('userToken')}` } }
       );
       return response.data;

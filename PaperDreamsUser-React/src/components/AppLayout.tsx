@@ -469,6 +469,7 @@ export default () => {
   // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
   return (<>
+  
     <Header />
     <Outlet />
     <Footer />

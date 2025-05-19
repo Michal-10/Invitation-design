@@ -23,7 +23,7 @@ export default function ChooseCategoryPage() {
     const getCategories = async () => {
       try {
         setLoading(true)
-        const res = await axios.get("http://localhost:5077/api/Category")
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/Category`)
         setCategories(res.data)
       } catch (error) {
         console.error("שגיאה בשליפת הקטגוריות:", error)
