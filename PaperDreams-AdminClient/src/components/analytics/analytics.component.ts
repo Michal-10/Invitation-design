@@ -393,17 +393,17 @@ export class AnalyticsComponent implements OnInit {
 
   ngOnInit(): void {
     // Fetch total templates
-    this.analyticsService.getTotalTemplates().subscribe(count => {
-      this.totalTemplates = count;
-    });
-    console.log("after getTotalTemplates");
+    // this.analyticsService.getTotalTemplates().subscribe(count => {
+    //   this.totalTemplates = count;
+    // });
+    // console.log("after getTotalTemplates");
     
 
     // Fetch total fields
-    this.analyticsService.getTotalFields().subscribe(count => {
-      this.totalFields = count;
-    });
-console.log("after getTotalFields");
+//     this.analyticsService.getTotalFields().subscribe(count => {
+//       this.totalFields = count;
+//     });
+// console.log("after getTotalFields");
 
     // Fetch templates by category
     this.analyticsService.getTemplatesByCategory().subscribe(data => {

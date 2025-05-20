@@ -33,17 +33,17 @@ export class AnalyticsService {
 
   constructor(private http: HttpClient) {}
 
-  getTotalTemplates(): Observable<number> {
-    console.log("getTotalTemplates");
+  // getTotalTemplates(): Observable<number> {
+  //   console.log("getTotalTemplates");
     
-    return this.http.get<number>(`${this.apiUrl}/total-templates`);
-  }
+  //   return this.http.get<number>(`${this.apiUrl}/total-templates`);
+  // }
 
-  getTotalFields(): Observable<number> {
-    console.log("getTotalFields");
+  // getTotalFields(): Observable<number> {
+  //   console.log("getTotalFields");
     
-    return this.http.get<number>(`${this.apiUrl}/total-fields`);
-  }
+  //   return this.http.get<number>(`${this.apiUrl}/total-fields`);
+  // }
 
   getDailyActiveUsers(): Observable<{ date: string, count: number }[]> {
     console.log("getDailyActiveUsers");
