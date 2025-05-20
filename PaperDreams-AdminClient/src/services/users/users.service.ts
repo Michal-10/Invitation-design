@@ -23,7 +23,9 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/users`, this.getAuthHeaders());
+  console.log("in userService before getAllUsers");
+  
+    return this.http.get<User[]>(`${this.apiUrl}/user`, this.getAuthHeaders());
   }
   updateUser(id: number, user: User) {
     console.log("in userService before updateUser");
