@@ -42,15 +42,40 @@ namespace PaperDreams_Server.Controllers
         [HttpGet("daily-logins")]
         public async Task<IActionResult> GetDailyLogins()
         {
-            var stats = await _statisticsService.GetDailyLoginStatsAsync();
-            return Ok(stats);
+            //var stats = await _statisticsService.GetDailyLoginStatsAsync();
+            //return Ok(stats);
+
+            try
+            {
+                var data = await _statisticsService.GetDailyLoginStatsAsync();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetDailyActiveUsers: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+
         }
 
         [HttpGet("active-users-daily")]
         public async Task<IActionResult> GetDailyActiveUsers()
         {
-            var data = await _statisticsService.GetDailyActiveUsersAsync();
-            return Ok(data);
+            //var data = await _statisticsService.GetDailyActiveUsersAsync();
+            //return Ok(data);
+
+
+            try
+            {
+                var data = await _statisticsService.GetDailyActiveUsersAsync();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetDailyActiveUsers: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+
         }
     }
 }
