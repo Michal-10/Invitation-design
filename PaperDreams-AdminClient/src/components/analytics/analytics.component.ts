@@ -396,11 +396,14 @@ export class AnalyticsComponent implements OnInit {
     this.analyticsService.getTotalTemplates().subscribe(count => {
       this.totalTemplates = count;
     });
+    console.log("after getTotalTemplates");
+    
 
     // Fetch total fields
     this.analyticsService.getTotalFields().subscribe(count => {
       this.totalFields = count;
     });
+console.log("after getTotalFields");
 
     // Fetch templates by category
     this.analyticsService.getTemplatesByCategory().subscribe(data => {
@@ -411,7 +414,11 @@ export class AnalyticsComponent implements OnInit {
       console.log(this.templatesByCategoryLabels);
 
       this.templatesByCategoryData = data.map(d => d.count);
+      console.log("in subscribe in getTemplatesByCategory");
+      
     });
+    console.log("after getTemplatesByCategory");
+    
 
     // Fetch daily logins
     this.analyticsService.getDailyLogins().subscribe(data => {
@@ -419,10 +426,14 @@ export class AnalyticsComponent implements OnInit {
       this.dailyLoginsData = data.map(d => d.count);
     });
 
+    console.log("after getDailyLogins");
+    
     // Fetch daily active users
     this.analyticsService.getDailyActiveUsers().subscribe(data => {
       this.dailyActiveUsersLabels = data.map(d => new Date(d.date).toLocaleDateString('he-IL')); // Display date
       this.dailyActiveUsersData = data.map(d => d.count); // Active users count
     });
+    console.log("after getDailyActiveUsers");
+    
   }
 }
