@@ -113,7 +113,8 @@ builder.Services.AddCors(options =>
                     "https://invitationline.onrender.com",
                     "https://invitationline-admin.onrender.com")
                   .AllowAnyHeader()
-                  .AllowAnyMethod();
+                  .AllowAnyMethod(). 
+                  AllowCredentials(); // ✅ חשוב מאוד!
         });
 
     //});
