@@ -3,8 +3,6 @@ import { AppBar, Toolbar, Typography, Box, Button, Stack, Avatar } from '@mui/ma
 import { motion } from 'framer-motion';
 import BrushIcon from '@mui/icons-material/Brush';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/Store';
 // import { RootState } from '../../redux/Store';
 // import { useSelector } from 'react-redux';
 
@@ -29,14 +27,22 @@ const Header: React.FC = () => {
 
     const [active, setActive] = useState<string>(location.pathname);
     // const [token, setToken] = useState<string | null>(sessionStorage.getItem('userToken'));
-    const [, setToken] = useState<string | null>(sessionStorage.getItem('userToken'));
+    const [token, setToken] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>('');
-    const user = useSelector((state: RootState) => state.user.user);
+    // const user = useSelector((state: RootState) => state.user.user);
+
+    useEffect(() => {
+        if(sessionStorage.getItem('userToken') ) {
+            setToken(true);
+        } 
+        
+    },[sessionStorage.getItem('userToken')]);
 
     useEffect(() => {
         setActive(location.pathname);
         const storedToken = sessionStorage.getItem('userToken');
-        setToken(storedToken);
+        // setToken(storedToken);
+        setToken(true);
         if (storedToken) {
             const name = getUserNameFromToken(storedToken);
             setUserName(name);
@@ -45,7 +51,7 @@ const Header: React.FC = () => {
 
     const handleLogout = () => {
         sessionStorage.removeItem('userToken');
-        setToken(null);
+        setToken(false);
         setUserName('');
         navigate('/');
     };
@@ -92,7 +98,7 @@ const Header: React.FC = () => {
                             sx={{ justifyContent: 'flex-end' }}
                         >
                           
-                          {user && <> <Button
+                           {token &&<> <Button
                                 color={active === '/' ? 'primary' : 'inherit'}
                                 sx={{ fontWeight: 500 }}
                                 onClick={() => navigate('/')}
@@ -116,7 +122,7 @@ const Header: React.FC = () => {
                             
                         
 
-                            {user ? (
+                            {token ? (
                                 <>
                                     <Avatar>
                                         {userName.charAt(0).toUpperCase()}
