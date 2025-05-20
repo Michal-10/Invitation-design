@@ -3,8 +3,8 @@ import { AppBar, Toolbar, Typography, Box, Button, Stack, Avatar } from '@mui/ma
 import { motion } from 'framer-motion';
 import BrushIcon from '@mui/icons-material/Brush';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { RootState } from '../../redux/Store';
-import { useSelector } from 'react-redux';
+// import { RootState } from '../../redux/Store';
+// import { useSelector } from 'react-redux';
 
 // פונקציה שמחזירה את שם המשתמש לפי הטוקן
 const getUserNameFromToken = (token: string | null): string => {
