@@ -99,7 +99,7 @@ import { styleModal } from "../../models/style";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/Store";
 import { User } from "../../models/User";
-import { loginRegister } from "../../redux/UserSlice";
+import { googleLogin, loginRegister } from "../../redux/UserSlice";
 
 export default function LoginRegisterWithApi({
   status,
@@ -156,6 +156,28 @@ export default function LoginRegisterWithApi({
       handleCloseModal(); // גם בשגיאה, לסגור את המודל
     }
   };
+
+
+
+
+
+  const handleGoogleLogin = async () => {
+    try {
+      const res = await dispatch(googleLogin()); // ✅ קריאה ל־googleLogin
+      console.log("Google login response", res);
+      setHideBtns(true);
+      handleCloseModal();
+    } catch (error) {
+      console.error("Google login failed", error);
+      alert("Google login failed 🥲");
+    }
+  };
+
+
+
+
+
+
 
   return (
     <Modal open={true} onClose={handleCloseModal}>
@@ -217,6 +239,21 @@ export default function LoginRegisterWithApi({
             type="submit"
           >
             התחברות
+          </Button>
+
+
+
+
+
+          
+          <Button
+            sx={{ marginTop: "10px" }}
+            fullWidth
+            variant="outlined"
+            type="button"
+            onClick={handleGoogleLogin}
+          >
+            התחברות עם גוגל
           </Button>
         </form>
       </Box>

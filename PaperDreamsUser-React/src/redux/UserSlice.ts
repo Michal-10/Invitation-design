@@ -3,6 +3,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { decodeToken } from "../Services/User";
 import { User } from "../models/User";
 import axios from "axios";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../pages/firebase";
 
 export const loginRegister = createAsyncThunk("loginRegister",
   async ({ user, status }: { user: Partial<User>, status: string }, thunkAPI) => {
@@ -44,6 +46,55 @@ export const loginRegister = createAsyncThunk("loginRegister",
     }
   }
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const googleLogin = createAsyncThunk("googleLogin", async (_, thunkAPI) => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
+
+    const userData = {
+      FirstName: user.displayName?.split(" ")[0] ?? "Unknown",
+      LastName: user.displayName?.split(" ")[1] ?? "User",
+      Email: user.email,
+      Password: user.uid, // סיסמה מזוהה לפי UID מגוגל (לא נחשפת)
+      Role: "user",
+      UpdatedAt: new Date()
+    };
+
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/register`, userData);
+
+    sessionStorage.setItem("userToken", response.data.token);
+
+    return response.data;
+
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
 
 export const updateUser = createAsyncThunk("updateUser",
   async ({ user }: { user: Partial<User> }, thunkAPI) => {
@@ -110,6 +161,54 @@ const userSlice = createSlice({
           : action.error.message || "Error login to system";
           
       })
+
+
+
+
+
+
+
+
+
+      .addCase(googleLogin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(googleLogin.fulfilled, (state, action) => {
+        state.loading = false;
+      
+        const decodedToken = decodeToken();
+        state.user = {
+          id: decodedToken?.decoded.userId ?? action.payload.user.id,
+          firstName: decodedToken?.decoded.firstName ?? action.payload.user.firstName,
+          lastName: action.payload.user.lastName,
+          email: decodedToken?.decoded.email ?? action.payload.user.email,
+          password: action.payload.user.password,
+          role: action.payload.user.role,
+          created_at: action.payload.user.created_at,
+          updatedAt: action.payload.user.updatedAt,
+        };
+      })
+      .addCase(googleLogin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = typeof action.payload === "string"
+          ? action.payload
+          : action.error.message || "Google login failed";
+      })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       .addCase(updateUser.pending, (state) => {
         state.loading = true;
         state.error = null;
