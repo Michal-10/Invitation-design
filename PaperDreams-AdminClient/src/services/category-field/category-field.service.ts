@@ -26,6 +26,6 @@ export class CategoryFieldService {
 
   getFieldsByCategory(categoryId: number) {
     console.log("in categoryFieldService before getFieldsByCategory");
-    return this.http.get<any[]>(`${environment.apiUrl}/api/CategoryField/category/${categoryId}`);
+    return this.http.get<any[]>(`${environment.apiUrl}/CategoryField/category/${categoryId}`);
   }
 }
