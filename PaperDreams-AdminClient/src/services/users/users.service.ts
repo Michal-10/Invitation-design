@@ -23,7 +23,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl, this.getAuthHeaders());
+    return this.http.get<User[]>(`${this.apiUrl}/users`, this.getAuthHeaders());
   }
   updateUser(id: number, user: User) {
     console.log("in userService before updateUser");
