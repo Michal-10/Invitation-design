@@ -22,7 +22,7 @@
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   
-    <button mat-button class="sort-button" (click)="toggleSortOrder()">
+    <button mat-button style="direction: rtl;" class="sort-button" (click)="toggleSortOrder()">
       מיון לפי שם {{ sortAscending ? '(א-ת)' : '(ת-א)' }}
       <mat-icon>{{ sortAscending ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
     </button>
