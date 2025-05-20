@@ -88,7 +88,7 @@ const Header: React.FC = () => {
                             alignItems="center"
                             sx={{ justifyContent: 'flex-end' }}
                         >
-                           {token &&
+                          
                            <> <Button
                                 color={active === '/' ? 'primary' : 'inherit'}
                                 sx={{ fontWeight: 500 }}
@@ -110,7 +110,7 @@ const Header: React.FC = () => {
                             >
                                 יצירת הזמנה
                             </Button></>
-                            }
+                            
                         
 
                             {token ? (
