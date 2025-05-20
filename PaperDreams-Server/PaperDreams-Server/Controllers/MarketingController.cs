@@ -31,6 +31,9 @@ namespace PaperDreams_Server.Controllers
 
             var fromEmail = _config["Email:User"];
             var password = _config["Email:Password"];
+            Console.WriteLine("---------------");
+            Console.WriteLine("emain   "+fromEmail+"    upass   "+password );
+            Console.WriteLine("---------------");
 
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
