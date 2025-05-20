@@ -26,27 +26,18 @@ const Header: React.FC = () => {
     const location = useLocation();
 
     const [active, setActive] = useState<string>(location.pathname);
-    // const [token, setToken] = useState<string | null>(sessionStorage.getItem('userToken'));
-    const [token, setToken] = useState<boolean>(false);
+    const [token, setToken] = useState<string | null>(sessionStorage.getItem('userToken'));
     const [userName, setUserName] = useState<string>('');
     // const user = useSelector((state: RootState) => state.user.user);
 
     useEffect(() => {
-
-        if(sessionStorage.getItem('userToken')) {
-            setToken(true);
-        } 
-        else {
-            setToken(false);
-        }
-        
+        setToken(sessionStorage.getItem('userToken'));        
     },[sessionStorage.getItem('userToken')]);
 
     useEffect(() => {
         setActive(location.pathname);
         const storedToken = sessionStorage.getItem('userToken');
-        // setToken(storedToken);
-        setToken(true);
+        setToken(storedToken);
         if (storedToken) {
             const name = getUserNameFromToken(storedToken);
             setUserName(name);
@@ -55,7 +46,7 @@ const Header: React.FC = () => {
 
     const handleLogout = () => {
         sessionStorage.removeItem('userToken');
-        setToken(false);
+        setToken(null);
         setUserName('');
         navigate('/');
     };
@@ -102,7 +93,7 @@ const Header: React.FC = () => {
                             sx={{ justifyContent: 'flex-end' }}
                         >
                           
-                           {token &&<> <Button
+                           <> <Button
                                 color={active === '/' ? 'primary' : 'inherit'}
                                 sx={{ fontWeight: 500 }}
                                 onClick={() => navigate('/')}
@@ -122,7 +113,7 @@ const Header: React.FC = () => {
                                 onClick={() => navigate('/chooseCategory')}
                             >
                                 יצירת הזמנה
-                            </Button></>}
+                            </Button></>
                             
                         
 
