@@ -28,7 +28,7 @@ const Header: React.FC = () => {
     const [active, setActive] = useState<string>(location.pathname);
     const [token, setToken] = useState<string | null>(sessionStorage.getItem('userToken'));
     const [userName, setUserName] = useState<string>('');
-    const user = useSelector((state: RootState) => state.user.user);
+    // const user = useSelector((state: RootState) => state.user.user);
 
     useEffect(() => {
         setActive(location.pathname);
@@ -109,7 +109,8 @@ const Header: React.FC = () => {
                                 onClick={() => navigate('/chooseCategory')}
                             >
                                 יצירת הזמנה
-                            </Button></>}
+                            </Button></>
+                            }
                         
 
                             {token ? (
