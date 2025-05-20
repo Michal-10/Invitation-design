@@ -99,11 +99,11 @@ builder.Services.AddHttpContextAccessor();
 
 
 
-// הגדרת CORS
+//הגדרת CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowClients", policy =>
-    {
+    //options.AddPolicy("AllowClients", policy =>
+    //{
 
         //policy.SetIsOriginAllowed(_ => true)
         //.AllowAnyMethod().AllowAnyHeader().AllowCredentials();
@@ -115,8 +115,28 @@ builder.Services.AddCors(options =>
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
-    });
+
+    //});
 });
+
+
+
+
+
+
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowClients",
+//        builder => builder.AllowAnyOrigin()
+//                        .AllowAnyMethod()
+//                        .AllowAnyHeader());
+//});
+
+
+
+
+
+
 
 // הוספת JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -153,7 +173,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowReactApp");
+app.UseCors("AllowClients");
 
 app.UseAuthentication(); // 🔑 הוספתי את זה כאן!
 app.UseAuthorization();
