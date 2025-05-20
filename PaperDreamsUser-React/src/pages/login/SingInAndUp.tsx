@@ -1,14 +1,14 @@
 import  { useState } from "react";
 import { Box, Button } from "@mui/material";
-import LoginRegisterWithApi from "./LoginRegisterWithApi";
+// import LoginRegisterWithApi from "./LoginRegisterWithApi";
 
 export default function LoginPage() {
   const [signInOrUp, setSignInOrUp] = useState<"login" | "register" | null>(null);
-  const [, setHideBtns] = useState<boolean>(false);
+  // const [, setHideBtns] = useState<boolean>(false);
 
-  const handleCloseModal = () => {
-    setSignInOrUp(null);
-  };
+  // const handleCloseModal = () => {
+  //   setSignInOrUp(null);
+  // };
 
   return (
     <Box
@@ -45,7 +45,7 @@ export default function LoginPage() {
       </Box>
 
       {/* הטופס לפי הבחירה */}
-      {signInOrUp && (
+      {/* {signInOrUp && (
         <Box sx={{ width: { xs: "90vw", sm: 400 }, mt: 3 }}>
           <LoginRegisterWithApi
             status={signInOrUp}
@@ -53,7 +53,7 @@ export default function LoginPage() {
             handleCloseModal={handleCloseModal}
           />
         </Box>
-      )}
+      )} */}
     </Box>
   );
 }
