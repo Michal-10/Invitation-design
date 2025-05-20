@@ -63,7 +63,7 @@ namespace PaperDreams_Server.Controllers
                         IsBodyHtml = true
                     };
 
-                   // mail.Bcc.Add(fromEmail);
+                    mail.Bcc.Add(fromEmail);
                     mail.To.Add(recipient);
                     Console.WriteLine("yes "+recipient);
                     await smtpClient.SendMailAsync(mail);
