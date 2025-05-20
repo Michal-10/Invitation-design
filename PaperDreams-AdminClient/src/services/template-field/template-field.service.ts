@@ -49,7 +49,7 @@ export class TemplateFieldService {
   addFieldToTemplate(data: any): Observable<any>  {
     console.log("in templateFieldService before addFieldToTemplate");
     console.log(data);
-    return this.http.post(`${environment.apiUrl}/add`, data);
+    return this.http.post(`${this.apiUrl}/add`, data);
   }
 
   updateTemplateFieldPosition(id:number, data: any): Observable<any> {
