@@ -3,6 +3,8 @@ import { AppBar, Toolbar, Typography, Box, Button, Stack, Avatar } from '@mui/ma
 import { motion } from 'framer-motion';
 import BrushIcon from '@mui/icons-material/Brush';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/Store';
 // import { RootState } from '../../redux/Store';
 // import { useSelector } from 'react-redux';
 
@@ -26,9 +28,10 @@ const Header: React.FC = () => {
     const location = useLocation();
 
     const [active, setActive] = useState<string>(location.pathname);
-    const [token, setToken] = useState<string | null>(sessionStorage.getItem('userToken'));
+    // const [token, setToken] = useState<string | null>(sessionStorage.getItem('userToken'));
+    const [, setToken] = useState<string | null>(sessionStorage.getItem('userToken'));
     const [userName, setUserName] = useState<string>('');
-    // const user = useSelector((state: RootState) => state.user.user);
+    const user = useSelector((state: RootState) => state.user.user);
 
     useEffect(() => {
         setActive(location.pathname);
@@ -89,7 +92,7 @@ const Header: React.FC = () => {
                             sx={{ justifyContent: 'flex-end' }}
                         >
                           
-                           <> <Button
+                          {user && <> <Button
                                 color={active === '/' ? 'primary' : 'inherit'}
                                 sx={{ fontWeight: 500 }}
                                 onClick={() => navigate('/')}
@@ -109,11 +112,11 @@ const Header: React.FC = () => {
                                 onClick={() => navigate('/chooseCategory')}
                             >
                                 יצירת הזמנה
-                            </Button></>
+                            </Button></>}
                             
                         
 
-                            {token ? (
+                            {user ? (
                                 <>
                                     <Avatar>
                                         {userName.charAt(0).toUpperCase()}
