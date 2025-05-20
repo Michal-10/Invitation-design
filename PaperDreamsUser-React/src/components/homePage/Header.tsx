@@ -3,6 +3,8 @@ import { AppBar, Toolbar, Typography, Box, Button, Stack, Avatar } from '@mui/ma
 import { motion } from 'framer-motion';
 import BrushIcon from '@mui/icons-material/Brush';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/Store';
 // import { RootState } from '../../redux/Store';
 // import { useSelector } from 'react-redux';
 
@@ -28,13 +30,16 @@ const Header: React.FC = () => {
     const [active, setActive] = useState<string>(location.pathname);
     const [token, setToken] = useState<string | null>(sessionStorage.getItem('userToken'));
     const [userName, setUserName] = useState<string>('');
-    // const user = useSelector((state: RootState) => state.user.user);
+    const user = useSelector((state: RootState) => state.user.user);
 
     useEffect(() => {
-        setToken(sessionStorage.getItem('userToken'));        
-    },[sessionStorage.getItem('userToken')]);
+        setToken(sessionStorage.getItem('userToken'));
+    }, [sessionStorage.getItem('userToken')]);
 
     useEffect(() => {
+        console.log('user')
+        console.log(user)
+
         setActive(location.pathname);
         const storedToken = sessionStorage.getItem('userToken');
         setToken(storedToken);
@@ -85,21 +90,23 @@ const Header: React.FC = () => {
                     </Box>
 
                     {/* תפריט ניווט וכפתור התחברות/התנתקות */}
-                    
-                        <Stack
-                            direction={{ xs: 'column', sm: 'row' }}
-                            spacing={{ xs: 1, sm: 2 }}
-                            alignItems="center"
-                            sx={{ justifyContent: 'flex-end' }}
+
+                    <Stack
+                        direction={{ xs: 'column', sm: 'row' }}
+                        spacing={{ xs: 1, sm: 2 }}
+                        alignItems="center"
+                        sx={{ justifyContent: 'flex-end' }}
+                    >
+
+
+                        {user?.id &&
+                         <><Button
+                            color={active === '/' ? 'primary' : 'inherit'}
+                            sx={{ fontWeight: 500 }}
+                            onClick={() => navigate('/')}
                         >
-                          
-                           <> <Button
-                                color={active === '/' ? 'primary' : 'inherit'}
-                                sx={{ fontWeight: 500 }}
-                                onClick={() => navigate('/')}
-                            >
-                                בית
-                            </Button>
+                            בית
+                        </Button>
                             <Button
                                 color={active === '/templates' ? 'primary' : 'inherit'}
                                 sx={{ fontWeight: 500 }}
@@ -113,45 +120,45 @@ const Header: React.FC = () => {
                                 onClick={() => navigate('/chooseCategory')}
                             >
                                 יצירת הזמנה
-                            </Button></>
-                            
-                        
+                            </Button></>}
 
-                            {token ? (
-                                <>
-                                    <Avatar>
-                                        {userName.charAt(0).toUpperCase()}
-                                    </Avatar>
-                                    <Button
-                                        variant="outlined"
-                                        color="error"
-                                        onClick={handleLogout}
-                                        sx={{
-                                            borderRadius: '20px',
-                                            fontWeight: 'bold',
-                                            px: 2,
-                                            py: 0.5,
-                                        }}
-                                    >
-                                        התנתקות
-                                    </Button>
-                                </>
-                            ) : (
+
+
+                        {token ? (
+                            <>
+                                <Avatar>
+                                    {userName.charAt(0).toUpperCase()}
+                                </Avatar>
                                 <Button
                                     variant="outlined"
+                                    color="error"
+                                    onClick={handleLogout}
                                     sx={{
                                         borderRadius: '20px',
                                         fontWeight: 'bold',
                                         px: 2,
                                         py: 0.5,
                                     }}
-                                    component={Link}
-                                    to="/login"
                                 >
-                                    התחברות
+                                    התנתקות
                                 </Button>
-                            )}
-                        </Stack>
+                            </>
+                        ) : (
+                            <Button
+                                variant="outlined"
+                                sx={{
+                                    borderRadius: '20px',
+                                    fontWeight: 'bold',
+                                    px: 2,
+                                    py: 0.5,
+                                }}
+                                component={Link}
+                                to="/login"
+                            >
+                                התחברות
+                            </Button>
+                        )}
+                    </Stack>
                 </Toolbar>
             </AppBar>
         </motion.div>
