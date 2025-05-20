@@ -51,27 +51,27 @@ export class UsersComponent implements OnInit {
 
 
 
-  searchTerm: string = '';
-  sortAscending: boolean = true;
+  // searchTerm: string = '';
+  // sortAscending: boolean = true;
   
-  get filteredUsers(): User[] {
-    const filtered = this.users.filter(user => {
-      const name = `${user.firstName} ${user.lastName}`.toLowerCase();
-      const email = user.email.toLowerCase();
-      const term = this.searchTerm.toLowerCase();
-      return name.includes(term) || email.includes(term);
-    });
+  // get filteredUsers(): User[] {
+  //   const filtered = this.users.filter(user => {
+  //     const name = `${user.firstName} ${user.lastName}`.toLowerCase();
+  //     const email = user.email.toLowerCase();
+  //     const term = this.searchTerm.toLowerCase();
+  //     return name.includes(term) || email.includes(term);
+  //   });
   
-    return filtered.sort((a, b) => {
-      const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
-      const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
-      return this.sortAscending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
-    });
-  }
+  //   return filtered.sort((a, b) => {
+  //     const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+  //     const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+  //     return this.sortAscending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+  //   });
+  // }
   
-  toggleSortOrder() {
-    this.sortAscending = !this.sortAscending;
-  }
+  // toggleSortOrder() {
+  //   this.sortAscending = !this.sortAscending;
+  // }
 
 
 
