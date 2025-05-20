@@ -67,9 +67,11 @@ namespace PaperDreams_Server.Controllers
                     mail.To.Add(recipient);
                     Console.WriteLine("yes "+recipient);
                     await smtpClient.SendMailAsync(mail);
+                    Console.WriteLine($"Successfully sent to: {recipient}");
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine($"Failed to send to {recipient}. Error: {ex.Message}");
                     //Console.WriteLine($"שגיאה בשליחת מייל ל: {recipient}, שגיאה: {ex.Message}");
                     // אפשר להמשיך לשולח את השאר גם אם אחד נפל
                 }
