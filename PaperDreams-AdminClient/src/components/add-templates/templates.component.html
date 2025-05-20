@@ -180,9 +180,12 @@
               <mat-option [value]="c.id">{{ c.name }}</mat-option>
             }
           </mat-select>
-          <mat-error *ngIf="templateForm.get('categoryId')?.invalid && templateForm.get('categoryId')?.touched">
+          @if(templateForm.get('categoryId')?.invalid && templateForm.get('categoryId')?.touched) {
+            <mat-error>יש לבחור קטגוריה</mat-error>
+          }
+          <!-- <mat-error >
             יש לבחור קטגוריה
-          </mat-error>
+          </mat-error> -->
         </mat-form-field>
 
         <div class="file-upload-container">

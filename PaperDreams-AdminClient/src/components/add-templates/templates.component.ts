@@ -375,6 +375,8 @@ export class TemplatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("ngOnInit in template component add template");
+    
     this.categoryService.getCategories().subscribe((data) => {
       console.log("in ngOnInit template component");
       console.log("categories: ");
