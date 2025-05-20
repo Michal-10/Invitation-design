@@ -245,7 +245,7 @@ export default function LoginRegisterWithApi({
 
 
 
-          
+
           <Button
             sx={{ marginTop: "10px" }}
             fullWidth
@@ -255,6 +255,9 @@ export default function LoginRegisterWithApi({
           >
             התחברות עם גוגל
           </Button>
+
+
+          
         </form>
       </Box>
     </Modal>
