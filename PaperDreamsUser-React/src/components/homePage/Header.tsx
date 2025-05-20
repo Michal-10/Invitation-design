@@ -3,6 +3,8 @@ import { AppBar, Toolbar, Typography, Box, Button, Stack, Avatar } from '@mui/ma
 import { motion } from 'framer-motion';
 import BrushIcon from '@mui/icons-material/Brush';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { RootState } from '../../redux/Store';
+import { useSelector } from 'react-redux';
 
 // פונקציה שמחזירה את שם המשתמש לפי הטוקן
 const getUserNameFromToken = (token: string | null): string => {
@@ -26,6 +28,7 @@ const Header: React.FC = () => {
     const [active, setActive] = useState<string>(location.pathname);
     const [token, setToken] = useState<string | null>(sessionStorage.getItem('userToken'));
     const [userName, setUserName] = useState<string>('');
+    const user = useSelector((state: RootState) => state.user.user);
 
     useEffect(() => {
         setActive(location.pathname);
@@ -78,69 +81,72 @@ const Header: React.FC = () => {
                     </Box>
 
                     {/* תפריט ניווט וכפתור התחברות/התנתקות */}
-                    <Stack
-                        direction={{ xs: 'column', sm: 'row' }}
-                        spacing={{ xs: 1, sm: 2 }}
-                        alignItems="center"
-                        sx={{ justifyContent: 'flex-end' }}
-                    >
-                        <Button
-                            color={active === '/' ? 'primary' : 'inherit'}
-                            sx={{ fontWeight: 500 }}
-                            onClick={() => navigate('/')}
+                    
+                        <Stack
+                            direction={{ xs: 'column', sm: 'row' }}
+                            spacing={{ xs: 1, sm: 2 }}
+                            alignItems="center"
+                            sx={{ justifyContent: 'flex-end' }}
                         >
-                            בית
-                        </Button>
-                        <Button
-                            color={active === '/templates' ? 'primary' : 'inherit'}
-                            sx={{ fontWeight: 500 }}
-                            onClick={() => navigate('/MyCompletedInvitation')}
-                        >
-                            ההזמנות שלי
-                        </Button>
-                        <Button
-                            color={active === '/order' ? 'primary' : 'inherit'}
-                            sx={{ fontWeight: 500 }}
-                            onClick={() => navigate('/chooseCategory')}
-                        >
-                            יצירת הזמנה
-                        </Button>
+                           {token &&
+                           <> <Button
+                                color={active === '/' ? 'primary' : 'inherit'}
+                                sx={{ fontWeight: 500 }}
+                                onClick={() => navigate('/')}
+                            >
+                                בית
+                            </Button>
+                            <Button
+                                color={active === '/templates' ? 'primary' : 'inherit'}
+                                sx={{ fontWeight: 500 }}
+                                onClick={() => navigate('/MyCompletedInvitation')}
+                            >
+                                ההזמנות שלי
+                            </Button>
+                            <Button
+                                color={active === '/order' ? 'primary' : 'inherit'}
+                                sx={{ fontWeight: 500 }}
+                                onClick={() => navigate('/chooseCategory')}
+                            >
+                                יצירת הזמנה
+                            </Button></>}
+                        
 
-                        {token ? (
-                            <>
-                                <Avatar>
-                                    {userName.charAt(0).toUpperCase()}
-                                </Avatar>
+                            {token ? (
+                                <>
+                                    <Avatar>
+                                        {userName.charAt(0).toUpperCase()}
+                                    </Avatar>
+                                    <Button
+                                        variant="outlined"
+                                        color="error"
+                                        onClick={handleLogout}
+                                        sx={{
+                                            borderRadius: '20px',
+                                            fontWeight: 'bold',
+                                            px: 2,
+                                            py: 0.5,
+                                        }}
+                                    >
+                                        התנתקות
+                                    </Button>
+                                </>
+                            ) : (
                                 <Button
                                     variant="outlined"
-                                    color="error"
-                                    onClick={handleLogout}
                                     sx={{
                                         borderRadius: '20px',
                                         fontWeight: 'bold',
                                         px: 2,
                                         py: 0.5,
                                     }}
+                                    component={Link}
+                                    to="/login"
                                 >
-                                    התנתקות
+                                    התחברות
                                 </Button>
-                            </>
-                        ) : (
-                            <Button
-                                variant="outlined"
-                                sx={{
-                                    borderRadius: '20px',
-                                    fontWeight: 'bold',
-                                    px: 2,
-                                    py: 0.5,
-                                }}
-                                component={Link}
-                                to="/login"
-                            >
-                                התחברות
-                            </Button>
-                        )}
-                    </Stack>
+                            )}
+                        </Stack>
                 </Toolbar>
             </AppBar>
         </motion.div>
