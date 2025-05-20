@@ -25,6 +25,7 @@ namespace PaperDreams_Server.Controllers
         public async Task<IActionResult> SendMarketingEmail([FromBody] string content)
         {
             var listUsers = _userService.GetEmailUsersAsync().Result;
+            Console.WriteLine(listUsers);
             if (listUsers == null || !(listUsers.Any() || string.IsNullOrEmpty(content))) 
                 return BadRequest("Missing emails or content");
 

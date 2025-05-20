@@ -20,12 +20,12 @@ export class MarketingService {
   }
 
   // טעינת כתובות האימייל מהשרת
-  loadEmails(): Observable<string[]> {
-    return this.http.get<string[]>(
-      `${environment.apiUrl}/api/user/AllEmailsUsers`,
-      this.getAuthHeaders()
-    );
-  }
+  // loadEmails(): Observable<string[]> {
+  //   return this.http.get<string[]>(
+  //     `${environment.apiUrl}/api/user/AllEmailsUsers`,
+  //     this.getAuthHeaders()
+  //   );
+  // }
 
   // שליחת תוכן שיווקי לשרת
   sendMarketingEmail( content: string ): Observable<any> {
