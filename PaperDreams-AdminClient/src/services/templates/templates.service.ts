@@ -76,7 +76,7 @@ export class TemplatesService {
   }
 
   getTemplatesByCategory(category: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/category/${category}`,
+    return this.http.get<any[]>(`${this.apiUrl}/Category/${category}`,
       this.getAuthHeaders()
     );
   }
