@@ -32,9 +32,13 @@ const Header: React.FC = () => {
     // const user = useSelector((state: RootState) => state.user.user);
 
     useEffect(() => {
-        if(sessionStorage.getItem('userToken') ) {
+
+        if(sessionStorage.getItem('userToken')) {
             setToken(true);
         } 
+        else {
+            setToken(false);
+        }
         
     },[sessionStorage.getItem('userToken')]);
 
