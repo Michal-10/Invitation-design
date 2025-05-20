@@ -186,6 +186,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-users',
@@ -199,13 +200,15 @@ import Swal from 'sweetalert2';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
   users: User[] = [];
+  isLoading: boolean = false;
   editingUserId: number | null = null;
   userForm!: FormGroup;
   add_user: boolean = false;
@@ -236,12 +239,15 @@ export class UsersComponent implements OnInit {
   }
 
   fetchUsers() {
+    this.isLoading = true;
     this.userService.getAllUsers().subscribe({
       next: (data) => {
         const adminEmail = this.authService.getAdminEmail();
         this.users = data.filter(user => user.email !== adminEmail);
+        this.isLoading = false; // סיים טעינה
       },
       error: (err) => {
+        this.isLoading = false; // סיים טעינה
         if ( err.status == 401 ){
           Swal.fire({
             title: 'שגיאה',
