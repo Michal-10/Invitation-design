@@ -102,14 +102,19 @@ builder.Services.AddHttpContextAccessor();
 // הגדרת CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReactApp", policy =>
+    options.AddPolicy("AllowClients", policy =>
     {
-        //policy.WithOrigins("http://localhost:3000", "http://localhost:3001") // הוספת גם את 3001
-        //      .AllowAnyMethod()
-        //      .AllowAnyHeader()
-        //      .AllowCredentials();
-        policy.SetIsOriginAllowed(_ => true)
-        .AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+
+        //policy.SetIsOriginAllowed(_ => true)
+        //.AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+        options.AddPolicy("AllowClients", policy =>
+        {
+            policy.WithOrigins(
+                    "https://invitationline.onrender.com",
+                    "https://invitationline-admin.onrender.com")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
     });
 });
 
