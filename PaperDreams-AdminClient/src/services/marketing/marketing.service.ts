@@ -33,7 +33,7 @@ export class MarketingService {
     console.log(content);
     
     return this.http.post(
-      'http://localhost:5077/api/Marketing/send',
+      `${environment.apiUrl}/Marketing/send`,
       JSON.stringify(content),
       {
         headers: new HttpHeaders({
