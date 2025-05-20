@@ -1,182 +1,9 @@
 
-
-// import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-// import { User } from '../../models/user';
-// import { UserService } from '../../services/users/users.service';
-// import { AuthService } from '../../services/auth/auth.service';
-// import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-// import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-// import { MatCardModule } from '@angular/material/card';
-// import { MatFormFieldModule } from '@angular/material/form-field';
-// import { MatInputModule } from '@angular/material/input';
-// import { MatButtonModule } from '@angular/material/button';
-// import { CommonModule } from '@angular/common';
-
-// @Component({
-//   selector: 'app-users',
-//   standalone: true,
-//   imports: [
-//     CommonModule,
-//     ReactiveFormsModule,
-//     MatCardModule,
-//     MatFormFieldModule,
-//     MatInputModule,
-//     MatButtonModule,
-//     MatDialogModule
-//   ],
-//   templateUrl: './users.component.html',
-//   styleUrls: ['./users.component.css']
-// })
-// export class UsersComponent implements OnInit {
-//   users: User[] = [];
-//   editingUserId: number | null = null;
-//   userForm!: FormGroup;
-//   add_user:boolean = false;
-//   @ViewChild('editDialog') editDialog!: TemplateRef<any>;
-//   private dialogRef!: MatDialogRef<any> ;
-
-//   constructor(
-//     private userService: UserService,
-//     private authService: AuthService,
-//     private fb: FormBuilder,
-//     private dialog: MatDialog
-//   ) {
-//     this.userForm = this.fb.group({
-//       email: ['', [Validators.required, Validators.email]],
-//       password: [''],
-//       firstName: ['', Validators.required],
-//       lastName: ['', Validators.required]
-//     });
-//    }
-
-//   ngOnInit(): void {
-//     this.fetchUsers();
-//   }
-
-//   fetchUsers() {
-//     this.userService.getAllUsers().subscribe({
-//       next: (data) => {
-//         const adminEmail = this.authService.getAdminEmail();
-//         this.users = data.filter(user => user.email !== adminEmail);
-//       },
-//       error: (err) => console.error('שגיאה בטעינת משתמשים:', err)
-//     });
-//   }
-
-//   addUser(){
-//     const model = this.userForm.value
-//     const user: User = {
-//       ...model,
-//       role: 'User',
-//       updatedAt: new Date(),
-//     }
-
-//     this.userService.addUser(user).subscribe({
-//       next: () => {
-//         this.fetchUsers();
-//         this.userForm.reset();
-//         alert('המשתמש נוסף בהצלחה!');
-//       },
-//       error: (err) => alert('שגיאה בהוספה: ' + err.error)
-//     });
-//     this.dialog.closeAll();
-//   }
-//     startEdit(user: User) {
-//       this.editingUserId = user.id;
-      
-
-//       // פתיחת הדיאלוג
-//       this.openDialog();
-
-//       // טיפול בסגירת הדיאלוג
-//       this.closeDialog();
-//     }
-
-//     openDialog() {
-//       this.dialogRef = this.dialog.open(this.editDialog, {
-//         width: '400px',
-//         direction: 'rtl',
-//         disableClose: true
-//       });
-//     }
-
-//     closeDialog() {
-//       this.dialogRef.afterClosed().subscribe(result => {
-//         if (!result) {
-//           this.cancelEdit();
-//         }
-//       });
-//     }
-//     cancelEdit() {
-//       this.editingUserId = null;
-//       if (this.dialogRef) {
-//         this.dialogRef.close(false);
-//         // this.dialogRef = null;
-//       }
-//       if (this.userForm) {
-//         this.userForm.reset();
-//       }
-//     }
-
-//     saveUser() {
-//       if (!this.editingUserId || this.userForm.invalid) return;
-
-//       const formValue = this.userForm.value;
-//       let updatedUser: User = {
-//         id: this.editingUserId,
-//         ...this.userForm.value
-//       }
-
-//       // רק אם הסיסמה לא ריקה, נכלול אותה בעדכון
-//       if (formValue.password && formValue.password.trim() !== '') {
-//         updatedUser.password = formValue.password;
-//       }
-
-//       console.log("before updateUser");
-//       console.log(updatedUser);
-//       this.userService.updateUser(this.editingUserId, { ...updatedUser } as User).subscribe({
-//         next: () => {
-
-//           this.fetchUsers(); // טוען מחדש את כל המשתמשים
-
-//           if (this.dialogRef) {
-//             this.dialogRef.close(true);
-//             // this.dialogRef = null;
-//           }
-
-//           this.editingUserId = null;
-//           this.userForm.reset();
-//           alert('המשתמש עודכן בהצלחה!');
-//         },
-//         error: (err) => alert('שגיאה בעדכון: ' + err.error)
-//       });
-//     }
-
-
-//     deleteUser(id: number) {
-//       if (confirm('האם אתה בטוח שברצונך למחוק את המשתמש?')) {
-//         this.userService.deleteUser(id).subscribe({
-//           next: () => {
-//             this.users = this.users.filter(u => u.id !== id);
-//           },
-//           error: (err) => console.log('שגיאה במחיקה:', err)
-//         });
-//       }
-//     }
-//   }
-
-
-
-
-
-
-
-
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/users/users.service';
 import { AuthService } from '../../services/auth/auth.service';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -201,7 +28,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatDialogModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule
   ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
@@ -215,6 +43,41 @@ export class UsersComponent implements OnInit {
   hidePassword: boolean = true;
   @ViewChild('editDialog') editDialog!: TemplateRef<any>;
   private dialogRef!: MatDialogRef<any>;
+
+
+
+
+  
+
+
+
+  searchTerm: string = '';
+  sortAscending: boolean = true;
+  
+  get filteredUsers(): User[] {
+    const filtered = this.users.filter(user => {
+      const name = `${user.firstName} ${user.lastName}`.toLowerCase();
+      const email = user.email.toLowerCase();
+      const term = this.searchTerm.toLowerCase();
+      return name.includes(term) || email.includes(term);
+    });
+  
+    return filtered.sort((a, b) => {
+      const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+      const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+      return this.sortAscending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+    });
+  }
+  
+  toggleSortOrder() {
+    this.sortAscending = !this.sortAscending;
+  }
+
+
+
+
+
+
 
   constructor(
     private userService: UserService,

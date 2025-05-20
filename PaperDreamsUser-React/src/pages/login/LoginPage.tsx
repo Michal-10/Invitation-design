@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/Store";
-import { loginRegister } from "../../redux/UserSlice";
+import { googleLogin, loginRegister } from "../../redux/UserSlice";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 
@@ -55,6 +55,22 @@ export default function AuthPage() {
     }
   };
 
+
+
+  const handleGoogleLogin = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      await dispatch(googleLogin()).unwrap();
+    } catch (err: any) {
+      setError("התחברות עם גוגל נכשלה 😞");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+
   return (
     <Box
       component={motion.div}
@@ -71,6 +87,14 @@ export default function AuthPage() {
         overflow: "hidden",
       }}
     >
+
+
+
+
+
+
+
+
       <Paper
         elevation={6}
         sx={{
@@ -134,6 +158,20 @@ export default function AuthPage() {
         >
           {loading ? "טוען..." : mode === "login" ? "התחבר" : "הרשם"}
         </Button>
+
+
+
+        <Button
+          fullWidth
+          variant="outlined"
+          onClick={handleGoogleLogin}
+          disabled={loading}
+          sx={{ mt: 2 }}
+        >
+          התחברות עם Google
+        </Button>
+
+
 
         <Button
           fullWidth

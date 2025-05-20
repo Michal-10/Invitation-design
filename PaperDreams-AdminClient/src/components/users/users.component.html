@@ -13,6 +13,23 @@
     </div>
   </div>
 
+
+
+  <div class="search-sort-bar">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>חיפוש לפי שם או אימייל</mat-label>
+      <input matInput [(ngModel)]="searchTerm" placeholder="הקלד כאן...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  
+    <button mat-button class="sort-button" (click)="toggleSortOrder()">
+      מיון לפי שם {{ sortAscending ? '(א-ת)' : '(ת-א)' }}
+      <mat-icon>{{ sortAscending ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+    </button>
+  </div>
+
+
+
   <div class="users-grid">
     @for (user of users; track user.id) {
     <!-- <div class="user-card">
