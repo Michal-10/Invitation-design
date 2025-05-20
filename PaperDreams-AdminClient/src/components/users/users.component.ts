@@ -47,7 +47,7 @@ export class UsersComponent implements OnInit {
 
 
 
-  
+
 
 
 
@@ -102,6 +102,8 @@ export class UsersComponent implements OnInit {
   }
 
   fetchUsers() {
+    console.log("fetchUsers");
+    
     this.isLoading = true;
     this.userService.getAllUsers().subscribe({
       next: (data) => {
