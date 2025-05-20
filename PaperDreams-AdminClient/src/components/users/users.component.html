@@ -60,10 +60,10 @@
       </div>
     
       <div class="user-actions">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="startEdit(user)" >
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn">
+        <button mat-icon-button (click)="deleteUser(user.id)" color="warn">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
