@@ -62,7 +62,7 @@ namespace PaperDreams_Server.Controllers
 
                    // mail.Bcc.Add(fromEmail);
                     mail.To.Add(recipient);
-
+                    Console.WriteLine("yes "+recipient);
                     await smtpClient.SendMailAsync(mail);
                 }
                 catch (Exception ex)
