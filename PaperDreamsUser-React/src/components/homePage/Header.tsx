@@ -99,7 +99,7 @@ const Header: React.FC = () => {
                     >
 
 
-                        {user?.id &&
+                        {user?.id && token &&
                          <><Button
                             color={active === '/' ? 'primary' : 'inherit'}
                             sx={{ fontWeight: 500 }}
