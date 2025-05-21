@@ -11,11 +11,12 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/Store";
 import { googleLogin, loginRegister } from "../../redux/UserSlice";
 import { motion } from "framer-motion";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function AuthPage() {
   const theme = useTheme();
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const [mode, setMode] = useState<"login" | "register">("login");
   const [loading, setLoading] = useState(false);
@@ -48,8 +49,9 @@ export default function AuthPage() {
           // Add a default or appropriate status value
         })
       ).unwrap();
+      navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
-      setError(err.message || "שגיאה כללית");
+      setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -63,6 +65,7 @@ export default function AuthPage() {
 
     try {
       await dispatch(googleLogin()).unwrap();
+      navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
       setError("התחברות עם גוגל נכשלה 😞");
     } finally {
