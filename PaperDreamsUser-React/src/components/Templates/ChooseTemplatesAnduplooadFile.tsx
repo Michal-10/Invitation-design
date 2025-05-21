@@ -146,6 +146,9 @@ export default function CategoryTemplatesPage() {
               <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, color: theme.palette.primary.dark }}>
                 העלאת קובץ
               </Typography>
+              <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, color: theme.palette.primary.dark }}>
+                 העלה קובץ עם פרטים על האירוע
+              </Typography>
               <UploadFile onFileSelected={setFile} />
               <Box sx={{ mt: 4 }}>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
