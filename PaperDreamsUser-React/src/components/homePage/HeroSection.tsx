@@ -21,7 +21,9 @@ const HeroSection = () => {
         console.log(sessionStorage.getItem('token'));
         
         
-        if(user?.id && sessionStorage.getItem('token')  ){
+        if(user?.id 
+            // && sessionStorage.getItem('token')
+          ){
            console.log("'navigate('/chooseCategory') ");
         }
         else {
