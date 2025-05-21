@@ -22,7 +22,7 @@ const HeroSection = () => {
         
         
         if(user?.id 
-            // && sessionStorage.getItem('token')
+             && sessionStorage.getItem('token')
           ){
            console.log("'navigate('/chooseCategory') ");
         }
