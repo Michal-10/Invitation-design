@@ -4,13 +4,16 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/Store';
 
 const HeroSection = () => {
 
     const navigate = useNavigate();
+    const user = useSelector((state: RootState) => state.user.user);
 
     const handleStartNow = () => {
-        sessionStorage.getItem('token') ? navigate('/chooseCategory') : navigate('/login');
+        sessionStorage.getItem('token')  && user?.id? navigate('/chooseCategory') : navigate('/login');
     };
     return (
         <Box
