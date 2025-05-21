@@ -71,9 +71,6 @@ namespace PaperDreams_Server.Controllers
     <hr style='border: none; border-top: 1px solid #ccc; margin: 10px 0;' />
     <hr style='border: none; border-top: 1px solid #ccc; margin: 0 0 20px 0;' />
 
-    <div style='color: #555; display: flex; align-items: center;'>
-        <img src='https://www.invitationline.com/logo.png' alt='InvitationLine Logo' style='height:60px; margin-left:15px;' />
-        <div>
             <p style='margin:0; font-size:16px; font-weight:bold;'>🎉 InvitationLine – <span style='font-style:italic;'>כי כל פרט חשוב</span></p>
             <p style='margin:4px 0;'>🎨 עיצוב חכם להזמנות, תבניות מותאמות אישית ועוד</p>
             <p style='margin:4px 0;'>🌐 
