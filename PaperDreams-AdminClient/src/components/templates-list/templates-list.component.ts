@@ -92,6 +92,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import Category from '../../models/Category';
+import { TemplatePreviewDialogComponent } from '../template-preview-dialog/template-preview-dialog.component';
 
 @Component({
   selector: 'app-template-list',
@@ -159,23 +160,34 @@ new: any;
   /**
    * פתיחת תצוגה מקדימה של התבנית
    */
+  // viewTemplate(template: Template) {
+  //   this.previewTemplate = template;
+    
+  //   // כאן אפשר להשתמש ב-MatDialog לפתיחת חלון מודאלי עם תצוגה מקדימה
+  //   // לדוגמה:
+  //   // const dialogRef = this.dialog.open(TemplatePreviewComponent, {
+  //   //   width: '80%',
+  //   //   data: { template: template }
+  //   // });
+    
+  //   // במקום זה, נציג הודעה פשוטה
+  //   this.snackBar.open(`צפייה בתבנית: ${template.name}`, 'סגור', {
+  //     duration: 3000,
+  //     horizontalPosition: 'center',
+  //     verticalPosition: 'bottom',
+  //   });
+  // }
+
+
+
   viewTemplate(template: Template) {
-    this.previewTemplate = template;
-    
-    // כאן אפשר להשתמש ב-MatDialog לפתיחת חלון מודאלי עם תצוגה מקדימה
-    // לדוגמה:
-    // const dialogRef = this.dialog.open(TemplatePreviewComponent, {
-    //   width: '80%',
-    //   data: { template: template }
-    // });
-    
-    // במקום זה, נציג הודעה פשוטה
-    this.snackBar.open(`צפייה בתבנית: ${template.name}`, 'סגור', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
+    this.dialog.open(TemplatePreviewDialogComponent, {
+      width: '80%',
+      maxHeight: '90vh',
+      data: { template }
     });
   }
+
 
   /**
    * בחירת תבנית לשימוש

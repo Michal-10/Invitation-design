@@ -1,0 +1,12 @@
+.dialog-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 10px;
+  }
+  
+  .full-image {
+    width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+  
