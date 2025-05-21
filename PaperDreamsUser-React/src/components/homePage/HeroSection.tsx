@@ -15,6 +15,11 @@ const HeroSection = () => {
     const handleStartNow = () => {
         console.log('handleStartNow');
         console.log("-*-*-*-*-*-*-*-*-*-*-*-*-");
+        console.log("user");
+        console.log(user);
+        console.log("sessionStorage.getItem('token')");
+        console.log(sessionStorage.getItem('token'));
+        
         
         if(user?.id && sessionStorage.getItem('token')  ){
            console.log("'navigate('/chooseCategory') ");
