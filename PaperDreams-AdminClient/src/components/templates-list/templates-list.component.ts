@@ -115,6 +115,8 @@ export class TemplatesListComponent implements OnInit {
   templates: Template[] = [];
   previewTemplate: Template | null = null;
   isPreviewOpen = false;
+  fullScreenPreview: boolean = false;
+
 new: any;
 
   constructor(
@@ -180,14 +182,20 @@ new: any;
 
 
 
+  // viewTemplate(template: Template) {
+  //   this.dialog.open(TemplatePreviewDialogComponent, {
+  //     width: '80%',
+  //     maxHeight: '90vh',
+  //     data: { template }
+  //   });
+  // }
   viewTemplate(template: Template) {
-    this.dialog.open(TemplatePreviewDialogComponent, {
-      width: '80%',
-      maxHeight: '90vh',
-      data: { template }
-    });
+    this.previewTemplate = template;
+    this.fullScreenPreview = true;
   }
-
+  closePreview() {
+    this.fullScreenPreview = false;
+  }
 
   /**
    * בחירת תבנית לשימוש

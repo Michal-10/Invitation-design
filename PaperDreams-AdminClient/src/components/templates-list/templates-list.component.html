@@ -39,76 +39,87 @@
     -->
 
 
-    <div class="content-wrapper">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">
-            <i class="material-icons">category</i>
-            בחר קטגוריה להצגת תבניות
-          </div>
-        </div>
-        <div class="card-body">
-          <mat-form-field appearance="outline" style="width: 100%;">
-            <mat-label>קטגוריה</mat-label>
-            <mat-select [(ngModel)]="selectedCategory" (selectionChange)="loadTemplates()">
-              @for(c of categories; track c.name) {
-                <mat-option [value]="c">{{ c.name }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
+<div class="content-wrapper">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="material-icons">category</i>
+        בחר קטגוריה להצגת תבניות
       </div>
-    
-      @if(templates.length > 0) {
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">
-              <i class="material-icons">dashboard</i>
-              תבניות בקטגוריה: {{ selectedCategory.name }}
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="template-grid">
-              @for(template of templates; track template.id) {
-                <div class="template-card">
-                  <div class="template-preview">
-                    @if(template.imageUrl) {
-                      <img [src]="template.imageUrl" alt="תמונת תבנית" />
-                      <div class="overlay">
-                        <div class="overlay-actions">
-                          <button class="btn-icon" title="צפייה בתבנית" (click)="viewTemplate(template)">
-                            <i class="material-icons">visibility</i>
-                          </button>
-                          <!-- <button class="btn-icon" title="שימוש בתבנית" (click)="useTemplate(template)">
+    </div>
+    <div class="card-body">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>קטגוריה</mat-label>
+        <mat-select [(ngModel)]="selectedCategory" (selectionChange)="loadTemplates()">
+          @for(c of categories; track c.name) {
+          <mat-option [value]="c">{{ c.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  @if(templates.length > 0) {
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="material-icons">dashboard</i>
+        תבניות בקטגוריה: {{ selectedCategory.name }}
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="template-grid">
+        @for(template of templates; track template.id) {
+        <div class="template-card">
+          <div class="template-preview">
+            @if(template.imageUrl) {
+            <img [src]="template.imageUrl" alt="תמונת תבנית" />
+            <div class="overlay">
+              <div class="overlay-actions">
+                <button class="btn-icon" title="צפייה בתבנית" (click)="viewTemplate(template)">
+                  <i class="material-icons">visibility</i>
+                </button>
+                <!-- <button class="btn-icon" title="שימוש בתבנית" (click)="useTemplate(template)">
                             <i class="material-icons">add_circle</i>
                           </button> -->
-                        </div>
-                      </div>
-                    } @else {
-                      <div class="no-image">
-                        <i class="material-icons">image</i>
-                      </div>
-                    }
-                  </div>
-                  <div class="template-info">
-                    <!-- <div class="template-title">{{ template.name }}</div> -->
-                    <div class="template-meta">
-                      <span>
-                        <i class="material-icons" style="font-size: 14px; vertical-align: middle;">calendar_today</i>
-                        <!-- {{ template.createdAt | date:'dd/MM/yyyy' }} -->
-                      <!-- תאריך יצירה  {{new Date(template.createdAt).toLocaleDateString('he-IL')}} -->
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              }
+              </div>
+            </div>
+            } @else {
+            <div class="no-image">
+              <i class="material-icons">image</i>
+            </div>
+            }
+          </div>
+          <div class="template-info">
+            <!-- <div class="template-title">{{ template.name }}</div> -->
+            <div class="template-meta">
+              <span>
+                <i class="material-icons" style="font-size: 14px; vertical-align: middle;">calendar_today</i>
+                <!-- {{ template.createdAt | date:'dd/MM/yyyy' }} -->
+                <!-- תאריך יצירה  {{new Date(template.createdAt).toLocaleDateString('he-IL')}} -->
+              </span>
             </div>
           </div>
         </div>
-      } @else {
-        <div class="list-empty">
-          <i class="material-icons">dashboard</i>
-          <p>אין תבניות להצגה</p>
-        </div>
-      }
+        }
+      </div>
     </div>
+  </div>
+  } @else {
+  <div class="list-empty">
+    <i class="material-icons">dashboard</i>
+    <p>אין תבניות להצגה</p>
+  </div>
+  }
+</div>
+
+
+
+<!-- תצוגה מקדימה במסך מלא -->
+@if(fullScreenPreview){
+<div class="fullscreen-overlay" (click)="closePreview()">
+  <div class="fullscreen-content" (click)="$event.stopPropagation()">
+    <img [src]="previewTemplate?.imageUrl" alt="תצוגה מלאה" />
+    <button class="close-button" (click)="closePreview()">✕</button>
+  </div>
+</div>}
