@@ -12,9 +12,22 @@ const Footer = () => {
     >
       <Typography variant="body2">© InvitionLine 2025 כל הזכויות שמורות</Typography>
       <Typography variant="body2">concat us at 
-        {/* <a href="mailto:r0527102247@gmail.com">InvitationLine@support.com</a> */}
-        <a href='mailto:noreply.invitationline@gmail.com'>support@InvitationLine.com</a>
-      </Typography>
+        <a href='mailto:noreply.invitationline@gmail.com'>support@invitationLine.co.il</a>
+      
+
+
+
+  <a
+    href="https://mail.google.com/mail/?view=cm&fs=1&to=noreply.invitationline@gmail.com&su=פנייה%20מאתר%20InvitationLine&body=שלום%20רציתי%20לפנות%20בנוגע%20ל..."
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ color: '#0077cc', textDecoration: 'none', marginLeft: '5px' }}
+  >
+    support@invitationLine.co.il
+  </a>
+  </Typography>
+
+
     </Box>
   );
 };
