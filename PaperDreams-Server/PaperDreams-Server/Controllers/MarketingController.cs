@@ -71,10 +71,10 @@ namespace PaperDreams_Server.Controllers
                                     <p style='margin:0; font-weight:bold;'>🎉 InvitationLine – <span style='font-style:italic;'>כי כל פרט חשוב</span></p>
                                     <p style='margin:4px 0;'>🎨 עיצוב חכם להזמנות, תבניות מותאמות אישית ועוד</p>
                                     <p style='margin:4px 0;'>🌐 
-                                        <a href='https://www.invitationline.com' style='color:#0066cc; text-decoration:none;'>www.invitationline.com</a>
+                                        <a href='https://invitationline.onrender.com' style='color:#0066cc; text-decoration:none;'>www.invitationline.com</a>
                                     </p>
                                     <p style='margin:4px 0;'>📧 
-                                        <a href='mailto:support@invitationline.co.il?subject=פנייה%20לשירות%20לקוחות&body=שלום%20צוות%20InvitationLine%2C%0A%0Aברצוני%20לפנות%20אליכם%20בעניין%20...' 
+                                        <a href='mailto:noreply.invitationline@gmail.com?subject=פנייה%20לשירות%20לקוחות&body=שלום%20צוות%20InvitationLine%2C%0A%0Aברצוני%20לפנות%20אליכם%20בעניין%20...' 
                                            style='color:#0066cc; text-decoration:none;'>support@invitationline.co.il</a>
                                     </p>
                                     <p style='margin:4px 0;'>📞 +1 (234) 567-8900</p>
