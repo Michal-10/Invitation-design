@@ -31,7 +31,7 @@ const HeroSection = () => {
         }
        
         
-        sessionStorage.getItem('token')  && user?.id? navigate('/chooseCategory') : navigate('/login');
+        user?.id? navigate('/chooseCategory') : navigate('/login');
     };
     return (
         <Box
