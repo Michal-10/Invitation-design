@@ -378,9 +378,9 @@ Chart.register(ChartDataLabels);
 })
 export class AnalyticsComponent implements OnInit {
 
-  totalTemplates: number = 0;
-  totalFields: number = 0;
-  activeUsersToday: number = 0;
+  // totalTemplates: number = 0;
+  // totalFields: number = 0;
+  // activeUsersToday: number = 0;
 
   templatesByCategoryLabels: string[] = [];
   templatesByCategoryData: number[] = [];
