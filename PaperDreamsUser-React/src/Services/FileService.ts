@@ -29,7 +29,7 @@ export const getText = async (file: File) => {
     console.log("in getText bsfore ");
 
     try {
-        const response = await fetch("http://localhost:5000/upload/", {
+        const response = await fetch(`https://invitationline-aiserver.onrender.com/upload/`, {
             method: "POST",
             body: formData,
         });
