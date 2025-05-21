@@ -78,7 +78,7 @@ namespace PaperDreams_Server.Controllers
             </p>
             <p style='margin:4px 0;'>📧 
                 <a href='mailto:noreply.invitationline@gmail.com?subject=פנייה%20לשירות%20לקוחות&body=שלום%20צוות%20InvitationLine%2C%0A%0Aברצוני%20לפנות%20אליכם%20בעניין%20...' 
-                   style='color:#0066cc; text-decoration:none;'>support@invitationline.co.il</a>
+                   style='color:#0066cc; text-decoration:none;'>support@invitationline.com</a>
             </p>
             <p style='margin:4px 0;'>📞 +1 (234) 567-8900</p>
             <p style='margin-top:10px; font-size:12px; color:#888;'>

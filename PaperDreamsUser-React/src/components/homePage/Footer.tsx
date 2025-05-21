@@ -11,7 +11,10 @@ const Footer = () => {
       }}
     >
       <Typography variant="body2">© InvitionLine 2025 כל הזכויות שמורות</Typography>
-      <Typography variant="body2">concat us at <a href="mailto:r0527102247@gmail.com">InvitationLine@support.com</a></Typography>
+      <Typography variant="body2">concat us at 
+        {/* <a href="mailto:r0527102247@gmail.com">InvitationLine@support.com</a> */}
+        <a href='mailto:noreply.invitationline@gmail.com'>support@InvitationLine.com</a>
+      </Typography>
     </Box>
   );
 };
