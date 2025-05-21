@@ -59,12 +59,12 @@ export default function AuthPage() {
 
 
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = async (mode:string) => {
     setLoading(true);
     setError("");
 
     try {
-      await dispatch(googleLogin()).unwrap();
+      await dispatch(googleLogin({mode})).unwrap();
       navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
       setError("התחברות עם גוגל נכשלה 😞");
@@ -167,7 +167,7 @@ export default function AuthPage() {
         <Button
           fullWidth
           variant="outlined"
-          onClick={handleGoogleLogin}
+          onClick={()=>handleGoogleLogin(mode)}
           disabled={loading}
           sx={{ mt: 2 }}
         >

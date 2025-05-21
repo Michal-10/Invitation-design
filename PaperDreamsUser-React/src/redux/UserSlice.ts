@@ -60,7 +60,7 @@ export const loginRegister = createAsyncThunk("loginRegister",
 
 
 
-export const googleLogin = createAsyncThunk("googleLogin", async (_, thunkAPI) => {
+export const googleLogin = createAsyncThunk("googleLogin", async ({ mode }: { mode: string }, thunkAPI) => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
     const user = result.user;
@@ -74,7 +74,7 @@ export const googleLogin = createAsyncThunk("googleLogin", async (_, thunkAPI) =
       UpdatedAt: new Date()
     };
 
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/register`, userData);
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/${mode}`, userData);
 
     sessionStorage.setItem("userToken", response.data.token);
 
