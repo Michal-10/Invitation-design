@@ -108,14 +108,14 @@ const Header: React.FC = () => {
                             בית
                         </Button>
                             <Button
-                                color={active === '/templates' ? 'primary' : 'inherit'}
+                                color={ 'primary' }
                                 sx={{ fontWeight: 500 }}
                                 onClick={() => navigate('/MyCompletedInvitation')}
                             >
                                 ההזמנות שלי
                             </Button>
                             <Button
-                                color={active === '/order' ? 'primary' : 'inherit'}
+                                color={ 'primary' }
                                 sx={{ fontWeight: 500 }}
                                 onClick={() => navigate('/chooseCategory')}
                             >

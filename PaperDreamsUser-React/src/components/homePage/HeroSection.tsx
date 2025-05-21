@@ -13,6 +13,17 @@ const HeroSection = () => {
     const user = useSelector((state: RootState) => state.user.user);
 
     const handleStartNow = () => {
+        console.log('handleStartNow');
+        console.log("-*-*-*-*-*-*-*-*-*-*-*-*-");
+        
+        if( sessionStorage.getItem('token')  && user?.id ){
+           console.log("'navigate('/chooseCategory') ");
+        }
+        else {
+            navigate('/login')
+        }
+       
+        
         sessionStorage.getItem('token')  && user?.id? navigate('/chooseCategory') : navigate('/login');
     };
     return (
