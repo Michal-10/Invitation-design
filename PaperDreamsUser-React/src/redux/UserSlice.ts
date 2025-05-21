@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { decodeToken } from "../Services/User";
 import { User } from "../models/User";
 import axios from "axios";
-import { getRedirectResult, signInWithRedirect } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../pages/firebase";
 
 export const loginRegister = createAsyncThunk("loginRegister",
@@ -62,11 +62,7 @@ export const loginRegister = createAsyncThunk("loginRegister",
 
 export const googleLogin = createAsyncThunk("googleLogin", async (_, thunkAPI) => {
   try {
-    await signInWithRedirect(auth, googleProvider);
-    const result = await getRedirectResult(auth);
-    if (!result || !result.user) {
-      throw new Error("No user found after redirect");
-    }
+    const result = await signInWithPopup(auth, googleProvider);
     const user = result.user;
 
     const userData = {
