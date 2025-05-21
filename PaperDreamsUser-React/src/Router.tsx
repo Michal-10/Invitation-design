@@ -5,7 +5,7 @@ import AppLayout from "./components/AppLayout";
 import ChooseTemplatesAnduplooadFile from "./components/Templates/ChooseTemplatesAnduplooadFile";
 import MyCompletedInvitationPage from "./components/completedInvitation/MyCompletedInvitation";
 import LoginPage from "./pages/login/LoginPage";
-import ChooseCategoryTemplate from "./components/design/ChooseCategoryTemplate";
+import ChooseCategoryTemplate from "./components/ChooseCategoryTemplate";
 import HomePage from "./components/homePage/HomePage";
 
 export const Router = createBrowserRouter([

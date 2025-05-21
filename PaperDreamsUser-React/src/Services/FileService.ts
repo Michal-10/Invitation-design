@@ -26,7 +26,9 @@ export const getText = async (file: File) => {
     formData.append("file", file);
     formData.append("event_type", eventType);
 
+    console.log("//////////////////////////////////");
     console.log("in getText bsfore ");
+    console.log("in getText");
 
     try {
         const response = await fetch(`https://invitationline-aiserver.onrender.com/upload/`, {
@@ -35,6 +37,8 @@ export const getText = async (file: File) => {
         });
         console.log("in getText after ");
         console.log(response);
+        console.log("//////////////////////////////////");
+        
 
 
 

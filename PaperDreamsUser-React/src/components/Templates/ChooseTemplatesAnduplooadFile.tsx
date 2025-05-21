@@ -70,9 +70,15 @@ export default function CategoryTemplatesPage() {
     sessionStorage.setItem("template", JSON.stringify(selectedTemplate));
 
     setWaitToExtract(true);
+    console.log("in handleCreateInvitation before getText");
+    
     getText(file)
       .then((texts) => {
         const invitation: Invitation = { text: texts, template: selectedTemplate };
+        console.log("in handleCreateInvitation after getText");
+        console.log("texts");
+        console.log(texts);
+        console.log("------------------");
         dispatch(setInvitation({ invitation }));
         setWaitToExtract(false);
         navigate("/designInvitation");

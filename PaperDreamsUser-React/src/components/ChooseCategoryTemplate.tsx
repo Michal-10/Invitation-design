@@ -8,7 +8,7 @@ import {
 } from "@mui/material"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import { Category } from "../../models/Category"
+import { Category } from "../models/Category"
 import { motion } from "framer-motion"
 import StarIcon from "@mui/icons-material/Star"
 
