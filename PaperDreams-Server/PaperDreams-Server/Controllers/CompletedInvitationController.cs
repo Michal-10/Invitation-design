@@ -151,13 +151,24 @@ namespace PaperDreams_Server.Controllers
                             <p>{request.Message}</p>
                             <img src='cid:invitationImage' style='max-width:100%;' />
                              <hr style='margin:20px 0;' />
-
-                            <div style='color: #555;'>
-                                <p style='margin:0; '>בברכה,<br />צוות invitatioline</p>
-                                <p style='margin:0;'>
-                                    <a href='https://yourwebsite.com' target='_blank' style='color: #1a73e8; text-decoration: none;'>לאתר שלנו</a>
-                                </p>
-                            </div>
+                               
+                            <br/>
+                            <br/>
+                             <div style='color: #555;'>
+                                    <p style='margin:0; font-weight:bold;'>🎉 InvitationLine – <span style='font-style:italic;'>כי כל פרט חשוב</span></p>
+                                    <p style='margin:4px 0;'>🎨 עיצוב חכם להזמנות, תבניות מותאמות אישית ועוד</p>
+                                    <p style='margin:4px 0;'>🌐 
+                                        <a href='https://invitationline.onrender.com' style='color:#0066cc; text-decoration:none;'>www.invitationline.com</a>
+                                    </p>
+                                    <p style='margin:4px 0;'>📧 
+                                        <a href='mailto:noreply.invitationline@gmail.com?subject=פנייה%20לשירות%20לקוחות&body=שלום%20צוות%20InvitationLine%2C%0A%0Aברצוני%20לפנות%20אליכם%20בעניין%20...' 
+                                           style='color:#0066cc; text-decoration:none;'>support@invitationline.co.il</a>
+                                    </p>
+                                    <p style='margin:4px 0;'>📞 +1 (234) 567-8900</p>
+                                    <p style='margin-top:10px; font-size:12px; color:#888;'>
+                                        הודעה זו נשלחה מ־InvitationLine. נשמח לסייע בכל שאלה או פנייה.
+                                    </p>
+                                </div>
                         </div>";
 
                     mail.Bcc.Add(fromEmail);
