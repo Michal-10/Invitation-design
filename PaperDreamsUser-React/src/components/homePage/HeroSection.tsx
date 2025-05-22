@@ -145,6 +145,7 @@ const HeroSection = () => {
                     <Box sx={{ paddingBottom: '35px', paddingTop: '35px' }}>
                         <Typography variant="h2" component="h1"
                             sx={{
+                                fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
                                 fontWeight: 700, mb: 2, alignItems: 'center',
                                 color: "#333",
                                 direction: "rtl",
