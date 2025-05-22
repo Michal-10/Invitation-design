@@ -930,6 +930,8 @@ export class FieldPlacementComponent implements OnInit {
 
     this.templatesService.getDownloadURL(this.template.name).then(res => {
       this.templateImageUrl = res;
+      this.addFieldsOnTEmplates();
+
     }).catch(err => {
       Swal.fire({
         title: 'שגיאה',
@@ -948,7 +950,7 @@ export class FieldPlacementComponent implements OnInit {
         next: (res) => {
           this.fields = res;
           //השמת השדות על התבנית
-         this.addFieldsOnTEmplates();
+        //  this.addFieldsOnTEmplates();
           // this.loadExistingPositions();
         },
         error: (err) => {
@@ -966,7 +968,6 @@ export class FieldPlacementComponent implements OnInit {
 
 
   async addFieldsOnTEmplates(): Promise<void> {
-
     const img = this.templateImageRef.nativeElement;
     const imgWidth = img.offsetWidth;
     const imgHeight = img.offsetHeight;
