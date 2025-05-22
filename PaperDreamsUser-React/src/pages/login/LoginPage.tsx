@@ -28,13 +28,14 @@ export default function AuthPage() {
   const lastNameRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async () => {
+    setLoading(true);
+    setError("");
+    
     const email = emailRef.current?.value || "";
     const password = passwordRef.current?.value || "";
     const firstName = firstNameRef.current?.value || "";
     const lastName = lastNameRef.current?.value || "";
 
-    setLoading(true);
-    setError("");
 
     try {
       await dispatch(
@@ -51,8 +52,8 @@ export default function AuthPage() {
       ).unwrap();
       navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
-      setError(err.message);
-      console.log("the mail or password it's wrong");
+      setError("the mail or password it's wrong");
+      // alert("the mail or password it's wrong");
       console.log(err);
       
     } finally {
