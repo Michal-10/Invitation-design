@@ -481,7 +481,7 @@ console.log(myTtemplate.templateFields[0].name);
             console.log("לפני שמירת מושלם");
             console.log("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 
-            await axios.post("http://localhost:5077/api/CompletedInvitation/add", invitationData);
+            await axios.post(`${import.meta.env.VITE_API_URL}/CompletedInvitation/add`, invitationData);
             console.log("אחרי שמירת מושלם");
 
             // העלאת הקובץ ל-S3
