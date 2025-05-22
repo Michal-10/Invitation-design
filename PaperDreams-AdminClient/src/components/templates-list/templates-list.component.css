@@ -248,21 +248,17 @@
   padding: 18px 20px;
   border-bottom: 1px solid #f0f2f5;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  background: linear-gradient(135deg, #912ffa 0%, #256eed 100%);
+  color: white;
 }
 
 .card-title {
   font-size: 18px;
   font-weight: 600;
-  color: #333;
   display: flex;
   align-items: center;
-}
-
-.card-title i {
-  margin-left: 10px;
-  color: #1e88e5; /* כחול במקום סגול */
 }
 
 .card-body {
