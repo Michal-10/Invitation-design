@@ -37,7 +37,8 @@
 // import { decodeToken } from "../Services/User";
 
 import { Outlet } from "react-router"
-import HomePage from "./HomePage"
+import Footer from "./homePage/Footer"
+import Header from "./homePage/Header"
 
 // export default () => {
 //     const theme = useTheme()
@@ -465,23 +466,14 @@ import HomePage from "./HomePage"
 
 
 
-
-
-
-
-
-
-
-
 export default () => {
   // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
   return (<>
 
-    {/* <Header /> */}
-    <HomePage />
+    <Header />
     <Outlet />
-    {/* <Footer /> */}
+    <Footer />
 
   </>)
 }
