@@ -1,7 +1,7 @@
   template-editor.component.scss
   .template-editor-container {
       padding: 20px;
-      font-family: Arial, sans-serif;
+      font-family: var(--font-family);
     }
     
     h2 {

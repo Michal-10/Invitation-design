@@ -16,7 +16,7 @@
   .add-user-container button {
     background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     color: white;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: var(--font-family);
     font-weight: bold;
     border-radius: 12px;
     width: fit-content;
