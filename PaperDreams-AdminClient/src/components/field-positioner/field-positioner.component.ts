@@ -1432,7 +1432,7 @@ export class FieldPlacementComponent implements OnInit {
 
       for (const field of this.fields) {
         // אם לשדה אין מיקום שמור ב-`this.positions` (כלומר, הוא לא הגיע מהדאטה בייס)
-        if (!this.positions[field.field.id]) {
+        // if (!this.positions[field.field.id]) {
           const payload = {
             fieldId: field.field.id,
             templateId: this.templateId,
@@ -1454,7 +1454,7 @@ export class FieldPlacementComponent implements OnInit {
             // כאן אפשר להציג הודעת שגיאה קטנה למשתמש
           }
           currentY += lineHeight;
-        }
+        // }
       }
       console.log('All fields placed or loaded. Final positions:', this.positions);
 
@@ -1472,46 +1472,46 @@ export class FieldPlacementComponent implements OnInit {
 
   // ניתן להשאיר את onImageClick ריק אם לא רוצים לאפשר מיקום ידני בלחיצה.
   // אם רוצים לאפשר מיקום ידני של שדה נבחר:
-  onImageClick(event: MouseEvent): void {
-    if (!this.selectedField || this.draggingField) return;
+  // onImageClick(event: MouseEvent): void {
+  //   if (!this.selectedField || this.draggingField) return;
 
-    const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-    const x = event.clientX - containerRect.left;
-    const y = event.clientY - containerRect.top;
+  //   const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+  //   const x = event.clientX - containerRect.left;
+  //   const y = event.clientY - containerRect.top;
 
-    const fieldId = this.selectedField.field.id;
-    const existingPosition = this.positions[fieldId];
-    const payload = {
-      fieldId: fieldId,
-      templateId: this.templateId,
-      x: Math.round(x),
-      y: Math.round(y)
-    };
+  //   const fieldId = this.selectedField.field.id;
+  //   const existingPosition = this.positions[fieldId];
+  //   const payload = {
+  //     fieldId: fieldId,
+  //     templateId: this.templateId,
+  //     x: Math.round(x),
+  //     y: Math.round(y)
+  //   };
 
-    // אם השדה כבר מוקם, אז זו פעולת עדכון, אחרת זו הוספה
-    if (existingPosition && existingPosition.templateFieldId) {
-      this.templateFieldService.updateTemplateFieldPosition(existingPosition.templateFieldId, payload).subscribe({
-        next: () => {
-          this.positions[fieldId] = { x, y, templateFieldId: existingPosition.templateFieldId };
-          this.unsavedChanges = true;
-          Swal.fire({ title: 'הצלחה', text: 'מיקום השדה עודכן בהצלחה', icon: 'success', timer: 1000, showConfirmButton: false });
-        },
-        error: (err) => Swal.fire({ title: 'שגיאה', text: 'לא ניתן לעדכן את מיקום השדה', icon: 'error', confirmButtonText: 'אישור', confirmButtonColor: '#5c6bc0' })
-      });
-    } else {
-      // אם השדה אינו קיים (מגיע מהפאנל ולא מוקם עדיין)
-      this.templateFieldService.addFieldToTemplate(payload).subscribe({
-        next: (response) => {
-          this.positions[fieldId] = { x, y, templateFieldId: response.id };
-          this.unsavedChanges = true;
-          Swal.fire({ title: 'הצלחה', text: 'השדה מוקם בהצלחה', icon: 'success', timer: 1000, showConfirmButton: false });
-        },
-        error: (err) => Swal.fire({ title: 'שגיאה', text: 'לא ניתן למקם את השדה', icon: 'error', confirmButtonText: 'אישור', confirmButtonColor: '#5c6bc0' })
-      });
-    }
-    this.selectedField = null;
-    this.showPrompt = false;
-  }
+  //   // אם השדה כבר מוקם, אז זו פעולת עדכון, אחרת זו הוספה
+  //   if (existingPosition && existingPosition.templateFieldId) {
+  //     this.templateFieldService.updateTemplateFieldPosition(existingPosition.templateFieldId, payload).subscribe({
+  //       next: () => {
+  //         this.positions[fieldId] = { x, y, templateFieldId: existingPosition.templateFieldId };
+  //         this.unsavedChanges = true;
+  //         Swal.fire({ title: 'הצלחה', text: 'מיקום השדה עודכן בהצלחה', icon: 'success', timer: 1000, showConfirmButton: false });
+  //       },
+  //       error: (err) => Swal.fire({ title: 'שגיאה', text: 'לא ניתן לעדכן את מיקום השדה', icon: 'error', confirmButtonText: 'אישור', confirmButtonColor: '#5c6bc0' })
+  //     });
+  //   } else {
+  //     // אם השדה אינו קיים (מגיע מהפאנל ולא מוקם עדיין)
+  //     this.templateFieldService.addFieldToTemplate(payload).subscribe({
+  //       next: (response) => {
+  //         this.positions[fieldId] = { x, y, templateFieldId: response.id };
+  //         this.unsavedChanges = true;
+  //         Swal.fire({ title: 'הצלחה', text: 'השדה מוקם בהצלחה', icon: 'success', timer: 1000, showConfirmButton: false });
+  //       },
+  //       error: (err) => Swal.fire({ title: 'שגיאה', text: 'לא ניתן למקם את השדה', icon: 'error', confirmButtonText: 'אישור', confirmButtonColor: '#5c6bc0' })
+  //     });
+  //   }
+  //   this.selectedField = null;
+  //   this.showPrompt = false;
+  // }
 
   selectField(field: any): void {
     this.selectedField = field;
