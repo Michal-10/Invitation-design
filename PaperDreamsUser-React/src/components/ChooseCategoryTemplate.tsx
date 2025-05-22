@@ -202,7 +202,6 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { Category } from "../models/Category"
 import { motion } from "framer-motion"
-import StarIcon from "@mui/icons-material/Star"
 import CategoryIcon from "@mui/icons-material/Category"
 
 export default function ChooseCategoryPage() {
@@ -425,7 +424,7 @@ export default function ChooseCategoryPage() {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
-                      bgcolor: isSelected ? theme.palette.primary.light : theme.palette.background.paper,
+                      // bgcolor: isSelected ? theme.palette.primary.light : theme.palette.background.paper,
                       border: `2px solid ${isSelected ? theme.palette.primary.main : "transparent"}`,
                       boxShadow: isSelected
                         ? "0 0 10px rgba(0,0,0,0.1)"
@@ -434,17 +433,7 @@ export default function ChooseCategoryPage() {
                       transition: "all 0.3s ease-in-out",
                     }}
                   >
-                    <StarIcon
-                      sx={{
-                        position: "absolute",
-                        top: 12,
-                        right: 12,
-                        color: isSelected
-                          ? theme.palette.primary.main
-                          : theme.palette.grey[400],
-                        fontSize: 22,
-                      }}
-                    />
+                  
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                       <CategoryIcon sx={{ color: theme.palette.primary.dark }} />
                       <Typography
