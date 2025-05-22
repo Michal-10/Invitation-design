@@ -147,6 +147,7 @@
 .btn-primary {
   background: linear-gradient(135deg, #912ffa 0%, #256eed 100%) !important;
   color: white !important;
+  font-weight: 600 !important;
   width: -webkit-fill-available;
   padding: 8px 20px !important;
   border-radius: 8px !important;
