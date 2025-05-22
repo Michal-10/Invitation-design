@@ -139,97 +139,202 @@
 
 
 
- <div class="content-wrapper page-transition">
-  <div class="placement-workspace">
-    <!-- Fields Panel -->
-    <div class="fields-panel card">
-      <div class="card-header">
-        <div class="card-title">
-          <i class="material-icons">format_list_bulleted</i>
-          <span>שדות זמינים</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+  <div class="content-wrapper page-transition">
+    <div class="placement-workspace">
+      <div class="fields-panel card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="material-icons">format_list_bulleted</i>
+            <span>שדות זמינים</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="fields-list">
+            @for (field of fields; track field) {
+              <div class="field-item" 
+                  [class.placed]="isFieldPlaced(field.field.id)"
+                  [class.selected]="isFieldSelected(field)">
+                  <button class="field-button edit-button" (click)="editPlacement(field)">
+                    <mat-icon>edit_location</mat-icon>
+                    <span>{{ field.field.name }}</span>
+                  </button>
+              </div>
+            }
+            
+            @if(fields.length === 0) {
+              <div class="empty-fields">
+                <mat-icon>info</mat-icon>
+                <p>אין שדות זמינים לקטגוריה זו</p>
+              </div>
+            }
+          </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="fields-list">
-          @for (field of fields; track field) {
-            <div class="field-item" 
-                [class.placed]="isFieldPlaced(field.field.id)"
-                [class.selected]="isFieldSelected(field)">
-              <!-- @if (!isFieldPlaced(field.field.id)) {
-                <button class="field-button edit-button" (click)="selectField(field)">
-                  <mat-icon>edit_location</mat-icon>
-                  <span>{{ field.field.name }}</span>
-                </button>
-              } @else { -->
-                <button class="field-button edit-button" (click)="editPlacement(field)">
-                  <mat-icon>edit_location</mat-icon>
-                  <span>{{ field.field.name }}</span>
-                </button>
-              <!-- } -->
+
+      <div class="template-workspace card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="material-icons">dashboard_customize</i>
+            <span>מיקום שדות</span>
+          </div>
+        </div>
+        <div class="card-body">
+          @if(showPrompt && selectedField) {
+            <div class="placement-prompt">
+              <mat-icon>touch_app</mat-icon>
+              <p>לחץ על התמונה במיקום שבו אתה רוצה למקם את השדה "{{ selectedField.field.name }}"</p>
             </div>
           }
-          
-          @if(fields.length === 0) {
-            <div class="empty-fields">
-              <mat-icon>info</mat-icon>
-              <p>אין שדות זמינים לקטגוריה זו</p>
-            </div>
-          }
+
+          <div class="image-container" #imageContainer>
+            @if(templateImageUrl) {
+              <img 
+                #templateImage 
+                [src]="templateImageUrl" 
+                alt="Template" 
+                class="template-image"
+                (click)="onImageClick($event)" 
+              />
+              
+              @for (field of fields; track field) {
+                @if (positions[field.field.id]) {
+                  <div 
+                    class="field-label" 
+                    [style.top]="getFieldPosition(field.field.id)?.top"
+                    [style.left]="getFieldPosition(field.field.id)?.left" 
+                    [style.position]="'absolute'"
+                    [attr.data-field-id]="field.field.id" 
+                    (mousedown)="startDrag($event, field)"
+                  >
+                    <div class="field-label-content">
+                      <mat-icon>drag_indicator</mat-icon>
+                      <span>{{ field.field.name }}</span>
+                    </div>
+                  </div>
+                }
+              }
+            } @else {
+              <div class="loading-template">
+                <mat-spinner diameter="40" color="accent"></mat-spinner>
+                <p>טוען תבנית...</p>
+              </div>
+            }
+          </div>
         </div>
       </div>
     </div>
+  </div> -->
 
-    <!-- Template Workspace -->
-    <div class="template-workspace card">
-      <div class="card-header">
-        <div class="card-title">
-          <i class="material-icons">dashboard_customize</i>
-          <span>מיקום שדות</span>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <div class="content-wrapper page-transition">
+    <div class="placement-workspace">
+      <div class="fields-panel card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="material-icons">format_list_bulleted</i>
+            <span>שדות זמינים</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- <div class="fields-list">
+            @for (field of fields; track field) {
+              <div class="field-item" 
+                  [class.placed]="isFieldPlaced(field.field.id)"
+                  [class.selected]="isFieldSelected(field)">
+                  <button class="field-button edit-button" (click)="editPlacement(field)">
+                    <mat-icon>edit_location</mat-icon>
+                    <span>{{ field.field.name }}</span>
+                  </button>
+              </div>
+            }
+            
+            @if(fields.length === 0) {
+              <div class="empty-fields">
+                <mat-icon>info</mat-icon>
+                <p>אין שדות זמינים לקטגוריה זו</p>
+              </div>
+            }
+          </div> -->
         </div>
       </div>
-      <div class="card-body">
-        @if(showPrompt && selectedField) {
-          <div class="placement-prompt">
-            <mat-icon>touch_app</mat-icon>
-            <p>לחץ על התמונה במיקום שבו אתה רוצה למקם את השדה "{{ selectedField.field.name }}"</p>
-          </div>
-        }
 
-        <div class="image-container" #imageContainer>
-          @if(templateImageUrl) {
-            <img 
-              #templateImage 
-              [src]="templateImageUrl" 
-              alt="Template" 
-              class="template-image"
-              (click)="onImageClick($event)" 
-            />
-            
-            @for (field of fields; track field) {
-              @if (positions[field.field.id]) {
-                <div 
-                  class="field-label" 
-                  [style.top]="getFieldPosition(field.field.id)?.top"
-                  [style.left]="getFieldPosition(field.field.id)?.left" 
-                  [style.position]="'absolute'"
-                  [attr.data-field-id]="field.field.id" 
-                  (mousedown)="startDrag($event, field)"
-                >
-                  <div class="field-label-content">
-                    <mat-icon>drag_indicator</mat-icon>
-                    <span>{{ field.field.name }}</span>
-                  </div>
-                </div>
-              }
-            }
-          } @else {
-            <div class="loading-template">
-              <mat-spinner diameter="40" color="accent"></mat-spinner>
-              <p>טוען תבנית...</p>
+      <div class="template-workspace card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="material-icons">dashboard_customize</i>
+            <span>מיקום שדות</span>
+          </div>
+        </div>
+        <div class="card-body">
+          @if(showPrompt && selectedField) {
+            <div class="placement-prompt">
+              <mat-icon>touch_app</mat-icon>
+              <p>לחץ על התמונה במיקום שבו אתה רוצה למקם את השדה "{{ selectedField.field.name }}"</p>
             </div>
           }
+
+          <div class="image-container" #imageContainer>
+            @if(templateImageUrl) {
+              <img 
+                #templateImage 
+                [src]="templateImageUrl" 
+                alt="Template" 
+                class="template-image"
+              />
+              
+              @for (field of fields; track field) {
+                @if (positions[field.field.id]) {
+                  <div 
+                    class="field-label" 
+                    [style.top]="getFieldPosition(field.field.id)?.top"
+                    [style.left]="getFieldPosition(field.field.id)?.left" 
+                    [style.position]="'absolute'"
+                    [attr.data-field-id]="field.field.id" 
+                    (mousedown)="startDrag($event, field)"
+                  >
+                    <div class="field-label-content">
+                      <mat-icon>drag_indicator</mat-icon>
+                      <span>{{ field.field.name }}</span>
+                    </div>
+                  </div>
+                }
+              }
+            } @else {
+              <div class="loading-template">
+                <mat-spinner diameter="40" color="accent"></mat-spinner>
+                <p>טוען תבנית...</p>
+              </div>
+            }
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
