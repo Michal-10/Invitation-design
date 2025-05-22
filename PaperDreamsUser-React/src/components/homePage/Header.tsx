@@ -68,7 +68,7 @@ const Header: React.FC = () => {
                 elevation={0}
                 sx={{
                     backdropFilter: 'blur(8px)',
-                    borderBottom: '1px solid primary',
+                    borderBottom: '1.5px solid #ff6f61',
                     direction: 'ltr',
                     width: '100vw',
                 }}
