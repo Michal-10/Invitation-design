@@ -142,7 +142,7 @@ const HeroSection = () => {
                 {/* Hero Section */}
                 <Box
                     sx={{ bgcolor: "white", py: 8, textAlign: "center" }} >
-                    <Box sx={{ paddingBottom: '35px', paddingTop: '35px' }}>
+                    <Box sx={{ paddingBottom: '20px', paddingTop: '20px' }}>
                         <Typography variant="h2" component="h1"
                             sx={{
                                 fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
@@ -166,7 +166,7 @@ const HeroSection = () => {
                                 px: 4,
                                 py: 1.5,
                                 borderRadius: 2,
-                                fontSize: "1.1rem",
+                                fontSize: "1.5rem",
                             }}
                         >
                             התחל עכשיו
