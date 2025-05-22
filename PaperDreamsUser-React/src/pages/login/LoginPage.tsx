@@ -52,6 +52,9 @@ export default function AuthPage() {
       navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
       setError(err.message);
+      console.log("the mail or password it's wrong");
+      console.log(err);
+      
     } finally {
       setLoading(false);
     }
