@@ -146,13 +146,14 @@
 
 .btn-primary {
   background: linear-gradient(135deg, #912ffa 0%, #256eed 100%) !important;
-  color: white !important;
-  padding: 8px 20px !important;
+  /* color: white !important; */
+  width: -webkit-fill-available;
+  /* padding: 8px 20px !important;
   border-radius: 8px !important;
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
-  transition: all 0.2s ease !important;
+  transition: all 0.2s ease !important; */
 }
 
 
