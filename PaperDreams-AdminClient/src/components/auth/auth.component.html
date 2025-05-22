@@ -35,14 +35,18 @@
 
 
 
- <div class="login-container">
-  <div class="login-card">
-    <div class="login-header">
-      <h1>ברוכים הבאים</h1>
-      <p>התחבר למערכת הניהול</p>
+
+
+
+
+
+ <div class="upload-template-container">
+  <div class="upload-card">
+    <div class="upload-header">
+      <h2><mat-icon>login</mat-icon> התחברות</h2>
     </div>
 
-    <div class="login-form">
+    <div class="upload-form">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>אימייל</mat-label>
         <input matInput [(ngModel)]="email" type="email" required>
@@ -53,12 +57,12 @@
         <mat-label>סיסמה</mat-label>
         <input matInput [(ngModel)]="password" [type]="hidePassword ? 'password' : 'text'" required>
         <mat-icon matPrefix>lock</mat-icon>
-        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+        <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
           <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" class="login-button" (click)="login()">
+      <button mat-raised-button class="upload-button" (click)="login()">
         <mat-icon>login</mat-icon>
         התחבר
       </button>
