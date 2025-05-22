@@ -241,124 +241,255 @@ export default function ChooseCategoryPage() {
     }
   }
 
+  // return (
+  //   <Box
+  //     dir="rtl"
+  //     sx={{
+  //       minHeight: "100vh",
+  //       width: "90vw",
+  //       px: { xs: 2, md: 4 },
+  //       py: 5,
+  //       bgcolor: theme.palette.background.default,
+  //       display: "flex",
+  //       flexDirection: "column",
+  //       alignItems: "center",
+  //     }}
+  //   >
+  //     <Typography
+  //       variant="h3"
+  //       sx={{
+  //         mb: 5,
+  //         fontWeight: 800,
+  //         color: theme.palette.primary.main,
+  //         textAlign: "right",
+  //         alignSelf: "flex-start",
+  //       }}
+  //     >
+  //       בחר קטגוריה
+  //     </Typography>
+
+  //     {loading ? (
+  //       <CircularProgress />
+  //     ) : (
+  //       <Box
+  //         sx={{
+  //           display: "grid",
+  //           gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+  //           gap: 4,
+  //           width: "100%",
+  //         }}
+  //       >
+  //         {categories.map((category) => {
+  //           const isSelected = selectedCategory?.id === category.id
+  //           return (
+  //             <motion.div
+  //               key={category.id}
+  //               whileHover={{ scale: 1.03 }}
+  //               whileTap={{ scale: 0.97 }}
+  //             >
+  //               <Box
+  //                 sx={{
+  //                   position: "relative",
+  //                   borderRadius: 4,
+  //                   p: 2,
+  //                   height: 160,
+  //                   display: "flex",
+  //                   flexDirection: "column",
+  //                   justifyContent: "space-between",
+  //                   bgcolor: isSelected ? theme.palette.primary.light : theme.palette.background.paper,
+  //                   border: `2px solid ${isSelected ? theme.palette.primary.main : "transparent"}`,
+  //                   boxShadow: isSelected
+  //                     ? "0 0 10px rgba(0,0,0,0.1)"
+  //                     : "0 2px 6px rgba(0,0,0,0.06)",
+  //                   cursor: "pointer",
+  //                   transition: "all 0.3s ease-in-out",
+  //                 }}
+  //               >
+  //                 <StarIcon
+  //                   sx={{
+  //                     position: "absolute",
+  //                     top: 12,
+  //                     right: 12,
+  //                     color: isSelected
+  //                       ? theme.palette.primary.main
+  //                       : theme.palette.grey[400],
+  //                     fontSize: 22,
+  //                   }}
+  //                 />
+  //                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+  //                   <CategoryIcon sx={{ color: theme.palette.primary.dark }} />
+  //                   <Typography
+  //                     variant="h6"
+  //                     sx={{
+  //                       fontWeight: 600,
+  //                       color: theme.palette.text.primary,
+  //                     }}
+  //                   >
+  //                     {category.name}
+  //                   </Typography>
+  //                 </Box>
+
+  //                 <Button
+  //                   variant={isSelected ? "contained" : "outlined"}
+  //                   onClick={() => handleCategoryClick(category)}
+  //                   color="primary"
+  //                   fullWidth
+  //                 >
+  //                   {isSelected ? "בטל בחירה" : "בחר"}
+  //                 </Button>
+  //               </Box>
+  //             </motion.div>
+  //           )
+  //         })}
+  //       </Box>
+  //     )}
+
+  //     <Button
+  //       variant="contained"
+  //       color="primary"
+  //       disabled={!selectedCategory}
+  //       onClick={handleContinue}
+  //       sx={{
+  //         mt: 6,
+  //         px: 6,
+  //         py: 1.5,
+  //         fontSize: "1.1rem",
+  //         borderRadius: "2rem",
+  //       }}
+  //     >
+  //       המשך
+  //     </Button>
+  //   </Box>
+  // )
+
+
   return (
     <Box
       dir="rtl"
       sx={{
         minHeight: "100vh",
-        width: "90vw",
-        px: { xs: 2, md: 4 },
-        py: 5,
         bgcolor: theme.palette.background.default,
         display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        justifyContent: "center",
+        py: 5,
       }}
     >
-      <Typography
-        variant="h3"
+      <Box
         sx={{
-          mb: 5,
-          fontWeight: 800,
-          color: theme.palette.primary.main,
-          textAlign: "right",
-          alignSelf: "flex-start",
+          width: "100%",
+          maxWidth: "1200px",
+          px: { xs: 2, md: 4 },
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        בחר קטגוריה
-      </Typography>
-
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <Box
+        <Typography
+          variant="h3"
           sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: 4,
-            width: "100%",
+            mb: 5,
+            fontWeight: 800,
+            color: theme.palette.primary.main,
+            textAlign: "right",
+            alignSelf: "flex-start",
           }}
         >
-          {categories.map((category) => {
-            const isSelected = selectedCategory?.id === category.id
-            return (
-              <motion.div
-                key={category.id}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Box
-                  sx={{
-                    position: "relative",
-                    borderRadius: 4,
-                    p: 2,
-                    height: 160,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    bgcolor: isSelected ? theme.palette.primary.light : theme.palette.background.paper,
-                    border: `2px solid ${isSelected ? theme.palette.primary.main : "transparent"}`,
-                    boxShadow: isSelected
-                      ? "0 0 10px rgba(0,0,0,0.1)"
-                      : "0 2px 6px rgba(0,0,0,0.06)",
-                    cursor: "pointer",
-                    transition: "all 0.3s ease-in-out",
-                  }}
+          בחר קטגוריה
+        </Typography>
+  
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: 4,
+              width: "100%",
+            }}
+          >
+            {categories.map((category) => {
+              const isSelected = selectedCategory?.id === category.id
+              return (
+                <motion.div
+                  key={category.id}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                 >
-                  <StarIcon
+                  <Box
                     sx={{
-                      position: "absolute",
-                      top: 12,
-                      right: 12,
-                      color: isSelected
-                        ? theme.palette.primary.main
-                        : theme.palette.grey[400],
-                      fontSize: 22,
+                      position: "relative",
+                      borderRadius: 4,
+                      p: 2,
+                      height: 160,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      bgcolor: isSelected ? theme.palette.primary.light : theme.palette.background.paper,
+                      border: `2px solid ${isSelected ? theme.palette.primary.main : "transparent"}`,
+                      boxShadow: isSelected
+                        ? "0 0 10px rgba(0,0,0,0.1)"
+                        : "0 2px 6px rgba(0,0,0,0.06)",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease-in-out",
                     }}
-                  />
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <CategoryIcon sx={{ color: theme.palette.primary.dark }} />
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontWeight: 600,
-                        color: theme.palette.text.primary,
-                      }}
-                    >
-                      {category.name}
-                    </Typography>
-                  </Box>
-
-                  <Button
-                    variant={isSelected ? "contained" : "outlined"}
-                    onClick={() => handleCategoryClick(category)}
-                    color="primary"
-                    fullWidth
                   >
-                    {isSelected ? "בטל בחירה" : "בחר"}
-                  </Button>
-                </Box>
-              </motion.div>
-            )
-          })}
-        </Box>
-      )}
-
-      <Button
-        variant="contained"
-        color="primary"
-        disabled={!selectedCategory}
-        onClick={handleContinue}
-        sx={{
-          mt: 6,
-          px: 6,
-          py: 1.5,
-          fontSize: "1.1rem",
-          borderRadius: "2rem",
-        }}
-      >
-        המשך
-      </Button>
+                    <StarIcon
+                      sx={{
+                        position: "absolute",
+                        top: 12,
+                        right: 12,
+                        color: isSelected
+                          ? theme.palette.primary.main
+                          : theme.palette.grey[400],
+                        fontSize: 22,
+                      }}
+                    />
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                      <CategoryIcon sx={{ color: theme.palette.primary.dark }} />
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontWeight: 600,
+                          color: theme.palette.text.primary,
+                        }}
+                      >
+                        {category.name}
+                      </Typography>
+                    </Box>
+  
+                    <Button
+                      variant={isSelected ? "contained" : "outlined"}
+                      onClick={() => handleCategoryClick(category)}
+                      color="primary"
+                      fullWidth
+                    >
+                      {isSelected ? "בטל בחירה" : "בחר"}
+                    </Button>
+                  </Box>
+                </motion.div>
+              )
+            })}
+          </Box>
+        )}
+  
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={!selectedCategory}
+          onClick={handleContinue}
+          sx={{
+            mt: 6,
+            px: 6,
+            py: 1.5,
+            fontSize: "1.1rem",
+            borderRadius: "2rem",
+          }}
+        >
+          המשך
+        </Button>
+      </Box>
     </Box>
   )
+  
 }
