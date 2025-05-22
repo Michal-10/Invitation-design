@@ -82,53 +82,41 @@
 
 
 
+ 
 
-
-
-
-
- :root {
-  --primary-light: #a18cd1;
-  --primary-dark: #4b6cb7;
-}
-
-/* עטיפת הדף */
-.upload-template-container {
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #f5f7fa;
   padding: 20px;
+  /* background: #f2f4f7; */
 }
 
-/* כרטיס התחברות */
-.upload-card {
+.login-card {
   width: 100%;
   max-width: 500px;
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   animation: fadeIn 0.5s ease-out;
 }
 
-/* כותרת עליונה */
-.upload-header {
-  background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
-  color: white;
-  padding: 20px;
+.login-header {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+  /* color: white; */
   text-align: center;
+  padding: 20px;
   font-size: 1.5rem;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
-/* גוף הטופס */
-.upload-form {
+.login-form {
   padding: 30px;
   direction: rtl;
 }
@@ -138,27 +126,36 @@
   margin-bottom: 20px;
 }
 
+.mat-form-field {
+  width: 100%;
+  background: var(--input-bg);
+  border-radius: 8px;
+}
+
 /* כפתור התחברות */
-.upload-button {
+.login-button {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
-  color: white;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+  /* color: white; */
   font-weight: bold;
+  border: none;
   border-radius: 12px;
+  font-size: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  transition: all 0.3s ease-in-out;
+  transition: 0.3s ease;
+  cursor: pointer;
 }
 
-.upload-button:hover {
+.login-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* אנימציה */
+/* אנימציית טעינה */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -170,25 +167,19 @@
   }
 }
 
-/* רספונסיביות למסכים קטנים */
+/* מסכים קטנים */
 @media (max-width: 600px) {
-  .upload-card {
-    margin: 0 10px;
-    border-radius: 12px;
+  .login-card {
+    margin: 0 15px;
+    border-radius: 16px;
   }
 
-  .upload-header {
-    font-size: 1.2rem;
-    padding: 16px;
-    flex-direction: column;
-  }
-
-  .upload-form {
+  .login-form {
     padding: 20px;
   }
 
-  .upload-button {
-    font-size: 0.9rem;
-    padding: 10px;
+  .login-header {
+    font-size: 1.2rem;
+    padding: 16px;
   }
 }
