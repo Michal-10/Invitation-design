@@ -30,7 +30,7 @@ export default function AuthPage() {
   const handleSubmit = async () => {
     setLoading(true);
     setError("");
-    
+
     const email = emailRef.current?.value || "";
     const password = passwordRef.current?.value || "";
     const firstName = firstNameRef.current?.value || "";
@@ -71,7 +71,7 @@ export default function AuthPage() {
       await dispatch(googleLogin({mode})).unwrap();
       navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
-      setError("התחברות עם גוגל נכשלה 😞");
+      setError("משתמש לא קיים במערכת");
     } finally {
       setLoading(false);
     }
