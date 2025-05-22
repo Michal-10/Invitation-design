@@ -4,7 +4,7 @@ import {
   Button,
   TextField,
   Typography,
-  useTheme,
+  // useTheme,
   Paper,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router";
 
 export default function AuthPage() {
-  const theme = useTheme();
+  // const theme = useTheme();
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -36,7 +36,6 @@ export default function AuthPage() {
     const firstName = firstNameRef.current?.value || "";
     const lastName = lastNameRef.current?.value || "";
 
-
     try {
       await dispatch(
         loginRegister({
@@ -49,10 +48,12 @@ export default function AuthPage() {
           status: mode,
           // Add a default or appropriate status value
         })
-      ).unwrap();
+      )
+      // .unwrap();
       navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
       setError("the mail or password it's wrong");
+      alert("המשתמש לא קיים במערכת");
       // alert("the mail or password it's wrong");
       console.log(err);
       
@@ -90,7 +91,7 @@ export default function AuthPage() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+        // background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
         overflow: "hidden",
       }}
     >
@@ -111,6 +112,7 @@ export default function AuthPage() {
           borderRadius: 4,
           backgroundColor: "#fff",
           textAlign: "center",
+          border: "1.5px solid #ff6f61",
         }}
       >
         <Typography variant="h4" gutterBottom>

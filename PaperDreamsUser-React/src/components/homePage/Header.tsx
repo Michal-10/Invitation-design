@@ -68,7 +68,7 @@ const Header: React.FC = () => {
                 elevation={0}
                 sx={{
                     backdropFilter: 'blur(8px)',
-                    borderBottom: '1.5px solid #ff6f61',
+                    borderBottom: '2px solid #ff6f61',
                     direction: 'ltr',
                     width: '100vw',
                 }}
@@ -151,8 +151,9 @@ const Header: React.FC = () => {
                                     px: 2,
                                     py: 0.5,
                                     '&:hover': {
-                                        backgroundColor: 'primary.light', // רקע בהיר במעבר עכבר
-                                        color: 'primary.dark', // צבע כהה במעבר עכבר
+                                        backgroundColor: 'transparent', // ביטול מילוי רקע במעבר עכבר
+                                        color: 'primary.dark', // שינוי צבע הטקסט במעבר עכבר
+                                        borderColor: 'primary.dark', // שינוי צבע הגבול במעבר עכבר
                                     },
                                 }}
                                 component={Link}
