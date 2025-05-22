@@ -320,7 +320,14 @@ export default () => {
 
         const fetchFileUrl = async () => {
             try {
+                console.log("in fetchFileUrl");
+                console.log("before getDownloadURL");
+                
+                
                 setImageURL(await getDownloadURL(storedTemplate.name));
+                console.log("after getDownloadURL in fetchFileUrl");
+                console.log("imageURL");
+                console.log(imageURL);
             } catch (error) {
                 console.error("שגיאה בהבאת ה-URL:", error);
                 alert(`שגיאה בהבאת ה-URL: ${error}`);
