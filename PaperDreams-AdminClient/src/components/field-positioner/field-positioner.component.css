@@ -195,24 +195,34 @@
 }  */
 
 /* Main Container */
+
+
+
+
+
+/* כללי */
 .content-wrapper {
   padding: 25px;
   direction: rtl;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 70px); /* 70px בהנחה שזה גובה ההדר העליון */
   overflow: hidden;
+  display: flex; /* שינוי: כדי למרכז את התבנית */
+  justify-content: center; /* שינוי: למרכז אופקית */
+  align-items: center; /* שינוי: למרכז אנכית */
 }
 
-/* Placement Workspace */
+/* Placement Workspace - עכשיו יש בו רק עמודה אחת */
 .placement-workspace {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 25px;
+  display: flex; /* שינוי */
+  justify-content: center; /* שינוי */
+  align-items: center; /* שינוי */
   height: 100%;
-  max-width: 100%;
+  width: 100%; /* שינוי: תופס את כל הרוחב */
+  max-width: 1200px; /* הגבלת רוחב מקסימלית למראה נעים */
   overflow: hidden;
 }
 
-/* Card Styling */
+/* Card Styling - כללי */
 .card {
   background: white;
   border-radius: 12px;
@@ -222,6 +232,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%; /* שינוי: תופס את כל רוחב ההורה */
   max-height: 100%;
 }
 
@@ -254,128 +265,43 @@
 .card-body {
   padding: 20px;
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden; /* ✅ הוספה זו תמנע גלילה רוחבית */
+  overflow: auto; /* שינוי: גלילה אוטומטית */
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center; /* שינוי: למרכז את התמונה בתוך ה-body */
+  align-items: center; /* שינוי: למרכז את התמונה בתוך ה-body */
 }
 
-
-/* Fields Panel */
-.fields-panel {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  min-width: 0; /* Prevents horizontal overflow */
-}
-
-.fields-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  overflow-y: auto;
-  overflow-x: hidden; /* ✅ מונע גלילה רוחבית */
-  width: 100%;
-}
-
-.field-item {
-  transition: all 0.2s ease;
-  width: 100%;
-}
-
-.field-button {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 12px 15px;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-  background: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: right;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.field-button span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex: 1;
-}
-
-.field-button:hover {
-  background: #f8f9fb;
-  transform: translateX(-5px);
-  border-color: #d0d0d0;
-}
-
-.field-button mat-icon {
-  margin-left: 10px;
-  color: #6634ee;
-  flex-shrink: 0;
-}
-
-.field-item.placed .field-button {
-  background: rgba(106, 17, 203, 0.05);
-  border-color: rgba(106, 17, 203, 0.2);
-}
-
-.field-item.selected .field-button {
-  background: linear-gradient(135deg, rgba(145, 47, 250, 0.1) 0%, rgba(37, 110, 237, 0.1) 100%);
-  border-color: #4f01a2;
-  box-shadow: 0 0 0 2px rgba(145, 47, 250, 0.2);
-}
-
-.edit-button mat-icon {
-  color: #256eed;
-}
-
-.empty-fields {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px 0;
-  color: #888;
-  text-align: center;
-}
-
-.empty-fields mat-icon {
-  font-size: 40px;
-  height: 40px;
-  width: 40px;
-  margin-bottom: 10px;
-  color: #ccc;
-}
-
-/* Template Workspace */
+/* Template Workspace - עכשיו הוא העיקר */
 .template-workspace {
   height: 100%;
   display: flex;
   flex-direction: column;
-  min-width: 0; /* Prevents horizontal overflow */
+  min-width: 0;
+  flex-grow: 1; /* יתפוס את המקום הפנוי */
 }
 
 .image-container {
   position: relative;
-  height: 100%;
+  height: 100%; /* שינוי: תופס את כל הגובה הזמין */
+  width: 100%; /* שינוי: תופס את כל הרוחב הזמין */
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center; /* שינוי: למרכז את התמונה אנכית */
   background: #f8f9fb;
   border-radius: 8px;
   border: 1px dashed #e0e0e0;
-  overflow: auto;
+  overflow: hidden; /* הסתרת גלילה בתוך הקונטיינר - התמונה תתכווץ */
 }
 
 .template-image {
   max-width: 100%;
-  cursor: pointer;
-  object-fit: contain;
+  max-height: 100%; /* שינוי: יבטיח שהתמונה תתאים לגובה הקונטיינר */
+  object-fit: contain; /* יבטיח שהתמונה לא תיחתך ותשמור על פרופורציות */
+  display: block; /* כדי להסיר רווחים מיותרים מתחת לתמונה */
 }
+
 
 .loading-template {
   display: flex;
@@ -396,6 +322,7 @@
   cursor: grab;
   user-select: none;
   z-index: 10;
+  position: absolute; /* חייב להישאר absolute למיקום חופשי */
 }
 
 .field-label:active {
@@ -422,28 +349,6 @@
   font-size: 18px;
   height: 18px;
   width: 18px;
-}
-
-/* Placement Prompt */
-.placement-prompt {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  left: 20px;
-  z-index: 100;
-  background: rgba(47, 61, 250, 0.9);
-  color: white;
-  padding: 15px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.3s ease;
-}
-
-.placement-prompt mat-icon {
-  margin-left: 10px;
-  font-size: 24px;
 }
 
 /* Animations */
@@ -481,19 +386,8 @@
   background: rgba(145, 47, 250, 0.5);
 }
 
-/* Responsive Styles */
-@media (max-width: 992px) {
-  .placement-workspace {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-  }
-  
-  .fields-panel {
-    max-height: 300px;
-  }
-}
-
 /* Custom Spinner Color */
 ::ng-deep .mat-mdc-progress-spinner.mat-accent circle {
   stroke: #792ffa !important;
 }
+

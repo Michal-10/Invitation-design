@@ -347,39 +347,8 @@
 
 
 
-
   <div class="content-wrapper page-transition">
     <div class="placement-workspace">
-      <!-- <div class="fields-panel card">
-        <div class="card-header">
-          <div class="card-title">
-            <i class="material-icons">format_list_bulleted</i>
-            <span>שדות זמינים</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="fields-list">
-            @for (field of fields; track field) {
-              <div class="field-item"
-                  [class.placed]="isFieldPlaced(field.field.id)"
-                  [class.selected]="isFieldSelected(field)">
-                <button class="field-button edit-button" (click)="selectField(field)">
-                  <mat-icon>edit_location</mat-icon>
-                  <span>{{ field.field.name }}</span>
-                </button>
-              </div>
-            }
-  
-            @if(fields.length === 0) {
-              <div class="empty-fields">
-                <mat-icon>info</mat-icon>
-                <p>אין שדות זמינים לקטגוריה זו</p>
-              </div>
-            }
-          </div>
-        </div>
-      </div>
-   -->
       <div class="template-workspace card">
         <div class="card-header">
           <div class="card-title">
@@ -395,7 +364,7 @@
                 [src]="templateImageUrl"
                 alt="Template"
                 class="template-image"
-                (load)="onTemplateImageLoad()"  />
+                (load)="onTemplateImageLoad()" />
   
               @for (field of fields; track field) {
                 @if (positions[field.field.id]) {
