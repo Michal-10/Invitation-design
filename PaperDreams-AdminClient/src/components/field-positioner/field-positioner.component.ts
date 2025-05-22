@@ -1,48 +1,173 @@
-// // // // // import { Component, OnInit } from '@angular/core';
-// // // // // import { CategoryFieldService } from '../../services/category-field/category-field.service';
-// // // // // import { TemplateFieldService } from '../../services/template-field/template-field.service';
+// // // // // // import { Component, OnInit } from '@angular/core';
+// // // // // // import { CategoryFieldService } from '../../services/category-field/category-field.service';
+// // // // // // import { TemplateFieldService } from '../../services/template-field/template-field.service';
 
-// // // // // @Component({
-// // // // //   selector: 'app-field-placement',
-// // // // //   templateUrl: './field-positioner.component.html', // Updated to match the correct file name
-// // // // // })
-// // // // // export class FieldPlacementComponent implements OnInit {
-// // // // //   fields: any[] = [];
-// // // // //   templateId: number = 0;
+// // // // // // @Component({
+// // // // // //   selector: 'app-field-placement',
+// // // // // //   templateUrl: './field-positioner.component.html', // Updated to match the correct file name
+// // // // // // })
+// // // // // // export class FieldPlacementComponent implements OnInit {
+// // // // // //   fields: any[] = [];
+// // // // // //   templateId: number = 0;
 
-// // // // //   constructor(
-// // // // //     private templateFieldService: TemplateFieldService,
-// // // // //     private categoryFieldService: CategoryFieldService
-// // // // //   ) {}
+// // // // // //   constructor(
+// // // // // //     private templateFieldService: TemplateFieldService,
+// // // // // //     private categoryFieldService: CategoryFieldService
+// // // // // //   ) {}
 
-// // // // //   ngOnInit(): void {
-// // // // //     const categoryId = Number(localStorage.getItem('categoryId'));
-// // // // //     this.templateId = Number(localStorage.getItem('templateId'));
+// // // // // //   ngOnInit(): void {
+// // // // // //     const categoryId = Number(localStorage.getItem('categoryId'));
+// // // // // //     this.templateId = Number(localStorage.getItem('templateId'));
 
-// // // // //     if (categoryId) {
-// // // // //       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe((res) => {
-// // // // //         this.fields = res;
-// // // // //       });
-// // // // //     }
-// // // // //   }
+// // // // // //     if (categoryId) {
+// // // // // //       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe((res) => {
+// // // // // //         this.fields = res;
+// // // // // //       });
+// // // // // //     }
+// // // // // //   }
 
-// // // // //   savePosition(fieldId: number, x: number, y: number): void {
-// // // // //     const payload = {
-// // // // //       fieldId,
-// // // // //       templateId: this.templateId,
-// // // // //       x,
-// // // // //       y,
-// // // // //     };
+// // // // // //   savePosition(fieldId: number, x: number, y: number): void {
+// // // // // //     const payload = {
+// // // // // //       fieldId,
+// // // // // //       templateId: this.templateId,
+// // // // // //       x,
+// // // // // //       y,
+// // // // // //     };
 
-// // // // //     this.templateFieldService.addFieldToTemplate(payload).subscribe(() => {
-// // // // //       alert('Field saved!');
-// // // // //     });
-// // // // //   }
-// // // // // }
-
-
+// // // // // //     this.templateFieldService.addFieldToTemplate(payload).subscribe(() => {
+// // // // // //       alert('Field saved!');
+// // // // // //     });
+// // // // // //   }
+// // // // // // }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+// // // // import { Component, OnInit, HostListener } from '@angular/core';
+// // // // import { CategoryFieldService } from '../../services/category-field/category-field.service';
+// // // // import { TemplateFieldService } from '../../services/template-field/template-field.service';
+// // // // import { ActivatedRoute } from '@angular/router';
+// // // // import { Template } from '../../models/template';
+// // // // import { TemplatesService } from '../../services/templates/templates.service';
+
+// // // // @Component({
+// // // //   selector: 'app-field-placement',
+// // // //   templateUrl: './field-positioner.component.html',
+// // // //   styleUrls: ['./field-positioner.component.css']
+// // // // })
+// // // // export class FieldPlacementComponent implements OnInit {
+// // // //   fields: any[] = [];
+// // // //   templateId: number = 0;
+// // // //   selectedField: any = null;
+// // // //   template!:Template;
+// // // //   templateImageUrl!:string;
+// // // //   positions: { [key: number]: { x: number, y: number } } = {};
+
+// // // //   constructor(
+// // // //     private templatesService:TemplatesService,
+// // // //     private templateFieldService: TemplateFieldService,
+// // // //     private categoryFieldService: CategoryFieldService,
+// // // //     private route: ActivatedRoute
+// // // //   ) {}
+
+// // // //   ngOnInit(): void {
+// // // //     // this.templateImageUrl = sessionStorage.getItem('templateImageUrl') || '';
+// // // //     console.log("ngonInit templateImageUrl: ");
+// // // //     // console.log("this.templateImageUrl: ");
+// // // //     // console.log(this.templateImageUrl);
+// // // //     // console.log("this.templateImageUrl: ");
+
+// // // //     const templateData = sessionStorage.getItem('template');
+
+// // // //     console.log("templateData: ");
+// // // //     console.log(templateData);
+// // // //     console.log("this.template: ");
+// // // //     this.template = templateData ? JSON.parse(templateData) as Template : {} as Template;
+// // // //     console.log(this.template);
+
+// // // //     console.log(this.template.imageUrl);
+// // // //     this.templatesService.getDownloadURL(this.template.name).then((res)=>{
+// // // //       console.log("in getDownloadURL: in field-positioner.component.ts");
+// // // //       console.log("//////////////////////////");
+
+// // // //       console.log(res);
+
+// // // //       this.templateImageUrl = res; 
+// // // //       console.log("this.templateImageUrl: ");
+// // // //       console.log(this.templateImageUrl);
+
+// // // //     });
+
+// // // //     // this.templateImageUrl = this.templatesService.getDownloadURL(this.template.Name)
+// // // //     //   console.log("this.templateImageUrl: ");
+// // // //     //   console.log(this.templateImageUrl);
+
+// // // //     console.log("this.templateImageUrl: ");
+// // // //     console.log(this.templateImageUrl);
+
+// // // //     this.templateId = Number(this.route.snapshot.paramMap.get('id'));
+// // // //     console.log("this.templateId: ");
+// // // //     console.log(this.templateId);
+
+// // // //     const categoryId = Number(sessionStorage.getItem('categoryId'));
+// // // //     console.log("categoryId: ");
+// // // //     console.log(categoryId);
+// // // //     // this.templateId = Number(sessionStorage.getItem('templateId'));
+// // // // console.log("---------------------------------------------------");
+
+// // // //     if (categoryId>=0) {
+// // // //       console.log("before getFieldsByCategory categoryId: ");
+// // // //       console.log(categoryId);
+
+// // // //       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe((res) => {
+// // // //         console.log("in subscribe getFieldsByCategory categoryId: ");
+// // // //        console.log(res);
+// // // //        (res);
+// // // //         this.fields = res;
+// // // //       });
+// // // //     }
+// // // //     console.log("this.fields: ");
+// // // //     console.log(this.fields);
+
+// // // //   }
+
+// // // //   onImageClick(event: MouseEvent): void {
+// // // //     if (!this.selectedField) return;
+
+// // // //     const rect = (event.target as HTMLElement).getBoundingClientRect();
+// // // //     const x = event.clientX - rect.left;
+// // // //     const y = event.clientY - rect.top;
+
+// // // //     this.positions[this.selectedField.id] = { x, y };
+
+// // // //     const payload = {
+// // // //       fieldId: this.selectedField.id,
+// // // //       templateId: this.templateId,
+// // // //       x,
+// // // //       y
+// // // //     };
+
+// // // //     this.templateFieldService.addFieldToTemplate(payload).subscribe(() => {
+// // // //       alert(`השדה "${this.selectedField.name}" נשמר במיקום (${x}, ${y})`);
+// // // //     });
+
+// // // //     this.selectedField = null;
+// // // //   }
+
+// // // //   selectField(field: any) {
+// // // //     this.selectedField = field;
+// // // //   }
+// // // // }
 
 
 
@@ -69,51 +194,34 @@
 // // //   fields: any[] = [];
 // // //   templateId: number = 0;
 // // //   selectedField: any = null;
-// // //   template!:Template;
-// // //   templateImageUrl!:string;
+// // //   template!: Template;
+// // //   templateImageUrl!: string;
 // // //   positions: { [key: number]: { x: number, y: number } } = {};
+// // //   showPrompt: boolean = false;
 
 // // //   constructor(
-// // //     private templatesService:TemplatesService,
+// // //     private templatesService: TemplatesService,
 // // //     private templateFieldService: TemplateFieldService,
 // // //     private categoryFieldService: CategoryFieldService,
 // // //     private route: ActivatedRoute
 // // //   ) {}
 
 // // //   ngOnInit(): void {
-// // //     // this.templateImageUrl = sessionStorage.getItem('templateImageUrl') || '';
-// // //     console.log("ngonInit templateImageUrl: ");
-// // //     // console.log("this.templateImageUrl: ");
-// // //     // console.log(this.templateImageUrl);
-// // //     // console.log("this.templateImageUrl: ");
-
 // // //     const templateData = sessionStorage.getItem('template');
-
 // // //     console.log("templateData: ");
 // // //     console.log(templateData);
-// // //     console.log("this.template: ");
+
 // // //     this.template = templateData ? JSON.parse(templateData) as Template : {} as Template;
+// // //     console.log("this.template: ");
 // // //     console.log(this.template);
 
-// // //     console.log(this.template.imageUrl);
-// // //     this.templatesService.getDownloadURL(this.template.name).then((res)=>{
+// // //     this.templatesService.getDownloadURL(this.template.name).then((res) => {
 // // //       console.log("in getDownloadURL: in field-positioner.component.ts");
-// // //       console.log("//////////////////////////");
-
 // // //       console.log(res);
-
 // // //       this.templateImageUrl = res; 
 // // //       console.log("this.templateImageUrl: ");
 // // //       console.log(this.templateImageUrl);
-
 // // //     });
-
-// // //     // this.templateImageUrl = this.templatesService.getDownloadURL(this.template.Name)
-// // //     //   console.log("this.templateImageUrl: ");
-// // //     //   console.log(this.templateImageUrl);
-
-// // //     console.log("this.templateImageUrl: ");
-// // //     console.log(this.templateImageUrl);
 
 // // //     this.templateId = Number(this.route.snapshot.paramMap.get('id'));
 // // //     console.log("this.templateId: ");
@@ -122,23 +230,25 @@
 // // //     const categoryId = Number(sessionStorage.getItem('categoryId'));
 // // //     console.log("categoryId: ");
 // // //     console.log(categoryId);
-// // //     // this.templateId = Number(sessionStorage.getItem('templateId'));
-// // // console.log("---------------------------------------------------");
 
-// // //     if (categoryId>=0) {
+// // //     if (categoryId >= 0) {
 // // //       console.log("before getFieldsByCategory categoryId: ");
 // // //       console.log(categoryId);
 
 // // //       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe((res) => {
 // // //         console.log("in subscribe getFieldsByCategory categoryId: ");
-// // //        console.log(res);
-// // //        (res);
+// // //         console.log(res);
 // // //         this.fields = res;
+
+// // //         // Load existing positions
+// // //         this.loadExistingPositions();
 // // //       });
 // // //     }
-// // //     console.log("this.fields: ");
-// // //     console.log(this.fields);
+// // //   }
 
+// // //   loadExistingPositions(): void {
+// // //     // This method can be used to load existing positions from the server if needed
+// // //     // For now we'll keep it empty but you can implement it later
 // // //   }
 
 // // //   onImageClick(event: MouseEvent): void {
@@ -157,15 +267,25 @@
 // // //       y
 // // //     };
 
+// // //     // Capture field name before resetting selectedField
+// // //     const fieldName = this.selectedField.field?.name || this.selectedField.name;
+
 // // //     this.templateFieldService.addFieldToTemplate(payload).subscribe(() => {
-// // //       alert(`השדה "${this.selectedField.name}" נשמר במיקום (${x}, ${y})`);
+// // //       alert(`השדה "${fieldName}" נשמר במיקום (${x}, ${y})`);
 // // //     });
 
 // // //     this.selectedField = null;
+// // //     this.showPrompt = false;
 // // //   }
 
 // // //   selectField(field: any) {
 // // //     this.selectedField = field;
+// // //     this.showPrompt = true;
+// // //   }
+
+// // //   // Helper method to check if a field is selected
+// // //   isFieldSelected(field: any): boolean {
+// // //     return this.selectedField && this.selectedField.id === field.id;
 // // //   }
 // // // }
 
@@ -178,322 +298,336 @@
 
 
 
-// // import { Component, OnInit, HostListener } from '@angular/core';
-// // import { CategoryFieldService } from '../../services/category-field/category-field.service';
-// // import { TemplateFieldService } from '../../services/template-field/template-field.service';
-// // import { ActivatedRoute } from '@angular/router';
-// // import { Template } from '../../models/template';
-// // import { TemplatesService } from '../../services/templates/templates.service';
-
-// // @Component({
-// //   selector: 'app-field-placement',
-// //   templateUrl: './field-positioner.component.html',
-// //   styleUrls: ['./field-positioner.component.css']
-// // })
-// // export class FieldPlacementComponent implements OnInit {
-// //   fields: any[] = [];
-// //   templateId: number = 0;
-// //   selectedField: any = null;
-// //   template!: Template;
-// //   templateImageUrl!: string;
-// //   positions: { [key: number]: { x: number, y: number } } = {};
-// //   showPrompt: boolean = false;
 
-// //   constructor(
-// //     private templatesService: TemplatesService,
-// //     private templateFieldService: TemplateFieldService,
-// //     private categoryFieldService: CategoryFieldService,
-// //     private route: ActivatedRoute
-// //   ) {}
 
-// //   ngOnInit(): void {
-// //     const templateData = sessionStorage.getItem('template');
-// //     console.log("templateData: ");
-// //     console.log(templateData);
 
-// //     this.template = templateData ? JSON.parse(templateData) as Template : {} as Template;
-// //     console.log("this.template: ");
-// //     console.log(this.template);
 
-// //     this.templatesService.getDownloadURL(this.template.name).then((res) => {
-// //       console.log("in getDownloadURL: in field-positioner.component.ts");
-// //       console.log(res);
-// //       this.templateImageUrl = res; 
-// //       console.log("this.templateImageUrl: ");
-// //       console.log(this.templateImageUrl);
-// //     });
 
-// //     this.templateId = Number(this.route.snapshot.paramMap.get('id'));
-// //     console.log("this.templateId: ");
-// //     console.log(this.templateId);
 
-// //     const categoryId = Number(sessionStorage.getItem('categoryId'));
-// //     console.log("categoryId: ");
-// //     console.log(categoryId);
 
-// //     if (categoryId >= 0) {
-// //       console.log("before getFieldsByCategory categoryId: ");
-// //       console.log(categoryId);
 
-// //       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe((res) => {
-// //         console.log("in subscribe getFieldsByCategory categoryId: ");
-// //         console.log(res);
-// //         this.fields = res;
 
-// //         // Load existing positions
-// //         this.loadExistingPositions();
-// //       });
-// //     }
-// //   }
+// // // import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
+// // // import { CategoryFieldService } from '../../services/category-field/category-field.service';
+// // // import { TemplateFieldService } from '../../services/template-field/template-field.service';
+// // // import { ActivatedRoute } from '@angular/router';
+// // // import { Template } from '../../models/template';
+// // // import { TemplatesService } from '../../services/templates/templates.service';
+
+// // // @Component({
+// // //   selector: 'app-field-placement',
+// // //   templateUrl: './field-positioner.component.html',
+// // //   styleUrls: ['./field-positioner.component.css']
+// // // })
+// // // export class FieldPlacementComponent implements OnInit {
+// // //   fields: any[] = [];
+// // //   templateId: number = 0;
+// // //   selectedField: any = null;
+// // //   template!: Template;
+// // //   templateImageUrl!: string;
+// // //   positions: { [key: number]: { x: number, y: number } } = {};
+// // //   showPrompt: boolean = false;
+// // //   @ViewChild('templateImage') templateImageRef!: ElementRef;
+
+// // //   constructor(
+// // //     private templatesService: TemplatesService,
+// // //     private templateFieldService: TemplateFieldService,
+// // //     private categoryFieldService: CategoryFieldService,
+// // //     private route: ActivatedRoute
+// // //   ) {}
+
+// // //   ngOnInit(): void {
+// // //     const templateData = sessionStorage.getItem('template');
+// // //     console.log("templateData: ", templateData);
+
+// // //     this.template = templateData ? JSON.parse(templateData) as Template : {} as Template;
+// // //     console.log("this.template: ", this.template);
+
+// // //     // Get template ID from route param
+// // //     this.templateId = Number(this.route.snapshot.paramMap.get('id'));
+// // //     if (!this.templateId) {
+// // //       // Fallback to sessionStorage if route param is not available
+// // //       this.templateId = Number(sessionStorage.getItem('templateId'));
+// // //     }
+// // //     console.log("this.templateId: ", this.templateId);
+
+// // //     // Get the template image URL
+// // //     this.templatesService.getDownloadURL(this.template.name).then((res) => {
+// // //       console.log("Template image URL: ", res);
+// // //       this.templateImageUrl = res;
+// // //     }).catch(error => {
+// // //       console.error("Error loading template image: ", error);
+// // //       alert("שגיאה בטעינת תמונת התבנית");
+// // //     });
+
+// // //     // Get category ID
+// // //     const categoryId = Number(sessionStorage.getItem('categoryId'));
+// // //     console.log("categoryId: ", categoryId);
+
+// // //     if (categoryId >= 0) {
+// // //       // Get fields for this category
+// // //       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe(
+// // //         (res) => {
+// // //           console.log("Fields loaded: ", res);
+// // //           this.fields = res;
+
+// // //           // Load existing positions
+// // //           this.loadExistingPositions();
+// // //         },
+// // //         (error) => {
+// // //           console.error("Error loading fields: ", error);
+// // //           alert("שגיאה בטעינת השדות");
+// // //         }
+// // //       );
+// // //     } else {
+// // //       console.error("Invalid category ID");
+// // //       alert("קטגוריה לא תקינה");
+// // //     }
+// // //   }
+
+// // //   loadExistingPositions(): void {
+// // //     if (!this.templateId) {
+// // //       console.error("Cannot load positions - template ID is missing");
+// // //       return;
+// // //     }
 
-// //   loadExistingPositions(): void {
-// //     // This method can be used to load existing positions from the server if needed
-// //     // For now we'll keep it empty but you can implement it later
-// //   }
+// // //     // Load existing field positions for this template
+// // //     this.templateFieldService.addFieldToTemplate(this.templateId).subscribe(
+// // //       (templateFields) => {
+// // //         console.log("Existing template fields loaded: ", templateFields);
 
-// //   onImageClick(event: MouseEvent): void {
-// //     if (!this.selectedField) return;
+// // //         if (Array.isArray(templateFields) && templateFields.length > 0) {
+// // //           // Map the existing positions to our positions object
+// // //           templateFields.forEach(tf => {
+// // //             if (tf.fieldId && tf.x !== undefined && tf.y !== undefined) {
+// // //               this.positions[tf.fieldId] = { x: tf.x, y: tf.y };
+// // //             }
+// // //           });
+// // //         }
+// // //       },
+// // //       (error) => {
+// // //         console.error("Error loading existing field positions: ", error);
+// // //       }
+// // //     );
+// // //   }
 
-// //     const rect = (event.target as HTMLElement).getBoundingClientRect();
-// //     const x = event.clientX - rect.left;
-// //     const y = event.clientY - rect.top;
+// // //   onImageClick(event: MouseEvent): void {
+// // //     if (!this.selectedField) return;
 
-// //     this.positions[this.selectedField.id] = { x, y };
-
-// //     const payload = {
-// //       fieldId: this.selectedField.id,
-// //       templateId: this.templateId,
-// //       x,
-// //       y
-// //     };
+// // //     // Make sure we're getting the position relative to the image
+// // //     const rect = (event.target as HTMLElement).getBoundingClientRect();
+// // //     const x = event.clientX - rect.left;
+// // //     const y = event.clientY - rect.top;
 
-// //     // Capture field name before resetting selectedField
-// //     const fieldName = this.selectedField.field?.name || this.selectedField.name;
-
-// //     this.templateFieldService.addFieldToTemplate(payload).subscribe(() => {
-// //       alert(`השדה "${fieldName}" נשמר במיקום (${x}, ${y})`);
-// //     });
-
-// //     this.selectedField = null;
-// //     this.showPrompt = false;
-// //   }
-
-// //   selectField(field: any) {
-// //     this.selectedField = field;
-// //     this.showPrompt = true;
-// //   }
+// // //     console.log(`Image clicked at position x:${x}, y:${y}`);
 
-// //   // Helper method to check if a field is selected
-// //   isFieldSelected(field: any): boolean {
-// //     return this.selectedField && this.selectedField.id === field.id;
-// //   }
-// // }
+// // //     // Update the position in our local state
+// // //     this.positions[this.selectedField.id] = { x, y };
+// // //     console.log("this.selectedField.field.id: ", this.selectedField.field.id);
 
+// // //     const payload = {
 
+// // //       /////////////////////////////////////////////////
+// // //       fieldId: this.selectedField.field.id,
+// // //       templateId: this.templateId,
+// // //       x: Math.round(x),
+// // //       y: Math.round(y)
+// // //     };
 
+// // //     console.log('Saving field position with payload:', payload);
 
+// // //     // Capture field name before resetting selectedField
+// // //     const fieldName = this.selectedField.field?.name || this.selectedField.name;
 
+// // //     this.templateFieldService.addFieldToTemplate(payload).subscribe(
+// // //       (response) => {
+// // //         console.log('Field position saved successfully:', response);
+// // //         alert(`השדה "${fieldName}" נשמר במיקום (${x.toFixed(0)}, ${y.toFixed(0)})`);
 
+// // //         // Make sure the field remains visible on the template
+// // //         this.positions[this.selectedField.id] = { x, y };
+// // //       },
+// // //       (error) => {
+// // //         console.error('Error saving field position:', error);
+// // //         alert(`שגיאה בשמירת השדה "${fieldName}". אנא נסה שוב.`);
+// // //       }
+// // //     );
 
+// // //     this.selectedField = null;
+// // //     this.showPrompt = false;
+// // //   }
 
+// // //   selectField(field: any) {
+// // //     console.log("Field selected: ", field);
 
+// // //     console.log(field.id);
 
+// // //     this.selectedField = field;
+// // //     this.showPrompt = true;
+// // //   }
 
+// // //   // Helper method to check if a field is selected
+// // //   isFieldSelected(field: any): boolean {
+// // //     console.log(" in isFieldSelected: ");
+// // //     console.log("this.selectedField: ");
 
+// // //     // console.log(this.selectedField.id);
 
+// // //     return this.selectedField && this.selectedField.id === field.id;
+// // //   }
+// // // }
 
 
 
 
 
 
-// // import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
-// // import { CategoryFieldService } from '../../services/category-field/category-field.service';
-// // import { TemplateFieldService } from '../../services/template-field/template-field.service';
-// // import { ActivatedRoute } from '@angular/router';
-// // import { Template } from '../../models/template';
-// // import { TemplatesService } from '../../services/templates/templates.service';
-
-// // @Component({
-// //   selector: 'app-field-placement',
-// //   templateUrl: './field-positioner.component.html',
-// //   styleUrls: ['./field-positioner.component.css']
-// // })
-// // export class FieldPlacementComponent implements OnInit {
-// //   fields: any[] = [];
-// //   templateId: number = 0;
-// //   selectedField: any = null;
-// //   template!: Template;
-// //   templateImageUrl!: string;
-// //   positions: { [key: number]: { x: number, y: number } } = {};
-// //   showPrompt: boolean = false;
-// //   @ViewChild('templateImage') templateImageRef!: ElementRef;
 
-// //   constructor(
-// //     private templatesService: TemplatesService,
-// //     private templateFieldService: TemplateFieldService,
-// //     private categoryFieldService: CategoryFieldService,
-// //     private route: ActivatedRoute
-// //   ) {}
-
-// //   ngOnInit(): void {
-// //     const templateData = sessionStorage.getItem('template');
-// //     console.log("templateData: ", templateData);
 
-// //     this.template = templateData ? JSON.parse(templateData) as Template : {} as Template;
-// //     console.log("this.template: ", this.template);
 
-// //     // Get template ID from route param
-// //     this.templateId = Number(this.route.snapshot.paramMap.get('id'));
-// //     if (!this.templateId) {
-// //       // Fallback to sessionStorage if route param is not available
-// //       this.templateId = Number(sessionStorage.getItem('templateId'));
-// //     }
-// //     console.log("this.templateId: ", this.templateId);
-
-// //     // Get the template image URL
-// //     this.templatesService.getDownloadURL(this.template.name).then((res) => {
-// //       console.log("Template image URL: ", res);
-// //       this.templateImageUrl = res;
-// //     }).catch(error => {
-// //       console.error("Error loading template image: ", error);
-// //       alert("שגיאה בטעינת תמונת התבנית");
-// //     });
-
-// //     // Get category ID
-// //     const categoryId = Number(sessionStorage.getItem('categoryId'));
-// //     console.log("categoryId: ", categoryId);
-
-// //     if (categoryId >= 0) {
-// //       // Get fields for this category
-// //       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe(
-// //         (res) => {
-// //           console.log("Fields loaded: ", res);
-// //           this.fields = res;
-
-// //           // Load existing positions
-// //           this.loadExistingPositions();
-// //         },
-// //         (error) => {
-// //           console.error("Error loading fields: ", error);
-// //           alert("שגיאה בטעינת השדות");
-// //         }
-// //       );
-// //     } else {
-// //       console.error("Invalid category ID");
-// //       alert("קטגוריה לא תקינה");
-// //     }
-// //   }
 
-// //   loadExistingPositions(): void {
-// //     if (!this.templateId) {
-// //       console.error("Cannot load positions - template ID is missing");
-// //       return;
-// //     }
 
-// //     // Load existing field positions for this template
-// //     this.templateFieldService.addFieldToTemplate(this.templateId).subscribe(
-// //       (templateFields) => {
-// //         console.log("Existing template fields loaded: ", templateFields);
 
-// //         if (Array.isArray(templateFields) && templateFields.length > 0) {
-// //           // Map the existing positions to our positions object
-// //           templateFields.forEach(tf => {
-// //             if (tf.fieldId && tf.x !== undefined && tf.y !== undefined) {
-// //               this.positions[tf.fieldId] = { x: tf.x, y: tf.y };
-// //             }
-// //           });
-// //         }
-// //       },
-// //       (error) => {
-// //         console.error("Error loading existing field positions: ", error);
-// //       }
-// //     );
-// //   }
 
-// //   onImageClick(event: MouseEvent): void {
-// //     if (!this.selectedField) return;
 
-// //     // Make sure we're getting the position relative to the image
-// //     const rect = (event.target as HTMLElement).getBoundingClientRect();
-// //     const x = event.clientX - rect.left;
-// //     const y = event.clientY - rect.top;
 
-// //     console.log(`Image clicked at position x:${x}, y:${y}`);
 
-// //     // Update the position in our local state
-// //     this.positions[this.selectedField.id] = { x, y };
-// //     console.log("this.selectedField.field.id: ", this.selectedField.field.id);
 
-// //     const payload = {
 
-// //       /////////////////////////////////////////////////
-// //       fieldId: this.selectedField.field.id,
-// //       templateId: this.templateId,
-// //       x: Math.round(x),
-// //       y: Math.round(y)
-// //     };
 
-// //     console.log('Saving field position with payload:', payload);
 
-// //     // Capture field name before resetting selectedField
-// //     const fieldName = this.selectedField.field?.name || this.selectedField.name;
 
-// //     this.templateFieldService.addFieldToTemplate(payload).subscribe(
-// //       (response) => {
-// //         console.log('Field position saved successfully:', response);
-// //         alert(`השדה "${fieldName}" נשמר במיקום (${x.toFixed(0)}, ${y.toFixed(0)})`);
+// // // import { Component, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
+// // // import { CategoryFieldService } from '../../services/category-field/category-field.service';
+// // // import { TemplateFieldService } from '../../services/template-field/template-field.service';
+// // // import { ActivatedRoute } from '@angular/router';
+// // // import { Template } from '../../models/template';
+// // // import { TemplatesService } from '../../services/templates/templates.service';
 
-// //         // Make sure the field remains visible on the template
-// //         this.positions[this.selectedField.id] = { x, y };
-// //       },
-// //       (error) => {
-// //         console.error('Error saving field position:', error);
-// //         alert(`שגיאה בשמירת השדה "${fieldName}". אנא נסה שוב.`);
-// //       }
-// //     );
+// // // @Component({
+// // //   selector: 'app-field-placement',
+// // //   templateUrl: './field-positioner.component.html',
+// // //   styleUrls: ['./field-positioner.component.css']
+// // // })
+// // // export class FieldPlacementComponent implements OnInit {
+// // //   fields: any[] = [];
+// // //   templateId: number = 0;
+// // //   selectedField: any = null;
+// // //   template!: Template;
+// // //   templateImageUrl!: string;
+// // //   positions: { [key: number]: { x: number, y: number } } = {};
+// // //   showPrompt: boolean = false;
+// // //   draggingField: any = null;
+// // //   dragOffset = { x: 0, y: 0 };
+
+// // //   @ViewChild('templateImage') templateImageRef!: ElementRef;
+// // //   @ViewChild('imageContainer') imageContainerRef!: ElementRef;
 
-// //     this.selectedField = null;
-// //     this.showPrompt = false;
-// //   }
-
-// //   selectField(field: any) {
-// //     console.log("Field selected: ", field);
-
-// //     console.log(field.id);
-
-// //     this.selectedField = field;
-// //     this.showPrompt = true;
-// //   }
-
-// //   // Helper method to check if a field is selected
-// //   isFieldSelected(field: any): boolean {
-// //     console.log(" in isFieldSelected: ");
-// //     console.log("this.selectedField: ");
-
-// //     // console.log(this.selectedField.id);
-
-// //     return this.selectedField && this.selectedField.id === field.id;
-// //   }
-// // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// // //   constructor(
+// // //     private templatesService: TemplatesService,
+// // //     private templateFieldService: TemplateFieldService,
+// // //     private categoryFieldService: CategoryFieldService,
+// // //     private route: ActivatedRoute
+// // //   ) {}
+
+// // //   ngOnInit(): void {
+// // //     const templateData = sessionStorage.getItem('template');
+// // //     this.template = templateData ? JSON.parse(templateData) : {} as Template;
+// // //     this.templateId = Number(this.route.snapshot.paramMap.get('id')) || Number(sessionStorage.getItem('templateId'));
+
+// // //     this.templatesService.getDownloadURL(this.template.name).then(res => {
+// // //       this.templateImageUrl = res;
+// // //     });
+
+// // //     const categoryId = Number(sessionStorage.getItem('categoryId'));
+// // //     if (categoryId >= 0) {
+// // //       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe((res) => {
+// // //         this.fields = res;
+// // //         this.loadExistingPositions();
+// // //       });
+// // //     }
+// // //   }
+
+// // //   trackByFieldId(index: number, field: any): number {
+// // //     return field.id;
+// // //   }
+
+// // //   loadExistingPositions(): void {
+// // //     this.templateFieldService.addFieldToTemplate(this.templateId).subscribe(templateFields => {
+// // //       (Array.isArray(templateFields) ? templateFields : Object.values(templateFields)).forEach(tf => {
+// // //         if (tf.fieldId && tf.x !== undefined && tf.y !== undefined) {
+// // //           this.positions[tf.fieldId] = { x: tf.x, y: tf.y };
+// // //         }
+// // //       });
+// // //     });
+// // //   }
+
+// // //   onImageClick(event: MouseEvent): void {
+// // //     if (!this.selectedField) return;
+// // //     const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+// // //     const x = event.clientX - containerRect.left;
+// // //     const y = event.clientY - containerRect.top;
+
+// // //     const payload = {
+// // //       fieldId: this.selectedField.field.id,
+// // //       templateId: this.templateId,
+// // //       x: Math.round(x),
+// // //       y: Math.round(y)
+// // //     };
+
+// // //     this.templateFieldService.addFieldToTemplate(payload).subscribe(() => {
+// // //       this.positions[this.selectedField.id] = { x, y };
+// // //       this.selectedField = null;
+// // //       this.showPrompt = false;
+// // //     });
+// // //   }
+
+// // //   selectField(field: any): void {
+// // //     this.selectedField = field;
+// // //     this.showPrompt = true;
+// // //   }
+
+// // //   isFieldSelected(field: any): boolean {
+// // //     return this.selectedField && this.selectedField.id === field.id;
+// // //   }
+
+// // //   startDrag(event: MouseEvent, field: any): void {
+// // //     event.stopPropagation();
+// // //     this.draggingField = field;
+// // //     const pos = this.positions[field.id];
+// // //     this.dragOffset.x = event.offsetX;
+// // //     this.dragOffset.y = event.offsetY;
+// // //   }
+
+// // //   @HostListener('document:mousemove', ['$event'])
+// // //   onDrag(event: MouseEvent): void {
+// // //     if (!this.draggingField) return;
+// // //     const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+// // //     const x = event.clientX - containerRect.left - this.dragOffset.x;
+// // //     const y = event.clientY - containerRect.top - this.dragOffset.y;
+// // //     this.positions[this.draggingField.id] = { x, y };
+// // //   }
+
+// // //   @HostListener('document:mouseup')
+// // //   stopDrag(): void {
+// // //     if (!this.draggingField) return;
+// // //     const field = this.draggingField;
+// // //     const pos = this.positions[field.id];
+
+// // //     const payload = {
+// // //       fieldId: field.field.id,
+// // //       templateId: this.templateId,
+// // //       x: Math.round(pos.x),
+// // //       y: Math.round(pos.y)
+// // //     };
+
+// // //     this.templateFieldService.addFieldToTemplate(payload).subscribe(() => {
+// // //       console.log('Position updated:', payload);
+// // //     });
+
+// // //     this.draggingField = null;
+// // //   }
+// // // }
 
 
 
@@ -515,7 +649,7 @@
 // //   selectedField: any = null;
 // //   template!: Template;
 // //   templateImageUrl!: string;
-// //   positions: { [key: number]: { x: number, y: number } } = {};
+// //   positions: { [key: number]: { x: number, y: number, templateFieldId?: number } } = {};
 // //   showPrompt: boolean = false;
 // //   draggingField: any = null;
 // //   dragOffset = { x: 0, y: 0 };
@@ -534,9 +668,12 @@
 // //     const templateData = sessionStorage.getItem('template');
 // //     this.template = templateData ? JSON.parse(templateData) : {} as Template;
 // //     this.templateId = Number(this.route.snapshot.paramMap.get('id')) || Number(sessionStorage.getItem('templateId'));
+// // console.log("in ngOnInit before : templateImageUrl");
 
 // //     this.templatesService.getDownloadURL(this.template.name).then(res => {
 // //       this.templateImageUrl = res;
+// //       console.log(this.templateImageUrl);
+
 // //     });
 
 // //     const categoryId = Number(sessionStorage.getItem('categoryId'));
@@ -553,35 +690,93 @@
 // //   }
 
 // //   loadExistingPositions(): void {
-// //     this.templateFieldService.addFieldToTemplate(this.templateId).subscribe(templateFields => {
+// //     this.templateFieldService.getTemplateFieldsByTemplateId(this.templateId).subscribe(templateFields => {
 // //       (Array.isArray(templateFields) ? templateFields : Object.values(templateFields)).forEach(tf => {
 // //         if (tf.fieldId && tf.x !== undefined && tf.y !== undefined) {
-// //           this.positions[tf.fieldId] = { x: tf.x, y: tf.y };
+// //           this.positions[tf.fieldId] = { x: tf.x, y: tf.y, templateFieldId: tf.id };
 // //         }
 // //       });
 // //     });
 // //   }
 
-// //   onImageClick(event: MouseEvent): void {
-// //     if (!this.selectedField) return;
-// //     const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-// //     const x = event.clientX - containerRect.left;
-// //     const y = event.clientY - containerRect.top;
+// // //   onImageClick(event: MouseEvent): void {
+// // //     console.log("on imageClick event: ", event);
 
-// //     const payload = {
-// //       fieldId: this.selectedField.field.id,
-// //       templateId: this.templateId,
-// //       x: Math.round(x),
-// //       y: Math.round(y)
-// //     };
+// // //     if (!this.selectedField || this.draggingField) return;
+// // //     const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+// // //     const x = event.clientX - containerRect.left;
+// // //     const y = event.clientY - containerRect.top;
 
-// //     this.templateFieldService.addFieldToTemplate(payload).subscribe(() => {
-// //       this.positions[this.selectedField.id] = { x, y };
-// //       this.selectedField = null;
-// //       this.showPrompt = false;
+// // //     const payload = {
+// // //       fieldId: this.selectedField.field.id,
+// // //       templateId: this.templateId,
+// // //       x: Math.round(x),
+// // //       y: Math.round(y)
+// // //     };
+// // // console.log("in imageClick payload: before service");
+// // // console.log(payload);
+
+// // // console.log("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*");
+// // //     this.templateFieldService.addFieldToTemplate(payload).subscribe(response => {
+// // //       console.log("in addFieldToTemplate response: ");
+// // //       console.log(response);
+// // //       console.log("response.id: ");
+// // //       console.log(response.id);
+// // //       console.log("////////////////////////////////////////////////////");
+
+// // //       this.positions[this.selectedField.field.id] = { x, y, templateFieldId: response.id };
+// // //       this.selectedField = null;
+// // //       this.showPrompt = false;
+// // //     });
+// // //   }
+// // onImageClick(event: MouseEvent): void {
+// //   console.log("on imageClick event: ", event);
+
+// //   if (!this.selectedField || this.draggingField) return;
+// //   const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+// //   const x = event.clientX - containerRect.left;
+// //   const y = event.clientY - containerRect.top;
+
+// //   const fieldId = this.selectedField.field.id;
+// //   const existingPosition = this.positions[fieldId];
+// //   const payload = {
+// //     fieldId: fieldId,
+// //     templateId: this.templateId,
+// //     x: Math.round(x),
+// //     y: Math.round(y)
+// //   };
+// //   console.log("in imageClick payload: before service");
+// //   console.log(payload);
+
+// //   console.log("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*");
+
+// //   if (!existingPosition) {
+// //     // מצב: מיקום ראשון של השדה
+// //     this.templateFieldService.addFieldToTemplate(payload).subscribe(response => {
+// //       console.log("in addFieldToTemplate response: ");
+// //       console.log(response);
+// //       console.log("response.id: ");
+// //       console.log(response.id);
+// //       console.log("////////////////////////////////////////////////////");
+
+// //       this.positions[fieldId] = { x, y, templateFieldId: response.id };
 // //     });
-// //   }
+// //   } else {
+// //     // מצב: עריכת מיקום קיים של השדה
+// //     const templateFieldIdToUpdate = existingPosition.templateFieldId;
+// //     if (templateFieldIdToUpdate) {
+// //       this.templateFieldService.updateTemplateFieldPosition(templateFieldIdToUpdate, payload).subscribe(() => {
+// //         console.log('Position updated:', payload);
+// //         this.positions[fieldId] = { x, y, templateFieldId: templateFieldIdToUpdate };
 
+// //       });
+// //     } else {
+// //       console.error('Error: templateFieldId not found for updating position.');
+// //     }
+// //     this.selectedField = null;
+// //     this.showPrompt = false;
+// //   }
+// // }
 // //   selectField(field: any): void {
 // //     this.selectedField = field;
 // //     this.showPrompt = true;
@@ -591,55 +786,139 @@
 // //     return this.selectedField && this.selectedField.id === field.id;
 // //   }
 
+// //   getFieldPosition(fieldId: number): { top: string, left: string } | null {
+// //     const pos = this.positions[fieldId];
+// //     if (pos) {
+// //       return { top: `${pos.y}px`, left: `${pos.x}px` };
+// //     }
+// //     return null;
+// //   }
+
 // //   startDrag(event: MouseEvent, field: any): void {
 // //     event.stopPropagation();
 // //     this.draggingField = field;
-// //     const pos = this.positions[field.id];
-// //     this.dragOffset.x = event.offsetX;
-// //     this.dragOffset.y = event.offsetY;
-// //   }
-
-// //   @HostListener('document:mousemove', ['$event'])
-// //   onDrag(event: MouseEvent): void {
-// //     if (!this.draggingField) return;
 // //     const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-// //     const x = event.clientX - containerRect.left - this.dragOffset.x;
-// //     const y = event.clientY - containerRect.top - this.dragOffset.y;
-// //     this.positions[this.draggingField.id] = { x, y };
+// //     this.dragOffset.x = event.clientX - containerRect.left - this.positions[field.id].x;
+// //     this.dragOffset.y = event.clientY - containerRect.top - this.positions[field.id].y;
+// //     (event.target as HTMLElement).style.cursor = 'grabbing';
 // //   }
 
-// //   @HostListener('document:mouseup')
-// //   stopDrag(): void {
-// //     if (!this.draggingField) return;
-// //     const field = this.draggingField;
-// //     const pos = this.positions[field.id];
+// //   // @HostListener('document:mousemove', ['$event'])
+// //   // onDrag(event: MouseEvent): void {
+// //   //   if (!this.draggingField) return;
+// //   //   const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+// //   //   let x = event.clientX - containerRect.left - this.dragOffset.x;
+// //   //   let y = event.clientY - containerRect.top - this.dragOffset.y;
 
+// //   //   const element = document.querySelector(`.field-label[data-field-id="${this.draggingField.id}"]`);
+// //   //   if (element) {
+// //   //     x = Math.max(0, Math.min(x, containerRect.width - (element as HTMLElement).offsetWidth));
+// //   //     y = Math.max(0, Math.min(y, containerRect.height - (element as HTMLElement).offsetHeight));
+// //   //   }
+
+// //   //   this.positions[this.draggingField.id] = { x, y };
+// //   // }
+
+// //   // @HostListener('document:mouseup')
+// //   // stopDrag(): void {
+// //   //   if (!this.draggingField) return;
+// //   //   const field = this.draggingField;
+// //   //   const pos = this.positions[field.id];
+// //   //   this.draggingField = null;
+// //   //   const element = document.querySelector(`.field-label[data-field-id="${field.id}"]`);
+// //   //   if (element) {
+// //   //     (element as HTMLElement).style.cursor = 'grab';
+// //   //   }
+// //   //   this.updateFieldPosition(this.positions[field.id].templateFieldId!, pos.x, pos.y);
+// //   // }
+
+// //   updateFieldPosition(templateFieldId: number, x: number, y: number): void {
 // //     const payload = {
-// //       fieldId: field.field.id,
 // //       templateId: this.templateId,
-// //       x: Math.round(pos.x),
-// //       y: Math.round(pos.y)
+// //       fieldId: this.fields.find(f => f.field.id === this.draggingField.id)?.field.id,
+// //       x: Math.round(x),
+// //       y: Math.round(y)
 // //     };
 
-// //     this.templateFieldService.addFieldToTemplate(payload).subscribe(() => {
+// //     this.templateFieldService.updateTemplateFieldPosition(templateFieldId, payload).subscribe(() => {
 // //       console.log('Position updated:', payload);
 // //     });
+// //   }
 
-// //     this.draggingField = null;
+// //   isFieldPlaced(fieldId: number): boolean {
+// //     return !!this.positions[fieldId];
+// //   }
+
+// //   editPlacement(field: any): void {
+// //     this.selectedField = field;
+// //     this.showPrompt = true;
 // //   }
 // // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 // import { Component, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 // import { CategoryFieldService } from '../../services/category-field/category-field.service';
 // import { TemplateFieldService } from '../../services/template-field/template-field.service';
-// import { ActivatedRoute } from '@angular/router';
+// import { ActivatedRoute, Router } from '@angular/router';
 // import { Template } from '../../models/template';
 // import { TemplatesService } from '../../services/templates/templates.service';
+// import { MatIconModule } from '@angular/material/icon';
+// import { MatButtonModule } from '@angular/material/button';
+// import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+// import { CommonModule } from '@angular/common';
+// import Swal from 'sweetalert2';
 
 // @Component({
 //   selector: 'app-field-placement',
+//   standalone: true,
+//   imports: [
+//     CommonModule,
+//     MatIconModule,
+//     MatButtonModule,
+//     MatProgressSpinnerModule
+//   ],
 //   templateUrl: './field-positioner.component.html',
 //   styleUrls: ['./field-positioner.component.css']
 // })
@@ -653,6 +932,7 @@
 //   showPrompt: boolean = false;
 //   draggingField: any = null;
 //   dragOffset = { x: 0, y: 0 };
+//   unsavedChanges: boolean = false;
 
 //   @ViewChild('templateImage') templateImageRef!: ElementRef;
 //   @ViewChild('imageContainer') imageContainerRef!: ElementRef;
@@ -661,199 +941,373 @@
 //     private templatesService: TemplatesService,
 //     private templateFieldService: TemplateFieldService,
 //     private categoryFieldService: CategoryFieldService,
-//     private route: ActivatedRoute
-//   ) {}
+//     private route: ActivatedRoute,
+//     private router: Router
+//   ) { }
 
 //   ngOnInit(): void {
 //     const templateData = sessionStorage.getItem('template');
 //     this.template = templateData ? JSON.parse(templateData) : {} as Template;
 //     this.templateId = Number(this.route.snapshot.paramMap.get('id')) || Number(sessionStorage.getItem('templateId'));
-// console.log("in ngOnInit before : templateImageUrl");
+
+//     this.loadTemplateImage();
+//     this.loadFields();
+//   }
+
+//   loadTemplateImage(): void {
+//     if (!this.template.name) {
+//       Swal.fire({
+//         title: 'שגיאה',
+//         text: 'לא נמצאו פרטי תבנית',
+//         icon: 'error',
+//         confirmButtonText: 'אישור',
+//         confirmButtonColor: '#5c6bc0'
+//       });
+//       return;
+//     }
 
 //     this.templatesService.getDownloadURL(this.template.name).then(res => {
 //       this.templateImageUrl = res;
-//       console.log(this.templateImageUrl);
+//          this.addFieldsOnTEmplates();
 
+//     }).catch(err => {
+//       Swal.fire({
+//         title: 'שגיאה',
+//         text: 'לא ניתן לטעון את תמונת התבנית',
+//         icon: 'error',
+//         confirmButtonText: 'אישור',
+//         confirmButtonColor: '#5c6bc0'
+//       });
 //     });
+//   }
 
+//   loadFields(): void {
 //     const categoryId = Number(sessionStorage.getItem('categoryId'));
 //     if (categoryId >= 0) {
-//       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe((res) => {
-//         this.fields = res;
-//         this.loadExistingPositions();
+//       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe({
+//         next: (res) => {
+//           this.fields = res;
+//           //השמת השדות על התבנית
+//         //  this.addFieldsOnTEmplates();
+//           // this.loadExistingPositions();
+//         },
+//         error: (err) => {
+//           Swal.fire({
+//             title: 'שגיאה',
+//             text: 'לא ניתן לטעון את השדות',
+//             icon: 'error',
+//             confirmButtonText: 'אישור',
+//             confirmButtonColor: '#5c6bc0'
+//           });
+//         }
 //       });
 //     }
 //   }
 
-//   trackByFieldId(index: number, field: any): number {
-//     return field.id;
+
+//   async addFieldsOnTEmplates(): Promise<void> {
+//     const img = this.templateImageRef.nativeElement;
+//     const imgWidth = img.offsetWidth;
+//     const imgHeight = img.offsetHeight;
+
+//     let currentY = 50; // מיקום Y התחלתי עבור העמודה, ניתן להתאים
+//     const startX = imgWidth / 2; // מיקום X: במרכז התמונה
+//     const lineHeight = 30; // מרווח אנכי בין שדות
+
+//     for (const field of this.fields) {
+//       const payload = {
+//         fieldId: field.field.id,
+//         templateId: this.templateId,
+//         x: Math.round(startX),
+//         y: Math.round(currentY)
+//       };
+
+//       try {
+//         const response = await this.templateFieldService.addFieldToTemplate(payload).toPromise();
+//         this.positions[field.field.id] = {
+//           x: response.x,
+//           y: response.y,
+//           templateFieldId: response.id
+//         };
+//         this.unsavedChanges = true; // סמן שיש שינויים
+//       } catch (err) {
+//         console.error('שגיאה במיקום אוטומטי ובשמירת השדה:', err);
+//         // כאן אפשר להציג הודעת שגיאה קטנה למשתמש
+//       }
+//       currentY += lineHeight;
+//     }
+//     // catch(err:any) {
+//     // Swal.fire({
+//     //   title: 'שגיאה',
+//     //   text: 'לא ניתן לטעון או למקם את השדות',
+//     //   icon: 'error',
+//     //   confirmButtonText: 'אישור',
+//     //   confirmButtonColor: '#5c6bc0'
+//     // });
+//     // console.error('Error loading or placing fields:', err);
 //   }
 
-//   loadExistingPositions(): void {
-//     this.templateFieldService.getTemplateFieldsByTemplateId(this.templateId).subscribe(templateFields => {
-//       (Array.isArray(templateFields) ? templateFields : Object.values(templateFields)).forEach(tf => {
-//         if (tf.fieldId && tf.x !== undefined && tf.y !== undefined) {
-//           this.positions[tf.fieldId] = { x: tf.x, y: tf.y, templateFieldId: tf.id };
-//         }
-//       });
-//     });
-//   }
 
-// //   onImageClick(event: MouseEvent): void {
-// //     console.log("on imageClick event: ", event);
 
-// //     if (!this.selectedField || this.draggingField) return;
-// //     const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-// //     const x = event.clientX - containerRect.left;
-// //     const y = event.clientY - containerRect.top;
 
-// //     const payload = {
-// //       fieldId: this.selectedField.field.id,
-// //       templateId: this.templateId,
-// //       x: Math.round(x),
-// //       y: Math.round(y)
-// //     };
-// // console.log("in imageClick payload: before service");
-// // console.log(payload);
 
-// // console.log("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*");
-// //     this.templateFieldService.addFieldToTemplate(payload).subscribe(response => {
-// //       console.log("in addFieldToTemplate response: ");
-// //       console.log(response);
-// //       console.log("response.id: ");
-// //       console.log(response.id);
-// //       console.log("////////////////////////////////////////////////////");
 
-// //       this.positions[this.selectedField.field.id] = { x, y, templateFieldId: response.id };
-// //       this.selectedField = null;
-// //       this.showPrompt = false;
+
+
+// // loadExistingPositions(): void {
+// //   this.templateFieldService.getTemplateFieldsByTemplateId(this.templateId).subscribe({
+// //     next: (templateFields) => {
+// //       (Array.isArray(templateFields) ? templateFields : Object.values(templateFields)).forEach(tf => {
+// //         if (tf.fieldId && tf.x !== undefined && tf.y !== undefined) {
+// //           this.positions[tf.fieldId] = { x: tf.x, y: tf.y, templateFieldId: tf.id };
+// //         }
+// //       });
+// //     },
+// //     error: (err) => {
+// //       console.error('שגיאה בטעינת מיקומים קיימים:', err);
+// //     }
+// //   });
+// // }
+
+// // onImageClick(event: MouseEvent): void {
+// //   if (!this.selectedField || this.draggingField) return;
+// //   console.log("in onImageClick event: ", event);
+
+// //   const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+// //   const x = event.clientX - containerRect.left;
+// //   const y = event.clientY - containerRect.top;
+
+// //   const fieldId = this.selectedField.field.id;
+// //   const existingPosition = this.positions[fieldId];
+// //   const payload = {
+// //     fieldId: fieldId,
+// //     templateId: this.templateId,
+// //     x: Math.round(x),
+// //     y: Math.round(y)
+// //   };
+
+// //   if (!existingPosition) {
+// //     // מיקום ראשון של השדה
+// //     this.templateFieldService.addFieldToTemplate(payload).subscribe({
+// //       next: (response) => {
+// //         console.log("in addFieldToTemplate response: ");
+// //         console.log(response);
+
+
+// //         this.positions[fieldId] = { x, y, templateFieldId: response.id };
+// //         console.log('Field position saved successfully:', response);
+
+// //         console.log(response.id);
+
+// //         this.unsavedChanges = true;
+
+// //         Swal.fire({
+// //           title: 'הצלחה',
+// //           text: 'השדה מוקם בהצלחה',
+// //           icon: 'success',
+// //           timer: 1000,
+// //           showConfirmButton: false
+// //         });
+// //       },
+// //       error: (err) => {
+// //         Swal.fire({
+// //           title: 'שגיאה',
+// //           text: 'לא ניתן למקם את השדה',
+// //           icon: 'error',
+// //           confirmButtonText: 'אישור',
+// //           confirmButtonColor: '#5c6bc0'
+// //         });
+// //       }
 // //     });
+// //   } else {
+// //     console.log("in second edit");
+// //     console.log(existingPosition);
+
+
+// //     // עריכת מיקום קיים
+// //     const templateFieldIdToUpdate = existingPosition.templateFieldId;
+// //     console.log(templateFieldIdToUpdate);
+
+// //     if (templateFieldIdToUpdate) {
+// //       this.templateFieldService.updateTemplateFieldPosition(templateFieldIdToUpdate, payload).subscribe({
+// //         next: () => {
+// //           console.log('Position updated:', payload);
+// //           console.log("this.positions: ", this.positions);
+// //           this.positions[fieldId] = { x, y, templateFieldId: templateFieldIdToUpdate };
+// //           this.unsavedChanges = true;
+
+// //           Swal.fire({
+// //             title: 'הצלחה',
+// //             text: 'מיקום השדה עודכן בהצלחה',
+// //             icon: 'success',
+// //             timer: 1000,
+// //             showConfirmButton: false
+// //           });
+// //         },
+// //         error: (err) => {
+// //           Swal.fire({
+// //             title: 'שגיאה',
+// //             text: 'לא ניתן לעדכן את מיקום השדה',
+// //             icon: 'error',
+// //             confirmButtonText: 'אישור',
+// //             confirmButtonColor: '#5c6bc0'
+// //           });
+// //         }
+// //       });
+// //     }
 // //   }
-// onImageClick(event: MouseEvent): void {
-//   console.log("on imageClick event: ", event);
 
-//   if (!this.selectedField || this.draggingField) return;
+// //   this.selectedField = null;
+// //   this.showPrompt = false;
+// // }
+
+// selectField(field: any): void {
+//   this.selectedField = field;
+//   this.showPrompt = true;
+// }
+
+// isFieldSelected(field: any): boolean {
+//   return this.selectedField && this.selectedField.field.id === field.field.id;
+// }
+
+// getFieldPosition(fieldId: number): { top: string, left: string } | null {
+//   const pos = this.positions[fieldId];
+//   if (pos) {
+//     return { top: `${pos.y}px`, left: `${pos.x}px` };
+//   }
+//   return null;
+// }
+
+// startDrag(event: MouseEvent, field: any): void {
+//   event.stopPropagation();
+//   this.draggingField = field;
+//   console.log("in startDrag event: ", event);
+//   console.log(this.draggingField);
+
+
+//   const element = event.target as HTMLElement;
+//   const fieldLabel = element.closest('.field-label') as HTMLElement;
+
+//   if(fieldLabel) {
+//     const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+//     const fieldRect = fieldLabel.getBoundingClientRect();
+
+//     this.dragOffset.x = event.clientX - fieldRect.left;
+//     this.dragOffset.y = event.clientY - fieldRect.top;
+
+//     fieldLabel.style.cursor = 'grabbing';
+//   }
+// }
+
+// @HostListener('document:mousemove', ['$event'])
+// onDrag(event: MouseEvent): void {
+//   if(!this.draggingField) return;
+
 //   const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-//   const x = event.clientX - containerRect.left;
-//   const y = event.clientY - containerRect.top;
+//   const fieldId = this.draggingField.field.id;
 
-//   const fieldId = this.selectedField.field.id;
-//   const existingPosition = this.positions[fieldId];
+//   let x = event.clientX - containerRect.left - this.dragOffset.x;
+//   let y = event.clientY - containerRect.top - this.dragOffset.y;
+
+//   // מגבלות כדי שהשדה לא יצא מגבולות התמונה
+//   const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
+//   if(element) {
+//     x = Math.max(0, Math.min(x, containerRect.width - element.offsetWidth));
+//     y = Math.max(0, Math.min(y, containerRect.height - element.offsetHeight));
+
+//     element.style.left = `${x}px`;
+//     element.style.top = `${y}px`;
+//   }
+// }
+
+// @HostListener('document:mouseup')
+// stopDrag(): void {
+//   if(!this.draggingField) return;
+
+//   const fieldId = this.draggingField.field.id;
+//   const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
+
+//   if(element) {
+//     element.style.cursor = 'grab';
+
+//     const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+//     const fieldRect = element.getBoundingClientRect();
+
+//     const x = fieldRect.left - containerRect.left;
+//     const y = fieldRect.top - containerRect.top;
+
+//     const templateFieldId = this.positions[fieldId]?.templateFieldId;
+//     if (templateFieldId) {
+//       this.updateFieldPosition(templateFieldId, x, y);
+//     }
+//   }
+
+//   // this.draggingField = null;
+// }
+
+// updateFieldPosition(templateFieldId: number, x: number, y: number): void {
+//   console.log("in updateFieldPosition: ", x, y);
+//   console.log(this.draggingField);
+
+
 //   const payload = {
-//     fieldId: fieldId,
 //     templateId: this.templateId,
+//     fieldId: this.draggingField.field.id,
 //     x: Math.round(x),
 //     y: Math.round(y)
 //   };
-//   console.log("in imageClick payload: before service");
-//   console.log(payload);
 
-//   console.log("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*");
-
-//   if (!existingPosition) {
-//     // מצב: מיקום ראשון של השדה
-//     this.templateFieldService.addFieldToTemplate(payload).subscribe(response => {
-//       console.log("in addFieldToTemplate response: ");
-//       console.log(response);
-//       console.log("response.id: ");
-//       console.log(response.id);
-//       console.log("////////////////////////////////////////////////////");
-
-//       this.positions[fieldId] = { x, y, templateFieldId: response.id };
-//     });
-//   } else {
-//     // מצב: עריכת מיקום קיים של השדה
-//     const templateFieldIdToUpdate = existingPosition.templateFieldId;
-//     if (templateFieldIdToUpdate) {
-//       this.templateFieldService.updateTemplateFieldPosition(templateFieldIdToUpdate, payload).subscribe(() => {
-//         console.log('Position updated:', payload);
-//         this.positions[fieldId] = { x, y, templateFieldId: templateFieldIdToUpdate };
-
-//       });
-//     } else {
-//       console.error('Error: templateFieldId not found for updating position.');
-//     }
-//     this.selectedField = null;
-//     this.showPrompt = false;
-//   }
-// }
-//   selectField(field: any): void {
-//     this.selectedField = field;
-//     this.showPrompt = true;
-//   }
-
-//   isFieldSelected(field: any): boolean {
-//     return this.selectedField && this.selectedField.id === field.id;
-//   }
-
-//   getFieldPosition(fieldId: number): { top: string, left: string } | null {
-//     const pos = this.positions[fieldId];
-//     if (pos) {
-//       return { top: `${pos.y}px`, left: `${pos.x}px` };
-//     }
-//     return null;
-//   }
-
-//   startDrag(event: MouseEvent, field: any): void {
-//     event.stopPropagation();
-//     this.draggingField = field;
-//     const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-//     this.dragOffset.x = event.clientX - containerRect.left - this.positions[field.id].x;
-//     this.dragOffset.y = event.clientY - containerRect.top - this.positions[field.id].y;
-//     (event.target as HTMLElement).style.cursor = 'grabbing';
-//   }
-
-//   // @HostListener('document:mousemove', ['$event'])
-//   // onDrag(event: MouseEvent): void {
-//   //   if (!this.draggingField) return;
-//   //   const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-//   //   let x = event.clientX - containerRect.left - this.dragOffset.x;
-//   //   let y = event.clientY - containerRect.top - this.dragOffset.y;
-
-//   //   const element = document.querySelector(`.field-label[data-field-id="${this.draggingField.id}"]`);
-//   //   if (element) {
-//   //     x = Math.max(0, Math.min(x, containerRect.width - (element as HTMLElement).offsetWidth));
-//   //     y = Math.max(0, Math.min(y, containerRect.height - (element as HTMLElement).offsetHeight));
-//   //   }
-
-//   //   this.positions[this.draggingField.id] = { x, y };
-//   // }
-
-//   // @HostListener('document:mouseup')
-//   // stopDrag(): void {
-//   //   if (!this.draggingField) return;
-//   //   const field = this.draggingField;
-//   //   const pos = this.positions[field.id];
-//   //   this.draggingField = null;
-//   //   const element = document.querySelector(`.field-label[data-field-id="${field.id}"]`);
-//   //   if (element) {
-//   //     (element as HTMLElement).style.cursor = 'grab';
-//   //   }
-//   //   this.updateFieldPosition(this.positions[field.id].templateFieldId!, pos.x, pos.y);
-//   // }
-
-//   updateFieldPosition(templateFieldId: number, x: number, y: number): void {
-//     const payload = {
-//       templateId: this.templateId,
-//       fieldId: this.fields.find(f => f.field.id === this.draggingField.id)?.field.id,
-//       x: Math.round(x),
-//       y: Math.round(y)
-//     };
-
-//     this.templateFieldService.updateTemplateFieldPosition(templateFieldId, payload).subscribe(() => {
+//   this.templateFieldService.updateTemplateFieldPosition(templateFieldId, payload).subscribe({
+//     next: () => {
 //       console.log('Position updated:', payload);
-//     });
-//   }
+//       console.log("draginField");
 
-//   isFieldPlaced(fieldId: number): boolean {
-//     return !!this.positions[fieldId];
-//   }
+//       console.log(this.draggingField);
 
-//   editPlacement(field: any): void {
-//     this.selectedField = field;
-//     this.showPrompt = true;
-//   }
+//       const fieldId = this.draggingField.field.id;
+//       this.positions[fieldId] = {
+//         x: Math.round(x),
+//         y: Math.round(y),
+//         templateFieldId
+//       };
+//       this.unsavedChanges = true;
+//       this.draggingField = null;
+
+//     },
+//     error: (err) => {
+//       console.error('שגיאה בעדכון מיקום:', err);
+
+//       // שחזור המיקום הקודם
+//       const fieldId = this.draggingField.field.id;
+//       const oldPos = this.positions[fieldId];
+//       if (oldPos) {
+//         const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
+//         if (element) {
+//           element.style.left = `${oldPos.x}px`;
+//           element.style.top = `${oldPos.y}px`;
+//         }
+//       }
+//     }
+//   });
 // }
+
+// isFieldPlaced(fieldId: number): boolean {
+//   return !!this.positions[fieldId];
+// }
+
+// editPlacement(field: any): void {
+//   this.selectedField = field;
+//   this.showPrompt = true;
+// }
+// }
+
+
+
+
+
+
+
+
 
 
 
@@ -913,7 +1367,7 @@ export class FieldPlacementComponent implements OnInit {
     this.templateId = Number(this.route.snapshot.paramMap.get('id')) || Number(sessionStorage.getItem('templateId'));
 
     this.loadTemplateImage();
-    this.loadFields();
+    // הסרנו את הקריאה ל-loadFields() מכאן, היא תתרחש בתוך addFieldsOnTEmplates
   }
 
   loadTemplateImage(): void {
@@ -930,8 +1384,8 @@ export class FieldPlacementComponent implements OnInit {
 
     this.templatesService.getDownloadURL(this.template.name).then(res => {
       this.templateImageUrl = res;
-      this.addFieldsOnTEmplates();
-
+      // **חשוב:** הקריאה ל-addFieldsOnTEmplates() הועברה ל-onTemplateImageLoad()
+      // שתופעל רק לאחר שהתמונה נטענה בפועל בדפדפן.
     }).catch(err => {
       Swal.fire({
         title: 'שגיאה',
@@ -943,15 +1397,28 @@ export class FieldPlacementComponent implements OnInit {
     });
   }
 
+  // פונקציה חדשה שנקראת כאשר התמונה סיימה להיטען ב-DOM
+  onTemplateImageLoad(): void {
+    console.log('Template image has loaded successfully. Proceeding to place fields.');
+    // כעת, כשהתמונה נטענה ב-DOM ו-nativeElement זמין, אנו יכולים למקם את השדות.
+    this.addFieldsOnTEmplates();
+  }
+
+  // הפונקציה loadFields() המקורית, כבר לא נחוצה כפונקציה נפרדת.
+  // הלוגיקה שלה שולבה ב-addFieldsOnTEmplates.
+  // אם היא משמשת למטרה אחרת בקומפוננטה (לדוגמה, הצגת רשימת השדות בפאנל),
+  // יש לטעון את השדות במקום אחר שאינו תלוי במימדי התמונה.
+  // למען הפתרון הנוכחי, אנו מניחים ש-this.fields יאוכלסו בתוך addFieldsOnTEmplates.
+  // אם אתה צריך את רשימת השדות בפאנל עוד לפני טעינת התמונה, תצטרך להפעיל אותה ב-ngOnInit
+  // ולהפריד את הלוגיקה של מיקום השדות מהטעינה שלהם.
   loadFields(): void {
     const categoryId = Number(sessionStorage.getItem('categoryId'));
     if (categoryId >= 0) {
       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe({
         next: (res) => {
           this.fields = res;
-          //השמת השדות על התבנית
-        //  this.addFieldsOnTEmplates();
-          // this.loadExistingPositions();
+          // אם רצית למקם כאן ישירות, זה כבר לא המקום הנכון כי התמונה עדיין לא נטענה
+          // הלוגיקה של המיקום תתרחש ב-addFieldsOnTEmplates
         },
         error: (err) => {
           Swal.fire({
@@ -968,301 +1435,268 @@ export class FieldPlacementComponent implements OnInit {
 
 
   async addFieldsOnTEmplates(): Promise<void> {
-    const img = this.templateImageRef.nativeElement;
-    const imgWidth = img.offsetWidth;
-    const imgHeight = img.offsetHeight;
+    const categoryId = Number(sessionStorage.getItem('categoryId'));
+    if (categoryId < 0) {
+        console.warn('No category ID found to load fields.');
+        return;
+    }
 
-    let currentY = 50; // מיקום Y התחלתי עבור העמודה, ניתן להתאים
-    const startX = imgWidth / 2; // מיקום X: במרכז התמונה
-    const lineHeight = 30; // מרווח אנכי בין שדות
+    try {
+      // 1. טען תחילה את כל המיקומים הקיימים עבור תבנית זו
+      // const existingTemplateFields = await this.templateFieldService.getTemplateFieldsByTemplateId(this.templateId).toPromise();
+      // (Array.isArray(existingTemplateFields) ? existingTemplateFields : Object.values(existingTemplateFields)).forEach(tf => {
+      //   if (tf.fieldId && tf.x !== undefined && tf.y !== undefined) {
+      //     this.positions[tf.fieldId] = { x: tf.x, y: tf.y, templateFieldId: tf.id };
+      //   }
+      // });
 
-    for (const field of this.fields) {
-      const payload = {
-        fieldId: field.field.id,
-        templateId: this.templateId,
-        x: Math.round(startX),
-        y: Math.round(currentY)
-      };
-
-      try {
-        const response = await this.templateFieldService.addFieldToTemplate(payload).toPromise();
-        this.positions[field.field.id] = {
-          x: response.x,
-          y: response.y,
-          templateFieldId: response.id
-        };
-        this.unsavedChanges = true; // סמן שיש שינויים
-      } catch (err) {
-        console.error('שגיאה במיקום אוטומטי ובשמירת השדה:', err);
-        // כאן אפשר להציג הודעת שגיאה קטנה למשתמש
+      // 2. טען את כל השדות הזמינים מהקטגוריה (אם עדיין לא נטענו)
+      if (this.fields.length === 0) { // טען רק אם לא נטענו עדיין
+        await this.categoryFieldService.getFieldsByCategory(categoryId).subscribe((data)=>{
+          this.fields = data;
+        });
       }
-      currentY += lineHeight;
-    }
-    // catch(err:any) {
-    // Swal.fire({
-    //   title: 'שגיאה',
-    //   text: 'לא ניתן לטעון או למקם את השדות',
-    //   icon: 'error',
-    //   confirmButtonText: 'אישור',
-    //   confirmButtonColor: '#5c6bc0'
-    // });
-    // console.error('Error loading or placing fields:', err);
-  }
 
+      // 3. ודא ש-templateImageRef.nativeElement זמין (הבדיקה החשובה ביותר!)
+      if (!this.templateImageRef || !this.templateImageRef.nativeElement) {
+        console.error("Error: templateImageRef.nativeElement is undefined. Cannot calculate positions.");
+        Swal.fire({
+          title: 'שגיאה בטעינה',
+          text: 'אירעה שגיאה בטעינת התמונה. נסה לרענן את הדף.',
+          icon: 'error',
+          confirmButtonText: 'אישור',
+          confirmButtonColor: '#5c6bc0'
+        });
+        return;
+      }
 
+      const img = this.templateImageRef.nativeElement;
+      const imgWidth = img.offsetWidth;
+      const imgHeight = img.offsetHeight;
 
+      let currentY = 50; // מיקום Y התחלתי עבור העמודה, ניתן להתאים
+      const startX = imgWidth / 2; // מיקום X: במרכז התמונה
+      const lineHeight = 30; // מרווח אנכי בין שדות
 
+      for (const field of this.fields) {
+        // אם לשדה אין מיקום שמור בדאטה בייס, מקם אותו אוטומטית ושמור
+        if (!this.positions[field.field.id]) {
+          const payload = {
+            fieldId: field.field.id,
+            templateId: this.templateId,
+            x: Math.round(startX),
+            y: Math.round(currentY)
+          };
 
-
-
-
-// loadExistingPositions(): void {
-//   this.templateFieldService.getTemplateFieldsByTemplateId(this.templateId).subscribe({
-//     next: (templateFields) => {
-//       (Array.isArray(templateFields) ? templateFields : Object.values(templateFields)).forEach(tf => {
-//         if (tf.fieldId && tf.x !== undefined && tf.y !== undefined) {
-//           this.positions[tf.fieldId] = { x: tf.x, y: tf.y, templateFieldId: tf.id };
-//         }
-//       });
-//     },
-//     error: (err) => {
-//       console.error('שגיאה בטעינת מיקומים קיימים:', err);
-//     }
-//   });
-// }
-
-// onImageClick(event: MouseEvent): void {
-//   if (!this.selectedField || this.draggingField) return;
-//   console.log("in onImageClick event: ", event);
-
-//   const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-//   const x = event.clientX - containerRect.left;
-//   const y = event.clientY - containerRect.top;
-
-//   const fieldId = this.selectedField.field.id;
-//   const existingPosition = this.positions[fieldId];
-//   const payload = {
-//     fieldId: fieldId,
-//     templateId: this.templateId,
-//     x: Math.round(x),
-//     y: Math.round(y)
-//   };
-
-//   if (!existingPosition) {
-//     // מיקום ראשון של השדה
-//     this.templateFieldService.addFieldToTemplate(payload).subscribe({
-//       next: (response) => {
-//         console.log("in addFieldToTemplate response: ");
-//         console.log(response);
-
-
-//         this.positions[fieldId] = { x, y, templateFieldId: response.id };
-//         console.log('Field position saved successfully:', response);
-
-//         console.log(response.id);
-
-//         this.unsavedChanges = true;
-
-//         Swal.fire({
-//           title: 'הצלחה',
-//           text: 'השדה מוקם בהצלחה',
-//           icon: 'success',
-//           timer: 1000,
-//           showConfirmButton: false
-//         });
-//       },
-//       error: (err) => {
-//         Swal.fire({
-//           title: 'שגיאה',
-//           text: 'לא ניתן למקם את השדה',
-//           icon: 'error',
-//           confirmButtonText: 'אישור',
-//           confirmButtonColor: '#5c6bc0'
-//         });
-//       }
-//     });
-//   } else {
-//     console.log("in second edit");
-//     console.log(existingPosition);
-
-
-//     // עריכת מיקום קיים
-//     const templateFieldIdToUpdate = existingPosition.templateFieldId;
-//     console.log(templateFieldIdToUpdate);
-
-//     if (templateFieldIdToUpdate) {
-//       this.templateFieldService.updateTemplateFieldPosition(templateFieldIdToUpdate, payload).subscribe({
-//         next: () => {
-//           console.log('Position updated:', payload);
-//           console.log("this.positions: ", this.positions);
-//           this.positions[fieldId] = { x, y, templateFieldId: templateFieldIdToUpdate };
-//           this.unsavedChanges = true;
-
-//           Swal.fire({
-//             title: 'הצלחה',
-//             text: 'מיקום השדה עודכן בהצלחה',
-//             icon: 'success',
-//             timer: 1000,
-//             showConfirmButton: false
-//           });
-//         },
-//         error: (err) => {
-//           Swal.fire({
-//             title: 'שגיאה',
-//             text: 'לא ניתן לעדכן את מיקום השדה',
-//             icon: 'error',
-//             confirmButtonText: 'אישור',
-//             confirmButtonColor: '#5c6bc0'
-//           });
-//         }
-//       });
-//     }
-//   }
-
-//   this.selectedField = null;
-//   this.showPrompt = false;
-// }
-
-selectField(field: any): void {
-  this.selectedField = field;
-  this.showPrompt = true;
-}
-
-isFieldSelected(field: any): boolean {
-  return this.selectedField && this.selectedField.field.id === field.field.id;
-}
-
-getFieldPosition(fieldId: number): { top: string, left: string } | null {
-  const pos = this.positions[fieldId];
-  if (pos) {
-    return { top: `${pos.y}px`, left: `${pos.x}px` };
-  }
-  return null;
-}
-
-startDrag(event: MouseEvent, field: any): void {
-  event.stopPropagation();
-  this.draggingField = field;
-  console.log("in startDrag event: ", event);
-  console.log(this.draggingField);
-
-
-  const element = event.target as HTMLElement;
-  const fieldLabel = element.closest('.field-label') as HTMLElement;
-
-  if(fieldLabel) {
-    const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-    const fieldRect = fieldLabel.getBoundingClientRect();
-
-    this.dragOffset.x = event.clientX - fieldRect.left;
-    this.dragOffset.y = event.clientY - fieldRect.top;
-
-    fieldLabel.style.cursor = 'grabbing';
-  }
-}
-
-@HostListener('document:mousemove', ['$event'])
-onDrag(event: MouseEvent): void {
-  if(!this.draggingField) return;
-
-  const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-  const fieldId = this.draggingField.field.id;
-
-  let x = event.clientX - containerRect.left - this.dragOffset.x;
-  let y = event.clientY - containerRect.top - this.dragOffset.y;
-
-  // מגבלות כדי שהשדה לא יצא מגבולות התמונה
-  const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
-  if(element) {
-    x = Math.max(0, Math.min(x, containerRect.width - element.offsetWidth));
-    y = Math.max(0, Math.min(y, containerRect.height - element.offsetHeight));
-
-    element.style.left = `${x}px`;
-    element.style.top = `${y}px`;
-  }
-}
-
-@HostListener('document:mouseup')
-stopDrag(): void {
-  if(!this.draggingField) return;
-
-  const fieldId = this.draggingField.field.id;
-  const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
-
-  if(element) {
-    element.style.cursor = 'grab';
-
-    const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-    const fieldRect = element.getBoundingClientRect();
-
-    const x = fieldRect.left - containerRect.left;
-    const y = fieldRect.top - containerRect.top;
-
-    const templateFieldId = this.positions[fieldId]?.templateFieldId;
-    if (templateFieldId) {
-      this.updateFieldPosition(templateFieldId, x, y);
-    }
-  }
-
-  // this.draggingField = null;
-}
-
-updateFieldPosition(templateFieldId: number, x: number, y: number): void {
-  console.log("in updateFieldPosition: ", x, y);
-  console.log(this.draggingField);
-
-
-  const payload = {
-    templateId: this.templateId,
-    fieldId: this.draggingField.field.id,
-    x: Math.round(x),
-    y: Math.round(y)
-  };
-
-  this.templateFieldService.updateTemplateFieldPosition(templateFieldId, payload).subscribe({
-    next: () => {
-      console.log('Position updated:', payload);
-      console.log("draginField");
-
-      console.log(this.draggingField);
-
-      const fieldId = this.draggingField.field.id;
-      this.positions[fieldId] = {
-        x: Math.round(x),
-        y: Math.round(y),
-        templateFieldId
-      };
-      this.unsavedChanges = true;
-      this.draggingField = null;
-
-    },
-    error: (err) => {
-      console.error('שגיאה בעדכון מיקום:', err);
-
-      // שחזור המיקום הקודם
-      const fieldId = this.draggingField.field.id;
-      const oldPos = this.positions[fieldId];
-      if (oldPos) {
-        const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
-        if (element) {
-          element.style.left = `${oldPos.x}px`;
-          element.style.top = `${oldPos.y}px`;
+          try {
+            const response = await this.templateFieldService.addFieldToTemplate(payload).toPromise();
+            this.positions[field.field.id] = {
+              x: response.x,
+              y: response.y,
+              templateFieldId: response.id
+            };
+            this.unsavedChanges = true; // סמן שיש שינויים
+          } catch (err) {
+            console.error('שגיאה במיקום אוטומטי ובשמירת השדה:', err);
+            // כאן אפשר להציג הודעת שגיאה קטנה למשתמש
+          }
+          currentY += lineHeight;
         }
       }
+
+    } catch (err) {
+      Swal.fire({
+        title: 'שגיאה',
+        text: 'לא ניתן לטעון או למקם את השדות',
+        icon: 'error',
+        confirmButtonText: 'אישור',
+        confirmButtonColor: '#5c6bc0'
+      });
+      console.error('Error loading or placing fields:', err);
     }
-  });
+  }
+
+
+  // onImageClick(event: MouseEvent): void {
+  //   // לוגיקה זו אינה נחוצה עוד למיקום ראשוני
+  // }
+
+  selectField(field: any): void {
+    this.selectedField = field;
+    this.showPrompt = true;
+  }
+
+  isFieldSelected(field: any): boolean {
+    return this.selectedField && this.selectedField.field.id === field.field.id;
+  }
+
+  getFieldPosition(fieldId: number): { top: string, left: string } | null {
+    const pos = this.positions[fieldId];
+    if (pos) {
+      return { top: `${pos.y}px`, left: `${pos.x}px` };
+    }
+    return null;
+  }
+
+  startDrag(event: MouseEvent, field: any): void {
+    event.stopPropagation();
+    this.draggingField = field;
+
+    const element = event.target as HTMLElement;
+    const fieldLabel = element.closest('.field-label') as HTMLElement;
+
+    if (fieldLabel) {
+      const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+      const fieldRect = fieldLabel.getBoundingClientRect();
+
+      this.dragOffset.x = event.clientX - fieldRect.left;
+      this.dragOffset.y = event.clientY - fieldRect.top;
+
+      fieldLabel.style.cursor = 'grabbing';
+    }
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  onDrag(event: MouseEvent): void {
+    if (!this.draggingField) return;
+
+    const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+    const fieldId = this.draggingField.field.id;
+
+    let x = event.clientX - containerRect.left - this.dragOffset.x;
+    let y = event.clientY - containerRect.top - this.dragOffset.y;
+
+    const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
+    if (element) {
+      x = Math.max(0, Math.min(x, containerRect.width - element.offsetWidth));
+      y = Math.max(0, Math.min(y, containerRect.height - element.offsetHeight));
+
+      element.style.left = `${x}px`;
+      element.style.top = `${y}px`;
+    }
+  }
+
+  @HostListener('document:mouseup')
+  stopDrag(): void {
+    if (!this.draggingField) return;
+
+    const fieldId = this.draggingField.field.id;
+    const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
+
+    if (element) {
+      element.style.cursor = 'grab';
+
+      const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+      const fieldRect = element.getBoundingClientRect();
+
+      const x = fieldRect.left - containerRect.left;
+      const y = fieldRect.top - containerRect.top;
+
+      const templateFieldId = this.positions[fieldId]?.templateFieldId;
+      if (templateFieldId) {
+        this.updateFieldPosition(templateFieldId, x, y);
+      }
+    }
+    this.draggingField = null;
+  }
+
+  updateFieldPosition(templateFieldId: number, x: number, y: number): void {
+    const payload = {
+      templateId: this.templateId,
+      fieldId: this.draggingField.field.id,
+      x: Math.round(x),
+      y: Math.round(y)
+    };
+
+    this.templateFieldService.updateTemplateFieldPosition(templateFieldId, payload).subscribe({
+      next: () => {
+        console.log('Position updated:', payload);
+        const fieldId = this.draggingField.field.id;
+        this.positions[fieldId] = {
+          x: Math.round(x),
+          y: Math.round(y),
+          templateFieldId
+        };
+        this.unsavedChanges = true;
+        this.draggingField = null;
+
+      },
+      error: (err) => {
+        console.error('שגיאה בעדכון מיקום:', err);
+
+        const fieldId = this.draggingField.field.id;
+        const oldPos = this.positions[fieldId];
+        if (oldPos) {
+          const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
+          if (element) {
+            element.style.left = `${oldPos.x}px`;
+            element.style.top = `${oldPos.y}px`;
+          }
+        }
+      }
+    });
+  }
+
+  isFieldPlaced(fieldId: number): boolean {
+    return !!this.positions[fieldId];
+  }
+
+  editPlacement(field: any): void {
+    this.selectedField = field;
+    this.showPrompt = true;
+  }
+
+  // פונקציות שמירה וחזרה נשארות כפי שהן
+  saveAllPlacements(): void {
+    Swal.fire({
+      title: 'שמירת מיקומים',
+      text: 'האם אתה בטוח שברצונך לשמור את כל המיקומים?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#5c6bc0',
+      cancelButtonColor: '#757575',
+      confirmButtonText: 'שמור',
+      cancelButtonText: 'ביטול'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'נשמר בהצלחה!',
+          text: 'כל המיקומים נשמרו בהצלחה',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        }).then(() => {
+          this.unsavedChanges = false;
+        });
+      }
+    });
+  }
+
+  goBack(): void {
+    if (this.unsavedChanges) {
+      Swal.fire({
+        title: 'שינויים לא שמורים',
+        text: 'יש לך שינויים שלא נשמרו. האם אתה בטוח שברצונך לצאת?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#e53935',
+        cancelButtonColor: '#757575',
+        confirmButtonText: 'צא ללא שמירה',
+        cancelButtonText: 'המשך עריכה'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/templates-list']);
+        }
+      });
+    } else {
+      this.router.navigate(['/templates-list']);
+    }
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any): void {
+    if (this.unsavedChanges) {
+      $event.returnValue = true;
+    }
+  }
 }
-
-isFieldPlaced(fieldId: number): boolean {
-  return !!this.positions[fieldId];
-}
-
-editPlacement(field: any): void {
-  this.selectedField = field;
-  this.showPrompt = true;
-}
-}
-
-
-
-
