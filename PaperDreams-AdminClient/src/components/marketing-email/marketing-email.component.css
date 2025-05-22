@@ -80,22 +80,20 @@
   padding: 18px 20px;
   border-bottom: 1px solid #f0f2f5;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  background: linear-gradient(135deg, #912ffa 0%, #256eed 100%);
+  color: white;
 }
 
 .card-title {
   font-size: 18px;
   font-weight: 600;
-  color: #333;
   display: flex;
   align-items: center;
 }
 
-.card-title i {
-  margin-left: 10px;
-  color: #1e88e5;
-}
+
 
 .card-body {
   padding: 20px;
@@ -154,7 +152,7 @@
 
 /* Textarea alternative */
 .text-editor {
-  width: 100%;
+  width: 95%;
   min-height: 200px;
   padding: 15px;
   border: 1px solid #e0e0e0;
