@@ -127,7 +127,7 @@ export class AuthComponent {
       error: (err) => {
         Swal.fire({
           title: 'שגיאה בהתחברות',
-          text:  'אירעה שגיאה בהתחברות, אנא נסה שנית',
+          text:  'אירעה שגיאה בהתחברות, סיסמא לא תקינה',
           icon: 'error',
           confirmButtonText: 'אישור',
           confirmButtonColor: '#5c6bc0'
