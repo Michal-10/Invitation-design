@@ -1265,7 +1265,6 @@
 
 
 
-
 import { Component, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { CategoryFieldService } from '../../services/category-field/category-field.service';
 import { TemplateFieldService } from '../../services/template-field/template-field.service';
@@ -1293,11 +1292,11 @@ import Swal from 'sweetalert2';
 export class FieldPlacementComponent implements OnInit {
   fields: any[] = [];
   templateId: number = 0;
-  selectedField: any = null;
+  // selectedField: any = null; // הוסר כי אין צורך במיקום ידני בלחיצה
   template!: Template;
   templateImageUrl!: string;
   positions: { [key: number]: { x: number, y: number, templateFieldId?: number } } = {};
-  showPrompt: boolean = false; // זה יהיה רלוונטי רק אם תחליט לאפשר מיקום ידני בלחיצה
+  // showPrompt: boolean = false; // הוסר
   draggingField: any = null;
   dragOffset = { x: 0, y: 0 };
   unsavedChanges: boolean = false;
@@ -1318,9 +1317,7 @@ export class FieldPlacementComponent implements OnInit {
     this.template = templateData ? JSON.parse(templateData) : {} as Template;
     this.templateId = Number(this.route.snapshot.paramMap.get('id')) || Number(sessionStorage.getItem('templateId'));
 
-    // 1. טען את רשימת השדות קודם כל. זה מבטיח ש-`this.fields` תהיה זמינה.
     this.loadFieldsFromCategory();
-    // 2. טען את ה-URL של התמונה.
     this.loadTemplateImage();
   }
 
@@ -1360,8 +1357,6 @@ export class FieldPlacementComponent implements OnInit {
 
     this.templatesService.getDownloadURL(this.template.name).then(res => {
       this.templateImageUrl = res;
-      // ברגע שה-URL נקבע, התמונה תתחיל להיטען ב-HTML.
-      // הפונקציה onTemplateImageLoad() תטפל במיקום לאחר שהיא תיטען בפועל.
     }).catch(err => {
       Swal.fire({
         title: 'שגיאה',
@@ -1377,9 +1372,33 @@ export class FieldPlacementComponent implements OnInit {
   // זו הפונקציה שנקראת כאשר התמונה סיימה להיטען ב-DOM
   onTemplateImageLoad(): void {
     console.log('Template image has finished loading in the DOM. Proceeding to place fields.');
-    // כעת, כשהאלמנט templateImageRef.nativeElement זמין ומוכן, נוכל למקם את השדות.
-    this.addFieldsOnTEmplates();
+    // קודם נטען מיקומים קיימים, ואז נמקם את החדשים
+    // this.loadExistingTemplateFields().then(() => {
+      this.addFieldsOnTEmplates();
+    // });
   }
+
+  // פונקציה לטעינת מיקומים קיימים מה-DB
+  // async loadExistingTemplateFields(): Promise<void> {
+  //   try {
+  //     const existingTemplateFields = await this.templateFieldService.getTemplateFieldsByTemplateId(this.templateId).toPromise();
+  //     (Array.isArray(existingTemplateFields) ? existingTemplateFields : Object.values(existingTemplateFields)).forEach(tf => {
+  //       if (tf.fieldId && tf.x !== undefined && tf.y !== undefined) {
+  //         this.positions[tf.fieldId] = { x: tf.x, y: tf.y, templateFieldId: tf.id };
+  //       }
+  //     });
+  //     console.log('Existing field positions loaded:', this.positions);
+  //   } catch (err) {
+  //     console.error('Error loading existing template fields:', err);
+  //     Swal.fire({
+  //       title: 'שגיאה',
+  //       text: 'לא ניתן לטעון מיקומים קיימים של שדות.',
+  //       icon: 'error',
+  //       confirmButtonText: 'אישור',
+  //       confirmButtonColor: '#5c6bc0'
+  //     });
+  //   }
+  // }
 
   async addFieldsOnTEmplates(): Promise<void> {
     const categoryId = Number(sessionStorage.getItem('categoryId'));
@@ -1388,18 +1407,11 @@ export class FieldPlacementComponent implements OnInit {
       return;
     }
 
-    // ודא שרשימת השדות נטענה לפני שנמשיך
-    // (הנחה: loadFieldsFromCategory כבר הפעילה את עצמה ב-ngOnInit)
     if (this.fields.length === 0) {
-      console.warn('Fields array is empty. Waiting for fields to load.');
-      // ניתן להוסיף כאן לוגיקת המתנה או נסיון טעינה חוזר,
-      // אך במקרה זה, loadFieldsFromCategory כבר פועלת.
-      // אם יש בעיה בתזמון, אפשר לנסות להשתמש ב-setTimeout קצר או להעביר את ה-Promise.all
-      // גם לטעינת השדות וגם לטעינת התמונה.
+      console.warn('Fields array is empty. Cannot place fields.');
       return;
     }
 
-    // ודא ש-templateImageRef.nativeElement אכן קיים ומוכן
     if (!this.templateImageRef || !this.templateImageRef.nativeElement) {
       console.error("Error: templateImageRef.nativeElement is undefined. Cannot calculate positions for initial placement.");
       Swal.fire({
@@ -1413,48 +1425,40 @@ export class FieldPlacementComponent implements OnInit {
     }
 
     try {
-      // 1. טען תחילה את כל המיקומים הקיימים עבור תבנית זו
-      // const existingTemplateFields = await this.templateFieldService.getTemplateFieldsByTemplateId(this.templateId).toPromise();
-      // (Array.isArray(existingTemplateFields) ? existingTemplateFields : Object.values(existingTemplateFields)).forEach(tf => {
-      //   if (tf.fieldId && tf.x !== undefined && tf.y !== undefined) {
-      //     this.positions[tf.fieldId] = { x: tf.x, y: tf.y, templateFieldId: tf.id };
-      //   }
-      // });
-      // console.log('Existing field positions loaded:', this.positions);
+      const imgElement = this.templateImageRef.nativeElement;
+      // Get the actual rendered size of the image (accounting for object-fit: contain)
+      const imgRect = imgElement.getBoundingClientRect();
 
-      const img = this.templateImageRef.nativeElement;
-      const imgWidth = img.offsetWidth;
-      const imgHeight = img.offsetHeight;
-
-      let currentY = 50; // מיקום Y התחלתי עבור העמודה, ניתן להתאים
-      const startX = imgWidth / 2; // מיקום X: במרכז התמונה
-      const lineHeight = 30; // מרווח אנכי בין שדות
+      let currentY = 50; // Initial Y position relative to the image top
+      // Place fields horizontally centered on the image
+      const startX = imgRect.width / 2;
+      const lineHeight = 30; // Vertical spacing between fields
 
       for (const field of this.fields) {
-        // אם לשדה אין מיקום שמור ב-`this.positions` (כלומר, הוא לא הגיע מהדאטה בייס)
-        // if (!this.positions[field.field.id]) {
+        // Only add fields that do NOT already have a position
+        if (!this.positions[field.field.id]) {
           const payload = {
             fieldId: field.field.id,
             templateId: this.templateId,
+            // Store positions relative to the top-left of the image
             x: Math.round(startX),
             y: Math.round(currentY)
           };
 
           try {
-            console.log(`Placing new field: ${field.field.name} at (${payload.x}, ${payload.y})`);
+            console.log(`Placing new field: ${field.field.name} at (${payload.x}, ${payload.y}) relative to image.`);
             const response = await this.templateFieldService.addFieldToTemplate(payload).toPromise();
             this.positions[field.field.id] = {
               x: response.x,
               y: response.y,
               templateFieldId: response.id
             };
-            this.unsavedChanges = true; // סמן שיש שינויים
+            this.unsavedChanges = true;
           } catch (err) {
             console.error(`שגיאה במיקום אוטומטי ובשמירת השדה ${field.field.name}:`, err);
-            // כאן אפשר להציג הודעת שגיאה קטנה למשתמש
           }
           currentY += lineHeight;
-        // }
+        }
       }
       console.log('All fields placed or loaded. Final positions:', this.positions);
 
@@ -1470,14 +1474,22 @@ export class FieldPlacementComponent implements OnInit {
     }
   }
 
-  // ניתן להשאיר את onImageClick ריק אם לא רוצים לאפשר מיקום ידני בלחיצה.
-  // אם רוצים לאפשר מיקום ידני של שדה נבחר:
+  // --- פונקציות הקשורות למיקום ידני (אם רלוונטי) ---
+  // אם אתה לא רוצה לאפשר מיקום ידני בלחיצה, אתה יכול להסיר את הפונקציות האלה.
+  // השארתי אותן כי הן היו בקוד שלך, אך הן לא נחוצות למיקום אוטומטי.
   // onImageClick(event: MouseEvent): void {
   //   if (!this.selectedField || this.draggingField) return;
 
-  //   const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-  //   const x = event.clientX - containerRect.left;
-  //   const y = event.clientY - containerRect.top;
+  //   const imgElement = this.templateImageRef.nativeElement;
+  //   const imgRect = imgElement.getBoundingClientRect();
+
+  //   const x = event.clientX - imgRect.left;
+  //   const y = event.clientY - imgRect.top;
+
+  //   if (x < 0 || x > imgRect.width || y < 0 || y > imgRect.height) {
+  //     console.warn("Click outside image bounds. Not placing field.");
+  //     return;
+  //   }
 
   //   const fieldId = this.selectedField.field.id;
   //   const existingPosition = this.positions[fieldId];
@@ -1488,7 +1500,6 @@ export class FieldPlacementComponent implements OnInit {
   //     y: Math.round(y)
   //   };
 
-  //   // אם השדה כבר מוקם, אז זו פעולת עדכון, אחרת זו הוספה
   //   if (existingPosition && existingPosition.templateFieldId) {
   //     this.templateFieldService.updateTemplateFieldPosition(existingPosition.templateFieldId, payload).subscribe({
   //       next: () => {
@@ -1499,7 +1510,6 @@ export class FieldPlacementComponent implements OnInit {
   //       error: (err) => Swal.fire({ title: 'שגיאה', text: 'לא ניתן לעדכן את מיקום השדה', icon: 'error', confirmButtonText: 'אישור', confirmButtonColor: '#5c6bc0' })
   //     });
   //   } else {
-  //     // אם השדה אינו קיים (מגיע מהפאנל ולא מוקם עדיין)
   //     this.templateFieldService.addFieldToTemplate(payload).subscribe({
   //       next: (response) => {
   //         this.positions[fieldId] = { x, y, templateFieldId: response.id };
@@ -1513,21 +1523,36 @@ export class FieldPlacementComponent implements OnInit {
   //   this.showPrompt = false;
   // }
 
-  selectField(field: any): void {
-    this.selectedField = field;
-    this.showPrompt = true; // הצג את ההודעה למשתמש ללחוץ על התמונה
-  }
+  // selectField(field: any): void {
+  //   this.selectedField = field;
+  //   this.showPrompt = true;
+  // }
 
-  isFieldSelected(field: any): boolean {
-    return this.selectedField && this.selectedField.field.id === field.field.id;
-  }
+  // isFieldSelected(field: any): boolean {
+  //   return this.selectedField && this.selectedField.field.id === field.field.id;
+  // }
+  // --- סוף פונקציות של פאנל צדדי ---
 
   getFieldPosition(fieldId: number): { top: string, left: string } | null {
     const pos = this.positions[fieldId];
-    if (pos) {
-      return { top: `${pos.y}px`, left: `${pos.x}px` };
+    if (!pos || !this.templateImageRef || !this.templateImageRef.nativeElement || !this.imageContainerRef || !this.imageContainerRef.nativeElement) {
+      return null;
     }
-    return null;
+
+    const imgElement = this.templateImageRef.nativeElement;
+    const imgRect = imgElement.getBoundingClientRect();
+    const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+
+    // Calculate the offset of the image's top-left corner relative to the container's top-left corner
+    const imageOffsetX = imgRect.left - containerRect.left;
+    const imageOffsetY = imgRect.top - containerRect.top;
+
+    // The stored 'pos.x' and 'pos.y' are relative to the image.
+    // To display them absolutely within the image-container, we need to add the image's offset.
+    const finalX = pos.x + imageOffsetX;
+    const finalY = pos.y + imageOffsetY;
+
+    return { top: `${finalY}px`, left: `${finalX}px` };
   }
 
   startDrag(event: MouseEvent, field: any): void {
@@ -1538,11 +1563,10 @@ export class FieldPlacementComponent implements OnInit {
     const fieldLabel = element.closest('.field-label') as HTMLElement;
 
     if (fieldLabel) {
-      const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-      const fieldRect = fieldLabel.getBoundingClientRect();
-
-      this.dragOffset.x = event.clientX - fieldRect.left;
-      this.dragOffset.y = event.clientY - fieldRect.top;
+      // Calculate the offset of the mouse click within the field label itself
+      // This ensures the field doesn't "jump" when dragging starts.
+      this.dragOffset.x = event.clientX - fieldLabel.getBoundingClientRect().left;
+      this.dragOffset.y = event.clientY - fieldLabel.getBoundingClientRect().top;
 
       fieldLabel.style.cursor = 'grabbing';
     }
@@ -1550,27 +1574,44 @@ export class FieldPlacementComponent implements OnInit {
 
   @HostListener('document:mousemove', ['$event'])
   onDrag(event: MouseEvent): void {
-    if (!this.draggingField) return;
+    if (!this.draggingField || !this.templateImageRef || !this.templateImageRef.nativeElement || !this.imageContainerRef || !this.imageContainerRef.nativeElement) return;
 
+    const imgElement = this.templateImageRef.nativeElement;
+    const imgRect = imgElement.getBoundingClientRect(); // Actual image dimensions and position
     const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+
+    // Calculate the offset of the image's top-left corner relative to the container's top-left corner
+    const imageOffsetX = imgRect.left - containerRect.left;
+    const imageOffsetY = imgRect.top - containerRect.top;
+
+    // Mouse position relative to the image-container's top-left corner
+    let newXInContainer = event.clientX - containerRect.left - this.dragOffset.x;
+    let newYInContainer = event.clientY - containerRect.top - this.dragOffset.y;
+
     const fieldId = this.draggingField.field.id;
-
-    let x = event.clientX - containerRect.left - this.dragOffset.x;
-    let y = event.clientY - containerRect.top - this.dragOffset.y;
-
     const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
-    if (element) {
-      x = Math.max(0, Math.min(x, containerRect.width - element.offsetWidth));
-      y = Math.max(0, Math.min(y, containerRect.height - element.offsetHeight));
 
-      element.style.left = `${x}px`;
-      element.style.top = `${y}px`;
+    if (element) {
+      const fieldWidth = element.offsetWidth;
+      const fieldHeight = element.offsetHeight;
+
+      // Calculate the field's position relative to the image's top-left corner
+      let xRelativeToImage = newXInContainer - imageOffsetX;
+      let yRelativeToImage = newYInContainer - imageOffsetY;
+
+      // Clamp the field's position to stay within the image boundaries
+      xRelativeToImage = Math.max(0, Math.min(xRelativeToImage, imgRect.width - fieldWidth));
+      yRelativeToImage = Math.max(0, Math.min(yRelativeToImage, imgRect.height - fieldHeight));
+
+      // Update the element's style, converting back to container-relative coordinates for display
+      element.style.left = `${xRelativeToImage + imageOffsetX}px`;
+      element.style.top = `${yRelativeToImage + imageOffsetY}px`;
     }
   }
 
   @HostListener('document:mouseup')
   stopDrag(): void {
-    if (!this.draggingField) return;
+    if (!this.draggingField || !this.templateImageRef || !this.templateImageRef.nativeElement || !this.imageContainerRef || !this.imageContainerRef.nativeElement) return;
 
     const fieldId = this.draggingField.field.id;
     const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
@@ -1578,15 +1619,25 @@ export class FieldPlacementComponent implements OnInit {
     if (element) {
       element.style.cursor = 'grab';
 
+      const imgElement = this.templateImageRef.nativeElement;
+      const imgRect = imgElement.getBoundingClientRect();
       const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
-      const fieldRect = element.getBoundingClientRect();
 
-      const x = fieldRect.left - containerRect.left;
-      const y = fieldRect.top - containerRect.top;
+      // Calculate the offset of the image's top-left corner relative to the container's top-left corner
+      const imageOffsetX = imgRect.left - containerRect.left;
+      const imageOffsetY = imgRect.top - containerRect.top;
+
+      // Get the current position of the field label relative to its container
+      const finalXInContainer = parseFloat(element.style.left || '0');
+      const finalYInContainer = parseFloat(element.style.top || '0');
+
+      // The position to save in the database must be relative to the image
+      const xToSave = finalXInContainer - imageOffsetX;
+      const yToSave = finalYInContainer - imageOffsetY;
 
       const templateFieldId = this.positions[fieldId]?.templateFieldId;
       if (templateFieldId) {
-        this.updateFieldPosition(templateFieldId, x, y);
+        this.updateFieldPosition(templateFieldId, xToSave, yToSave);
       }
     }
     this.draggingField = null;
@@ -1595,7 +1646,7 @@ export class FieldPlacementComponent implements OnInit {
   updateFieldPosition(templateFieldId: number, x: number, y: number): void {
     const payload = {
       templateId: this.templateId,
-      fieldId: this.draggingField.field.id,
+      fieldId: this.draggingField.field.id, // This should be correct
       x: Math.round(x),
       y: Math.round(y)
     };
@@ -1610,7 +1661,7 @@ export class FieldPlacementComponent implements OnInit {
           templateFieldId
         };
         this.unsavedChanges = true;
-        this.draggingField = null; // אפס את השדה הנגרר רק לאחר עדכון מוצלח
+        this.draggingField = null;
 
       },
       error: (err) => {
@@ -1622,17 +1673,24 @@ export class FieldPlacementComponent implements OnInit {
           confirmButtonText: 'אישור',
           confirmButtonColor: '#5c6bc0'
         });
-        // שחזור המיקום הקודם ב-UI אם העדכון נכשל
+        // Revert to previous position in UI if update fails
         const fieldId = this.draggingField.field.id;
         const oldPos = this.positions[fieldId];
         if (oldPos) {
           const element = document.querySelector(`.field-label[data-field-id="${fieldId}"]`) as HTMLElement;
           if (element) {
-            element.style.left = `${oldPos.x}px`;
-            element.style.top = `${oldPos.y}px`;
+            // Recalculate container-relative position for display
+            const imgElement = this.templateImageRef.nativeElement;
+            const imgRect = imgElement.getBoundingClientRect();
+            const containerRect = this.imageContainerRef.nativeElement.getBoundingClientRect();
+            const imageOffsetX = imgRect.left - containerRect.left;
+            const imageOffsetY = imgRect.top - containerRect.top;
+
+            element.style.left = `${oldPos.x + imageOffsetX}px`;
+            element.style.top = `${oldPos.y + imageOffsetY}px`;
           }
         }
-        this.draggingField = null; // גם אם נכשל, אפס את השדה הנגרר
+        this.draggingField = null; // Even if failed, reset dragging field
       }
     });
   }
@@ -1641,10 +1699,10 @@ export class FieldPlacementComponent implements OnInit {
     return !!this.positions[fieldId];
   }
 
-  editPlacement(field: any): void {
-    this.selectedField = field;
-    this.showPrompt = true;
-  }
+  // editPlacement(field: any): void { // הוסר כי אין צורך במיקום ידני
+  //   this.selectedField = field;
+  //   this.showPrompt = true;
+  // }
 
   saveAllPlacements(): void {
     Swal.fire({

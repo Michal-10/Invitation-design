@@ -200,24 +200,24 @@
 
 
 
-/* כללי */
+/* כללי *//* כללי */
 .content-wrapper {
   padding: 25px;
   direction: rtl;
-  height: calc(100vh - 70px); /* 70px בהנחה שזה גובה ההדר העליון */
+  height: calc(100vh - 70px); /* גובה ההדר העליון */
   overflow: hidden;
-  display: flex; /* שינוי: כדי למרכז את התבנית */
-  justify-content: center; /* שינוי: למרכז אופקית */
-  align-items: center; /* שינוי: למרכז אנכית */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Placement Workspace - עכשיו יש בו רק עמודה אחת */
 .placement-workspace {
-  display: flex; /* שינוי */
-  justify-content: center; /* שינוי */
-  align-items: center; /* שינוי */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  width: 100%; /* שינוי: תופס את כל הרוחב */
+  width: 100%;
   max-width: 1200px; /* הגבלת רוחב מקסימלית למראה נעים */
   overflow: hidden;
 }
@@ -232,7 +232,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%; /* שינוי: תופס את כל רוחב ההורה */
+  width: 100%;
   max-height: 100%;
 }
 
@@ -265,43 +265,43 @@
 .card-body {
   padding: 20px;
   flex: 1;
-  overflow: auto; /* שינוי: גלילה אוטומטית */
+  overflow: auto; /* גלילה אוטומטית אם התוכן עולה על הגובה */
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* שינוי: למרכז את התמונה בתוך ה-body */
-  align-items: center; /* שינוי: למרכז את התמונה בתוך ה-body */
+  justify-content: center;
+  align-items: center;
 }
 
-/* Template Workspace - עכשיו הוא העיקר */
+/* Template Workspace */
 .template-workspace {
   height: 100%;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  flex-grow: 1; /* יתפוס את המקום הפנוי */
+  flex-grow: 1;
 }
 
 .image-container {
-  position: relative;
-  height: 100%; /* שינוי: תופס את כל הגובה הזמין */
-  width: 100%; /* שינוי: תופס את כל הרוחב הזמין */
+  position: relative; /* חובה: נקודת ייחוס לשדות ממוקמים */
+  height: 100%; /* תופס את כל הגובה הזמין של ה-card-body */
+  width: 100%; /* תופס את כל הרוחב הזמין של ה-card-body */
   display: flex;
-  justify-content: center;
-  align-items: center; /* שינוי: למרכז את התמונה אנכית */
+  justify-content: center; /* למרכז את התמונה בתוך הקונטיינר */
+  align-items: center; /* למרכז את התמונה בתוך הקונטיינר */
   background: #f8f9fb;
   border-radius: 8px;
   border: 1px dashed #e0e0e0;
-  overflow: hidden; /* הסתרת גלילה בתוך הקונטיינר - התמונה תתכווץ */
+  overflow: hidden; /* הסתרת גלילה בתוך הקונטיינר */
 }
 
 .template-image {
-  max-width: 100%;
-  max-height: 100%; /* שינוי: יבטיח שהתמונה תתאים לגובה הקונטיינר */
-  object-fit: contain; /* יבטיח שהתמונה לא תיחתך ותשמור על פרופורציות */
+  max-width: 100%; /* התמונה תתכווץ אם הקונטיינר קטן ממנה */
+  max-height: 100%; /* התמונה תתכווץ אם הקונטיינר קטן ממנה */
+  object-fit: contain; /* שומר על פרופורציות ומבטיח שהתמונה כולה תוצג */
   display: block; /* כדי להסיר רווחים מיותרים מתחת לתמונה */
+  /* Remove width/height auto or fixed values here, let max-width/height handle it */
 }
-
 
 .loading-template {
   display: flex;
@@ -322,7 +322,7 @@
   cursor: grab;
   user-select: none;
   z-index: 10;
-  position: absolute; /* חייב להישאר absolute למיקום חופשי */
+  position: absolute; /* מאפשר מיקום חופשי בתוך ה-image-container */
 }
 
 .field-label:active {
@@ -390,4 +390,3 @@
 ::ng-deep .mat-mdc-progress-spinner.mat-accent circle {
   stroke: #792ffa !important;
 }
-
