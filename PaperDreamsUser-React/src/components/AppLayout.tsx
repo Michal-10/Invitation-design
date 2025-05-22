@@ -37,8 +37,6 @@
 // import { decodeToken } from "../Services/User";
 
 import { Outlet } from "react-router"
-import Footer from "./homePage/Footer"
-import Header from "./homePage/Header"
 import HomePage from "./HomePage"
 
 // export default () => {
