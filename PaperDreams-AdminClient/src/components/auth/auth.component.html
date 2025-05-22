@@ -39,30 +39,29 @@
 
 
 
-
- <div class="upload-template-container">
-  <div class="upload-card">
-    <div class="upload-header">
-      <h2><mat-icon>login</mat-icon> התחברות</h2>
+ <div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2><mat-icon>cloud_upload</mat-icon> התחברות</h2>
     </div>
 
-    <div class="upload-form">
-      <mat-form-field appearance="outline" class="form-field">
+    <div class="login-form">
+      <mat-form-field appearance="outline" class="form-field" floatLabel="always">
         <mat-label>אימייל</mat-label>
         <input matInput [(ngModel)]="email" type="email" required>
-        <mat-icon matPrefix>email</mat-icon>
+        <mat-icon matSuffix>email</mat-icon>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-field">
+      <mat-form-field appearance="outline" class="form-field" floatLabel="always">
         <mat-label>סיסמה</mat-label>
         <input matInput [(ngModel)]="password" [type]="hidePassword ? 'password' : 'text'" required>
-        <mat-icon matPrefix>lock</mat-icon>
-        <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
           <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
+        <mat-icon matPrefix>lock</mat-icon>
       </mat-form-field>
 
-      <button mat-raised-button class="upload-button" (click)="login()">
+      <button mat-raised-button color="primary" class="login-button" (click)="login()">
         <mat-icon>login</mat-icon>
         התחבר
       </button>
