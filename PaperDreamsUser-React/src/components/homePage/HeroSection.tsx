@@ -22,7 +22,7 @@ const HeroSection = () => {
         
         
         if(user?.id 
-             && sessionStorage.getItem('token')
+             && sessionStorage.getItem('userToken')
           ){
            console.log("'navigate('/chooseCategory') ");
         }
@@ -31,7 +31,7 @@ const HeroSection = () => {
         }
        
         
-        sessionStorage.getItem('token') && user?.id? navigate('/chooseCategory') : navigate('/login');
+        sessionStorage.getItem('userToken') && user?.id? navigate('/chooseCategory') : navigate('/login');
     };
     return (
         <Box
