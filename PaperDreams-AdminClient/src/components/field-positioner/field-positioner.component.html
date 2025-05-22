@@ -348,9 +348,6 @@
 
 
 
-
-
-
   <div class="content-wrapper page-transition">
     <div class="placement-workspace">
       <div class="fields-panel card">
@@ -398,8 +395,7 @@
                 [src]="templateImageUrl"
                 alt="Template"
                 class="template-image"
-                (load)="onTemplateImageLoad()" 
-              />
+                (load)="onTemplateImageLoad()"  />
   
               @for (field of fields; track field) {
                 @if (positions[field.field.id]) {
