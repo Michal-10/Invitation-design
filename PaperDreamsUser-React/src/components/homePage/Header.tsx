@@ -68,7 +68,7 @@ const Header: React.FC = () => {
                 elevation={0}
                 sx={{
                     backdropFilter: 'blur(8px)',
-                    borderBottom: '1px solid #e0e0e0',
+                    borderBottom: '1px solid primary',
                     direction: 'ltr',
                     width: '100vw',
                 }}
@@ -83,9 +83,9 @@ const Header: React.FC = () => {
                 >
                     {/* לוגו */}
                     <Box display="flex" alignItems="center" gap={1} mb={{ xs: 1, sm: 0 }}>
-                        <BrushIcon sx={{ color: '#1976d2' }} />
+                        <BrushIcon sx={{ color: 'primary' }} />
                         <Typography variant="h6" fontSize={{ xs: '1rem', sm: '1.25rem' }}>
-                            Invantation-Online
+                            InvantationLine
                         </Typography>
                     </Box>
 
@@ -100,27 +100,27 @@ const Header: React.FC = () => {
 
 
                         {user?.id && token &&
-                         <><Button
-                            color={active === '/' ? 'primary' : 'inherit'}
-                            sx={{ fontWeight: 500 }}
-                            onClick={() => navigate('/')}
-                        >
-                            בית
-                        </Button>
-                            <Button
-                                color={ 'primary' }
+                            <><Button
+                                color={active === '/' ? 'primary' : 'inherit'}
                                 sx={{ fontWeight: 500 }}
-                                onClick={() => navigate('/MyCompletedInvitation')}
+                                onClick={() => navigate('/')}
                             >
-                                ההזמנות שלי
+                                בית
                             </Button>
-                            <Button
-                                color={ 'primary' }
-                                sx={{ fontWeight: 500 }}
-                                onClick={() => navigate('/chooseCategory')}
-                            >
-                                יצירת הזמנה
-                            </Button></>}
+                                <Button
+                                    color={'primary'}
+                                    sx={{ fontWeight: 500 }}
+                                    onClick={() => navigate('/MyCompletedInvitation')}
+                                >
+                                    ההזמנות שלי
+                                </Button>
+                                <Button
+                                    color={'primary'}
+                                    sx={{ fontWeight: 500 }}
+                                    onClick={() => navigate('/chooseCategory')}
+                                >
+                                    יצירת הזמנה
+                                </Button></>}
 
 
 
@@ -151,6 +151,10 @@ const Header: React.FC = () => {
                                     fontWeight: 'bold',
                                     px: 2,
                                     py: 0.5,
+                                    '&:hover': {
+                                        backgroundColor: 'primary.light', // רקע בהיר במעבר עכבר
+                                        color: 'primary.dark', // צבע כהה במעבר עכבר
+                                    },
                                 }}
                                 component={Link}
                                 to="/login"
