@@ -423,7 +423,7 @@ console.log(myTtemplate.templateFields[0].name);
                 const textObj = new fabric.Text(value, {
                     left: scaledX,
                     top: scaledY,
-                    fontSize: 50 * scaleFactor,
+                    fontSize: 25 * scaleFactor,
                     fill: "black",
                     fontWeight: "bold"
                 });
