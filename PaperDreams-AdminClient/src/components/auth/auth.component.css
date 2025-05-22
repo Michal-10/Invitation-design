@@ -123,7 +123,7 @@
 
 .login-form {
   padding: 30px;
-  direction: rtl;
+  direction: ltr;
 }
 
 .form-field {
@@ -136,6 +136,24 @@
   background: var(--input-bg);
   border-radius: 8px;
 }
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #912ffa 0%, #256eed 100%) !important;
+  color: white !important;
+  padding: 8px 20px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
 
 /* אנימציית טעינה */
 @keyframes fadeIn {
