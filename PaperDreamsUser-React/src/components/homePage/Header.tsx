@@ -17,7 +17,7 @@ const getUserNameFromToken = (token: string | null): string => {
 
         console.log('payload');
         console.log(payload);
-        return payload?.email || '';
+        return payload?.name || '';
     } catch {
         return 'John Doe'; // שם ברירת מחדל במקרה של שגיאה
     }
