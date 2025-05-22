@@ -88,7 +88,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   padding: 20px;
   /* background: #f2f4f7; */
 }
@@ -103,17 +103,22 @@
   animation: fadeIn 0.5s ease-out;
 }
 
-.login-header {
-  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
-  /* color: white; */
-  text-align: center;
-  padding: 20px;
-  font-size: 1.5rem;
-  font-weight: bold;
+
+.card-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #f0f2f5;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  gap: 10px;
+  background: linear-gradient(135deg, #912ffa 0%, #256eed 100%);
+  color: white;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
 }
 
 .login-form {
@@ -130,29 +135,6 @@
   width: 100%;
   background: var(--input-bg);
   border-radius: 8px;
-}
-
-/* כפתור התחברות */
-.login-button {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
-  /* color: white; */
-  font-weight: bold;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  transition: 0.3s ease;
-  cursor: pointer;
-}
-
-.login-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* אנימציית טעינה */
