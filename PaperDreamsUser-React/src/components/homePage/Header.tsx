@@ -131,7 +131,6 @@ const Header: React.FC = () => {
                                 </Avatar>
                                 <Button
                                     variant="outlined"
-                                    color="error"
                                     onClick={handleLogout}
                                     sx={{
                                         borderRadius: '20px',
