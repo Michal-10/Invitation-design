@@ -39,6 +39,7 @@
 import { Outlet } from "react-router"
 import Footer from "./homePage/Footer"
 import Header from "./homePage/Header"
+import HomePage from "./HomePage"
 
 // export default () => {
 //     const theme = useTheme()
@@ -463,14 +464,26 @@ import Header from "./homePage/Header"
 //     )
 // }
 
+
+
+
+
+
+
+
+
+
+
+
 export default () => {
   // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
   return (<>
 
-    <Header />
+    {/* <Header /> */}
+    <HomePage />
     <Outlet />
-    <Footer />
+    {/* <Footer /> */}
 
   </>)
 }

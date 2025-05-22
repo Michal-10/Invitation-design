@@ -40,7 +40,7 @@ export const Router = createBrowserRouter([
       {
         path: "profile",
         element: <UpdateUser />,
-      },
+      }
     ],
   },
 ])
