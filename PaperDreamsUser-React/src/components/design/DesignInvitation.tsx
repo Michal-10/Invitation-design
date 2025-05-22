@@ -461,7 +461,7 @@ console.log(myTtemplate.templateFields[0].name);
             // בקשת URL חתום משרת ה-Backend
 
             const response = await axios.get(
-                `http://localhost:5077/api/upload/presigned-url?fileName=${newFile.name}`
+                `${import.meta.env.VITE_API_URL}/upload/presigned-url?fileName=${newFile.name}`
             );
 
             console.log("after presigned-url", response);
