@@ -39,6 +39,7 @@
 import { Outlet } from "react-router"
 import Footer from "./homePage/Footer"
 import Header from "./homePage/Header"
+import { Box } from "@mui/material"
 
 // export default () => {
 //     const theme = useTheme()
@@ -470,11 +471,33 @@ export default () => {
   // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
   return (<>
-
+{/* 
     <Header />
     <Outlet />
     <Footer />
 
-  </>)
+  </> */}
+
+<Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: `64px`,
+          zIndex: 1000,
+          bgcolor: "white", // רקע כדי שלא יסתיר תוכן מאחור
+          boxShadow: 1,
+        }}
+      >
+        <Header />
+      </Box>
+
+      <Box sx={{ pt: `64px`, minHeight: "100vh" }}>
+        <Outlet />
+        <Footer />
+      </Box>
+    </>
+  )
 }
 

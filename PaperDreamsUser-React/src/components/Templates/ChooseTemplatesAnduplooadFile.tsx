@@ -115,7 +115,7 @@ export default function CategoryTemplatesPage() {
               fontWeight: 700,
               textAlign: "center",
               direction: "rtl",
-              color: theme.palette.primary.main,
+              // color: theme.palette.primary.main,
             }}
           >
             בחירת תבנית והעלאת קובץ
@@ -177,7 +177,7 @@ export default function CategoryTemplatesPage() {
                 border: `1px solid ${theme.palette.primary.light}`,
               }}
             >
-              <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, color: theme.palette.primary.dark }}>
+              <Typography variant="h5" sx={{ fontWeight: 600, mb: 3 }}>
                 בחירת תבנית
               </Typography>
 
