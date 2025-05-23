@@ -4,6 +4,8 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import TuneIcon from '@mui/icons-material/Tune';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/Store';
 
 const HeroSection = () => {
 
@@ -127,12 +129,34 @@ const HeroSection = () => {
 
     // // State for contact dialog
     const [, setContactOpen] = useState(false)
-   
+    const user = useSelector((state: RootState) => state.user.user)
 
     // // Handle contact form
     const handleContactOpen = () => {
         setContactOpen(true)
     }
+
+    const handleStartNow = () => {
+            console.log('handleStartNow');
+            console.log("-*-*-*-*-*-*-*-*-*-*-*-*-");
+            console.log("user");
+            console.log(user);
+            console.log("sessionStorage.getItem('token')");
+            console.log(sessionStorage.getItem('token'));
+            
+            
+            if(user?.id 
+                 && sessionStorage.getItem('userToken')
+              ){
+               console.log("'navigate('/chooseCategory') ");
+            }
+            else {
+               console.log("'navigate('/login') ");
+            }
+           
+            
+            sessionStorage.getItem('userToken') && user?.id? navigate('/chooseCategory') : navigate('/login');
+        };
 
     return (
         <>
@@ -159,14 +183,14 @@ const HeroSection = () => {
                         <Button
                             variant="contained"
                             size="large"
-                            onClick={() => navigate("/chooseCategory")}
+                            onClick={handleStartNow}
                             sx={{
                                 bgcolor: "var(--primary-color)",
                                 "&:hover": { bgcolor: "#e05e52" },
                                 px: 4,
                                 py: 1.5,
                                 borderRadius: 2,
-                                fontSize: "1.5rem",
+                                fontSize: "1.3rem",
                             }}
                         >
                             התחל עכשיו
