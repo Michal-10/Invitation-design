@@ -592,6 +592,7 @@ export default function CategoryTemplatesPage() {
       <Box sx={{ py: 4 }}>
         <Box
           sx={{
+            direction: "ltr",
             display: "flex",
             flexWrap: "nowrap",
             flexDirection: "row-reverse",
