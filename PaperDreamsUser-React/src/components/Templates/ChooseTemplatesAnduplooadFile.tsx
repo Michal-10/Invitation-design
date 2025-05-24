@@ -318,7 +318,7 @@ export default function CategoryTemplatesPage() {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ overflowX: "hidden", pb: 5, direction: "rtl" }}>
+    <Container maxWidth="xl" sx={{ overflowY: "hidden", pb: 5, direction: "rtl" }}>
       {error && (
         <Alert severity="error" sx={{ mt: 3, mb: 2 }}>
           {error}
@@ -329,8 +329,6 @@ export default function CategoryTemplatesPage() {
         <Box
           sx={{
             display: "flex",
-            flexWrap: "nowrap",
-            flexDirection: "row-reverse",
             alignItems: "center",
             justifyContent: "space-between",
             mb: 3,
