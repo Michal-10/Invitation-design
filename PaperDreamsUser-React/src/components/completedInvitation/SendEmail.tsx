@@ -89,7 +89,7 @@ export default function EmailSend({
         variant={variant}
         color="primary"
         size={size}
-        startIcon={showIcon ? <Email /> : undefined}
+        startIcon={showIcon ? <Email sx={{marginLeft:'4px'}}/> : undefined}
         sx={{
           borderRadius: "20px",
           bgcolor: variant === "contained" ? "var(--primary-color)" : undefined,

@@ -82,7 +82,7 @@ export default function FileDownload({
         onClick={handleDownload}
         variant={variant}
         size={size}
-        startIcon={showIcon ? isDownloading ? <CircularProgress size={20} color="inherit" /> : <Download /> : undefined}
+        startIcon={showIcon ? isDownloading ? <CircularProgress size={20} color="inherit" /> : <Download  sx={{marginLeft:'4px'}}/> : undefined}
         disabled={isDownloading}
         color={variant === "contained" ? "primary" : undefined}
         sx={{
@@ -90,9 +90,6 @@ export default function FileDownload({
         ,
           "&:hover": {
             bgcolor: variant === "contained" ? "#primary" : undefined,
-          },
-          "& .MuiButton-startIcon": {
-            marginLeft: 1, // רווח תקני בין האייקון לטקסט
           }
         }}
       >
