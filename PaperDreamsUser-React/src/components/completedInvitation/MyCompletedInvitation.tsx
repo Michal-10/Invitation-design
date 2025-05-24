@@ -167,12 +167,36 @@ export default function MyCompletedInvitationPage() {
         </Box>
       ) : (
         <>
-          <Paper elevation={3} sx={{ p: { xs: 3, md: 5 }, mb: 5, borderRadius: 4, textAlign: "center" }}>
-            <Typography variant="h3" fontWeight={700}>ההזמנות המושלמות שלי</Typography>
-            <Typography variant="h6">בחר הזמנות שברצונך להוריד כקובץ ZIP</Typography>
-          </Paper>
+          <Paper
+  elevation={3}
+  sx={{
+    p: { xs: 3, md: 5 },
+    mb: 5,
+    borderRadius: 4,
+    textAlign: "center",
+    bgcolor: "primary.main", // צבע רקע
+    color: "white",
+  }}
+>
+  <Typography
+    variant="h3"
+    fontSize={{ xs: "2rem", md: "2.75rem" }}
+    fontWeight={700}
+    gutterBottom
+  >
+    ההזמנות המושלמות שלי
+  </Typography>
+  <Typography variant="h6" fontWeight={400}>
+    כל ההזמנות שיצרת מוצגות כאן
+  </Typography>
+</Paper>
 
-          <MultiFileDownload selectedFiles={selected} onClearSelection={clearSelection} />
+<Box display="flex" justifyContent="flex-start" mb={2}>
+  <MultiFileDownload
+    selectedFiles={selected}
+    onClearSelection={clearSelection}
+  />
+</Box>
 
           <Grid container spacing={4} justifyContent="center" mt={1}>
             {list.map((item, index) => (
