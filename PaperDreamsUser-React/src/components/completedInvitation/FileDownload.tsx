@@ -91,6 +91,9 @@ export default function FileDownload({
           "&:hover": {
             bgcolor: variant === "contained" ? "#primary" : undefined,
           },
+          "& .MuiButton-startIcon": {
+            marginLeft: 1, // רווח תקני בין האייקון לטקסט
+          }
         }}
       >
         {isDownloading ? "מוריד..." : buttonText}

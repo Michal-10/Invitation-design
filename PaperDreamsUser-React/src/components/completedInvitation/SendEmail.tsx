@@ -153,6 +153,9 @@ export default function EmailSend({
               "& .MuiInputLabel-root": {
                 fontFamily: "'Heebo', sans-serif",
               },
+              "& .MuiButton-startIcon": {
+                marginLeft: 1, // רווח תקני בין האייקון לטקסט
+              },
             }}
             InputProps={{
               startAdornment: <Email sx={{ marginLeft:'2px' }} color="primary" />,

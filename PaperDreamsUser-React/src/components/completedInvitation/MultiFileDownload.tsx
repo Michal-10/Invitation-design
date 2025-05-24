@@ -48,7 +48,9 @@ export default function MultiFileDownload({ selectedFiles, onClearSelection }: M
   };
 
   return (
-    <Box display="flex" alignItems="center" gap={2} mt={2} sx={{direction:'ltr'}}>
+    // <Box display="flex" alignItems="center" gap={2} mt={2} >
+        <Box display="flex" justifyContent="flex-start" alignItems="center" gap={2} mt={2}>
+
       <Button
         variant="contained"
         disabled={selectedFiles.length === 0 || loading}
