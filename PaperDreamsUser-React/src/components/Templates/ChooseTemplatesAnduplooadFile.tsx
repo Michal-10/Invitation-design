@@ -318,7 +318,7 @@ export default function CategoryTemplatesPage() {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ overflowY: "hidden", pb: 5, direction: "rtl" }}>
+    <Container sx={{ pb: 5, direction: "rtl" }}>
       {error && (
         <Alert severity="error" sx={{ mt: 3, mb: 2 }}>
           {error}
@@ -416,8 +416,6 @@ export default function CategoryTemplatesPage() {
               ) : templates.length > 0 ? (
                 <Box
                   sx={{
-                    overflowX: "auto",
-                    whiteSpace: "nowrap",
                     pb: 1,
                     "&::-webkit-scrollbar": {
                       height: "8px",
