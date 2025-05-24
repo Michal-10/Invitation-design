@@ -91,7 +91,7 @@ export default function FileDownload({
           "&:hover": {
             bgcolor: variant === "contained" ? "#primary" : undefined,
           }, "& .MuiButton-startIcon": {
-            marginLeft: 2, // Add space between icon and text
+            marginLeft: 1, // Add space between icon and text
           },
         }}
       >

@@ -95,6 +95,8 @@ export default function EmailSend({
           bgcolor: variant === "contained" ? "var(--primary-color)" : undefined,
           "&:hover": {
             bgcolor: variant === "contained" ? "#e05e52" : undefined,
+          }, "& .MuiButton-startIcon": {
+            marginLeft: 1, // Add space between icon and text
           },
         }}
       >
