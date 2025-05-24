@@ -48,7 +48,7 @@ export default function MultiFileDownload({ selectedFiles, onClearSelection }: M
   };
 
   return (
-    <Box display="flex" alignItems="center" gap={2} mt={2}>
+    <Box display="flex" alignItems="center" gap={2} mt={2} sx={{direction:'ltr'}}>
       <Button
         variant="contained"
         disabled={selectedFiles.length === 0 || loading}
@@ -59,7 +59,7 @@ export default function MultiFileDownload({ selectedFiles, onClearSelection }: M
         {loading ? "מוריד..." : `הורד (${selectedFiles.length}) קבצים`}
       </Button>
       {selectedFiles.length > 0 && (
-        <Button onClick={onClearSelection} color="secondary" variant="outlined" sx={{ borderRadius: 3 }}>
+        <Button onClick={onClearSelection} color="primary" variant="outlined" sx={{ borderRadius: 3 }}>
           <CheckCircle />
           נקה בחירה
         </Button>

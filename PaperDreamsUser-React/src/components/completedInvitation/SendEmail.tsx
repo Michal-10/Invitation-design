@@ -155,7 +155,7 @@ export default function EmailSend({
               },
             }}
             InputProps={{
-              startAdornment: <Email sx={{ mr: 1 }} color="primary" />,
+              startAdornment: <Email sx={{ marginLeft:'2px' }} color="primary" />,
             }}
           />
 
