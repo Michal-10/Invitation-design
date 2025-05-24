@@ -300,8 +300,8 @@ import PrintIcon from "@mui/icons-material/Print";
 import SaveIcon from "@mui/icons-material/Save";
 import { getDownloadURL } from "../../Services/FileService";
 import { uploadFileToAWS } from "../../Services/UploadFileToAWS";
-import TextEditorSidebar from "./TextEditorSideBar";
 import { decodeToken } from "../../Services/User";
+import TextEditorSidebar from "./TextEditorSideBar";
 
 export default () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
