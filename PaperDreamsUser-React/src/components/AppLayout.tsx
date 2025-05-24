@@ -487,7 +487,7 @@ export default () => {
           height: `64px`,
           zIndex: 1000,
           bgcolor: "white", // רקע כדי שלא יסתיר תוכן מאחור
-          boxShadow: 1,
+          // boxShadow: 1,
         }}
       >
         <Header />
