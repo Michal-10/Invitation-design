@@ -59,7 +59,8 @@ export default function MultiFileDownload({ selectedFiles, onClearSelection }: M
         {loading ? "מוריד..." : `הורד (${selectedFiles.length}) קבצים`}
       </Button>
       {selectedFiles.length > 0 && (
-        <Button onClick={onClearSelection} color="error">
+        <Button onClick={onClearSelection} color="secondary" variant="outlined" sx={{ borderRadius: 3 }}>
+          <CheckCircle />
           נקה בחירה
         </Button>
       )}
