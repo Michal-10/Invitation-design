@@ -50,7 +50,7 @@ export default function AuthPage() {
           // Add a default or appropriate status value
         })
       )
-      .unwrap();
+        .unwrap();
       navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
       setError("the mail or password it's wrong");
@@ -198,7 +198,7 @@ export default function AuthPage() {
           fullWidth
           onClick={() => setMode(mode === "login" ? "register" : "login")}
           sx={{ mt: 1 }}
-
+          disabled={loading}
         >
           {mode === "login"
             ? "אין לך חשבון? לחץ כאן להרשמה"
