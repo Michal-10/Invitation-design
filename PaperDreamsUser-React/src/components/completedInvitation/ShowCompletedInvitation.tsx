@@ -154,24 +154,14 @@ export default function ShowCompletedInvitation({ fileName, time, isSelected, on
       <Checkbox
         checked={isSelected}
         onChange={() => onToggleSelect(fileName)}
-        sx={{ position: "absolute", top: 10, left: 10, zIndex: 2 }}
+        sx={{ position: "absolute", top: 7, left: 7, zIndex: 2 }}
         color="primary"
       />
 
       {loading ? (
-        <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        height={250}
-        sx={{ bgcolor: "#f8f9fa" }}
-      >
-        <CircularProgress size={40} color="primary" />
-        <Typography variant="body2" color="text.secondary" mt={2}>
-          טוען הזמנה...
-        </Typography>
-      </Box>
+        <Box display="flex" justifyContent="center" alignItems="center" height={250}>
+          <CircularProgress />
+        </Box>
       ) : (
         <>
           <CardMedia
