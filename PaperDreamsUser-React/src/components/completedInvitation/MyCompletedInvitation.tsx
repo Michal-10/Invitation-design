@@ -170,7 +170,7 @@ export default function MyCompletedInvitationPage() {
           <Paper
   elevation={3}
   sx={{
-    // p: { xs: 3, md: 5 },
+    p: { xs: 2, md: 3 },
     mb: 5,
     borderRadius: 4,
     textAlign: "center",
