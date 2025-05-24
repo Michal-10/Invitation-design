@@ -288,6 +288,10 @@
 
 
 
+
+
+
+
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
 import axios from "axios";
@@ -546,7 +550,7 @@ console.log(myTtemplate.templateFields[0].name);
 
     return (
         <>
-            <Grid container style={{ height: "100vh", direction: "rtl" }}>
+            <Grid container style={{ height: "90vh", direction: "rtl" }}>
                 {/* Sidebar - רבע עמוד */}
 
                 <Grid item xs={3} style={{ padding: "3px" }}>

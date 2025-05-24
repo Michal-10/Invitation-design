@@ -473,7 +473,7 @@ export default function TextEditorSidebar({
               בחר שדה טקסט לעריכה:
             </Typography>
 
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+            <Box sx={{  display: "flex", flexDirection: "column", gap: 1.5 }}>
               {fieldsWithPlaces.map((templateField: TemplateField, index: number) => {
                 const textObj = canvas?.getObjects().find(
                   (obj) => (obj as any).fieldName === templateField.field.name
@@ -481,12 +481,13 @@ export default function TextEditorSidebar({
                 const displayText = textObj?.text ? `לעריכת ${templateField.field.name}` : templateField.field.name
 
                 return (
-                  <Button
+                  <Button 
                     key={index}
                     variant="outlined"
                     onClick={() => handleFieldSelect(templateField)}
                     startIcon={<TextFields />}
                     sx={{
+                      direction:'rtl',
                       borderColor: "var(--primary-color)",
                       color: "#333",
                       borderRadius: 1.5,
@@ -496,6 +497,9 @@ export default function TextEditorSidebar({
                       "&:hover": {
                         bgcolor: "rgba(255,111,97,0.05)",
                         borderColor: "var(--primary-color)",
+                      },
+                      "& .MuiButton-startIcon": {
+                        marginLeft: 1, // Add space between icon and text
                       },
                     }}
                   >
