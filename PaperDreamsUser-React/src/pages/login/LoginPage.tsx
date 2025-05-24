@@ -1,4 +1,4 @@
-import  { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -6,12 +6,13 @@ import {
   Typography,
   // useTheme,
   Paper,
+  CircularProgress,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/Store";
 import { googleLogin, loginRegister } from "../../redux/UserSlice";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 export default function AuthPage() {
   // const theme = useTheme();
@@ -49,14 +50,14 @@ export default function AuthPage() {
           // Add a default or appropriate status value
         })
       )
-      // .unwrap();
+      .unwrap();
       navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
       setError("the mail or password it's wrong");
       alert("המשתמש לא קיים במערכת");
       // alert("the mail or password it's wrong");
       console.log(err);
-      
+
     } finally {
       setLoading(false);
     }
@@ -64,12 +65,12 @@ export default function AuthPage() {
 
 
 
-  const handleGoogleLogin = async (mode:string) => {
+  const handleGoogleLogin = async (mode: string) => {
     setLoading(true);
     setError("");
 
     try {
-      await dispatch(googleLogin({mode})).unwrap();
+      await dispatch(googleLogin({ mode })).unwrap();
       navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
       setError("משתמש לא קיים במערכת");
@@ -77,7 +78,7 @@ export default function AuthPage() {
       setLoading(false);
     }
   };
-  
+
 
   return (
     <Box
@@ -126,12 +127,14 @@ export default function AuthPage() {
               fullWidth
               inputRef={firstNameRef}
               sx={{ mt: 2 }}
+              disabled={loading}
             />
             <TextField
               label="שם משפחה"
               fullWidth
               inputRef={lastNameRef}
               sx={{ mt: 2 }}
+              disabled={loading}
             />
           </>
         )}
@@ -141,6 +144,8 @@ export default function AuthPage() {
           fullWidth
           inputRef={emailRef}
           sx={{ mt: 2 }}
+          disabled={loading}
+          type="email"
         />
         <TextField
           label="סיסמה"
@@ -148,6 +153,7 @@ export default function AuthPage() {
           fullWidth
           inputRef={passwordRef}
           sx={{ mt: 2 }}
+          disabled={loading}
         />
 
         {error && (
@@ -161,11 +167,17 @@ export default function AuthPage() {
           variant="contained"
           onClick={handleSubmit}
           disabled={loading}
-          sx={{ mt: 3 }} 
-          component={Link}
-          to="/"
+          sx={{ mt: 3 }}
+        // component={Link}
+        // to="/"
         >
-          {loading ? "טוען..." : mode === "login" ? "התחבר" : "הרשם"}
+          {/* {loading ? "טוען..." : mode === "login" ? "התחבר" : "הרשם"} */}
+          {loading ? (
+            <CircularProgress size={24} sx={{ color: "#fff" }} />
+          ) : (
+            mode === "login" ? "התחבר" : "הרשם"
+          )}
+
         </Button>
 
 
@@ -173,7 +185,7 @@ export default function AuthPage() {
         <Button
           fullWidth
           variant="outlined"
-          onClick={()=>handleGoogleLogin(mode)}
+          onClick={() => handleGoogleLogin(mode)}
           disabled={loading}
           sx={{ mt: 2 }}
         >
@@ -186,7 +198,7 @@ export default function AuthPage() {
           fullWidth
           onClick={() => setMode(mode === "login" ? "register" : "login")}
           sx={{ mt: 1 }}
-         
+
         >
           {mode === "login"
             ? "אין לך חשבון? לחץ כאן להרשמה"
