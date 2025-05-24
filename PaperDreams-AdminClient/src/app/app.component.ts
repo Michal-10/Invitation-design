@@ -50,7 +50,7 @@ import { filter } from 'rxjs/operators';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'PaperDreams-AdminClient';
+  title = 'invitatonLine';
   sidebarCollapsed = false;
   currentRoute = '';
 
