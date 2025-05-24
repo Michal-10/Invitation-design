@@ -458,7 +458,7 @@ export default function TextEditorSidebar({
   }
 
   return (
-    <Paper elevation={3} sx={{ borderRadius: 2, direction: 'ltr', height: "100%", display: "flex", flexDirection: "column" }}>
+    <Paper elevation={3} sx={{ borderRadius: 2, direction: 'ltr', height: "90%", display: "flex", flexDirection: "column" }}>
       <Box sx={{ p: 2, bgcolor: "var(--primary-color)", color: "white", display: "flex", alignItems: "center", justifyContent: "center", gap: 1 }}>
         <Edit />
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
