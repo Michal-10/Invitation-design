@@ -170,7 +170,7 @@ export default function MyCompletedInvitationPage() {
           <Paper
   elevation={3}
   sx={{
-    p: { xs: 3, md: 5 },
+    // p: { xs: 3, md: 5 },
     mb: 5,
     borderRadius: 4,
     textAlign: "center",
@@ -191,7 +191,7 @@ export default function MyCompletedInvitationPage() {
   </Typography>
 </Paper>
 
-<Box display="flex" justifyContent="flex-start" mb={2}>
+<Box display="flex" justifyContent="flex-start" sx={{direction:'rtl'}} mb={2}>
   <MultiFileDownload
     selectedFiles={selected}
     onClearSelection={clearSelection}
