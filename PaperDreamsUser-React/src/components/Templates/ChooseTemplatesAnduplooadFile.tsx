@@ -376,10 +376,10 @@ export default function CategoryTemplatesPage() {
                 border: `1px solid ${theme.palette.primary.light}`,
               }}
             >
-              <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, color: theme.palette.primary.dark }}>
+              <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, color: theme.palette.primary.main }}>
                 העלאת קובץ
               </Typography>
-              <Typography sx={{ fontWeight: 300, mb: 3, color: theme.palette.primary.dark }}>
+              <Typography sx={{ fontWeight: 300, mb: 3, color: theme.palette.primary.main }}>
                 העלה קובץ עם פרטים על האירוע
               </Typography>
               <UploadFile onFileSelected={setFile} />
