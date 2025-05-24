@@ -581,7 +581,7 @@ export default function CategoryTemplatesPage() {
     <Container
       maxWidth={false}
       disableGutters
-      sx={{ pb: 5, direction: "rtl", minHeight: "100vh", px: { xs: 2, md: 6 } }}
+      sx={{ pb: 5, direction: "rtl",width:'100%', minHeight: "100vh", px: { xs: 2, md: 6 } }}
     >
       {error && (
         <Alert severity="error" sx={{ mt: 3, mb: 2 }}>
