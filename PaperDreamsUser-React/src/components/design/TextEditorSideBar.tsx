@@ -186,10 +186,9 @@ export default function TextEditorSidebar({
                     justifyContent: "flex-start",
                     textAlign: "start",
                     "&:hover": {
-                      bgcolor: theme.palette.primary.light,
                       borderColor: theme.palette.primary.main,
                     }, "& .MuiButton-startIcon": {
-                      marginRight: 1, // או ערך קבוע אחר כמו '8px'
+                      marginRight: 2, 
                       marginLeft: 0, // לוודא שאין margin מיותר בצד השני
                     },
                   }}
