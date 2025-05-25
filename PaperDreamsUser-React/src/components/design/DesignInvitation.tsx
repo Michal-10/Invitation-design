@@ -550,10 +550,10 @@ console.log(myTtemplate.templateFields[0].name);
 
     return (
         <>
-            <Grid container style={{top:'20px', height: "90vh", direction: "rtl" }}>
+            <Grid container style={{marginTop:'18px', height: "90vh", direction: "rtl" }}>
                 {/* Sidebar - רבע עמוד */}
 
-                <Grid item xs={3} style={{ marginTop:'10px', padding: "3px" }}>
+                <Grid item xs={3} style={{  padding: "3px" }}>
                     <TextEditorSidebar canvas={canvas} fieldsWithPlaces={myTtemplate.templateFields || []} />
                 </Grid>
                 {/* Canvas - שלושת רבעי עמוד */}
