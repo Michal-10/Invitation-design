@@ -178,6 +178,7 @@ export default function TextEditorSidebar({
                   onClick={() => handleFieldSelect(templateField)}
                   startIcon={<TextFields />}
                   sx={{
+                    marginLeft:2,
                     borderColor: theme.palette.primary.main,
                     color: theme.palette.text.primary,
                     borderRadius: 1.5,
@@ -188,7 +189,7 @@ export default function TextEditorSidebar({
                       bgcolor: theme.palette.primary.light,
                       borderColor: theme.palette.primary.main,
                     }, "& .MuiButton-startIcon": {
-                      marginRight: theme.spacing(1), // או ערך קבוע אחר כמו '8px'
+                      marginRight: 1, // או ערך קבוע אחר כמו '8px'
                       marginLeft: 0, // לוודא שאין margin מיותר בצד השני
                     },
                   }}
