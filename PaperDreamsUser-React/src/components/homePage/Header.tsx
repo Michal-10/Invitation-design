@@ -5,6 +5,7 @@ import BrushIcon from '@mui/icons-material/Brush';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/Store';
+import theme from '../../theme';
 // import { RootState } from '../../redux/Store';
 // import { useSelector } from 'react-redux';
 
@@ -83,9 +84,9 @@ const Header: React.FC = () => {
                 >
                     {/* לוגו */}
                     <Box display="flex" alignItems="center" gap={1} mb={{ xs: 1, sm: 0 }}>
-                        <BrushIcon sx={{ color: 'primary' }} />
+                        <BrushIcon sx={{ color: theme.palette.primary.main }} />
                         <Typography variant="h6" fontSize={{ xs: '1rem', sm: '1.25rem' }}>
-                            InvantationLine
+                            InvintationLine
                         </Typography>
                     </Box>
 

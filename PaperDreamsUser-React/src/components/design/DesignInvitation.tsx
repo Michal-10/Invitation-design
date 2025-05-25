@@ -558,7 +558,10 @@ console.log(myTtemplate.templateFields[0].name);
                 </Grid>
                 {/* Canvas - שלושת רבעי עמוד */}
                 <Grid item xs={9} style={{ display: "flex", flexDirection: "column", paddingLeft:'60%' }}>
-                    <canvas ref={canvasRef} style={{ paddingLeft:'30%', paddingTop:'80px' }} />
+                    <canvas ref={canvasRef} style={{
+                        //  paddingLeft:'30%',
+                        textAlign: 'center',
+                          paddingTop:'80px' }} />
                     <Box sx={{ top: '80px', position: 'absolute', left: '20px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
                         <Button
                             startIcon={<SaveIcon sx={{ color: 'var(--primary-color)' }} />}
