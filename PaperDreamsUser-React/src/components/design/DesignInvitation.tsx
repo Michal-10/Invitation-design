@@ -553,15 +553,14 @@ console.log(myTtemplate.templateFields[0].name);
             <Grid container style={{ height: "90vh", direction: "rtl" }}>
                 {/* Sidebar - רבע עמוד */}
 
-                <Grid item xs={3} style={{ padding: "3px" }}>
+                <Grid item xs={3} style={{ marginTop:'200px', padding: "3px" }}>
                     <TextEditorSidebar canvas={canvas} fieldsWithPlaces={myTtemplate.templateFields || []} />
                 </Grid>
                 {/* Canvas - שלושת רבעי עמוד */}
                 <Grid item xs={9} style={{ display: "flex", flexDirection: "column", paddingLeft:'60%' }}>
                     <canvas ref={canvasRef} style={{
-                        //  paddingLeft:'30%',
                         textAlign: 'center',
-                          paddingTop:'80px' }} />
+                    }} />
                     <Box sx={{ top: '80px', position: 'absolute', left: '20px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
                         <Button
                             startIcon={<SaveIcon sx={{ color: 'var(--primary-color)' }} />}
