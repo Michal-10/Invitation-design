@@ -22,6 +22,10 @@ export const Router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
+        path: "updateUser",
+        element: <UpdateUser />,
+      },
+      {
         path: "chooseCategory",
         element: <ChooseCategoryTemplate />,
       },
