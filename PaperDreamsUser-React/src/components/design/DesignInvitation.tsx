@@ -550,7 +550,7 @@ console.log(myTtemplate.templateFields[0].name);
 
     return (
         <>
-            <Grid container style={{ height: "90vh", direction: "rtl" }}>
+            <Grid container style={{ height: "89vh", direction: "rtl" }}>
                 {/* Sidebar - רבע עמוד */}
 
                 <Grid item xs={3} style={{ marginTop:'10px', padding: "3px" }}>
