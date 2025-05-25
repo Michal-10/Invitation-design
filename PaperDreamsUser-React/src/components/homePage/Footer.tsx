@@ -4,6 +4,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
+        zIndex: 1000,
         textAlign: 'center',
         py: 2,
         backgroundColor: '#141e30',
