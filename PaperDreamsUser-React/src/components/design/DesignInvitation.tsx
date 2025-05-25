@@ -586,6 +586,8 @@
 
 
 
+
+
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
 import axios from "axios";
@@ -791,17 +793,17 @@ export default () => {
     };
 
     return (
-        <Grid container sx={{ minHeight: "90vh", direction: "rtl", p: 2 }}>
+        <Grid container sx={{ minHeight: "90vh", direction: "rtl", p: 2, alignItems: 'flex-start' }}> {/* Align items to start at top */}
+
             {/* Sidebar for Text Editing - Right Side */}
             <Grid item xs={12} md={3} sx={{ pl: { xs: 0, md: 2 }, mb: { xs: 2, md: 0 }, order: { xs: 3, md: 1 } }}>
-                <Box sx={{ p: 2, height: "100%", display: 'flex', flexDirection: 'column' }}>
-                    {/* Removed Typography for "עריכת טקסט ההזמנה" */}
+                <Box sx={{ p: 2, height: "100%", display: 'flex', flexDirection: 'column', pt: { xs: 2, md: 4 } }}> {/* Adjusted padding top */}
                     <TextEditorSidebar canvas={canvas} fieldsWithPlaces={myTemplate.templateFields || []} />
                 </Box>
             </Grid>
 
             {/* Canvas - Middle */}
-            <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", order: { xs: 2, md: 2 } }}>
+            <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", order: { xs: 2, md: 2 }, pt: { xs: 0, md: 4 } }}> {/* Adjusted padding top */}
                 <Box sx={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -821,11 +823,16 @@ export default () => {
                     height: "100%",
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'center', // Center buttons vertically
-                    alignItems: { xs: 'center', md: 'flex-start' }, // Align to start for desktop, center for mobile
+                    justifyContent: 'flex-start', // Align buttons to the top
+                    alignItems: { xs: 'center', md: 'flex-start' },
                     gap: '15px',
-                    p: 2, // Added padding for the box containing buttons
+                    p: 2,
+                    pt: { xs: 2, md: 4 } // Adjusted padding top for buttons
                 }}>
+                    {/* You can add a Typography title here if you want a title for the buttons section */}
+                    {/* <Typography variant="h6" gutterBottom align="center" sx={{ color: 'var(--primary-color)', mb: 2 }}>
+                        פעולות
+                    </Typography> */}
                     <Button
                         variant="contained"
                         startIcon={<SaveIcon />}
@@ -840,7 +847,7 @@ export default () => {
                             padding: { xs: '8px 12px', md: '10px 15px' },
                             gap: '8px',
                             whiteSpace: 'nowrap',
-                            width: 'fit-content' // Ensure button width fits content
+                            width: 'fit-content'
                         }}
                     >
                         לשמירה והורדה
@@ -860,7 +867,7 @@ export default () => {
                             padding: { xs: '8px 12px', md: '10px 15px' },
                             gap: '8px',
                             whiteSpace: 'nowrap',
-                            width: 'fit-content' // Ensure button width fits content
+                            width: 'fit-content'
                         }}
                     >
                         להדפסת ההזמנה
