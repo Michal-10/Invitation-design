@@ -586,7 +586,6 @@
 
 
 
-
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
 import axios from "axios";
@@ -594,7 +593,7 @@ import { Template } from "../../models/Template";
 import { useNavigate } from "react-router";
 import { RootState } from "../../redux/Store";
 import { useSelector } from "react-redux";
-import { Grid, Box, Button, Typography } from "@mui/material"; // Removed Paper import
+import { Grid, Box, Button } from "@mui/material";
 import PrintIcon from "@mui/icons-material/Print";
 import SaveIcon from "@mui/icons-material/Save";
 import { getDownloadURL } from "../../Services/FileService";
@@ -793,32 +792,39 @@ export default () => {
 
     return (
         <Grid container sx={{ minHeight: "90vh", direction: "rtl", p: 2 }}>
-            {/* Canvas and Action Buttons */}
-            <Grid item xs={12} md={9} sx={{ display: "flex", flexDirection: "column", alignItems: "center", position: 'relative', pr: { xs: 0, md: 2 } }}>
-                {/* Canvas */}
+            {/* Sidebar for Text Editing - Right Side */}
+            <Grid item xs={12} md={3} sx={{ pl: { xs: 0, md: 2 }, mb: { xs: 2, md: 0 }, order: { xs: 3, md: 1 } }}>
+                <Box sx={{ p: 2, height: "100%", display: 'flex', flexDirection: 'column' }}>
+                    {/* Removed Typography for "עריכת טקסט ההזמנה" */}
+                    <TextEditorSidebar canvas={canvas} fieldsWithPlaces={myTemplate.templateFields || []} />
+                </Box>
+            </Grid>
+
+            {/* Canvas - Middle */}
+            <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", order: { xs: 2, md: 2 } }}>
                 <Box sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: 'fit-content',
-                    border: '1px solid #ddd', // Border directly on the Box
-                    borderRadius: '8px', // Rounded corners directly on the Box
-                    p: 2, // Padding around the canvas
+                    border: '1px solid #ddd',
+                    borderRadius: '8px',
+                    p: 2,
                 }}>
                     <canvas ref={canvasRef} />
                 </Box>
+            </Grid>
 
-                {/* Action Buttons */}
+            {/* Action Buttons - Left Side */}
+            <Grid item xs={12} md={3} sx={{ pr: { xs: 0, md: 2 }, mb: { xs: 2, md: 0 }, order: { xs: 1, md: 3 } }}>
                 <Box sx={{
-                    position: 'absolute',
-                    top: { xs: 'auto', md: '50px' },
-                    bottom: { xs: '20px', md: 'auto' },
-                    left: { xs: '50%', md: '20px' }, // Changed right to left
-                    transform: { xs: 'translateX(-50%)', md: 'none' }, // Adjusted transform for left positioning
+                    height: "100%",
                     display: 'flex',
-                    flexDirection: { xs: 'row', md: 'column' },
+                    flexDirection: 'column',
+                    justifyContent: 'center', // Center buttons vertically
+                    alignItems: { xs: 'center', md: 'flex-start' }, // Align to start for desktop, center for mobile
                     gap: '15px',
-                    mt: { xs: 2, md: 0 }
+                    p: 2, // Added padding for the box containing buttons
                 }}>
                     <Button
                         variant="contained"
@@ -833,7 +839,8 @@ export default () => {
                             fontSize: { xs: '14px', md: '18px' },
                             padding: { xs: '8px 12px', md: '10px 15px' },
                             gap: '8px',
-                            whiteSpace: 'nowrap'
+                            whiteSpace: 'nowrap',
+                            width: 'fit-content' // Ensure button width fits content
                         }}
                     >
                         לשמירה והורדה
@@ -852,21 +859,12 @@ export default () => {
                             fontSize: { xs: '14px', md: '18px' },
                             padding: { xs: '8px 12px', md: '10px 15px' },
                             gap: '8px',
-                            whiteSpace: 'nowrap'
+                            whiteSpace: 'nowrap',
+                            width: 'fit-content' // Ensure button width fits content
                         }}
                     >
                         להדפסת ההזמנה
                     </Button>
-                </Box>
-            </Grid>
-
-            {/* Sidebar for Text Editing */}
-            <Grid item xs={12} md={3} sx={{ pl: { xs: 0, md: 2 }, mb: { xs: 2, md: 0 } }}> {/* Changed pr to pl */}
-                <Box sx={{ p: 2, height: "100%", display: 'flex', flexDirection: 'column' }}> {/* Removed Paper */}
-                    <Typography variant="h6" gutterBottom align="center" sx={{ color: 'var(--primary-color)', mb: 2 }}>
-                        עריכת טקסט ההזמנה
-                    </Typography>
-                    <TextEditorSidebar canvas={canvas} fieldsWithPlaces={myTemplate.templateFields || []} />
                 </Box>
             </Grid>
         </Grid>
