@@ -178,7 +178,7 @@ export default function TextEditorSidebar({
                   onClick={() => handleFieldSelect(templateField)}
                   startIcon={<TextFields />}
                   sx={{
-                    marginLeft:2,
+                    marginLeft: 2,
                     borderColor: theme.palette.primary.main,
                     color: theme.palette.text.primary,
                     borderRadius: 1.5,
@@ -187,11 +187,12 @@ export default function TextEditorSidebar({
                     textAlign: "start",
                     "&:hover": {
                       borderColor: theme.palette.primary.main,
-                    }, "& .MuiButton-startIcon": {
-                      marginRight: 2, 
-                      marginLeft: 2, // לוודא שאין margin מיותר בצד השני
                     },
-                  }}
+                    "& .MuiButton-startIcon": {
+                      marginRight: 0, // אין צורך ברווח מימין ב-RTL
+                      marginLeft: 1.5, // רווח בין האייקון לטקסט (בכיוון ימין לשמאל)
+                    },
+                  }}                  
                 >
                   {templateField.field.name}
                 </Button>
