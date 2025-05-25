@@ -43,12 +43,17 @@ const Header: React.FC = () => {
 
         setActive(location.pathname);
         const storedToken = sessionStorage.getItem('userToken');
+        console.log("storedToken");
+        console.log(storedToken);
+        
         setToken(storedToken);
         if (storedToken) {
             const name = getUserNameFromToken(storedToken);
+            console.log("in useEffect in getUserNameFromToken");
+            console.log(name);
             setUserName(name);
         }
-    }, [location.pathname]);
+    }, [location.pathname, user]);
 
     const handleLogout = () => {
         sessionStorage.removeItem('userToken');
@@ -86,7 +91,7 @@ const Header: React.FC = () => {
                     <Box display="flex" alignItems="center" gap={1} mb={{ xs: 1, sm: 0 }}>
                         <BrushIcon sx={{ color: theme.palette.primary.main }} />
                         <Typography variant="h6" fontSize={{ xs: '1rem', sm: '1.25rem' }}>
-                            InvintationLine
+                            InvitationLine
                         </Typography>
                     </Box>
 
