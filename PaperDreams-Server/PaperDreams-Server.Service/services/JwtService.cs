@@ -90,6 +90,7 @@ namespace PaperDreams_Server.Service.services
                     new Claim("userId", user.Id.ToString()), // הוספת ה-Claim הזה כדי להימנע מבעיה
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(ClaimTypes.Name, user.FirstName ?? ""),
+                    new Claim("name", user.FirstName ?? user.LastName ?? ""),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 
