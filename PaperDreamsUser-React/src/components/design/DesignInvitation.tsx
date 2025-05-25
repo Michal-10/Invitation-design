@@ -557,7 +557,7 @@ console.log(myTtemplate.templateFields[0].name);
                     <TextEditorSidebar canvas={canvas} fieldsWithPlaces={myTtemplate.templateFields || []} />
                 </Grid>
                 {/* Canvas - שלושת רבעי עמוד */}
-                <Grid item xs={9} style={{ display: "flex", flexDirection: "column", paddingRight:'25%' }}>
+                <Grid item xs={9} style={{ display: "flex", flexDirection: "column", paddingRight:'15%' }}>
                     <canvas ref={canvasRef} style={{
                         textAlign: 'center',
                     }} />
