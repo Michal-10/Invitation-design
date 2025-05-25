@@ -187,6 +187,9 @@ export default function TextEditorSidebar({
                     "&:hover": {
                       bgcolor: theme.palette.primary.light,
                       borderColor: theme.palette.primary.main,
+                    }, "& .MuiButton-startIcon": {
+                      marginRight: theme.spacing(1), // או ערך קבוע אחר כמו '8px'
+                      marginLeft: 0, // לוודא שאין margin מיותר בצד השני
                     },
                   }}
                 >
