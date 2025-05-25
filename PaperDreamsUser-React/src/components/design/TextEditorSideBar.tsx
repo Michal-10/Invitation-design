@@ -170,7 +170,7 @@ export default function TextEditorSidebar({
               בחר שדה טקסט לעריכה:
             </Typography>
 
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5, direction: "rtl" }}>
               {fieldsWithPlaces.map((templateField: TemplateField, index: number) => (
                 <Button
                   key={index}
