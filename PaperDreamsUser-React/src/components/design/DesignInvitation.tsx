@@ -827,12 +827,9 @@ export default () => {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    // Removed fixed height here, canvas itself will define height
-                    // Removed border, borderRadius, and padding from this Box.
-                    // The canvas element will have its own border if desired.
-                }}>
+               }}>
                     <canvas ref={canvasRef} style={{
-                        border: '1px solid #ddd', // Border directly on the canvas
+                        // border: '1px solid #ddd', // Border directly on the canvas
                         borderRadius: '8px', // Rounded corners directly on the canvas
                     }} />
                 </Box>
@@ -844,11 +841,7 @@ export default () => {
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '15px',
-                    p: 2, // Padding around the buttons
-                    // Optional: add a border to the buttons container if desired
-                    // border: '1px solid #ddd',
-                    // borderRadius: '8px',
-                    // backgroundColor: 'white'
+                    p: 2, 
                 }}>
                     <Button
                         variant="contained"
@@ -857,14 +850,11 @@ export default () => {
                         sx={{
                             backgroundColor: 'var(--primary-color)',
                             color: 'white',
-                            '&:hover': {
-                                backgroundColor: 'darken(var(--primary-color), 10%)',
-                            },
                             fontSize: { xs: '14px', md: '18px' },
                             padding: { xs: '8px 12px', md: '10px 15px' },
                             gap: '8px',
                             whiteSpace: 'nowrap',
-                            width: 'fit-content'
+                            width: '60px'
                         }}
                     >
                         לשמירה והורדה
@@ -884,7 +874,7 @@ export default () => {
                             padding: { xs: '8px 12px', md: '10px 15px' },
                             gap: '8px',
                             whiteSpace: 'nowrap',
-                            width: 'fit-content'
+                            width: '60px'
                         }}
                     >
                         להדפסת ההזמנה
