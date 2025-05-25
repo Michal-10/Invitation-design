@@ -189,7 +189,7 @@ export default function TextEditorSidebar({
                       borderColor: theme.palette.primary.main,
                     }, "& .MuiButton-startIcon": {
                       marginRight: 2, 
-                      marginLeft: 0, // לוודא שאין margin מיותר בצד השני
+                      marginLeft: 2, // לוודא שאין margin מיותר בצד השני
                     },
                   }}
                 >
