@@ -166,7 +166,7 @@ const HeroSection = () => {
                 {/* Hero Section */}
                 <Box
                     sx={{ bgcolor: "white", py: 8, textAlign: "center" }} >
-                    <Box sx={{ paddingBottom: '20px', paddingTop: '20px' }}>
+                    <Box sx={{ paddingBottom: '10px', paddingTop: '10px' }}>
                         <Typography variant="h2" component="h1"
                             sx={{
                                 fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
@@ -177,7 +177,7 @@ const HeroSection = () => {
                         >
                             עיצוב הזמנות מקצועי בקליק
                         </Typography>
-                        <Typography variant="h5" sx={{ margin: '15px', color: "#666", direction: "rtl" }}>
+                        <Typography variant="h5" sx={{ margin: '10px', color: "#666", direction: "rtl" }}>
                             בחר תבנית, העלה קובץ, וקבל הזמנה מעוצבת בצורה מושלמת
                         </Typography>
                         <Button
@@ -199,7 +199,7 @@ const HeroSection = () => {
                 </Box>
 
                 {/* Features Section */}
-                <Box sx={{ py: 8/*, width: "100%" */ }}>
+                <Box sx={{ py: 5/*, width: "100%" */ }}>
                     <Box>
                         <Typography
                             variant="h3"
