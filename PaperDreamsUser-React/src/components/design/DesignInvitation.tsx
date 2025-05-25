@@ -587,7 +587,6 @@
 
 
 
-
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
 import axios from "axios";
@@ -595,13 +594,13 @@ import { Template } from "../../models/Template";
 import { useNavigate } from "react-router";
 import { RootState } from "../../redux/Store";
 import { useSelector } from "react-redux";
-import { Grid, Box, Button } from "@mui/material";
+import { Grid, Box, Button } from "@mui/material"; // Removed Typography as it's not needed for the sidebar title anymore
 import PrintIcon from "@mui/icons-material/Print";
 import SaveIcon from "@mui/icons-material/Save";
 import { getDownloadURL } from "../../Services/FileService";
 import { uploadFileToAWS } from "../../Services/UploadFileToAWS";
 import { decodeToken } from "../../Services/User";
-import TextEditorSidebar from "./TextEditorSideBar"; // Assuming this path is correct
+import TextEditorSidebar from "./TextEditorSideBar";
 
 export default () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -630,7 +629,15 @@ export default () => {
     // --- Initialize Fabric Canvas ---
     useEffect(() => {
         if (!canvasRef.current) return;
-        const newCanvas = new fabric.Canvas(canvasRef.current, { backgroundColor: "" });
+        // Define initial fixed dimensions for the canvas to avoid "growing" effect
+        const initialCanvasWidth = 550; // Or whatever default size makes sense
+        const initialCanvasHeight = 657; // Or whatever default size makes sense
+
+        const newCanvas = new fabric.Canvas(canvasRef.current, {
+            backgroundColor: "",
+            width: initialCanvasWidth,
+            height: initialCanvasHeight,
+        });
         setCanvas(newCanvas);
         return () => {
             newCanvas.dispose();
@@ -656,6 +663,7 @@ export default () => {
             const finalWidth = originalWidth * scaleFactor;
             const finalHeight = originalHeight * scaleFactor;
 
+            // Update canvas dimensions based on image and scaling
             canvas.setWidth(finalWidth);
             canvas.setHeight(finalHeight);
 
@@ -672,7 +680,10 @@ export default () => {
                 addTextToCanvas(scaleFactor);
             });
         };
-    }, [canvas, imageURL, myTemplate.templateFields, state.text]); // Added dependencies for addTextToCanvas
+        // If imageURL changes, we might want to clear existing canvas content
+        // This prevents text from previous images showing up
+        canvas.clear();
+    }, [canvas, imageURL, myTemplate.templateFields, state.text]);
 
     const addTextToCanvas = (scaleFactor: number) => {
         if (!canvas || !myTemplate?.templateFields) return;
@@ -793,46 +804,52 @@ export default () => {
     };
 
     return (
-        <Grid container sx={{ minHeight: "90vh", direction: "rtl", p: 2, alignItems: 'flex-start' }}> {/* Align items to start at top */}
+        <Grid container sx={{ minHeight: "calc(100vh - 64px)", direction: "rtl", p: 2, alignItems: 'flex-start' }}> {/* Adjusted minHeight for full viewport height minus header if any */}
 
             {/* Sidebar for Text Editing - Right Side */}
-            <Grid item xs={12} md={3} sx={{ pl: { xs: 0, md: 2 }, mb: { xs: 2, md: 0 }, order: { xs: 3, md: 1 } }}>
-                <Box sx={{ p: 2, height: "100%", display: 'flex', flexDirection: 'column', pt: { xs: 2, md: 4 } }}> {/* Adjusted padding top */}
+            <Grid item xs={12} md={3} sx={{ order: { xs: 3, md: 1 }, display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <Box sx={{
+                    height: "100%", // Make the Box fill the grid item's height
+                    display: 'flex',
+                    flexDirection: 'column',
+                    p: 2, // Padding inside the sidebar box
+                    border: '1px solid #ddd', // Optional: add border to sidebar
+                    borderRadius: '8px',
+                    backgroundColor: 'white' // Optional: background for sidebar
+                }}>
                     <TextEditorSidebar canvas={canvas} fieldsWithPlaces={myTemplate.templateFields || []} />
                 </Box>
             </Grid>
 
             {/* Canvas - Middle */}
-            <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", order: { xs: 2, md: 2 }, pt: { xs: 0, md: 4 } }}> {/* Adjusted padding top */}
+            <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", order: { xs: 2, md: 2 }, py: 2 }}> {/* py for vertical padding */}
                 <Box sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: 'fit-content',
-                    border: '1px solid #ddd',
-                    borderRadius: '8px',
-                    p: 2,
+                    // Removed fixed height here, canvas itself will define height
+                    // Removed border, borderRadius, and padding from this Box.
+                    // The canvas element will have its own border if desired.
                 }}>
-                    <canvas ref={canvasRef} />
+                    <canvas ref={canvasRef} style={{
+                        border: '1px solid #ddd', // Border directly on the canvas
+                        borderRadius: '8px', // Rounded corners directly on the canvas
+                    }} />
                 </Box>
             </Grid>
 
             {/* Action Buttons - Left Side */}
-            <Grid item xs={12} md={3} sx={{ pr: { xs: 0, md: 2 }, mb: { xs: 2, md: 0 }, order: { xs: 1, md: 3 } }}>
+            <Grid item xs={12} md={3} sx={{ order: { xs: 1, md: 3 }, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', py: 2, pl: { xs: 0, md: 2 } }}> {/* Adjusted for left alignment and padding */}
                 <Box sx={{
-                    height: "100%",
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'flex-start', // Align buttons to the top
-                    alignItems: { xs: 'center', md: 'flex-start' },
                     gap: '15px',
-                    p: 2,
-                    pt: { xs: 2, md: 4 } // Adjusted padding top for buttons
+                    p: 2, // Padding around the buttons
+                    // Optional: add a border to the buttons container if desired
+                    // border: '1px solid #ddd',
+                    // borderRadius: '8px',
+                    // backgroundColor: 'white'
                 }}>
-                    {/* You can add a Typography title here if you want a title for the buttons section */}
-                    {/* <Typography variant="h6" gutterBottom align="center" sx={{ color: 'var(--primary-color)', mb: 2 }}>
-                        פעולות
-                    </Typography> */}
                     <Button
                         variant="contained"
                         startIcon={<SaveIcon />}
