@@ -587,7 +587,6 @@
 
 
 
-
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
 import axios from "axios";
@@ -595,7 +594,7 @@ import { Template } from "../../models/Template";
 import { useNavigate } from "react-router";
 import { RootState } from "../../redux/Store";
 import { useSelector } from "react-redux";
-import { Grid, Box, Button, Typography, Paper } from "@mui/material";
+import { Grid, Box, Button, Typography } from "@mui/material"; // Removed Paper import
 import PrintIcon from "@mui/icons-material/Print";
 import SaveIcon from "@mui/icons-material/Save";
 import { getDownloadURL } from "../../Services/FileService";
@@ -779,7 +778,7 @@ export default () => {
                     <style>
                         @page { size: A4 portrait; margin: 0; }
                         body { margin: 0; padding: 0; width: 100%; height: 100%; }
-                        img { width: 100%; height: 100%; object-fit: contain; } /* Changed to contain for better fitting on A4 */
+                        img { width: 100%; height: 100%; object-fit: contain; }
                     </style>
                 </head>
                 <body onload="window.print(); setTimeout(() => window.parent.document.body.removeChild(window.frameElement), 1000);">
@@ -794,33 +793,32 @@ export default () => {
 
     return (
         <Grid container sx={{ minHeight: "90vh", direction: "rtl", p: 2 }}>
-            {/* Sidebar for Text Editing */}
-            <Grid item xs={12} md={3} sx={{ pr: { xs: 0, md: 2 }, mb: { xs: 2, md: 0 } }}>
-                <Paper elevation={3} sx={{ p: 2, height: "100%", display: 'flex', flexDirection: 'column' }}>
-                    <Typography variant="h6" gutterBottom align="center" sx={{ color: 'var(--primary-color)', mb: 2 }}>
-                        עריכת טקסט ההזמנה
-                    </Typography>
-                    <TextEditorSidebar canvas={canvas} fieldsWithPlaces={myTemplate.templateFields || []} />
-                </Paper>
-            </Grid>
-
             {/* Canvas and Action Buttons */}
-            <Grid item xs={12} md={9} sx={{ display: "flex", flexDirection: "column", alignItems: "center", position: 'relative' }}>
-                <Paper elevation={3} sx={{ p: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'fit-content' }}>
-                    <canvas ref={canvasRef} style={{ border: '1px solid #ddd', borderRadius: '8px' }} />
-                </Paper>
+            <Grid item xs={12} md={9} sx={{ display: "flex", flexDirection: "column", alignItems: "center", position: 'relative', pr: { xs: 0, md: 2 } }}>
+                {/* Canvas */}
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 'fit-content',
+                    border: '1px solid #ddd', // Border directly on the Box
+                    borderRadius: '8px', // Rounded corners directly on the Box
+                    p: 2, // Padding around the canvas
+                }}>
+                    <canvas ref={canvasRef} />
+                </Box>
 
                 {/* Action Buttons */}
                 <Box sx={{
                     position: 'absolute',
-                    top: { xs: 'auto', md: '50px' }, // Adjust top position for smaller screens
-                    bottom: { xs: '20px', md: 'auto' }, // Keep at bottom for smaller screens
-                    right: { xs: '50%', md: '20px' },
-                    transform: { xs: 'translateX(50%)', md: 'none' },
+                    top: { xs: 'auto', md: '50px' },
+                    bottom: { xs: '20px', md: 'auto' },
+                    left: { xs: '50%', md: '20px' }, // Changed right to left
+                    transform: { xs: 'translateX(-50%)', md: 'none' }, // Adjusted transform for left positioning
                     display: 'flex',
                     flexDirection: { xs: 'row', md: 'column' },
                     gap: '15px',
-                    mt: { xs: 2, md: 0 } // Margin top for smaller screens
+                    mt: { xs: 2, md: 0 }
                 }}>
                     <Button
                         variant="contained"
@@ -830,7 +828,7 @@ export default () => {
                             backgroundColor: 'var(--primary-color)',
                             color: 'white',
                             '&:hover': {
-                                backgroundColor: 'darken(var(--primary-color), 10%)', // Adjust hover color
+                                backgroundColor: 'darken(var(--primary-color), 10%)',
                             },
                             fontSize: { xs: '14px', md: '18px' },
                             padding: { xs: '8px 12px', md: '10px 15px' },
@@ -859,6 +857,16 @@ export default () => {
                     >
                         להדפסת ההזמנה
                     </Button>
+                </Box>
+            </Grid>
+
+            {/* Sidebar for Text Editing */}
+            <Grid item xs={12} md={3} sx={{ pl: { xs: 0, md: 2 }, mb: { xs: 2, md: 0 } }}> {/* Changed pr to pl */}
+                <Box sx={{ p: 2, height: "100%", display: 'flex', flexDirection: 'column' }}> {/* Removed Paper */}
+                    <Typography variant="h6" gutterBottom align="center" sx={{ color: 'var(--primary-color)', mb: 2 }}>
+                        עריכת טקסט ההזמנה
+                    </Typography>
+                    <TextEditorSidebar canvas={canvas} fieldsWithPlaces={myTemplate.templateFields || []} />
                 </Box>
             </Grid>
         </Grid>
