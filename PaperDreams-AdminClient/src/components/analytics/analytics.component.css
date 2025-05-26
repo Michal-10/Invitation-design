@@ -50,7 +50,14 @@
     max-height: 400px;
   }
   
-
+  .chart-buttons{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 15px;
+    margin-top: 20px;
+  }
   .btn-primary {
     background: linear-gradient(135deg, #912ffa 0%, #256eed 100%);
     color: white;
