@@ -384,18 +384,11 @@ const HeroSection = () => {
                                     href="https://mail.google.com/mail/?view=cm&fs=1&to=noreply.invitationline@gmail.com&su=פנייה%20מאתר%20InvitationLine&body=שלום%20רציתי%20לפנות%20בנוגע%20ל..."
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    style={{ color: '#0077cc', textDecoration: 'none', marginLeft: '5px' }}
+                                    style={{ color: '#fff', textDecoration: 'none', marginLeft: '5px' }}
                                 >
                                     צור קשר
                                 </a>
                             </Button>
-                            {/* <Button variant="outlined" size="large" onClick={handleContactOpen}
-                                sx={{ borderColor: "white", color: "white", "&:hover": { bgcolor: "rgba(255,255,255,0.1)", borderColor: "white", }, px: 4, py: 1.5, borderRadius: 2, fontSize: "1.1rem" }}>
-                                צור קשר
-                            </Button> */}
-
-
-
                         </Box>
                     </Box>
                 </Box>
