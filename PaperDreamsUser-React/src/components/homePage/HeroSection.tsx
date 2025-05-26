@@ -3,7 +3,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import TuneIcon from '@mui/icons-material/Tune';
 import { useNavigate } from 'react-router';
-import { useState } from 'react';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/Store';
 
@@ -19,8 +19,8 @@ const HeroSection = () => {
     //     console.log(user);
     //     console.log("sessionStorage.getItem('token')");
     //     console.log(sessionStorage.getItem('token'));
-        
-        
+
+
     //     if(user?.id 
     //          && sessionStorage.getItem('userToken')
     //       ){
@@ -29,8 +29,8 @@ const HeroSection = () => {
     //     else {
     //        console.log("'navigate('/login') ");
     //     }
-       
-        
+
+
     //     sessionStorage.getItem('userToken') && user?.id? navigate('/chooseCategory') : navigate('/login');
     // };
     // return (
@@ -128,35 +128,35 @@ const HeroSection = () => {
     // const open = Boolean(anchorEl)
 
     // // State for contact dialog
-    const [, setContactOpen] = useState(false)
+    // const [, setContactOpen] = useState(false)
     const user = useSelector((state: RootState) => state.user.user)
 
     // // Handle contact form
-    const handleContactOpen = () => {
-        setContactOpen(true)
-    }
+    // const handleContactOpen = () => {
+    //     // setContactOpen(true)
+    // }
 
     const handleStartNow = () => {
-            console.log('handleStartNow');
-            console.log("-*-*-*-*-*-*-*-*-*-*-*-*-");
-            console.log("user");
-            console.log(user);
-            console.log("sessionStorage.getItem('token')");
-            console.log(sessionStorage.getItem('token'));
-            
-            
-            if(user?.id 
-                 && sessionStorage.getItem('userToken')
-              ){
-               console.log("'navigate('/chooseCategory') ");
-            }
-            else {
-               console.log("'navigate('/login') ");
-            }
-           
-            
-            sessionStorage.getItem('userToken') && user?.id? navigate('/chooseCategory') : navigate('/login');
-        };
+        console.log('handleStartNow');
+        console.log("-*-*-*-*-*-*-*-*-*-*-*-*-");
+        console.log("user");
+        console.log(user);
+        console.log("sessionStorage.getItem('token')");
+        console.log(sessionStorage.getItem('token'));
+
+
+        if (user?.id
+            && sessionStorage.getItem('userToken')
+        ) {
+            console.log("'navigate('/chooseCategory') ");
+        }
+        else {
+            console.log("'navigate('/login') ");
+        }
+
+
+        sessionStorage.getItem('userToken') && user?.id ? navigate('/chooseCategory') : navigate('/login');
+    };
 
     return (
         <>
@@ -166,7 +166,7 @@ const HeroSection = () => {
                 {/* Hero Section */}
                 <Box
                     sx={{ bgcolor: "white", py: 8, textAlign: "center" }} >
-                    <Box sx={{ paddingBottom: '10px', paddingTop: '10px' }}>
+                    <Box sx={{ paddingBottom: '17px', paddingTop: '10px' }}>
                         <Typography variant="h2" component="h1"
                             sx={{
                                 fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
@@ -206,7 +206,7 @@ const HeroSection = () => {
                             component="h2"
                             sx={{
                                 fontWeight: 700,
-                                mb: 6,
+                                mb: 4,
                                 textAlign: "center",
                                 color: "#333",
                                 direction: "rtl",
@@ -289,7 +289,7 @@ const HeroSection = () => {
                                     <CardContent sx={{ flexGrow: 1, textAlign: "center", direction: "rtl" }}>
                                         <Box sx={{ display: "flex", justifyContent: "center", mb: 2, }} >
                                             <Avatar sx={{ bgcolor: "var(--primary-color)", width: 70, height: 70, }}>
-                                            <RocketLaunchIcon  style={{ fontSize: 30, color: '#fff' }} />
+                                                <RocketLaunchIcon style={{ fontSize: 30, color: '#fff' }} />
                                             </Avatar>
                                         </Box>
                                         <Typography variant="h5" component="h3" sx={{ fontWeight: 700, mb: 2 }}>
@@ -332,7 +332,7 @@ const HeroSection = () => {
                                     <CardContent sx={{ flexGrow: 1, textAlign: "center", direction: "rtl" }}>
                                         <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
                                             <Avatar sx={{ bgcolor: "var(--primary-color)", width: 70, height: 70, }}>
-                                                <TuneIcon  sx={{ fontSize: 30, color: "#fff" }} />
+                                                <TuneIcon sx={{ fontSize: 30, color: "#fff" }} />
                                             </Avatar>
                                         </Box>
                                         <Typography variant="h5" component="h3" sx={{ fontWeight: 700, mb: 2 }}>
@@ -344,7 +344,7 @@ const HeroSection = () => {
                                         </Typography>
                                     </CardContent>
                                     <CardActions sx={{ justifyContent: "center", pb: 3 }}>
-                                        <Button  onClick={() => navigate("/chooseCategory")} sx={{
+                                        <Button onClick={() => navigate("/chooseCategory")} sx={{
                                             fontSize: "20px",
                                             color: "var(--primary-color)",
                                             "&:hover": { bgcolor: "rgba(255,111,97,0.1)" },
@@ -375,10 +375,26 @@ const HeroSection = () => {
                                 sx={{ bgcolor: "white", color: "var(--primary-color)", "&:hover": { bgcolor: "#f0f0f0" }, px: 4, py: 1.5, borderRadius: 2, fontSize: "1.1rem" }}>
                                 צור הזמנה
                             </Button>
-                            <Button variant="outlined" size="large" onClick={handleContactOpen}
+
+
+                            <Button variant="outlined" size="large"
+                                sx={{ borderColor: "white", color: "white", "&:hover": { bgcolor: "rgba(255,255,255,0.1)", borderColor: "white", }, px: 4, py: 1.5, borderRadius: 2, fontSize: "1.1rem" }}>
+                                <a
+                                    href="https://mail.google.com/mail/?view=cm&fs=1&to=noreply.invitationline@gmail.com&su=פנייה%20מאתר%20InvitationLine&body=שלום%20רציתי%20לפנות%20בנוגע%20ל..."
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: '#0077cc', textDecoration: 'none', marginLeft: '5px' }}
+                                >
+                                    צור קשר
+                                </a>
+                            </Button>
+                            {/* <Button variant="outlined" size="large" onClick={handleContactOpen}
                                 sx={{ borderColor: "white", color: "white", "&:hover": { bgcolor: "rgba(255,255,255,0.1)", borderColor: "white", }, px: 4, py: 1.5, borderRadius: 2, fontSize: "1.1rem" }}>
                                 צור קשר
-                            </Button>
+                            </Button> */}
+
+
+
                         </Box>
                     </Box>
                 </Box>
