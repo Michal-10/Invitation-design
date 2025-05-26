@@ -118,7 +118,7 @@ namespace PaperDreams_Server.Controllers
 
             var isSuccess = await _userService.UpdateUserAsync(id, userDto);
             if (isSuccess!=null)
-                return Ok(new { message = "Profile updated successfully.", token = isSuccess });
+                return Ok(new { message = "Profile updated successfully.", token = isSuccess, user = userDto });
 
             return BadRequest("Failed to update profile.");
         }

@@ -111,7 +111,9 @@ builder.Services.AddCors(options =>
         {
             policy.WithOrigins(
                     "https://invitationline.onrender.com",
-                    "https://invitationline-admin.onrender.com")
+                    "https://invitationline-admin.onrender.com",
+                    "https://invitationline-vmg0.onrender.com/",
+                    "https://invitationline-admin-rst8.onrender.com")
                   .AllowAnyHeader()
                   .AllowAnyMethod(). 
                   AllowCredentials(); // ✅ חשוב מאוד!
