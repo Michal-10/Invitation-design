@@ -61,39 +61,37 @@
   </div>
 </div> -->
 
-
-
-
 <div class="dashboard-container">
   <h2>לוח סטטיסטיקות</h2>
 
-  <div class="chart-layout-new">
+  <div class="chart-layout">
     <!-- גרף פאי בצד שמאל -->
     <div class="chart-section chart-pie" (click)="openChart('pie')">
       <h3>התפלגות תבניות לפי קטגוריה</h3>
-      <canvas id="categoryPieChart" baseChart
-        [data]="{ labels: templatesByCategoryLabels, datasets: [{ data: templatesByCategoryData, backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#AB47BC'] }] }"
-        [type]="'pie'">
+      <canvas baseChart
+        [data]="{ labels: templatesByCategoryLabels, datasets: [{ data: templatesByCategoryData, backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'] }] }"
+        [type]="'pie'"
+        [options]="{ responsive: true, maintainAspectRatio: false }">
       </canvas>
     </div>
 
-    <!-- שני הגרפים לרוחב בצד ימין -->
+    <!-- שני גרפים מוערמים בצד ימין -->
     <div class="chart-right">
-      <div class="chart-section" (click)="openChart('bar')">
+      <div class="chart-section small-chart" (click)="openChart('bar')">
         <h3>התחברויות יומיות</h3>
-        <canvas id="dailyLoginsChart" baseChart
+        <canvas baseChart
           [data]="{ labels: dailyLoginsLabels, datasets: [{ label: 'מספר התחברויות', data: dailyLoginsData, backgroundColor: '#4f46e5' }] }"
-          [options]="{ responsive: true, scales: { x: { title: { display: true, text: 'שעה' } }, y: { beginAtZero: true } } }"
-          [type]="'bar'">
+          [type]="'bar'"
+          [options]="{ responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }">
         </canvas>
       </div>
 
-      <div class="chart-section" (click)="openChart('line')">
+      <div class="chart-section small-chart" (click)="openChart('line')">
         <h3>משתמשים פעילים יומית</h3>
-        <canvas id="dailyActiveUsersChart" baseChart
+        <canvas baseChart
           [data]="{ labels: dailyActiveUsersLabels, datasets: [{ label: 'משתמשים פעילים', data: dailyActiveUsersData, borderColor: '#ff5733', backgroundColor: 'rgba(255, 87, 51, 0.5)', fill: true }] }"
-          [options]="{ responsive: true, scales: { x: { title: { display: true, text: 'תאריך' } }, y: { beginAtZero: true, title: { display: true, text: 'מספר משתמשים' } } } }"
-          [type]="'line'">
+          [type]="'line'"
+          [options]="{ responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }">
         </canvas>
       </div>
     </div>
@@ -103,8 +101,8 @@
   <div *ngIf="selectedChart" class="fullscreen-chart" (click)="selectedChart = null">
     <canvas baseChart
       [data]="getChartData(selectedChart)"
-      [options]="getChartOptions(selectedChart)"
-      [type]="selectedChartType">
+      [type]="selectedChartType"
+      [options]="getChartOptions(selectedChart)">
     </canvas>
   </div>
 </div>
