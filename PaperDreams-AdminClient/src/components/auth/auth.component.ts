@@ -125,7 +125,7 @@ export class AuthComponent {
           timer: 1500,
           showConfirmButton: false
         }).then(() => {
-          // this.router.navigate(['/']);
+          this.router.navigate(['/']);
         });
         this.isLoading = false;
       },
