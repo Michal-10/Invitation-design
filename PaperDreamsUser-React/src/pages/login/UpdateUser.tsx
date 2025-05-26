@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/Store";
 import { User } from "../../models/User";
 import { updateUser } from "../../redux/UserSlice";
+import { useNavigate } from "react-router";
 // import LoginStore from "../global-state/mobX/LoginStore";
 // import { UserContext } from "../UserContextReducer";
 
@@ -22,6 +23,7 @@ const UpdateUser = () => {
     console.log(user);
     
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
     const firstNameRef = useRef<HTMLInputElement>(null);
     const lastNameRef = useRef<HTMLInputElement>(null);
@@ -60,6 +62,7 @@ const UpdateUser = () => {
         dispatch(updateUser({ user: userData }))
 
         setOpenModal(false);
+        navigate('/');
     }
 
     return (<>

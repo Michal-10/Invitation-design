@@ -180,8 +180,6 @@ export default function AuthPage() {
 
         </Button>
 
-
-
         <Button
           fullWidth
           variant="outlined"
