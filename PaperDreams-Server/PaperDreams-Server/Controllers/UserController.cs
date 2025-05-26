@@ -116,9 +116,9 @@ namespace PaperDreams_Server.Controllers
             if (!string.IsNullOrEmpty(userDto.Role) && userDto.Role != "string")
                 return BadRequest("You cannot change your role.");
 
-            bool isSuccess = await _userService.UpdateUserAsync(id, userDto);
-            if (isSuccess)
-                return Ok(new { message = "Profile updated successfully." });
+            var isSuccess = await _userService.UpdateUserAsync(id, userDto);
+            if (isSuccess!=null)
+                return Ok(new { message = "Profile updated successfully.", token = isSuccess });
 
             return BadRequest("Failed to update profile.");
         }

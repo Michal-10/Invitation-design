@@ -150,9 +150,7 @@ const UpdateUser = () => {
         try {
             const res = await dispatch(updateUser({ user: userData })).unwrap();
             console.log("in update Usr Comp ");
-            console.log(res);
-            sessionStorage.setItem('usetToken',res);            
-            
+            console.log(res);           
 
             setOpenModal(false);
             navigate('/');

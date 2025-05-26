@@ -100,7 +100,7 @@ namespace PaperDreams_Server.Service.services
         }
 
         // ✅ עדכון משתמש (משתמש יכול לעדכן רק את עצמו)
-        public async Task<bool> UpdateUserAsync(int id, UserDTO userDto)
+        public async Task<string> UpdateUserAsync(int id, UserDTO userDto)
         {
             var userFind = await _userRepository.GetUserByIdAsync(id);
             if (userFind != null)
@@ -108,9 +108,11 @@ namespace PaperDreams_Server.Service.services
                 var userEntity = _mapper.Map<User>(userDto);
                 userEntity.UpdatedAt = DateTime.Now;
                 userEntity.PasswordHash = userDto.Password;
-                return await _userRepository.UpdateUserAsync(id,userEntity);
+                var res = await _userRepository.UpdateUserAsync(id,userEntity);
+                if (res)
+                    return _jwtService.GenerateToken(userEntity);
             }
-            return false;
+            return null;
         }
 
         // ✅ מחיקת משתמש (Admin בלבד)

@@ -21,7 +21,7 @@ namespace PaperDreams_Server.Core.Iservices
 
         Task<UserDTO> getUserByIdAsync(int id);
 
-        Task<bool> UpdateUserAsync(int id, UserDTO userDto);
+        Task<string> UpdateUserAsync(int id, UserDTO userDto);
 
         Task<bool> DeleteUserAsync(int id);
 
