@@ -1,4 +1,4 @@
-/* 
+
    .dashboard-container {
     padding: 20px;
     direction: rtl;
@@ -53,72 +53,4 @@
 
 
 
- */
-
- .dashboard-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  height: 90vh;
-  gap: 16px;
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-.chart-section {
-  flex: 1;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 16px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.chart-section:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-}
-
-canvas {
-  width: 100% !important;
-  height: 100% !important;
-  max-height: 300px;
-}
-
-/* מצב גרף פתוח */
-.chart-section.expanded {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  background: white;
-  z-index: 9999;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-}
-
-.chart-section.expanded canvas {
-  max-height: none;
-  height: 80vh !important;
-}
-
-.close-btn {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: #f44336;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  z-index: 10000;
-}
 
