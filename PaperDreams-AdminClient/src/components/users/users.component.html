@@ -233,7 +233,7 @@
               [disabled]="userForm.invalid || (add_user && !userForm.get('password')?.value)"
               (click)="add_user ? addUser() : saveUser()">
               {{ add_user ? 'הוסף' : 'שמור' }}
-              @if(isLoading) {
+              @if(isLoadingSave) {
                 <mat-spinner color="#fff" diameter="20"></mat-spinner>
               }
             </button>

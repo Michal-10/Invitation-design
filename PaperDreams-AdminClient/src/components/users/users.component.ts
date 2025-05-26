@@ -262,7 +262,8 @@ export class UsersComponent implements OnInit {
 
 
 users: User[] = [];
-  isLoading: boolean = false;
+  isLoading: boolean = false; 
+  isLoadingSave : boolean = false;
   editingUserId: number | null = null;
   userForm!: FormGroup;
   add_user: boolean = false;
@@ -382,7 +383,7 @@ new: any;
   }
 
   saveUser() {
-    this.isLoading = true;
+    this.isLoadingSave = true;
     if (!this.editingUserId || this.userForm.invalid) return;
 
     const formValue = this.userForm.value;
@@ -393,7 +394,7 @@ new: any;
 
     this.userService.updateUser(this.editingUserId, updatedUser).subscribe({
       next: () => {
-        this.isLoading = false;
+        this.isLoadingSave = false;
         this.dialogRef.close();
         Swal.fire({
           title: 'הצלחה',
