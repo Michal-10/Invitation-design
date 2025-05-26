@@ -64,46 +64,40 @@
 
 
 
-
-
-
 <div class="dashboard-container">
   <h2>לוח סטטיסטיקות</h2>
 
-  <div class="chart-layout">
-    <!-- גרף עגול - בצד ימין -->
-    <div class="chart-section chart-pie" (click)="openChart('pie')">
+  <div class="chart-list">
+    <div class="chart-section" (click)="openChart('pie')">
       <h3>התפלגות תבניות לפי קטגוריה</h3>
-      <canvas id="categoryPieChart" baseChart
+      <canvas baseChart
         [data]="{ labels: templatesByCategoryLabels, datasets: [{ data: templatesByCategoryData, backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#AB47BC'] }] }"
         [type]="'pie'">
       </canvas>
     </div>
 
-    <!-- שני הגרפים השוכבים בצד שמאל -->
-    <div class="chart-column">
-      <div class="chart-section" (click)="openChart('bar')">
-        <h3>התחברויות יומיות</h3>
-        <canvas id="dailyLoginsChart" baseChart
-          [data]="{ labels: dailyLoginsLabels, datasets: [{ label: 'מספר התחברויות', data: dailyLoginsData, backgroundColor: '#4f46e5' }] }"
-          [options]="{ responsive: true, scales: { x: { title: { display: true, text: 'שעה' } }, y: { beginAtZero: true } } }"
-          [type]="'bar'">
-        </canvas>
-      </div>
+    <div class="chart-section" (click)="openChart('bar')">
+      <h3>התחברויות יומיות</h3>
+      <canvas baseChart
+        [data]="{ labels: dailyLoginsLabels, datasets: [{ label: 'מספר התחברויות', data: dailyLoginsData, backgroundColor: '#4f46e5' }] }"
+        [options]="{ responsive: true, scales: { x: { title: { display: true, text: 'שעה' } }, y: { beginAtZero: true } } }"
+        [type]="'bar'">
+      </canvas>
+    </div>
 
-      <div class="chart-section" (click)="openChart('line')">
-        <h3>משתמשים פעילים יומית</h3>
-        <canvas id="dailyActiveUsersChart" baseChart
-          [data]="{ labels: dailyActiveUsersLabels, datasets: [{ label: 'משתמשים פעילים', data: dailyActiveUsersData, borderColor: '#ff5733', backgroundColor: 'rgba(255, 87, 51, 0.5)', fill: true }] }"
-          [options]="{ responsive: true, scales: { x: { title: { display: true, text: 'תאריך' } }, y: { beginAtZero: true, title: { display: true, text: 'מספר משתמשים' } } } }"
-          [type]="'line'">
-        </canvas>
-      </div>
+    <div class="chart-section" (click)="openChart('line')">
+      <h3>משתמשים פעילים יומית</h3>
+      <canvas baseChart
+        [data]="{ labels: dailyActiveUsersLabels, datasets: [{ label: 'משתמשים פעילים', data: dailyActiveUsersData, borderColor: '#ff5733', backgroundColor: 'rgba(255, 87, 51, 0.5)', fill: true }] }"
+        [options]="{ responsive: true, scales: { x: { title: { display: true, text: 'תאריך' } }, y: { beginAtZero: true, title: { display: true, text: 'מספר משתמשים' } } } }"
+        [type]="'line'">
+      </canvas>
     </div>
   </div>
 
-  <!-- דיאלוג הגדלה (את יכולה להשתמש ב-MatDialog או Div פשוט שייפתח ב-fullscreen) -->
-  <div *ngIf="selectedChart" class="fullscreen-chart" (click)="selectedChart = null">
+  <!-- גרף מוגדל במסך מלא -->
+  <div *ngIf="selectedChart" class="fullscreen-chart">
+    <button class="close-btn" (click)="selectedChart = null">×</button>
     <canvas baseChart
       [data]="getChartData(selectedChart)"
       [options]="getChartOptions(selectedChart)"

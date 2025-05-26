@@ -50,7 +50,7 @@ export class AppComponent {
   logout() {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
   isLoggedIn(): boolean {
