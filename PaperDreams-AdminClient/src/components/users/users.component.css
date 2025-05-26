@@ -194,49 +194,7 @@
   margin-bottom: 20px;
 }
 
-/* העלאת קובץ */
-.file-upload-container {
-  margin-bottom: 25px;
 
-  .file-upload-label {
-    display: flex;
-    align-items: center;
-    padding: 12px 15px;
-    background: rgba(106, 17, 203, 0.1);
-    color: #912ffa;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    width: fit-content;
-
-    &:hover {
-      background: rgba(106, 17, 203, 0.2);
-    }
-
-    i {
-      margin-left: 8px;
-    }
-  }
-
-  .file-input {
-    display: none;
-  }
-
-  .selected-file {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #f8f9fb;
-    border-radius: 8px;
-    border: 1px dashed #e0e0e0;
-
-    i {
-      margin-left: 8px;
-      color: #912ffa;
-    }
-  }
-}
 
 /* כפתור ראשי */
 .form-actions {

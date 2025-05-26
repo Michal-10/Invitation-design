@@ -228,8 +228,8 @@
 
 
           <div class="form-actions">
-            <button mat-button (click)="cancelEdit()">ביטול</button>
-            <button mat-raised-button color="primary"
+            <button mat-button (click)="cancelEdit()" class="btn-primary">ביטול</button>
+            <button mat-raised-button color="primary" class="btn-primary"
               [disabled]="userForm.invalid || (add_user && !userForm.get('password')?.value)"
               (click)="add_user ? addUser() : saveUser()">
               {{ add_user ? 'הוסף' : 'שמור' }}
