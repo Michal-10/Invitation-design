@@ -174,6 +174,19 @@ app.UseSwagger();
 app.UseSwaggerUI();
 //}
 
+app.Use(async (context, next) =>
+{
+    if (context.Request.Host.Host == "invitationline-server.onrender.com")
+    {
+        var redirectUrl = "https://invitationline-server-ht5o.onrender.com" + context.Request.Path + context.Request.QueryString;
+        context.Response.Redirect(redirectUrl, permanent: true);
+        return;
+    }
+
+    await next();
+});
+
+
 app.UseHttpsRedirection();
 
 app.UseCors("AllowClients");
