@@ -1,31 +1,3 @@
-// import { Component } from '@angular/core';
-// import { Router, RouterLink, RouterOutlet } from '@angular/router';
-// import { MatToolbarModule } from '@angular/material/toolbar';
-
-
-// @Component({
-//   selector: 'app-root',
-//   imports: [RouterOutlet, MatToolbarModule, RouterLink],
-//   templateUrl: './app.component.html',
-//   styleUrl: './app.component.css'
-// })
-// export class AppComponent {
-//   title = 'PaperDreams-AdminClient';
-
-//   constructor(private router: Router) { }
-
-//   logout() {
-//     localStorage.removeItem('isLoggedIn');
-//     localStorage.removeItem('token');
-//     this.router.navigate(['/login']);
-//   }
-
-//   isLoggedIn(): boolean {
-//     return localStorage.getItem('isLoggedIn') === 'true';
-//   }
-// }
-
-
 
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet, NavigationEnd } from '@angular/router';

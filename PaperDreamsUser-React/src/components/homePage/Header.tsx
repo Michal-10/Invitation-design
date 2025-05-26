@@ -43,7 +43,7 @@
 //         const storedToken = sessionStorage.getItem('userToken');
 //         console.log("storedToken");
 //         console.log(storedToken);
-        
+
 //         setToken(storedToken);
 //         if (storedToken) {
 //             const name = getUserNameFromToken(storedToken);
@@ -190,7 +190,12 @@ import {
     Menu,
     MenuItem,
     IconButton,
+    Fade,
+    ListItemIcon,
+    ListItemText,
 } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { motion } from 'framer-motion';
 import BrushIcon from '@mui/icons-material/Brush';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
@@ -331,17 +336,35 @@ const Header: React.FC = () => {
                                     anchorEl={anchorEl}
                                     open={open}
                                     onClose={handleMenuClose}
+                                    TransitionComponent={Fade}
                                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                                     transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                    PaperProps={{
+                                        elevation: 4,
+                                        sx: {
+                                            borderRadius: 2,
+                                            minWidth: 180,
+                                            backgroundColor: 'background.paper',
+                                            boxShadow: '0px 4px 20px rgba(0,0,0,0.1)',
+                                        },
+                                    }}
                                 >
-                                    <MenuItem onClick={handleSettings}>הגדרות</MenuItem>
+                                    <MenuItem onClick={handleSettings}>
+                                        <ListItemIcon>
+                                            <SettingsIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText>הגדרות</ListItemText>
+                                    </MenuItem>
                                     <MenuItem
                                         onClick={() => {
                                             handleMenuClose();
                                             handleLogout();
                                         }}
                                     >
-                                        התנתקות
+                                        <ListItemIcon>
+                                            <LogoutIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText>התנתקות</ListItemText>
                                     </MenuItem>
                                 </Menu>
                             </>

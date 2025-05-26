@@ -1,151 +1,3 @@
-<!-- <p>templates works!</p>
-
-<div style="max-width: 600px; margin: auto; padding: 30px;">
-    <mat-card>
-      <mat-card-title>העלאת תבנית</mat-card-title>
-      <mat-card-content>
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>שם תבנית</mat-label>
-          <input matInput [(ngModel)]="templateName" />
-        </mat-form-field>
-  
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>קטגוריה</mat-label>
-          <mat-select [(ngModel)]="selectedCategory">
-            @for( c of categories; track c.name) {
-              <mat-option [value]="c.name">
-                {{ c.name }}
-              </mat-option>
-            }
-           
-          </mat-select>
-        </mat-form-field>
-  
-        <input type="file" (change)="onFileSelected($event)" />
-  
-        <button mat-raised-button color="primary" style="margin-top: 15px;" (click)="uploadTemplate()">
-          העלה תבנית
-        </button>
-      </mat-card-content>
-    </mat-card>
-  
-    <mat-card style="margin-top: 30px;">
-      <mat-card-title>הוספת קטגוריה חדשה</mat-card-title>
-      <mat-card-content>
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>שם קטגוריה</mat-label>
-          <input matInput [(ngModel)]="newCategoryName" />
-        </mat-form-field>
-        <button mat-stroked-button color="accent" (click)="addCategory()">הוסף קטגוריה</button>
-      </mat-card-content>
-    </mat-card>
-  </div>
-     -->
-
-
-
-
-<!-- 
-<form [formGroup]="templateForm" (ngSubmit)="submit()">
-  <select formControlName="categoryId">
-    @for ( c of categories; track c.id) {
-      <option [value]="c.id">{{ c.name }}</option>
-    }
-  </select>
-  <input formControlName="name" placeholder="Name">
-  <input formControlName="description" placeholder="Description">
-  <input formControlName="imageUrl" placeholder="Image URL">
-  <button type="submit">Create Template</button>
-</form> -->
-
-
-
-
-
-
-
-
-
-
-<!-- 
-
-<form [formGroup]="templateForm" (ngSubmit)="submit()" style="max-width: 500px; margin: auto;">
-  <mat-card>
-    <mat-card-title>העלאת תבנית</mat-card-title>
-    <mat-card-content>
-      <mat-form-field appearance="outline" style="width: 100%;">
-        <mat-label>שם תבנית</mat-label>
-        <input matInput formControlName="name" />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" style="width: 100%;">
-        <mat-label>תיאור</mat-label>
-        <input matInput formControlName="description" />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" style="width: 100%;">
-        <mat-label>קטגוריה</mat-label>
-        <mat-select formControlName="categoryId">
-          @for(c of categories; track c.id) {
-            <mat-option [value]="c.id">{{ c.name }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <input type="file" (change)="onFileSelected($event)" />
-
-      <button mat-raised-button color="primary" style="margin-top: 20px;" type="submit">
-        העלה ושמור תבנית
-      </button>
-    </mat-card-content>
-  </mat-card>
-</form> 
- -->
-
-
-
-<!-- 
-<form [formGroup]="templateForm" (ngSubmit)="submit()" dir="rtl" style="max-width: 600px; margin: auto;">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title style="text-align: center; width: 100%;">העלאת תבנית</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-
-      <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 16px;">
-        <mat-label>שם תבנית</mat-label>
-        <input matInput formControlName="name" required />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 16px;">
-        <mat-label>תיאור</mat-label>
-        <input matInput formControlName="description" required />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 16px;">
-        <mat-label>קטגוריה</mat-label>
-        <mat-select formControlName="categoryId" required>
-          @for(c of categories; track c.id) {
-            <mat-option [value]="c.id">{{ c.name }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <div style="margin-bottom: 16px;">
-        <label style="display: block; margin-bottom: 8px;">בחר קובץ תבנית:</label>
-        <input type="file" (change)="onFileSelected($event)" />
-      </div>
-
-      <button mat-raised-button color="primary" type="submit" style="width: 100%;">
-        העלה ושמור תבנית
-      </button>
-      
-    </mat-card-content>
-  </mat-card>
-</form> 
-
- -->
-
 
 <div class="content-wrapper page-transition">
   <div class="card">
@@ -163,9 +15,6 @@
           @if(templateForm.get('name')?.invalid && templateForm.get('name')?.touched){
           <mat-error>שם תבנית הוא שדה חובה</mat-error>
           }
-          <!-- <mat-error >
-            שם תבנית הוא שדה חובה
-          </mat-error> -->
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="custom-form-field">
@@ -186,9 +35,6 @@
           @if(templateForm.get('categoryId')?.invalid && templateForm.get('categoryId')?.touched) {
           <mat-error>יש לבחור קטגוריה</mat-error>
           }
-          <!-- <mat-error >
-            יש לבחור קטגוריה
-          </mat-error> -->
         </mat-form-field>
 
         <div class="file-upload-container">
@@ -213,7 +59,6 @@
             @if(isUploading) {
             <mat-spinner diameter="20" class="spinner"></mat-spinner>
             }
-            <!-- <mat-spinner diameter="20" class="spinner"></mat-spinner> -->
           </button>
         </div>
       </form>
