@@ -392,7 +392,6 @@ const Header: React.FC = () => {
                 </Toolbar>
             </AppBar>
         </motion.div>
-        
     );
 };
 
