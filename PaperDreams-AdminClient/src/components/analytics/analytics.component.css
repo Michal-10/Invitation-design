@@ -1,51 +1,4 @@
 /* 
-
-   .dashboard-container {
-    padding: 20px;
-    direction: rtl;
-  }
-  
-  .summary-cards {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-  
-  .card {
-    background: #f0f0f0;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    flex: 1;
-  }
-  
-  .chart-section {
-    margin-bottom: 30px;
-  }
-  
-  canvas {
-    max-width: 100%;
-    max-height: 400px;
-  }
-  
-  .probabilities-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .probabilities-section li {
-    padding: 6px 0;
-  }
-  
-  .stat-box {
-    background-color: #222;
-    color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 0 10px #0003;
-  }
-   */
    .dashboard-container {
     padding: 20px;
     direction: rtl;
@@ -78,7 +31,7 @@
     font-weight: bold;
   }
   .chart-section {
-    background: #ffffff; /* רקע לבן */
+    background: #ffffff; 
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 30px;
@@ -89,11 +42,56 @@
   .chart-section h3 {
     font-size: 1.5rem;
     margin-bottom: 20px;
-    color: #333333; /* צבע כותרת כהה */
+    color: #333333; 
   }
   
   canvas {
     max-width: 100%;
     max-height: 400px;
+  }
+   */
+
+
+
+
+
+   .charts-container {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .chart-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    max-height: 400px;
+  }
+  
+  .chart-card.expanded {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    max-height: none;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background: white;
+    padding: 24px;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+  
+  .chart-card.expanded mat-card-content {
+    height: 100%;
+  }
+  
+  canvas {
+    width: 100% !important;
+    height: 300px !important;
+  }
+  
+  .chart-card.expanded canvas {
+    height: 80vh !important;
   }
   

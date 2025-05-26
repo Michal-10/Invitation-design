@@ -1,40 +1,6 @@
-
-
-<div class="dashboard-container">
-    <h2>לוח סטטיסטיקות</h2>
-    <div class="chart-section">
-        <h3>התפלגות תבניות לפי קטגוריה</h3>
-        <canvas id="categoryPieChart" baseChart
-            [data]="{ labels: templatesByCategoryLabels, datasets: [{ data: templatesByCategoryData, backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'] }] }"
-            [type]="'pie'"></canvas>
-    </div>
-
-    <div class="chart-section">
-        <h3>התחברויות יומיות</h3>
-        <canvas id="dailyLoginsChart" baseChart
-            [data]="{ labels: dailyLoginsLabels, datasets: [{ label: 'מספר התחברויות', data: dailyLoginsData, backgroundColor: '#4f46e5' }] }"
-            [options]="{ responsive: true, scales: { x: { title: { display: true, text: 'שעה' } }, y: { beginAtZero: true } } }"
-            [type]="'bar'"></canvas>
-    </div>
-
-    <div class="chart-section">
-        <h3>משתמשים פעילים יומית</h3>
-        <canvas id="dailyActiveUsersChart" baseChart
-            [data]="{ labels: dailyActiveUsersLabels, datasets: [{ label: 'משתמשים פעילים', data: dailyActiveUsersData, borderColor: '#ff5733', backgroundColor: 'rgba(255, 87, 51, 0.5)', fill: true }] }"
-            [options]="{ responsive: true, scales: { x: { title: { display: true, text: 'תאריך' } }, y: { beginAtZero: true, title: { display: true, text: 'מספר משתמשים' } } } }"
-            [type]="'line'">
-        </canvas>
-    </div>
-</div>
-
 <!-- 
 
-
-
-
 <div class="dashboard-container">
-  <h2>לוח סטטיסטיקות</h2>
-  <div class="chart-grid">
     <div class="chart-section">
         <h3>התפלגות תבניות לפי קטגוריה</h3>
         <canvas id="categoryPieChart" baseChart
@@ -58,7 +24,66 @@
             [type]="'line'">
         </canvas>
     </div>
-  </div>
-</div>
+</div> -->
 
- -->
+
+
+
+
+<div class="charts-container">
+
+  <mat-card
+    class="chart-card"
+    [class.expanded]="selectedChart === 'pie'"
+    (click)="openChart('pie')"
+  >
+    <mat-card-header>
+      <mat-card-title>תבניות לפי קטגוריה</mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="selectedChart === 'pie' || !selectedChart">
+      <canvas
+        baseChart
+        [data]="getChartData('pie')"
+        [options]="getChartOptions('pie')"
+        [type]="selectedChartType"
+      ></canvas>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card
+    class="chart-card"
+    [class.expanded]="selectedChart === 'bar'"
+    (click)="openChart('bar')"
+  >
+    <mat-card-header>
+      <mat-card-title>כניסות יומיות</mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="selectedChart === 'bar' || !selectedChart">
+      <canvas
+        baseChart
+        [data]="getChartData('bar')"
+        [options]="getChartOptions('bar')"
+        [type]="selectedChartType"
+      ></canvas>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card
+    class="chart-card"
+    [class.expanded]="selectedChart === 'line'"
+    (click)="openChart('line')"
+  >
+    <mat-card-header>
+      <mat-card-title>משתמשים פעילים יומיים</mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="selectedChart === 'line' || !selectedChart">
+      <canvas
+        baseChart
+        [data]="getChartData('line')"
+        [options]="getChartOptions('line')"
+        [type]="selectedChartType"
+      ></canvas>
+    </mat-card-content>
+  </mat-card>
+
+</div>

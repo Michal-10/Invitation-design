@@ -454,7 +454,7 @@ getChartData(chart: string):ChartConfiguration['data'] {
         labels: this.templatesByCategoryLabels,
         datasets: [{
           data: this.templatesByCategoryData,
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#AB47BC']
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#AB47BC', '#FF7043', '#42A5F5', '#66BB6A'],
         }]
       };
     case 'bar':
