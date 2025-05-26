@@ -186,6 +186,7 @@ const HeroSection = () => {
                             onClick={handleStartNow}
                             sx={{
                                 bgcolor: "var(--primary-color)",
+                                marginTop:'5px',
                                 "&:hover": { bgcolor: "#e05e52" },
                                 px: 4,
                                 py: 1.5,
