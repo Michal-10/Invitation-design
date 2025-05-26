@@ -57,7 +57,9 @@
     flex-wrap: nowrap;
     gap: 15px;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
+
   .btn-primary {
     background: linear-gradient(135deg, #912ffa 0%, #256eed 100%);
     color: white;
