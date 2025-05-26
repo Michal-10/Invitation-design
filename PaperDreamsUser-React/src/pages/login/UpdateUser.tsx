@@ -148,7 +148,12 @@ const UpdateUser = () => {
         };
 
         try {
-            await dispatch(updateUser({ user: userData })).unwrap();
+            const res = await dispatch(updateUser({ user: userData })).unwrap();
+            console.log("in update Usr Comp ");
+            console.log(res);
+            sessionStorage.setItem('usetToken',res);            
+            
+
             setOpenModal(false);
             navigate('/');
         } catch (err: any) {
