@@ -269,6 +269,7 @@ users: User[] = [];
   hidePassword: boolean = true;
   @ViewChild('editDialog') editDialog!: TemplateRef<any>;
   private dialogRef!: MatDialogRef<any>;
+new: any;
 
   constructor(
     private userService: UserService,
