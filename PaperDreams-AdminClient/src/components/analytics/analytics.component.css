@@ -1,190 +1,71 @@
-/* 
+.dashboard-container {
+  padding: 30px 40px;
+  direction: rtl;
+  font-family: var(--font-family);
+}
 
-   .dashboard-container {
-    padding: 20px;
-    direction: rtl;
-  }
-  
-  .summary-cards {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-  
-  .card {
-    background: #f0f0f0;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    flex: 1;
-  }
-  
-  .chart-section {
-    margin-bottom: 30px;
-  }
-  
-  canvas {
-    max-width: 100%;
-    max-height: 400px;
-  }
-  
-  .probabilities-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .probabilities-section li {
-    padding: 6px 0;
-  }
-  
-  .stat-box {
-    background-color: #222;
-    color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 0 10px #0003;
-  }
-   */
-   .dashboard-container {
-    padding: 20px;
-    direction: rtl;
-    font-family: var(--font-family);
-  }
-  
-  .summary-cards {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-  
-  .card {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    color: white;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    flex: 1;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-  
-  .card p {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  .chart-section {
-    background: #ffffff; /* רקע לבן */
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .chart-section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #333333; /* צבע כותרת כהה */
-  }
-  
-  canvas {
-    max-width: 100%;
-    max-height: 400px;
-  }
-  
+.chart-layout-horizontal {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
 
+/* גרף הפאי בצד שמאל */
+.chart-pie {
+  flex: 0 0 350px;
+  max-width: 350px;
+}
 
+/* שני הגרפים האחרים מימין */
+.right-charts {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
+.chart-section {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
 
-/* 
-  .dashboard-container {
-    padding: 20px;
-  }
-  
-  .chart-section {
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-    padding: 15px;
-    background: #fff;
-    border-radius: 8px;
-    max-width: 400px;
-    margin: 10px;
-  }
-  
-  .chart-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 20px;
-  }
-   */
+.chart-section:hover {
+  transform: scale(1.02);
+}
 
-   .dashboard-container {
-    padding: 30px 40px;
-    direction: rtl;
-    font-family: var(--font-family);
-  }
-  
-  .chart-layout {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    align-items: flex-start;
-  }
-  
-  .chart-pie {
-    max-width: 350px;
-    flex-shrink: 0;
-    cursor: pointer;
-  }
-  
-  .chart-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    flex: 1;
-  }
-  
-  .chart-section {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.2s;
-    cursor: pointer;
-  }
-  
-  .chart-section:hover {
-    transform: scale(1.02);
-  }
-  
-  .chart-section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #333;
-  }
-  
-  canvas {
-    max-width: 100%;
-    max-height: 400px;
-  }
-  
-  .fullscreen-chart {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 40px;
-    cursor: pointer;
-  }
-  
+.chart-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+canvas {
+  max-width: 100%;
+  max-height: 400px;
+}
+
+/* מסך מלא */
+.fullscreen-chart {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 40px;
+  cursor: pointer;
+}
+
+.fullscreen-chart canvas {
+  width: 80% !important;
+  height: 70% !important;
+}
