@@ -200,8 +200,8 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  gap: 10px;
 
-  
 }
 .btn-primary {
   background: linear-gradient(135deg, #912ffa 0%, #256eed 100%);
@@ -214,6 +214,7 @@
   transition: all 0.2s ease;
   border: none;
   cursor: pointer;
+  font-size: medium;
 
   &:hover:enabled {
     box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
