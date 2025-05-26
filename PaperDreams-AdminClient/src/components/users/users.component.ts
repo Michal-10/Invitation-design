@@ -283,6 +283,10 @@ users: User[] = [];
     this.isLoading = true;
 
     this.userService.users$.subscribe(users => {
+      console.log("Users received from service:", users);
+      console.log(users);
+      
+      
       this.users = users;
       this.isLoading = false;
     });
