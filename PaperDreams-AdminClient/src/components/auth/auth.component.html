@@ -63,9 +63,15 @@
         <mat-icon matPrefix>lock</mat-icon>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" class="btn-primary" (click)="login()">
+      <button mat-raised-button color="primary" class="btn-primary" (click)="login()" disabled="isLoading">
         כניסה
+        @if(isLoading) {
+          <mat-spinner diameter="20" class="spinner"></mat-spinner>
+        }
       </button>
+
+
+
     </div>
   </div>
 </div>

@@ -60,6 +60,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-auth',
@@ -71,7 +72,8 @@ import Swal from 'sweetalert2';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
@@ -80,6 +82,7 @@ export class AuthComponent {
   email = '';
   password = '';
   hidePassword = true;
+  isLoading = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -94,6 +97,7 @@ export class AuthComponent {
       });
       return;
     }
+    this.isLoading = true;
 
     this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
@@ -123,6 +127,7 @@ export class AuthComponent {
         }).then(() => {
           this.router.navigate(['/users']);
         });
+        this.isLoading = false;
       },
       error: (err) => {
         Swal.fire({
