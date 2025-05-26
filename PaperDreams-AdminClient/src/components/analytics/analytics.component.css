@@ -56,7 +56,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .btn-primary {
     background: linear-gradient(135deg, #912ffa 0%, #256eed 100%);
