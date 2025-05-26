@@ -198,7 +198,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { motion } from 'framer-motion';
 import BrushIcon from '@mui/icons-material/Brush';
-import { useNavigate, useLocation, Link, Outlet } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/Store';
 import theme from '../../theme';
@@ -391,8 +391,6 @@ const Header: React.FC = () => {
                     </Stack>
                 </Toolbar>
             </AppBar>
-            
-            <Outlet/>
         </motion.div>
         
     );
