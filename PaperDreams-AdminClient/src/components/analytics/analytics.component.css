@@ -5,7 +5,8 @@
 }
 
 .chart-pie {
-  max-width: 400px;
+  height: 90vh;
+  /* max-width: 400px; */
   flex-shrink: 0;
   cursor: pointer;
 }
