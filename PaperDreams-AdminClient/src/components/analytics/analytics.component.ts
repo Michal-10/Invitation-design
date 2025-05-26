@@ -43,6 +43,8 @@ export class AnalyticsComponent implements OnInit {
   dailyLoginsData: number[] = [];
   dailyActiveUsersLabels: string[] = [];
   dailyActiveUsersData: number[] = [];
+  selectedChart: 'pie' | 'bar' | 'line' = 'pie'; // ברירת מחדל
+
 
   constructor(private analyticsService: AnalyticsService) { }
 
@@ -79,65 +81,7 @@ export class AnalyticsComponent implements OnInit {
     
   }
 
-
-
-
-
-//   selectedChart: 'pie' | 'bar' | 'line' | null = null;
-
-// openChart(chart: 'pie' | 'bar' | 'line') {
-//   this.selectedChart = chart;
-// }
-
-// getChartData(chart: string):ChartConfiguration['data'] {
-//   switch (chart) {
-//     case 'pie':
-//       return {
-//         labels: this.templatesByCategoryLabels,
-//         datasets: [{
-//           data: this.templatesByCategoryData,
-//           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#AB47BC', '#FF7043', '#42A5F5', '#66BB6A'],
-//         }]
-//       };
-//     case 'bar':
-//       return {
-//         labels: this.dailyLoginsLabels,
-//         datasets: [{
-//           label: 'מספר התחברויות',
-//           data: this.dailyLoginsData,
-//           backgroundColor: '#4f46e5'
-//         }]
-//       };
-//     case 'line':
-//       return {
-//         labels: this.dailyActiveUsersLabels,
-//         datasets: [{
-//           label: 'משתמשים פעילים',
-//           data: this.dailyActiveUsersData,
-//           borderColor: '#ff5733',
-//           backgroundColor: 'rgba(255, 87, 51, 0.5)',
-//           fill: true
-//         }]
-//       };
-//   }
-//       return { labels: [], datasets: [] };
-// }
-
-// getChartOptions(chart: string)  {
-//   return {
-//     responsive: true,
-//     scales: {
-//       x: { title: { display: true, text: chart === 'line' ? 'תאריך' : 'שעה' } },
-//       y: { beginAtZero: true, title: { display: chart !== 'pie', text: chart === 'line' ? 'מספר משתמשים' : 'כמות' } }
-//     }
-//   };
-// }
-
-// get selectedChartType() : ChartType {
-//   if (this.selectedChart === 'pie') return 'pie';
-//   if (this.selectedChart === 'bar') return 'bar';
-//   if (this.selectedChart === 'line') return 'line';
-//   return 'bar'; // Default to bar chart
-// }
-
+  selectChart(type: 'pie' | 'bar' | 'line') {
+    this.selectedChart = type;
+  }
 }
