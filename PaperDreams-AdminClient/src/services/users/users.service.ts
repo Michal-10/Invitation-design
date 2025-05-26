@@ -74,7 +74,7 @@ export class UserService {
 
   addUser(user: User): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/user/register`, user, this.getAuthHeaders()).pipe(
-      tap(newUser => {
+      tap(() => {
         const current = this.usersSubject.getValue();
         this.refreshUsers();
       })
