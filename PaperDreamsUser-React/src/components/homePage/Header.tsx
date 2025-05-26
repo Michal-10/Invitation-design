@@ -227,7 +227,7 @@ const Header: React.FC = () => {
 
     useEffect(() => {
         setToken(sessionStorage.getItem('userToken'));
-    }, [sessionStorage.getItem('userToken')]);
+    }, [sessionStorage.getItem('userToken'),user]);
 
     useEffect(() => {
         setActive(location.pathname);
@@ -237,7 +237,7 @@ const Header: React.FC = () => {
             const name = getUserNameFromToken(storedToken);
             setUserName(name || user.email.charAt(0).toUpperCase() || '');
         }
-    }, [location.pathname]);
+    }, [location.pathname, user]);
 
     const handleLogout = () => {
         sessionStorage.removeItem('userToken');

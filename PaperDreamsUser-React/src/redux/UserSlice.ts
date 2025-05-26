@@ -175,19 +175,27 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(googleLogin.fulfilled, (state, action) => {
+        console.log("googleLogin.fulfilled");
+        console.log("--------------------------------");
+        console.log(action.payload.user);
+        
         state.loading = false;
       
-        const decodedToken = decodeToken();
-        state.user = {
-          id: decodedToken?.decoded.userId ?? action.payload.user.id,
-          firstName: decodedToken?.decoded.firstName ?? action.payload.user.firstName,
-          lastName: action.payload.user.lastName,
-          email: decodedToken?.decoded.email ?? action.payload.user.email,
-          password: action.payload.user.password,
-          role: action.payload.user.role,
-          created_at: action.payload.user.created_at,
-          updatedAt: action.payload.user.updatedAt,
-        };
+        // const decodedToken = decodeToken();
+        state.error = action.payload.user;
+        console.log("googleLogin.fulfilled");
+        console.log("--------------------------------");
+        
+        // state.user = {
+        //   id: decodedToken?.decoded.userId ?? action.payload.user.id,
+        //   firstName: decodedToken?.decoded.firstName ?? action.payload.user.firstName,
+        //   lastName: action.payload.user.lastName,
+        //   email: decodedToken?.decoded.email ?? action.payload.user.email,
+        //   password: action.payload.user.password,
+        //   role: action.payload.user.role,
+        //   created_at: action.payload.user.created_at,
+        //   updatedAt: action.payload.user.updatedAt,
+        // };
       })
       .addCase(googleLogin.rejected, (state, action) => {
         state.loading = false;
