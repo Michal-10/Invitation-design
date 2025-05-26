@@ -382,6 +382,7 @@ new: any;
   }
 
   saveUser() {
+    this.isLoading = true;
     if (!this.editingUserId || this.userForm.invalid) return;
 
     const formValue = this.userForm.value;
@@ -392,6 +393,7 @@ new: any;
 
     this.userService.updateUser(this.editingUserId, updatedUser).subscribe({
       next: () => {
+        this.isLoading = false;
         this.dialogRef.close();
         Swal.fire({
           title: 'הצלחה',
