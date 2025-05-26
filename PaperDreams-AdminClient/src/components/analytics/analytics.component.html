@@ -2,10 +2,11 @@
 
 <div class="dashboard-container">
   <div class="chart-buttons">
-    <button [class.active]="selectedChart === 'pie'" (click)="selectChart('pie')">התפלגות לפי קטגוריה</button>
-    <button [class.active]="selectedChart === 'bar'" (click)="selectChart('bar')">התחברויות יומיות</button>
-    <button [class.active]="selectedChart === 'line'" (click)="selectChart('line')">משתמשים פעילים</button>
+    <button class="btn-primary" [class.active]="selectedChart === 'pie'" (click)="selectChart('pie')">התפלגות לפי קטגוריה</button>
+    <button class="btn-primary" [class.active]="selectedChart === 'bar'" (click)="selectChart('bar')">התחברויות יומיות</button>
+    <button class="btn-primary" [class.active]="selectedChart === 'line'" (click)="selectChart('line')">משתמשים פעילים</button>
   </div>
+
   @if(selectedChart === 'pie'){
 
     <div class="chart-section">
@@ -36,8 +37,3 @@
     </div>
   }
 </div>
-
-
-
-
-

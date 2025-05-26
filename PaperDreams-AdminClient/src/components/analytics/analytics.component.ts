@@ -71,6 +71,7 @@ export class AnalyticsComponent implements OnInit {
     });
 
     console.log("after getDailyLogins");
+    console.log("/*/*/*/*/*/*");
     
     // Fetch daily active users
     this.analyticsService.getDailyActiveUsers().subscribe(data => {
