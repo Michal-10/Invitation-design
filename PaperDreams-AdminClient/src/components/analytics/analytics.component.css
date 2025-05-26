@@ -1,27 +1,20 @@
-.dashboard-container {
-  padding: 30px 40px;
-  direction: rtl;
-  font-family: var(--font-family);
-}
-
-.chart-layout-horizontal {
+.chart-layout-new {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   align-items: flex-start;
 }
 
-/* גרף הפאי בצד שמאל */
 .chart-pie {
-  flex: 0 0 350px;
-  max-width: 350px;
+  max-width: 400px;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 
-/* שני הגרפים האחרים מימין */
-.right-charts {
-  flex: 1;
+.chart-right {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  flex: 1;
 }
 
 .chart-section {
@@ -47,25 +40,4 @@
 canvas {
   max-width: 100%;
   max-height: 400px;
-}
-
-/* מסך מלא */
-.fullscreen-chart {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.95);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 40px;
-  cursor: pointer;
-}
-
-.fullscreen-chart canvas {
-  width: 80% !important;
-  height: 70% !important;
 }

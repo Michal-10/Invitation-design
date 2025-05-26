@@ -64,12 +64,11 @@
 
 
 
-
 <div class="dashboard-container">
   <h2>לוח סטטיסטיקות</h2>
 
-  <div class="chart-layout-horizontal">
-    <!-- גרף הפאי בצד שמאל -->
+  <div class="chart-layout-new">
+    <!-- גרף פאי בצד שמאל -->
     <div class="chart-section chart-pie" (click)="openChart('pie')">
       <h3>התפלגות תבניות לפי קטגוריה</h3>
       <canvas id="categoryPieChart" baseChart
@@ -78,8 +77,8 @@
       </canvas>
     </div>
 
-    <!-- שני הגרפים אחד ליד השני בתוך עמודה -->
-    <div class="right-charts">
+    <!-- שני הגרפים לרוחב בצד ימין -->
+    <div class="chart-right">
       <div class="chart-section" (click)="openChart('bar')">
         <h3>התחברויות יומיות</h3>
         <canvas id="dailyLoginsChart" baseChart
@@ -100,7 +99,7 @@
     </div>
   </div>
 
-  <!-- גרף מוגדל במסך מלא -->
+  <!-- דיאלוג הגדלה -->
   <div *ngIf="selectedChart" class="fullscreen-chart" (click)="selectedChart = null">
     <canvas baseChart
       [data]="getChartData(selectedChart)"
