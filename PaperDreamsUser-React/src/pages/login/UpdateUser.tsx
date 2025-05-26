@@ -154,7 +154,6 @@ const UpdateUser = () => {
             sessionStorage.setItem('userToken', res.token);
             console.log("after update User Comp");
 
-            
             setOpenModal(false);
             navigate('/');
         } catch (err: any) {

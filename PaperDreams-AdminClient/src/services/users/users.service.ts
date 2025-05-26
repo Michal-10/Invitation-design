@@ -85,8 +85,7 @@ export class UserService {
     return this.http.put<User>(`${this.apiUrl}/user/update-profile/${id}`, user, this.getAuthHeaders()).pipe(
       tap(() => {
         const current = this.usersSubject.getValue();
-        const updatedList = current.map(u => u.id === id ? { ...u, ...user } : u);
-        this.usersSubject.next(updatedList);
+        this.refreshUsers();
       })
     );
   }
