@@ -76,7 +76,7 @@ export class UserService {
     return this.http.post<User>(`${this.apiUrl}/user/register`, user, this.getAuthHeaders()).pipe(
       tap(newUser => {
         const current = this.usersSubject.getValue();
-        this.usersSubject.next([...current, newUser]);
+        this.refreshUsers();
       })
     );
   }
@@ -95,7 +95,7 @@ export class UserService {
     return this.http.delete(`${this.apiUrl}/user/${id}`, this.getAuthHeaders()).pipe(
       tap(() => {
         const current = this.usersSubject.getValue();
-        this.usersSubject.next(current.filter(u => u.id !== id));
+        this.refreshUsers();
       })
     );
   }

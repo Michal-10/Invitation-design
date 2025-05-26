@@ -402,8 +402,8 @@ export default () => {
         if (!canvas || !myTtemplate?.templateFields) return;
         console.log(myTtemplate.templateFields);
         console.log('template', myTtemplate);
-console.log('myTtemplate.templateFields', myTtemplate.templateFields);
-console.log(myTtemplate.templateFields[0].name);
+        console.log('myTtemplate.templateFields', myTtemplate.templateFields);
+        console.log(myTtemplate.templateFields[0].name);
 
 
         myTtemplate.templateFields.forEach((field) => {

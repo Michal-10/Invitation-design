@@ -275,10 +275,6 @@ export default function TextEditorSidebar({
                   />
                 </Box>
               </Box>
-
-              php-template
-              Copy
-              Edit
               <Button
                 variant={isBold ? "contained" : "outlined"}
                 onClick={toggleBold}
