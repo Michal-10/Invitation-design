@@ -202,7 +202,6 @@ export default function TextEditorSidebar({
               gap: 1.5,
               direction: "rtl",
               // maxHeight: "90vh", // הגובה המקסימלי של אזור הבחירה
-              overflowY: "auto",
               pr: 1 // רווח מימין כדי שלא ייחתך הסקרול ב-RTL
             }}
             >             
@@ -235,7 +234,7 @@ export default function TextEditorSidebar({
             </Box>
           </>
         ) : (
-          <Card sx={{ height: "100%", padding: "5px", boxShadow: "none" }}>
+          <Card sx={{ height: "100%",overflowY:'auto', padding: "5px", boxShadow: "none" }}>
             <CardContent>
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Edit sx={{ color: theme.palette.primary.main, mr: 1, direction: "rtl" }} />
