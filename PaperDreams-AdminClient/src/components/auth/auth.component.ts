@@ -136,6 +136,8 @@ export class AuthComponent {
           icon: 'error',
           confirmButtonText: 'אישור',
           confirmButtonColor: '#5c6bc0'
+        }).then(() => {
+          this.router.navigate(['/']);
         });
       }
     });

@@ -182,7 +182,7 @@ const userSlice = createSlice({
         state.loading = false;
       
         const decodedToken = decodeToken();
-        // state.error = action.payload.user;
+        // state.error = ac tion.payload.user;
         console.log("googleLogin.fulfilled");
         console.log("--------------------------------");
         
