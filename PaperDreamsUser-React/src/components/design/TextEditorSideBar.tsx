@@ -316,7 +316,8 @@ export default function TextEditorSidebar({
                 startIcon={<FormatBold />}
                 sx={{
                   mb: 2,
-                  bgcolor: isBold ? theme.palette.primary.main : theme.palette.text.primary,
+                  // bgcolor: isBold ? theme.palette.primary.main : theme.palette.text.primary,
+                  bgcolor: theme.palette.primary.main,
                   color: isBold ? theme.palette.secondary.contrastText : theme.palette.text.primary,
                 }}
               >
