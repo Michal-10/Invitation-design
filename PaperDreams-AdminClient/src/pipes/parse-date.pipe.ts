@@ -7,6 +7,7 @@ export class ParseDatePipe implements PipeTransform {
   transform(value: any): Date | null {
     try {
       console.log("ParseDatePipe transform called with value:", value);
+      console.log(value);
       
       const parsed = new Date(value);
       console.log(parsed);
