@@ -398,7 +398,6 @@ export default () => {
         setEquallTexts(Object.fromEntries(Object.entries(exaText1)));
         console.log(exaText1);
         let exaText = Object.entries(exaText1);
-        
 
         console.log('here', exaText);
 
@@ -407,7 +406,6 @@ export default () => {
         console.log('template', myTtemplate);
         console.log('myTtemplate.templateFields', myTtemplate.templateFields);
         console.log(myTtemplate.templateFields[0].name);
-
 
         myTtemplate.templateFields.forEach((field) => {
             console.log("in myTtemplate.templateFields foreach");

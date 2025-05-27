@@ -53,6 +53,15 @@ export default function TextEditorSidebar({
 
   const handleFieldSelect = (templateField: TemplateField) => {
     setSelectedField(templateField)
+    console.log("Selected field:", templateField);
+    console.log("Equall texts:", equallTexts);
+    console.log(equallTexts);
+    console.log("equallTexts[templateField.field.name]");
+    console.log(equallTexts[templateField.field.name]);
+    
+    
+    
+    
     setTextValue(equallTexts[templateField.field.name])
     setTextValue(templateField.field.name)
     setIsEditing(true)
@@ -173,8 +182,19 @@ export default function TextEditorSidebar({
               בחר שדה טקסט לעריכה:
             </Typography>
 
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5, direction: "rtl" }}>
-              {fieldsWithPlaces.map((templateField: TemplateField, index: number) => (
+            <Box 
+            // sx={{ display: "flex", flexDirection: "column", gap: 1.5, direction: "rtl" }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 1.5,
+              direction: "rtl",
+              maxHeight: "90vh", // הגובה המקסימלי של אזור הבחירה
+              overflowY: "auto",
+              pr: 1 // רווח מימין כדי שלא ייחתך הסקרול ב-RTL
+            }}
+            >             
+             {fieldsWithPlaces.map((templateField: TemplateField, index: number) => (
                 <Button
                   key={index}
                   variant="outlined"
