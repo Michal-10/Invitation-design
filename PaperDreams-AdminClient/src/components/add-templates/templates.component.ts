@@ -119,7 +119,7 @@ export class TemplatesComponent implements OnInit {
       this.templateService.createTemplate(templateData).subscribe(async (res) => {
         Swal.fire({
           title: 'הצלחה',
-          text: 'המשתמש נוסף בהצלחה',
+          text: 'התבנית נשמרה בהצלחה',
           icon: 'success',
           timer: 1500,
           showConfirmButton: false
