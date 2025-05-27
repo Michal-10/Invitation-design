@@ -141,7 +141,8 @@ export default function TextEditorSidebar({
       sx={{
         borderRadius: 2,
         direction: "ltr",
-        height: "100%",
+        height: "90vh",
+        overflowY: 'auto',
         display: "flex",
         flexDirection: "column",
       }}
