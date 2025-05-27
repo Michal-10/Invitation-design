@@ -228,7 +228,20 @@ const userSlice = createSlice({
         console.log(action.payload.user);
         console.log("--------------------------------");
         
-        state.user = action.payload.user;
+        // state.user = action.payload.user;
+        const decodedToken = decodeToken();
+       console.log(action.payload.user);
+       console.log({...action.payload.user});
+            state.user = {
+                id: decodedToken?.decoded.userId ?? action.payload.user.id,
+                firstName: decodedToken?.decoded.firstName ?? action.payload.user.firstName,
+                lastName: action.payload.user.lastName,
+                email: decodedToken?.decoded.email ?? action.payload.user.email,
+                password: action.payload.user.password,
+                role: action.payload.user.role,
+                created_at: action.payload.user.created_at,
+                updatedAt: action.payload.user.updatedAt,
+            };
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
