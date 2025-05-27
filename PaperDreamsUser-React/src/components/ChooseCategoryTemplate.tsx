@@ -246,7 +246,6 @@ export default function ChooseCategoryPage() {
       dir="rtl"
       sx={{
         minHeight: "100vh",
-        width: "90vw",
         px: { xs: 2, md: 4 },
         py: 5,
         bgcolor: theme.palette.background.default,

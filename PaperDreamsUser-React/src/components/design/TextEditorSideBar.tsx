@@ -63,7 +63,7 @@ export default function TextEditorSidebar({
     
     
     setTextValue(equallTexts[templateField.field.name])
-    setTextValue(templateField.field.name)
+    // setTextValue(templateField.field.name)
     setIsEditing(true)
 
     if (canvas) {
@@ -148,16 +148,28 @@ export default function TextEditorSidebar({
   }
 
   return (
+    // <Paper
+    //   elevation={3}
+    //   sx={{
+    //     borderRadius: 2,
+    //     direction: "ltr",
+    //     height: "90vh",
+    //     display: "flex",
+    //     flexDirection: "column",
+    //   }}
+    // >
     <Paper
-      elevation={3}
-      sx={{
-        borderRadius: 2,
-        direction: "ltr",
-        height: "90vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+  elevation={3}
+  sx={{
+    borderRadius: 2,
+    direction: "ltr",
+    height: "90vh",
+    display: "flex",
+    flexDirection: "column",
+    overflow: "hidden" // חשוב למנוע גלילה חיצונית
+  }}
+>
+
       <Box
         sx={{
           p: 2,
@@ -304,7 +316,7 @@ export default function TextEditorSidebar({
                 startIcon={<FormatBold />}
                 sx={{
                   mb: 2,
-                  bgcolor: isBold ? theme.palette.secondary.main : "transparent",
+                  bgcolor: isBold ? theme.palette.secondary.main :  theme.palette.text.primary,
                   color: isBold ? theme.palette.secondary.contrastText : theme.palette.text.primary,
                 }}
               >
