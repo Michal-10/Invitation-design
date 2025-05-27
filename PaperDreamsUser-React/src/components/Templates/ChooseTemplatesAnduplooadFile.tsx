@@ -579,7 +579,7 @@ export default function CategoryTemplatesPage() {
   return (
     <Box
       sx={{
-        width: "95vw", // חוסם קפיצה
+        width: "100vw", // חוסם קפיצה
         minHeight: "100vh",
         direction: "rtl",
         pb: 5,
