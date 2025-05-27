@@ -13,6 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { from, map, Observable, of } from 'rxjs';
 import axios from 'axios';
 import { environment } from '../../environments/environment.prod';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -61,7 +62,13 @@ export class TemplatesService {
       return res.data;
     } catch (error) {
       console.error('שגיאה בהבאת ה-URL:', error);
-      alert(`שגיאה בהבאת ה-URL: ${error}`);
+      Swal.fire({
+        title: 'שגיאה',
+        text: `שגיאה בהבאת ה-URL: ${error}`,
+        icon: 'error',
+        confirmButtonText: 'אישור',
+        confirmButtonColor: '#5c6bc0'
+      });
     }
   };
 

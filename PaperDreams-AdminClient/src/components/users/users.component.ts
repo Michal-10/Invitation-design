@@ -31,7 +31,7 @@ import { ParseDatePipe } from '../../pipes/parse-date.pipe';
     MatTooltipModule,
     MatProgressSpinnerModule,
     FormsModule,
-    ParseDatePipe
+    // ParseDatePipe
   ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']

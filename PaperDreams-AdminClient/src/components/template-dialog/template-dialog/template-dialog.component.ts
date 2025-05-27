@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-template-dialog',
@@ -51,7 +52,13 @@ export class TemplateDialogComponent {
 
   submit(): void {
     if (this.templateForm.invalid || !this.selectedFile) {
-      alert('יש למלא את כל השדות כולל קובץ');
+      Swal.fire({
+        title: 'שגיאה',
+        text: 'יש למלא את כל השדות כולל קובץ',
+        icon: 'error',
+        confirmButtonText: 'אישור',
+        confirmButtonColor: '#5c6bc0'
+      });
       return;
     }
 

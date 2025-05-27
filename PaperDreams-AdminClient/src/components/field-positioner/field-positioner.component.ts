@@ -1704,7 +1704,59 @@ export class FieldPlacementComponent implements OnInit {
   //   this.showPrompt = true;
   // }
 
-  saveAllPlacements(): void {
+  // saveAllPlacements(): void {
+  //   Swal.fire({
+  //     title: 'שמירת מיקומים',
+  //     text: 'האם אתה בטוח שברצונך לשמור את כל המיקומים?',
+  //     icon: 'question',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#5c6bc0',
+  //     cancelButtonColor: '#757575',
+  //     confirmButtonText: 'שמור',
+  //     cancelButtonText: 'ביטול'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Swal.fire({
+  //         title: 'נשמר בהצלחה!',
+  //         text: 'כל המיקומים נשמרו בהצלחה',
+  //         icon: 'success',
+  //         timer: 1500,
+  //         showConfirmButton: false
+  //       }).then(() => {
+  //         this.unsavedChanges = false;
+  //       });
+  //     }
+  //   });
+  // }
+
+  // goBack(): void {
+  //   if (this.unsavedChanges) {
+  //     Swal.fire({
+  //       title: 'שינויים לא שמורים',
+  //       text: 'יש לך שינויים שלא נשמרו. האם אתה בטוח שברצונך לצאת?',
+  //       icon: 'warning',
+  //       showCancelButton: true,
+  //       confirmButtonColor: '#e53935',
+  //       cancelButtonColor: '#757575',
+  //       confirmButtonText: 'צא ללא שמירה',
+  //       cancelButtonText: 'המשך עריכה'
+  //     }).then((result) => {
+  //       if (result.isConfirmed) {
+  //         this.router.navigate(['/templates-list']);
+  //       }
+  //     });
+  //   } else {
+  //     this.router.navigate(['/templates-list']);
+  //   }
+  // }
+
+  // @HostListener('window:beforeunload', ['$event'])
+  // unloadNotification($event: any): void {
+  //   if (this.unsavedChanges) {
+  //     $event.returnValue = true;
+  //   }
+  // }
+  saveTemplate(){
     Swal.fire({
       title: 'שמירת מיקומים',
       text: 'האם אתה בטוח שברצונך לשמור את כל המיקומים?',
@@ -1727,33 +1779,6 @@ export class FieldPlacementComponent implements OnInit {
         });
       }
     });
-  }
-
-  goBack(): void {
-    if (this.unsavedChanges) {
-      Swal.fire({
-        title: 'שינויים לא שמורים',
-        text: 'יש לך שינויים שלא נשמרו. האם אתה בטוח שברצונך לצאת?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#e53935',
-        cancelButtonColor: '#757575',
-        confirmButtonText: 'צא ללא שמירה',
-        cancelButtonText: 'המשך עריכה'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigate(['/templates-list']);
-        }
-      });
-    } else {
-      this.router.navigate(['/templates-list']);
-    }
-  }
-
-  @HostListener('window:beforeunload', ['$event'])
-  unloadNotification($event: any): void {
-    if (this.unsavedChanges) {
-      $event.returnValue = true;
-    }
+    this.router.navigate(['/']);
   }
 }
