@@ -168,10 +168,7 @@ export default function AuthPage() {
           onClick={handleSubmit}
           disabled={loading}
           sx={{ mt: 3 }}
-        // component={Link}
-        // to="/"
         >
-          {/* {loading ? "טוען..." : mode === "login" ? "התחבר" : "הרשם"} */}
           {loading ? (
             <CircularProgress size={24} sx={{ color: "#fff" }} />
           ) : (
