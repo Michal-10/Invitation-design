@@ -139,6 +139,11 @@ const UpdateUser = () => {
             setLoading(false);
             return;
         }
+        
+console.log("user before update:");
+console.log(user);
+console.log(user.password);
+
 
         const userData: Partial<User> = {
             firstName: firstNameRef.current?.value || user.firstName,
