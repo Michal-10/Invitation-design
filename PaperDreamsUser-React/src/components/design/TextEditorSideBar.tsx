@@ -34,9 +34,11 @@ import {
 export default function TextEditorSidebar({
   canvas,
   fieldsWithPlaces,
+  equallTexts
 }: {
   canvas: fabric.Canvas
-  fieldsWithPlaces: TemplateField[]
+  fieldsWithPlaces: TemplateField[],
+  equallTexts: Record<string, string>
 }) {
   const theme = useTheme()
 
@@ -51,6 +53,7 @@ export default function TextEditorSidebar({
 
   const handleFieldSelect = (templateField: TemplateField) => {
     setSelectedField(templateField)
+    setTextValue(equallTexts[templateField.field.name])
     setTextValue(templateField.field.name)
     setIsEditing(true)
 
@@ -142,7 +145,6 @@ export default function TextEditorSidebar({
         borderRadius: 2,
         direction: "ltr",
         height: "90vh",
-        overflowY: 'auto',
         display: "flex",
         flexDirection: "column",
       }}

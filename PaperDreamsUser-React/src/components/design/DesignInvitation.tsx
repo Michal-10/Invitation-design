@@ -311,6 +311,7 @@ export default () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [canvas, setCanvas] = useState<fabric.Canvas>({} as fabric.Canvas);
     const [imageURL, setImageURL] = useState<string>("");
+    const [equallTexts, setEquallTexts] = useState<Record<string, string>>({});
 
     const state = useSelector((state: RootState) => state.invitation.Invitation);
     const [myTtemplate, setMyTemplate] = useState<Template>({} as Template);
@@ -394,8 +395,10 @@ export default () => {
 
         let exaText1 = state.text;
         console.log("exaText");
+        setEquallTexts(Object.fromEntries(Object.entries(exaText1)));
         console.log(exaText1);
         let exaText = Object.entries(exaText1);
+        
 
         console.log('here', exaText);
 
@@ -554,10 +557,10 @@ export default () => {
                 {/* Sidebar - רבע עמוד */}
 
                 <Grid item xs={3} style={{  padding: "3px" }}>
-                    <TextEditorSidebar canvas={canvas} fieldsWithPlaces={myTtemplate.templateFields || []} />
+                    <TextEditorSidebar equallTexts={equallTexts} canvas={canvas} fieldsWithPlaces={myTtemplate.templateFields || []} />
                 </Grid>
                 {/* Canvas - שלושת רבעי עמוד */}
-                <Grid item xs={9} style={{ display: "flex", flexDirection: "column", paddingRight:'15%' }}>
+                <Grid item xs={9} style={{ display: "flex", flexDirection: "column", paddingRight:'15%', margin:'auto' }}>
                     <canvas ref={canvasRef} style={{ textAlign: 'center'}} />
                     <Box sx={{ top: '80px', position: 'absolute', left: '20px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
                         <Button
