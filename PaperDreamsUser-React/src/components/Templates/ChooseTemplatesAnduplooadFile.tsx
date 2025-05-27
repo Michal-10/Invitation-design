@@ -644,6 +644,7 @@ export default function CategoryTemplatesPage() {
                 direction: "rtl",
                 border: `1px solid ${theme.palette.primary.light}`,
                 height: "100%",
+                maxHeight: "80vh",
               }}
             >
               <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, color: theme.palette.primary.main }}>
