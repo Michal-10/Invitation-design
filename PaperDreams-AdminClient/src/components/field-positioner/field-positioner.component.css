@@ -262,7 +262,10 @@
   margin-left: 10px;
 }
 .save-button{
+  background:  linear-gradient(135deg, #912ffa 0%, #256eed 100%);
+  color: white;
   font-weight: bold;
+  font-size: medium;
   direction: rtl;
 }
 
