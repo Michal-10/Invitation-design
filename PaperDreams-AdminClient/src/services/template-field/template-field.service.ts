@@ -1,40 +1,3 @@
-
-
-// // 🟢 template.service.ts
-// import { HttpClient } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
-
-// @Injectable({ providedIn: 'root' })
-// export class TemplateFieldService {
-  
-//   constructor(private http: HttpClient) {}
-
-//   addFieldToTemplate(data: any) {
-//     return this.http.post('http://localhost:5077/api/TemplateField/add', data);
-//   }
-// }
-
-
-
-
-// import { HttpClient } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
-
-// @Injectable({ providedIn: 'root' })
-// export class TemplateFieldService {
-//   constructor(private http: HttpClient) {}
-
-//   addFieldToTemplate(data: any) {
-//     console.log("in templateFieldService before addFieldToTemplate");
-//     console.log(data);
-    
-//     return this.http.post('http://localhost:5077/api/TemplateField/add', data);
-//   }
-
-  
-// }
-
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -42,7 +5,7 @@ import { environment } from '../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class TemplateFieldService {
-  private apiUrl = `${environment.apiUrl}/TemplateField`; // הגדרת כתובת ה-API
+  private apiUrl = `${environment.apiUrl}/TemplateField`; 
 
   constructor(private http: HttpClient) {}
 

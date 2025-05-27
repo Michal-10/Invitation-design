@@ -18,15 +18,7 @@ export class MarketingService {
       { responseType: 'json' }
     );
   }
-
-  // טעינת כתובות האימייל מהשרת
-  // loadEmails(): Observable<string[]> {
-  //   return this.http.get<string[]>(
-  //     `${environment.apiUrl}/api/user/AllEmailsUsers`,
-  //     this.getAuthHeaders()
-  //   );
-  // }
-
+  
   // שליחת תוכן שיווקי לשרת
   sendMarketingEmail( content: string ): Observable<any> {
     console.log("in marketingService before sendMarketingEmail");

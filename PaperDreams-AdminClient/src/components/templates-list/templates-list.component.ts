@@ -47,9 +47,9 @@
 //       next: (data) => {
 //         this.categories = data,
 //         console.log("categories: in loadCategories template-list");
-        
+
 //         console.log(data);
-        
+
 //       },
 //       error: (err) => console.error('שגיאה בטעינת קטגוריות:', err)
 //     });
@@ -58,7 +58,7 @@
 //   loadTemplates() {
 //     console.log("in loadTemplates template-list");
 //     console.log(this.selectedCategory);
-    
+
 //     if (!this.selectedCategory) return;
 
 //     this.templateService.getTemplatesByCategory(this.selectedCategory.id).subscribe({
@@ -68,8 +68,8 @@
 //           template.imageUrl = await this.templateService.getDownloadURL(template.name);
 //         });
 //         console.log(data);
-        
-        
+
+
 //       },
 //       error: (err) => console.error('שגיאה בטעינת תבניות:', err)
 //     });
@@ -92,7 +92,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import Category from '../../models/Category';
-import { TemplatePreviewDialogComponent } from '../template-preview-dialog/template-preview-dialog.component';
 
 @Component({
   selector: 'app-template-list',
@@ -117,14 +116,14 @@ export class TemplatesListComponent implements OnInit {
   isPreviewOpen = false;
   fullScreenPreview: boolean = false;
 
-new: any;
+  new: any;
 
   constructor(
     private categoryService: CategoryService,
     private templateService: TemplatesService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadCategories();
@@ -144,7 +143,7 @@ new: any;
   loadTemplates() {
     console.log("in loadTemplates template-list");
     console.log(this.selectedCategory);
-    
+
     if (!this.selectedCategory) return;
 
     this.templateService.getTemplatesByCategory(this.selectedCategory.id).subscribe({
@@ -158,64 +157,11 @@ new: any;
       error: (err) => console.error('שגיאה בטעינת תבניות:', err)
     });
   }
-
-  /**
-   * פתיחת תצוגה מקדימה של התבנית
-   */
-  // viewTemplate(template: Template) {
-  //   this.previewTemplate = template;
-    
-  //   // כאן אפשר להשתמש ב-MatDialog לפתיחת חלון מודאלי עם תצוגה מקדימה
-  //   // לדוגמה:
-  //   // const dialogRef = this.dialog.open(TemplatePreviewComponent, {
-  //   //   width: '80%',
-  //   //   data: { template: template }
-  //   // });
-    
-  //   // במקום זה, נציג הודעה פשוטה
-  //   this.snackBar.open(`צפייה בתבנית: ${template.name}`, 'סגור', {
-  //     duration: 3000,
-  //     horizontalPosition: 'center',
-  //     verticalPosition: 'bottom',
-  //   });
-  // }
-
-
-
-  // viewTemplate(template: Template) {
-  //   this.dialog.open(TemplatePreviewDialogComponent, {
-  //     width: '80%',
-  //     maxHeight: '90vh',
-  //     data: { template }
-  //   });
-  // }
   viewTemplate(template: Template) {
     this.previewTemplate = template;
     this.fullScreenPreview = true;
   }
   closePreview() {
     this.fullScreenPreview = false;
-  }
-
-  /**
-   * בחירת תבנית לשימוש
-   */
-  useTemplate(template: Template) {
-    // כאן תוכל להוסיף את הלוגיקה לשימוש בתבנית
-    // לדוגמה: ניווט לעמוד עריכה עם התבנית הנבחרת
-    
-    this.snackBar.open(`נבחרה תבנית: ${template.name}`, 'סגור', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
-    });
-    
-    // דוגמה לקריאה לשירות
-    // this.templateService.selectTemplate(template.id).subscribe({
-    //   next: (response) => {
-    //     // טיפול בתגובה מוצלחת
-    //   },
-    //   error: (err) => console.error('שגיאה בבחירת תבנית:', err)
-    // });
   }
 }

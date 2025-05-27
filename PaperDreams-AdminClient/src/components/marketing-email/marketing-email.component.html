@@ -1,91 +1,34 @@
-<!-- 
-
-<div class="email-container">
-    <h2>שליחת מייל שיווקי</h2>
-  
-      
-      
-      
-        <textarea 
-        id="emailContent"
-         [(ngModel)]="emailContent" 
-         rows="10" 
-         cols="80"
-         placeholder="כתוב כאן את הטקסט שברצונך לשלוח...">
-    </textarea>
-
-        <br><br>
-
-        <button (click)="generateMarketingText()">✍️ צור תוכן שיווקי (AI)</button>
-        <button (click)="sendEmails()" [disabled]="!emailContent.trim()">
-            <i class="material-icons">send</i> שלח לכל המשתמשים
-        </button>
-
-        <br><br>
-        @if(statusMessage)
-        {<div class="status-box">
-            {{ statusMessage }}
-        </div>}
+<div class="content-wrapper">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="material-icons">email</i>
+        שליחת מייל שיווקי
+      </div>
     </div>
- -->
-
-
- <div class="content-wrapper">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <i class="material-icons">email</i>
-          שליחת מייל שיווקי
-        </div>
+    <div class="card-body">
+      <div class="action-buttons">
+        <button class="btn btn-secondary" (click)="generateMarketingText()">
+          <i class="material-icons">auto_awesome</i>
+          צור תוכן שיווקי (AI)
+        </button>
+        <button class="btn btn-primary" (click)="sendEmails()" [disabled]="!emailContent.trim()">
+          <i class="material-icons">send</i>
+          שלח לכל המשתמשים
+        </button>
       </div>
-      <div class="card-body">
-        <div class="editor-container">
-          <!-- עורך Quill ללא הגדרת modules -->
-          <!-- <quill-editor
-            [(ngModel)]="emailContent"
-            [styles]="{ height: '300px', direction: 'rtl' }"
-            (onEditorCreated)="editorCreated($event)"
-            (onContentChanged)="contentChanged($event)"
-            placeholder="כתוב כאן את הטקסט שברצונך לשלוח..."
-          ></quill-editor> -->
-          
-          <!-- אפשרות חלופית - שימוש בתיבת טקסט רגילה -->
-          <textarea 
-            [(ngModel)]="emailContent" 
-            rows="10" 
-            class="text-editor"
-            placeholder="כתוב כאן את הטקסט שברצונך לשלוח...">
-          </textarea>
-          
-          <!-- תצוגה מקדימה של התוכן -->
-          <!-- <div class="preview-section">
-            <div class="preview-header">
-              <i class="material-icons">visibility</i>
-              תצוגה מקדימה
-            </div>
-            <div class="email-preview" [innerHTML]="getSanitizedContent()"></div>
-          </div> -->
-        </div>
-        
-        <div class="action-buttons">
-          <button class="btn btn-secondary" (click)="generateMarketingText()">
-            <i class="material-icons">auto_awesome</i>
-            צור תוכן שיווקי (AI)
-          </button>
-          <button class="btn btn-primary" (click)="sendEmails()" [disabled]="!emailContent.trim()">
-            <i class="material-icons">send</i>
-            שלח לכל המשתמשים
-          </button>
-        </div>
-        
-        @if(statusMessage) {
-          <div class="status-box" [ngClass]="{'loading': statusMessage.includes('שולח') || statusMessage.includes('מייצר')}">
-            <i class="material-icons" *ngIf="statusMessage.includes('שגיאה')">error</i>
-            <i class="material-icons" *ngIf="statusMessage.includes('נוצר') || statusMessage.includes('נשלח')">check_circle</i>
-            <i class="material-icons rotating" *ngIf="statusMessage.includes('שולח') || statusMessage.includes('מייצר')">sync</i>
-            {{ statusMessage }}
-          </div>
-        }
+
+      @if(statusMessage) {
+      <div class="status-box"
+        [ngClass]="{'loading': statusMessage.includes('שולח') || statusMessage.includes('מייצר')}">
+        <i class="material-icons" *ngIf="statusMessage.includes('שגיאה')">error</i>
+        <i class="material-icons"
+          *ngIf="statusMessage.includes('נוצר') || statusMessage.includes('נשלח')">check_circle</i>
+        <i class="material-icons rotating"
+          *ngIf="statusMessage.includes('שולח') || statusMessage.includes('מייצר')">sync</i>
+        {{ statusMessage }}
       </div>
+      }
     </div>
   </div>
+</div>

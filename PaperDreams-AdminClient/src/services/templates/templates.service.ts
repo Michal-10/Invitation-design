@@ -1,13 +1,3 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class TemplatesService {
-
-//   constructor() { }
-// }
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { from, map, Observable, of } from 'rxjs';
@@ -23,36 +13,10 @@ export class TemplatesService {
 
   constructor(private http: HttpClient) { }
 
-  // async uploadTemplate(formData: FormData): Promise<Observable<any>> { 
   uploadTemplate(formData: FormData): Observable<any> {
-    //העלאת התבנית ל AWS
     return from(this.uploadFileToAWS(formData.get('file') as File)).pipe(
-      map((res) => res.data) // Presigned URL from the server
+      map((res) => res.data) 
     );
-
-
-
-
-    // // uploadTemplate(formData: FormData): Observable<any> {
-    // //העלאת התבנית ל AWS 
-    // const res = await this.uploadFileToAWS(formData.get('file') as File);
-    // // .then((res) => {
-    // //   formData.append('imageUrl',res.data); // Presigned URL from the server
-    // // });
-    // console.log("res: " + res);
-
-
-    // // return this.http.post(this.apiUrl, {
-    // //   Name:
-    // //   Description:
-    // //   ImageUrl:
-    // //   CategoryId:
-    // //   Fields
-    // // }, this.getAuthHeaders());
-
-
-    // return of(res.data); // Presigned URL from the server
-    // // return of(formData);
   }
 
   async getDownloadURL(fileName: string) {
@@ -72,7 +36,6 @@ export class TemplatesService {
     }
   };
 
-
   private getAuthHeaders() {
     const token = localStorage.getItem('token');
     return {
@@ -88,14 +51,10 @@ export class TemplatesService {
     );
   }
 
-
-
-
   async uploadFileToAWS(file: File) {
 
     console.log("in uploas file to AWS");
     console.log(file);
-    
     
     if (!file) return;
 
@@ -111,7 +70,7 @@ export class TemplatesService {
       console.log("הקובץ הועלה בהצלחה ל-S3!");
 
       console.log("--------------before api/TextUpload/upload --------------- ");
-      return res.data;//return presigned-url
+      return res.data;
 
     } catch (error) {
       console.error("Error uploading image:", error);

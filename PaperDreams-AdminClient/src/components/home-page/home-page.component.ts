@@ -77,7 +77,7 @@ export class HomePageComponent  implements OnInit, OnDestroy {
 
   onGetStarted(): void {
     if (this.isLoggedIn()) {
-      this.router.navigate(['/analytics']); // הנתיב שאת רוצה שיפתח למשתמש מחובר
+      this.router.navigate(['/analytics']); 
     } else {
       this.router.navigate(['/login']);
     }

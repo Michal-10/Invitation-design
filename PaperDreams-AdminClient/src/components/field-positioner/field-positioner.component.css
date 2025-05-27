@@ -1,228 +1,23 @@
-/* .field-placement-container {
-  display: flex;
-  min-height: 100vh;
-  background-color: #f8f9fa;
-  color: #333;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  flex-direction: row;
-  overflow-x: hidden; 
-  overflow-y: hidden;
-}
-
-.page-header {
-  padding: 20px;
-  border-bottom: 1px solid #dee2e6;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.page-header h1 {
-  margin: 0;
-  color: #007bff;
-  font-size: 1.5em;
-}
-
-.placement-workspace {
-  direction: rtl;
-  display: flex;
-  flex-grow: 1;
-  padding: 20px;
-  gap: 20px;
-  overflow: hidden;
-  max-height: 100vh;
-}
-
-.fields-panel {
-  width: 250px;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  overflow-y: auto;
-  max-height: 100%;
-}
-
-.panel-header {
-  padding: 15px;
-  border-bottom: 1px solid #dee2e6;
-  font-weight: bold;
-  color: #495057;
-  text-align: right;
-}
-
-.fields-list {
-  padding: 10px;
-}
-
-.field-item {
-  margin-bottom: 8px;
-  text-align: right;
-}
-
-.field-button {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  background-color: #fff;
-  color: #495057;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  flex-direction: row-reverse;
-  justify-content: flex-start;
-}
-
-.field-button mat-icon {
-  margin-left: 8px;
-}
-
-.field-button span {
-  text-align: right;
-  flex-grow: 1;
-}
-
-.field-button.selected {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
-}
-
-.field-button.edit-button {
-  background-color: #28a745;
-  color: #fff;
-  border-color: #28a745;
-}
-
-.field-button:hover {
-  background-color: #e9ecef;
-  border-color: #adb5bd;
-}
-
-.template-workspace {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  background-color: #fff;
-  position: relative;
-  overflow: hidden;
-  max-height: 100vh;
-}
-
-.placement-prompt {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 12px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  color: #6c757d;
-  flex-direction: row-reverse;
-  max-width: 400px;
-}
-
-.placement-prompt mat-icon {
-  margin-left: 8px;
-  color: #007bff;
-}
-
-.image-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  max-height: 100vh;
-  position: relative;
-}
-
-.template-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.field-label {
-  position: absolute;
-  background-color: rgba(255, 255, 0, 0.8);
-  border: 1px solid #ffc107;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: grab;
-  z-index: 5;
-  color: #333;
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.field-label-content {
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
-}
-
-.field-label mat-icon {
-  margin-left: 6px;
-  font-size: 18px;
-  color: #555;
-}
-
-.loading-template {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #6c757d;
-}
-
-.loading-template mat-spinner {
-  margin-bottom: 10px;
-}  */
-
-/* Main Container */
-
-
-
-
-
-/* כללי *//* כללי */
 .content-wrapper {
   padding: 25px;
   direction: rtl;
-  height: calc(100vh - 70px); /* גובה ההדר העליון */
+  height: calc(100vh - 70px); 
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Placement Workspace - עכשיו יש בו רק עמודה אחת */
 .placement-workspace {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  max-width: 1200px; /* הגבלת רוחב מקסימלית למראה נעים */
+  max-width: 1200px; 
   overflow: hidden;
 }
 
-/* Card Styling - כללי */
 .card {
   background: white;
   border-radius: 12px;
@@ -273,7 +68,7 @@
 .card-body {
   padding: 20px;
   flex: 1;
-  overflow: auto; /* גלילה אוטומטית אם התוכן עולה על הגובה */
+  overflow: auto; 
   position: relative;
   display: flex;
   flex-direction: column;
@@ -281,7 +76,6 @@
   align-items: center;
 }
 
-/* Template Workspace */
 .template-workspace {
   height: 100%;
   display: flex;
@@ -291,24 +85,23 @@
 }
 
 .image-container {
-  position: relative; /* חובה: נקודת ייחוס לשדות ממוקמים */
-  height: 100%; /* תופס את כל הגובה הזמין של ה-card-body */
-  width: 100%; /* תופס את כל הרוחב הזמין של ה-card-body */
+  position: relative; 
+  height: 100%; 
+  width: 100%; 
   display: flex;
-  justify-content: center; /* למרכז את התמונה בתוך הקונטיינר */
-  align-items: center; /* למרכז את התמונה בתוך הקונטיינר */
+  justify-content: center; 
+  align-items: center; 
   background: #f8f9fb;
   border-radius: 8px;
   border: 1px dashed #e0e0e0;
-  overflow: hidden; /* הסתרת גלילה בתוך הקונטיינר */
+  overflow: hidden; 
 }
 
 .template-image {
-  max-width: 100%; /* התמונה תתכווץ אם הקונטיינר קטן ממנה */
-  max-height: 100%; /* התמונה תתכווץ אם הקונטיינר קטן ממנה */
-  object-fit: contain; /* שומר על פרופורציות ומבטיח שהתמונה כולה תוצג */
-  display: block; /* כדי להסיר רווחים מיותרים מתחת לתמונה */
-  /* Remove width/height auto or fixed values here, let max-width/height handle it */
+  max-width: 100%; 
+  max-height: 100%; 
+  object-fit: contain; 
+  display: block;
 }
 
 .loading-template {
@@ -325,12 +118,11 @@
   margin-top: 15px;
 }
 
-/* Field Labels */
 .field-label {
   cursor: grab;
   user-select: none;
   z-index: 10;
-  position: absolute; /* מאפשר מיקום חופשי בתוך ה-image-container */
+  position: absolute; 
 }
 
 .field-label:active {
@@ -359,7 +151,6 @@
   width: 18px;
 }
 
-/* Animations */
 .page-transition {
   animation: fadeIn 0.3s ease;
 }
@@ -375,7 +166,6 @@
   }
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -394,7 +184,6 @@
   background: rgba(145, 47, 250, 0.5);
 }
 
-/* Custom Spinner Color */
 ::ng-deep .mat-mdc-progress-spinner.mat-accent circle {
   stroke: #792ffa !important;
 }

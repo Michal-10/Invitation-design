@@ -64,7 +64,7 @@ export class TemplatesComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
-    this.isUploading = true; // Set the uploading state to true
+    this.isUploading = true; 
     console.log("in submit function in template component");
     console.log("this.selectedFile: before rename");
 
@@ -83,7 +83,7 @@ export class TemplatesComponent implements OnInit {
     try {
       const timestamp = new Date().getTime();
       const originalFile = this.selectedFile!;
-      const extension = originalFile.name.split('.').pop(); // סיומת הקובץ
+      const extension = originalFile.name.split('.').pop(); 
       const newFileName = originalFile.name.split('.')[0] + '_' + timestamp + '.' + extension;
 
       // יצירת קובץ חדש עם שם חדש
@@ -97,7 +97,6 @@ export class TemplatesComponent implements OnInit {
       console.log(this.selectedFile);
 
 
-      // this.selectedFile.name = this.selectedFile.name + new Date().getTime() +'.png'; // עדכון שם הקובץ שנשמר ב-AWS
       console.log("in submit function in template component");
       const presignedUrl = await this.templateService.uploadFileToAWS(this.selectedFile);
       console.log('presignedUrl', presignedUrl);
@@ -107,7 +106,7 @@ export class TemplatesComponent implements OnInit {
       const templateData = {
         ...this.templateForm.value,
         name: this.selectedFile.name,
-        imageUrl: presignedUrl, // שמירת ה-URL ללא הפרמטרים
+        imageUrl: presignedUrl, 
       };
 
       console.log("templateData: ");
@@ -137,8 +136,7 @@ export class TemplatesComponent implements OnInit {
 
         await this.templateService.uploadToS3(this.selectedFile, presignedUrl);
 
-        this.isUploading = false; // Set the uploading state to false after the upload is complete
-        // sessionStorage.setItem('templateId', res.id);
+        this.isUploading = false; 
         this.router.navigate(['/positions', res.id]);
       }, error => {
         console.error('Error creating template:', error);
@@ -155,12 +153,12 @@ export class TemplatesComponent implements OnInit {
       this.isUploading = false;
       if ((err as any).status === 401) {
          Swal.fire({
-                    title: 'שגיאה',
-                    text: 'שגיאה בהעלאה: משתמש לא מחובר למערכת',
-                    icon: 'error',
-                    confirmButtonText: 'אישור',
-                    confirmButtonColor: '#5c6bc0'
-                  });
+            title: 'שגיאה',
+            text: 'שגיאה בהעלאה: משתמש לא מחובר למערכת',
+            icon: 'error',
+            confirmButtonText: 'אישור',
+            confirmButtonColor: '#5c6bc0'
+          });
         return;
       }
       Swal.fire({

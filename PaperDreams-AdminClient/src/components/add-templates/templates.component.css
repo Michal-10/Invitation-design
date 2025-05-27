@@ -1,10 +1,8 @@
-/* עטיפת עמוד */
 .content-wrapper {
   padding: 25px;
   direction: ltr;
 }
 
-/* כרטיס */
 .card {
   background: white;
   border-radius: 12px;
@@ -50,7 +48,6 @@
   margin-bottom: 20px;
 }
 
-/* העלאת קובץ */
 .file-upload-container {
   margin-bottom: 25px;
 
@@ -94,7 +91,6 @@
   }
 }
 
-/* כפתור ראשי */
 .form-actions {
   display: flex;
   justify-content: flex-end;
@@ -129,7 +125,6 @@
   }
 }
 
-/* אנימציית מעבר */
 .page-transition {
   animation: fadeIn 0.3s ease;
 }
@@ -145,7 +140,6 @@
   }
 }
 
-/* רספונסיביות */
 @media (max-width: 768px) {
   .card {
     margin: 0 10px;

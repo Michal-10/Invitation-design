@@ -65,17 +65,11 @@
       </div>
       <div class="user-menu">
         @if (isLoggedIn()) {
-          <button mat-button [matMenuTriggerFor]="menu" class="user-button">
+          <button mat-button class="user-button">
             <!-- <i class="material-icons">arrow_drop_down</i> -->
             <span>מנהל מערכת</span>
             <i class="material-icons"></i>
           </button>
-          <mat-menu #menu="matMenu">
-            <!-- <button mat-menu-item class="logout-menu-item" (click)="logout()">
-              <i class="material-icons">logout</i>
-              <span>התנתק</span>
-            </button> -->
-          </mat-menu>
         } @else {
           <a mat-button class="user-button" routerLink="/login">
             <i class="material-icons">login</i>

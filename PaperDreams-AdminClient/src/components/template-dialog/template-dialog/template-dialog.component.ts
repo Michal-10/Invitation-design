@@ -23,8 +23,6 @@ import Swal from 'sweetalert2';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule
-    // ,
-    // BrowserAnimationsModule
   ],
   templateUrl: './template-dialog.component.html',
   styleUrls: ['./template-dialog.component.css']

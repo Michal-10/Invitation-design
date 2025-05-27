@@ -1,28 +1,22 @@
 <div class="home-container">
   
-    <!-- Main Content Grid -->
     <div class="main-grid">
   
-      <!-- Hero Section -->
       <div class="hero-card">
         <h1 class="animated-title">
           ברוכים הבאים ל<span class="color-changing-text"> מערכת הניהול </span>
         </h1>
         <p class="hero-subtitle">המקום שבו השליטה והנתונים נמצאים בידיים שלך</p>
         <button class="cta-button" (click)="onGetStarted()">
-         <!-- @if(isLoggedIn()) { -->
           <span class="button-text">{{ isLoggedIn() ? 'לצפיה בדוחות' : 'כניסה ללוח הבקרה' }}</span>
-          <!-- <span class="button-text" >כניסה ללוח הבקרה</span> -->
           <span class="button-icon">{{ isLoggedIn() ?  '📊' : '🛠️' }}</span>
-        <!-- } -->
-        
         </button>
       </div>
   
-      <!-- Features Cards -->
       <div class="features-container">
-        <div 
-          *ngFor="let feature of features; let i = index" 
+        <!-- @for( feature of features; i = $index){
+<div 
+          
           class="feature-card floating-card"
           [style.animation-delay.s]="i * 0.2">
           <div class="card-icon">{{ feature.icon }}</div>
@@ -30,6 +24,18 @@
           <p class="card-description">{{ feature.description }}</p>
           <div class="card-glow"></div>
         </div>
+        } -->
+        @for (feature of features; let i = $index; track $index) {
+            <div 
+              class="feature-card floating-card"
+              [style.animation-delay.s]="i * 0.2">
+              
+              <div class="card-icon">{{ feature.icon }}</div>
+              <h3 class="card-title">{{ feature.title }}</h3>
+              <p class="card-description">{{ feature.description }}</p>
+              <div class="card-glow"></div>
+            </div>
+          }
       </div>
       
     </div>

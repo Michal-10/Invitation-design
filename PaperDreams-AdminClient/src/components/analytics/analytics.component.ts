@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -51,35 +50,18 @@ export class AnalyticsComponent implements OnInit {
   ngOnInit(): void {
 
     this.analyticsService.getTemplatesByCategory().subscribe(data => {
-      console.log("in getTemplatesByCategory");
-
-      this.templatesByCategoryLabels = data.map(d => d.categoryName); // Use categoryName or fallback
-      console.log("templatesByCategoryLabels");
-      console.log(this.templatesByCategoryLabels);
-
+      this.templatesByCategoryLabels = data.map(d => d.categoryName); 
       this.templatesByCategoryData = data.map(d => d.count);
-      console.log("in subscribe in getTemplatesByCategory");
-      
     });
-    console.log("after getTemplatesByCategory");
-    
-
-    // Fetch daily logins
     this.analyticsService.getDailyLogins().subscribe(data => {
       this.dailyLoginsLabels = data.map(d => new Date(d.date).toLocaleDateString('he-IL')); // Display only the date
       this.dailyLoginsData = data.map(d => d.count);
     });
-
-    console.log("after getDailyLogins");
-    console.log("/*/*/*/*/*/*");
     
-    // Fetch daily active users
     this.analyticsService.getDailyActiveUsers().subscribe(data => {
       this.dailyActiveUsersLabels = data.map(d => new Date(d.date).toLocaleDateString('he-IL')); // Display date
-      this.dailyActiveUsersData = data.map(d => d.count); // Active users count
+      this.dailyActiveUsersData = data.map(d => d.count); 
     });
-    console.log("after getDailyActiveUsers");
-    
   }
 
   selectChart(type: 'pie' | 'bar' | 'line') {
