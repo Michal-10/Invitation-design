@@ -201,7 +201,7 @@ export default function TextEditorSidebar({
               flexDirection: "column",
               gap: 1.5,
               direction: "rtl",
-              maxHeight: "90vh", // הגובה המקסימלי של אזור הבחירה
+              // maxHeight: "90vh", // הגובה המקסימלי של אזור הבחירה
               overflowY: "auto",
               pr: 1 // רווח מימין כדי שלא ייחתך הסקרול ב-RTL
             }}
@@ -316,7 +316,7 @@ export default function TextEditorSidebar({
                 startIcon={<FormatBold />}
                 sx={{
                   mb: 2,
-                  bgcolor: isBold ? theme.palette.primary.main :  theme.palette.text.primary,
+                  bgcolor: isBold ? theme.palette.primary.main : theme.palette.text.primary,
                   color: isBold ? theme.palette.secondary.contrastText : theme.palette.text.primary,
                 }}
               >
