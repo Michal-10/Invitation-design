@@ -242,6 +242,9 @@ const userSlice = createSlice({
                 created_at: action.payload.user.created_at,
                 updatedAt: action.payload.user.updatedAt,
             };
+            console.log("sate.user");
+            console.log(state.user);
+            
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
