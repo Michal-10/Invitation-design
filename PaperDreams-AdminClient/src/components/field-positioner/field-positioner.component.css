@@ -261,6 +261,10 @@
 .card-title i {
   margin-left: 10px;
 }
+.save-button{
+  font-weight: bold;
+  direction: rtl;
+}
 
 .card-body {
   padding: 20px;
