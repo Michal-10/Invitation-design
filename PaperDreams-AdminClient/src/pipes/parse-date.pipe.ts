@@ -7,7 +7,8 @@ export class ParseDatePipe implements PipeTransform {
   transform(value: any): Date | null {
     try {
       const parsed = new Date(value);
-      return isNaN(parsed.getTime()) ? null : parsed;
+      return parsed;
+      // return isNaN(parsed.getTime()) ? null : parsed;
     } catch {
       return null;
     }
