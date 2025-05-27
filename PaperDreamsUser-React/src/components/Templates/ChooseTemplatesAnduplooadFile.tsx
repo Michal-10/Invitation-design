@@ -676,6 +676,7 @@ export default function CategoryTemplatesPage() {
                 bgcolor: "#f4f4f4",
                 minHeight: 500,
                 maxHeight: "80vh",
+                height: "100%",
                 overflowY: "auto",
               }}
             >
