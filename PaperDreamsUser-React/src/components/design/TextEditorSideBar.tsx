@@ -101,6 +101,7 @@ export default function TextEditorSidebar({
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextValue(e.target.value)
+    equallTexts[selectedField?.field.name||''] = e.target.value
     updateTextProperties({ text: e.target.value })
   }
 
