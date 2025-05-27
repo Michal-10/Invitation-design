@@ -12,6 +12,7 @@
     position: relative;
     overflow: hidden;
     padding: 2rem;
+    border-radius: 3;
   }
   
   /* רקע אנימציות */

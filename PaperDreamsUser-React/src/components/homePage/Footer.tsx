@@ -19,7 +19,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           style={{ color: '#0077cc', textDecoration: 'none', marginLeft: '5px' }}
         >
-          support@invitationLine.co.il
+          support@invitatiOnline.co.il
         </a>
       </Typography>
 

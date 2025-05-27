@@ -288,7 +288,7 @@ const Header: React.FC = () => {
                     <Box display="flex" alignItems="center" gap={1} mb={{ xs: 1, sm: 0 }}>
                         <BrushIcon sx={{ color: theme.palette.primary.main }} />
                         <Typography variant="h6" fontSize={{ xs: '1rem', sm: '1.25rem' }}>
-                            InvitationLine
+                            InvitatiOnline
                         </Typography>
                     </Box>
 
