@@ -41,10 +41,10 @@ const UpdateUser = () => {
 
     const checkPassword = (): boolean => {
         if (!passwordRef.current?.value) {
-            setErrors(prevErrors => ({ ...prevErrors, password: "שדה זה הוא חובה" }));
+            // setErrors(prevErrors => ({ ...prevErrors, password: "שדה זה הוא חובה" }));
             return false;
         } else {
-            setErrors(prevErrors => ({ ...prevErrors, password: null }));
+            // setErrors(prevErrors => ({ ...prevErrors, password: null }));
             return true;
         }
     };
