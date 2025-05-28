@@ -107,6 +107,7 @@ namespace PaperDreams_Server.Service.services
                 userEntity.PasswordHash = userDto.Password;
                 Console.WriteLine("in user update service ");
                 Console.WriteLine("userEntity.Id   ", userEntity.Id);
+                Console.WriteLine(userEntity.Id);
                 Console.WriteLine("userEntity.to   ", userEntity.ToString());
                 Console.WriteLine("*/*/*/*/*/*/*/*/*/*/*/*/*");
                 var res = await _userRepository.UpdateUserAsync(id,userEntity);
