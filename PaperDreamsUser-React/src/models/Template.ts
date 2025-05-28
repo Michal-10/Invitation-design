@@ -1,7 +1,6 @@
 import { TemplateField } from "./TemplateField";
 
 export class Template{
-    
     constructor(
         public createdAt:Date,
         public id:string,

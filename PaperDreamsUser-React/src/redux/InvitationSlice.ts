@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Invitation } from "../models/invitation";
+
 export const setInvitation = createAsyncThunk("invitation",
   async ({invitation}: { invitation: Invitation}) => {
    return invitation;

@@ -3,10 +3,6 @@ import axios from "axios";
 
 export const getDownloadURL = async (fileName: string) => {
     try {
-        console.log("in getDownloadURL");
-        console.log(fileName);
-        
-        
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/upload/download-url/${fileName}`);
         return res.data;
     } catch (error) {
@@ -26,21 +22,11 @@ export const getText = async (file: File) => {
     formData.append("file", file);
     formData.append("event_type", eventType);
 
-    console.log("//////////////////////////////////");
-    console.log("in getText bsfore ");
-    console.log("in getText");
-
     try {
         const response = await fetch(`https://invitationline-aiserver.onrender.com/upload/`, {
             method: "POST",
             body: formData,
         });
-        console.log("in getText after ");
-        console.log(response);
-        console.log("//////////////////////////////////");
-        
-
-
 
         if (!response.ok) {
             throw new Error("שגיאה בעת שליחת הקובץ לשרת");

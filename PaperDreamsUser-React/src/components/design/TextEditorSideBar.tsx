@@ -1,34 +1,11 @@
 import React, { useState } from "react"
 import { fabric } from "fabric"
 import { TemplateField } from "../../models/TemplateField"
-import {
-  Box,
-  Button,
-  FormControl,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  Typography,
-  Divider,
-  Card,
-  CardContent,
-  useTheme,
+import { Box, Button, FormControl, IconButton, InputLabel, MenuItem, Paper, Select, 
+  SelectChangeEvent, TextField, Typography, Divider, Card, CardContent, useTheme,
 } from "@mui/material"
-import {
-  FormatBold,
-  ArrowUpward,
-  ArrowBack,
-  ArrowForward,
-  ArrowDownward,
-  Close,
-  Edit,
-  ColorLens,
-  FormatSize,
-  TextFields,
+import { FormatBold, ArrowUpward, ArrowBack, ArrowForward, ArrowDownward, 
+  Close, Edit, ColorLens, FormatSize,  TextFields,
 } from "@mui/icons-material"
 
 export default function TextEditorSidebar({
@@ -52,15 +29,7 @@ export default function TextEditorSidebar({
   const [isEditing, setIsEditing] = useState<boolean>(false)
 
   const handleFieldSelect = (templateField: TemplateField) => {
-    setSelectedField(templateField)
-    console.log("Selected field:", templateField);
-    console.log("Equall texts:", equallTexts);
-    console.log(equallTexts);
-    console.log("equallTexts[templateField.field.name]");
-    console.log(equallTexts[templateField.field.name]);
-    
-    
-    
+    setSelectedField(templateField);
     
     setTextValue(equallTexts[templateField.field.name])
     setIsEditing(true)
@@ -184,14 +153,12 @@ export default function TextEditorSidebar({
             </Typography>
 
             <Box 
-            // sx={{ display: "flex", flexDirection: "column", gap: 1.5, direction: "rtl" }}
             sx={{
               display: "flex",
               flexDirection: "column",
               gap: 1.5,
               direction: "rtl",
-              // maxHeight: "90vh", // הגובה המקסימלי של אזור הבחירה
-              pr: 1 // רווח מימין כדי שלא ייחתך הסקרול ב-RTL
+              pr: 1 
             }}
             >             
              {fieldsWithPlaces.map((templateField: TemplateField, index: number) => (
@@ -212,8 +179,8 @@ export default function TextEditorSidebar({
                       borderColor: theme.palette.primary.main,
                     },
                     "& .MuiButton-startIcon": {
-                      marginRight: 0, // אין צורך ברווח מימין ב-RTL
-                      marginLeft: 1.5, // רווח בין האייקון לטקסט (בכיוון ימין לשמאל)
+                      marginRight: 0, 
+                      marginLeft: 1.5,
                     },
                   }}                  
                 >
@@ -304,7 +271,6 @@ export default function TextEditorSidebar({
                 startIcon={<FormatBold />}
                 sx={{
                   mb: 2,
-                  // bgcolor: isBold ? theme.palette.primary.main : theme.palette.text.primary,
                   bgcolor: theme.palette.primary.main,
                   color: isBold ? theme.palette.secondary.contrastText : theme.palette.text.primary,
                 }}

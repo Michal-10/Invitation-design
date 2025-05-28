@@ -1,5 +1,3 @@
-
-
 import { useState } from "react"
 import { Button, CircularProgress, Box, Typography, Paper, Snackbar, Alert } from "@mui/material"
 import { Download, CheckCircle } from "@mui/icons-material"
@@ -31,7 +29,6 @@ export default function FileDownload({
     setError(null)
 
     try {
-      // Start progress animation
       const progressInterval = setInterval(() => {
         setProgress((prevProgress) => {
           const newProgress = prevProgress + 10
@@ -39,10 +36,8 @@ export default function FileDownload({
         })
       }, 300)
 
-      // Get download URL
       const downloadUrl = await getDownloadURL(fileName)
 
-      // Download the file
       const fileResponse = await fetch(downloadUrl)
 
       if (!fileResponse.ok) {
@@ -51,7 +46,6 @@ export default function FileDownload({
 
       const blob = await fileResponse.blob()
 
-      // Create download link
       const link = document.createElement("a")
       link.href = window.URL.createObjectURL(blob)
       link.setAttribute("download", fileName)
@@ -59,7 +53,6 @@ export default function FileDownload({
       link.click()
       document.body.removeChild(link)
 
-      // Complete progress and show success
       clearInterval(progressInterval)
       setProgress(100)
       setShowSuccess(true)
@@ -98,7 +91,6 @@ export default function FileDownload({
         {isDownloading ? "מוריד..." : buttonText}
       </Button>
 
-      {/* Progress indicator */}
       {isDownloading && progress > 0 && (
         <Paper
           elevation={0}
@@ -120,7 +112,6 @@ export default function FileDownload({
         </Paper>
       )}
 
-      {/* Success/Error notifications */}
       <Snackbar
         open={showSuccess || !!error}
         autoHideDuration={4000}

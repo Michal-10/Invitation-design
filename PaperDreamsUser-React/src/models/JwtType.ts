@@ -3,5 +3,4 @@ export type jwtType ={
     userId:number,
     email:String,
     firstName:String
-
 }

@@ -1,5 +1,3 @@
-
-
 import { Check, Upload, InsertDriveFile } from '@mui/icons-material'
 import { Paper, Box, CircularProgress, Typography, Button } from '@mui/material'
 import React, { Dispatch, useRef, useState } from 'react'
@@ -18,9 +16,8 @@ export default ({ onFileSelected }:{onFileSelected:Dispatch<File>}) => {
     }
   
     const validateAndSetFile = (file: File) => {
-      setError(null)
-  
-      // Check file type
+      setError(null);
+
       const validTypes = [
         "image/jpeg",
         "image/png",
@@ -29,54 +26,52 @@ export default ({ onFileSelected }:{onFileSelected:Dispatch<File>}) => {
       ]
       if (!validTypes.includes(file.type)) {
         setError("סוג הקובץ אינו נתמך. אנא העלה קובץ תמונה, PDF או מסמך Word.")
-        return
+        return;
       }
   
-      // Check file size (10MB max)
       if (file.size > 10 * 1024 * 1024) {
         setError("הקובץ גדול מדי. גודל מקסימלי הוא 10MB.")
-        return
+        return;
       }
   
-      // Simulate file processing
       setUploading(true)
       setTimeout(() => {
-        setFile(file)
-        onFileSelected(file)
-        setUploading(false)
+        setFile(file);
+        onFileSelected(file);
+        setUploading(false);
       }, 1500)
     }
   
     const handleDragEnter = (e: React.DragEvent) => {
-      e.preventDefault()
-      e.stopPropagation()
-      setDragging(true)
+      e.preventDefault();
+      e.stopPropagation();
+      setDragging(true);
     }
   
     const handleDragLeave = (e: React.DragEvent) => {
-      e.preventDefault()
-      e.stopPropagation()
-      setDragging(false)
+      e.preventDefault();
+      e.stopPropagation();
+      setDragging(false);
     }
   
     const handleDragOver = (e: React.DragEvent) => {
-      e.preventDefault()
-      e.stopPropagation()
+      e.preventDefault();
+      e.stopPropagation();
     }
   
     const handleDrop = (e: React.DragEvent) => {
-      e.preventDefault()
-      e.stopPropagation()
-      setDragging(false)
+      e.preventDefault();
+      e.stopPropagation();
+      setDragging(false);
   
       if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        validateAndSetFile(e.dataTransfer.files[0])
+        validateAndSetFile(e.dataTransfer.files[0]);
       }
     }
   
     const openFileDialog = () => {
       if (fileInputRef.current) {
-        fileInputRef.current.click()
+        fileInputRef.current.click();
       }
     }
   
@@ -142,7 +137,6 @@ export default ({ onFileSelected }:{onFileSelected:Dispatch<File>}) => {
                 }}
               >
                 <InsertDriveFile fontSize="small" />
-                {/* <Typography sx={{ mr: 1 }}>{file.name}</Typography> */}
               </Box>
               <Button
                 variant="outlined"

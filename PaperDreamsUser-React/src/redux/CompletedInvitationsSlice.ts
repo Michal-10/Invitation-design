@@ -7,16 +7,8 @@ import { CompletedInvitation } from "../models/CompletedTemplates";
 export const fetchCompletedInvitation = createAsyncThunk("completedInvitation/fetch",
   async (_, thunkApi) => {
     try {
-
-      console.log("in fetchCompletedInvitation");
-      console.log(decodeToken());
-      console.log("UserId");
-      
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/CompletedInvitation/userInvitation/${decodeToken()?.decoded.userId}`);
-
-      console.log("fetch all complete");
-      console.log(res.data);
-
+      
       return res.data as CompletedInvitation[];
     } catch (error: any) {
       return thunkApi.rejectWithValue(error);

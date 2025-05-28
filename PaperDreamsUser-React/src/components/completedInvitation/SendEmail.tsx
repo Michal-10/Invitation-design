@@ -1,16 +1,6 @@
 import { useState } from "react";
-import {
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  TextField,
-  Snackbar,
-  Alert,
-  Box,
+import { Button, CircularProgress, Dialog, DialogActions, DialogContent,
+  DialogTitle, IconButton, TextField, Snackbar, Alert, Box
 } from "@mui/material";
 import { Close, Email, Send, CheckCircle } from "@mui/icons-material";
 import axios from "axios";
@@ -65,7 +55,6 @@ export default function EmailSend({
       setOpenDialog(false);
     } catch (error: any) {
       console.error("שגיאה בשליחת המייל:", error);
-
       if (error.response?.status === 400 && typeof error.response.data === "string") {
         setError("שליחה נכשלה: " + error.response.data);
       } else {
@@ -83,7 +72,6 @@ export default function EmailSend({
 
   return (
     <Box>
-      {/* כפתור פתיחת הדיאלוג */}
       <Button
         onClick={() => setOpenDialog(true)}
         variant={variant}
@@ -96,14 +84,13 @@ export default function EmailSend({
           "&:hover": {
             bgcolor: variant === "contained" ? "#e05e52" : undefined,
           }, "& .MuiButton-startIcon": {
-            marginLeft: 1, // Add space between icon and text
+            marginLeft: 1, 
           },
         }}
       >
         {buttonText}
       </Button>
 
-      {/* דיאלוג לשליחת מייל */}
       <Dialog
         open={openDialog}
         onClose={() => !sending && setOpenDialog(false)}
@@ -156,14 +143,13 @@ export default function EmailSend({
                 fontFamily: "'Heebo', sans-serif",
               },
               "& .MuiButton-startIcon": {
-                marginLeft: 1, // רווח תקני בין האייקון לטקסט
+                marginLeft: 1, 
               },
             }}
             InputProps={{
               startAdornment: <Email sx={{ marginLeft:'2px' }} color="primary" />,
             }}
           />
-
           <TextField
             margin="dense"
             label="הודעה אישית"
@@ -226,7 +212,6 @@ export default function EmailSend({
         </DialogActions>
       </Dialog>
 
-      {/* Snackbar for success/error */}
       <Snackbar
         open={showSuccess || !!error}
         autoHideDuration={4000}

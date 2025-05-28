@@ -14,7 +14,7 @@ export const Router = createBrowserRouter([
     element: (<><AppLayout /></>),
     children: [
       {
-        index: true, // This is the default route when the path is "/"
+        index: true, 
         element: <HomePage />,
       },
       {

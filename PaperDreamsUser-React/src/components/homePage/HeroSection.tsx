@@ -3,167 +3,22 @@ import EditIcon from '@mui/icons-material/Edit';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import TuneIcon from '@mui/icons-material/Tune';
 import { useNavigate } from 'react-router';
-
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/Store';
 
 const HeroSection = () => {
 
-    // const navigate = useNavigate();
-    // const user = useSelector((state: RootState) => state.user.user);
-
-    // const handleStartNow = () => {
-    //     console.log('handleStartNow');
-    //     console.log("-*-*-*-*-*-*-*-*-*-*-*-*-");
-    //     console.log("user");
-    //     console.log(user);
-    //     console.log("sessionStorage.getItem('token')");
-    //     console.log(sessionStorage.getItem('token'));
-
-
-    //     if(user?.id 
-    //          && sessionStorage.getItem('userToken')
-    //       ){
-    //        console.log("'navigate('/chooseCategory') ");
-    //     }
-    //     else {
-    //        console.log("'navigate('/login') ");
-    //     }
-
-
-    //     sessionStorage.getItem('userToken') && user?.id? navigate('/chooseCategory') : navigate('/login');
-    // };
-    // return (
-    //     <Box
-    //         component={motion.div}
-    //         initial={{ opacity: 0, y: 20 }}
-    //         animate={{ opacity: 1, y: 0 }}
-    //         transition={{ duration: 1 }}
-    //         sx={{
-    //             width: '100vw',
-    //             height: '100vh',
-    //             display: 'flex',
-    //             flexDirection: 'column',
-    //             alignItems: 'center',
-    //             justifyContent: 'center',
-    //             boxSizing: 'border-box',
-    //             p: 2,
-    //             direction: 'rtl',
-    //             textAlign: 'center',
-    //         }}
-    //     >
-    //         <Typography
-    //             variant="h3"
-    //             fontSize={{ xs: '2rem', sm: '3rem', md: '3.5rem' }}
-    //             fontWeight={700}
-    //             color="primary"
-    //             mb={2}
-    //         >
-    //             עיצוב הזמנות חכם 
-    //         </Typography>
-    //         <Typography
-    //             variant="h6"
-    //             fontSize={{ xs: '1rem', sm: '1.25rem' }}
-    //             color="text.secondary"
-    //             maxWidth="600px"
-    //             lineHeight={1.8}
-    //             mb={4}
-    //         >
-    //             בחרי תבנית ייחודית, העלי את הקובץ שלך<br />
-    //             וצרי עיצוב אוטומטי ברגע – הכל מבוסס AI ✨
-    //         </Typography>
-
-    //         <Stack
-    //             direction={{ xs: 'column', sm: 'row' }}
-    //             spacing={{ xs: 3, sm: 6 }}
-    //             mb={4}
-    //             width={'80%'}
-    //             justifyContent="center"
-    //             alignItems="center"
-    //         >
-    //             <Stack alignItems="center" spacing={1} maxWidth={300}>
-    //                 <SmartToyIcon color="primary" sx={{ fontSize: 50 }} />
-    //                 <Typography variant="subtitle1" fontWeight={600}>
-    //                     טכנולוגיית AI מתקדמת
-    //                 </Typography>
-    //                 <Typography variant="body2" color="text.secondary">
-    //                     מערכת מתקדמת לניתוח ועיצוב הזמנות במהירות ובדיוק מרבי.
-    //                 </Typography>
-    //             </Stack>
-
-    //             <Stack alignItems="center" spacing={1} maxWidth={180}>
-    //                 <UploadFileIcon color="primary" sx={{ fontSize: 50 }} />
-    //                 <Typography variant="subtitle1" fontWeight={600}>
-    //                     העלאת קבצים קלה
-    //                 </Typography>
-    //                 <Typography variant="body2" color="text.secondary">
-    //                     העלי קבצי טקסט או תמונות, וקבלי תבניות מעוצבות באופן אוטומטי.
-    //                 </Typography>
-    //             </Stack>
-
-    //             <Stack alignItems="center" spacing={1} maxWidth={180}>
-    //                 <DesignServicesIcon color="primary" sx={{ fontSize: 50 }} />
-    //                 <Typography variant="subtitle1" fontWeight={600}>
-    //                     עיצוב מותאם אישית
-    //                 </Typography>
-    //                 <Typography variant="body2" color="text.secondary">
-    //                     התאימי כל אלמנט בעיצוב בקלות ובמהירות עם ממשק משתמש אינטואיטיבי.
-    //                 </Typography>
-    //             </Stack>
-    //         </Stack>
-
-    //         <Button variant="contained" size="large" onClick={handleStartNow}>
-    //             התחל עכשיו
-    //         </Button>
-    //     </Box>
-    // );
-
-
-    // const isMobile = useMediaQuery(theme.breakpoints.down("md"))
     const navigate = useNavigate()
-    // const user = useSelector((state: RootState) => state.user.user)
-
-    //state for setting
-    // const [setting, setSetsetting] = useState<boolean>(false)
-    // const open = Boolean(anchorEl)
-
-    // // State for contact dialog
-    // const [, setContactOpen] = useState(false)
     const user = useSelector((state: RootState) => state.user.user)
 
-    // // Handle contact form
-    // const handleContactOpen = () => {
-    //     // setContactOpen(true)
-    // }
-
     const handleStartNow = () => {
-        console.log('handleStartNow');
-        console.log("-*-*-*-*-*-*-*-*-*-*-*-*-");
-        console.log("user");
-        console.log(user);
-        console.log("sessionStorage.getItem('token')");
-        console.log(sessionStorage.getItem('token'));
-
-
-        if (user?.id
-            && sessionStorage.getItem('userToken')
-        ) {
-            console.log("'navigate('/chooseCategory') ");
-        }
-        else {
-            console.log("'navigate('/login') ");
-        }
-
-
         sessionStorage.getItem('userToken') && user?.id ? navigate('/chooseCategory') : navigate('/login');
     };
 
     return (
         <>
 
-            {/* Main Content */}
             <Box component="main" sx={{ flexGrow: 1 }}>
-                {/* Hero Section */}
                 <Box
                     sx={{ bgcolor: "white", py: 8, textAlign: "center" }} >
                     <Box sx={{ paddingBottom: '17px', paddingTop: '10px' }}>
@@ -199,8 +54,7 @@ const HeroSection = () => {
                     </Box>
                 </Box>
 
-                {/* Features Section */}
-                <Box sx={{ py: 5/*, width: "100%" */ }}>
+                <Box sx={{ py: 5 }}>
                     <Box>
                         <Typography
                             variant="h3"
@@ -359,7 +213,6 @@ const HeroSection = () => {
                     </Box>
                 </Box>
 
-                {/* Call to Action */}
                 <Box
                     sx={{ bgcolor: "var(--primary-color)", color: "white", py: 8, textAlign: "center" }}>
                     <Box >

@@ -48,7 +48,6 @@ export default function MultiFileDownload({ selectedFiles, onClearSelection }: M
   };
 
   return (
-    // <Box display="flex" alignItems="center" gap={2} mt={2} >
         <Box display="flex" alignItems="center" gap={2} mt={2} >
 
       <Button

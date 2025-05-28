@@ -1,7 +1,6 @@
 import { Box, Button, CircularProgress, IconButton, Paper, TextField, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { FormEvent, useRef, useState } from "react";
-// import { styleModal } from "../../models/style";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/Store";
 import { User } from "../../models/User";
@@ -10,7 +9,6 @@ import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 
 const UpdateUser = () => {
-    // const [openModal, setOpenModal] = useState(true);
     const [, setOpenModal] = useState(true);
     const [loading, setLoading] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
@@ -44,48 +42,24 @@ const UpdateUser = () => {
         setServerError(null);
         setErrors({ email: null, phone: null, password:null });
 
-        // const validPassword = checkPassword();
-        // if(!validPassword){
-        //     setErrors({...errors, password:'לא הוזנה סיסמא, שדה חובה'});
-        //     return;
-        // }
-
-        // const validEmail = checkEmail();
-        // if (!validEmail) {
-        //     setErrors({...errors, email:'אימייל לא חוקי'});
-        //     return;
-        // }
-
-
         const newErrors: typeof errors = { email: null, phone: null, password: null };
 
-        // בדיקת סיסמה
         if (!passwordRef.current?.value) {
             newErrors.password = "לא הוזנה סיסמא, שדה חובה";
         }
     
-        // בדיקת אימייל
         const validEmail = checkEmail();
         if (!validEmail) {
             newErrors.email = "אימייל לא חוקי";
         }
     
-        // עדכון השגיאות
         setErrors(newErrors);
     
-        // אם יש לפחות שגיאה אחת - עצור
         if (Object.values(newErrors).some(error => error !== null)) {
             return;
         }
 
-
         setLoading(true);
-
-        console.log("user before update:");
-        console.log(user);
-        console.log(user.password);
-
-
         const userData: Partial<User> = {
             firstName: firstNameRef.current?.value || user.firstName,
             lastName: lastNameRef.current?.value || user.lastName,
@@ -95,10 +69,7 @@ const UpdateUser = () => {
 
         try {
             const res = await dispatch(updateUser({ user: userData })).unwrap();
-            console.log("in update Usr Comp ");
-            console.log(res);
             sessionStorage.setItem('userToken', res.token);
-            console.log("after update User Comp");
 
             setOpenModal(false);
             navigate('/');
@@ -160,10 +131,6 @@ const UpdateUser = () => {
                 >
                     {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : "שמירת שינויים"}
                 </Button>
-
-
-
-
             </Paper>
         </Box>
     );

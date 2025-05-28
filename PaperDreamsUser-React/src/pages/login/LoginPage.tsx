@@ -15,7 +15,6 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 
 export default function AuthPage() {
-  // const theme = useTheme();
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -47,23 +46,16 @@ export default function AuthPage() {
             lastName: mode === "register" ? lastName : undefined,
           },
           status: mode,
-          // Add a default or appropriate status value
         })
       )
         .unwrap();
-      navigate("/"); // Redirect to home page after successful login/register
+      navigate("/");
     } catch (err: any) {
       setError("משתמש קיים במערכת");
-      // alert("המשתמש קיים במערכת");
-      // alert("the mail or password it's wrong");
-      console.log(err);
-
     } finally {
       setLoading(false);
     }
   };
-
-
 
   const handleGoogleLogin = async (mode: string) => {
     setLoading(true);
@@ -71,14 +63,13 @@ export default function AuthPage() {
 
     try {
       await dispatch(googleLogin({ mode })).unwrap();
-      navigate("/"); // Redirect to home page after successful login/register
+      navigate("/"); 
     } catch (err: any) {
       setError("משתמש לא קיים במערכת");
     } finally {
       setLoading(false);
     }
   };
-
 
   return (
     <Box
@@ -92,18 +83,9 @@ export default function AuthPage() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        // background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
         overflow: "hidden",
       }}
     >
-
-
-
-
-
-
-
-
       <Paper
         elevation={6}
         sx={{
@@ -186,8 +168,6 @@ export default function AuthPage() {
         >
           התחברות עם Google
         </Button>
-
-
 
         <Button
           fullWidth
