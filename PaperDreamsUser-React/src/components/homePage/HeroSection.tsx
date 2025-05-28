@@ -372,7 +372,8 @@ const HeroSection = () => {
                             צור הזמנה מרשימה בקלות ובמהירות, או צור קשר אם יש לך שאלות
                         </Typography>
                         <Box sx={{ display: "flex", justifyContent: "center", gap: 2, flexWrap: "wrap" }}>
-                            <Button variant="contained" size="large" onClick={() => navigate("/chooseCategory")}
+                            <Button variant="contained" size="large" 
+                            onClick={handleStartNow}
                                 sx={{ bgcolor: "white", color: "var(--primary-color)", "&:hover": { bgcolor: "#f0f0f0" }, px: 4, py: 1.5, borderRadius: 2, fontSize: "1.1rem" }}>
                                 צור הזמנה
                             </Button>
