@@ -51,21 +51,21 @@ const UpdateUser = () => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        setLoading(true);
-        setServerError(null);
 
         const validPassword = checkPassword();
         if(!validPassword){
             setErrors({...errors, password:'לא הוזנה סיסמא, שדה חובה'});
+
             return;
         }
 
         const validEmail = checkEmail();
         if (!validEmail) {
             setErrors({...errors, email:'אימייל לא חוקי'});
-            setLoading(false);
             return;
         }
+        setLoading(true);
+        setServerError(null);
 
         console.log("user before update:");
         console.log(user);
