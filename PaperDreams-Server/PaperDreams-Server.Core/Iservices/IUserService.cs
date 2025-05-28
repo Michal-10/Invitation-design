@@ -19,7 +19,7 @@ namespace PaperDreams_Server.Core.Iservices
         Task<IEnumerable<UserDTO>> GetAllUsersAsync();
         Task<List<string>> GetEmailUsersAsync();
 
-        Task<UserDTO> getUserByIdAsync(int id);
+        //Task<UserDTO> getUserByIdAsync(int id);
 
         Task<string> UpdateUserAsync(int id, UserDTO userDto);
 

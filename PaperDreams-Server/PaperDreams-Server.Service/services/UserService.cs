@@ -37,17 +37,14 @@ namespace PaperDreams_Server.Service.services
             role.Description = "";
             role.RoleName = userDto.Role;
             newUser.Roles = new List<Role> { role };
-            // newUser.Roles.Add(role);
             newUser.created_at = DateTime.Now;
             newUser.UpdatedAt = DateTime.Now;
-            newUser.PasswordHash = HashPassword(userDto.Password); // הצפנת הסיסמה ✅
+            newUser.PasswordHash = HashPassword(userDto.Password); 
 
             await _userRepository.AddUserAsync(newUser);
 
-            // יצירת טוקן עבור המשתמש החדש
             var token = _jwtService.GenerateToken(newUser);
 
-            // מיפוי המשתמש חזרה ל-DTO כדי לא לחשוף מידע רגיש
             var userResponse = _mapper.Map<UserDTO>(newUser);
 
             return (token, userResponse);
@@ -80,11 +77,11 @@ namespace PaperDreams_Server.Service.services
             return await _userRepository.GetEmailUsersAsync();
         }
 
-        // ✅ החזרת משתמש לפי ID
-        public async Task<UserDTO> getUserByIdAsync(int id)
-        {
-            return _mapper.Map<UserDTO>(await _userRepository.GetUserByIdAsync(id));
-        }
+        //// ✅ החזרת משתמש לפי ID
+        //public async Task<UserDTO> getUserByIdAsync(int id)
+        //{
+        //    return _mapper.Map<UserDTO>(await _userRepository.GetUserByIdAsync(id));
+        //}
 
         public async Task<bool> AddUserAsync(UserDTO user)
         {
@@ -92,14 +89,13 @@ namespace PaperDreams_Server.Service.services
             var userFind = await _userRepository.GetUserByIdAsync(userEntity.Id);
             if (userFind == null)
             {
-                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                user.Password = HashPassword(user.Password);
                 await _userRepository.AddUserAsync(userEntity);
                 return true;
             }
             return false;
         }
 
-        // ✅ עדכון משתמש (משתמש יכול לעדכן רק את עצמו)
         public async Task<string> UpdateUserAsync(int id, UserDTO userDto)
         {
             var userFind = await _userRepository.GetUserByIdAsync(id);

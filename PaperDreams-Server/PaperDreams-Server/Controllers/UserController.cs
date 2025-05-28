@@ -69,35 +69,24 @@ namespace PaperDreams_Server.Controllers
         {
             return Ok(await _userService.GetAllUsersAsync());
         }
-
-        //[HttpGet("AllEmailsUsers")]
+        
+        //[HttpGet("{id}")]
+        //[Authorize]
         //[Authorize(Policy = "Admin")]
-        //public async Task<ActionResult<IEnumerable<string>>> GetAllEmailUsers()
+        //public async Task<ActionResult<UserDTO>> GetUserById(int id)
         //{
-        //    var emails = await _userService.GetEmailUsersAsync();
-        //    return Ok(emails);
+        //    var user = await _userService.getUserByIdAsync(id);
+        //    if (user == null)
+        //        return NotFound();
+
+        //    var userIdFromToken = uint.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        //    var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+        //    if (userIdFromToken != id && userRole != "Admin")
+        //        return Forbid(); // חסימת גישה
+
+        //    return user;
         //}
-        
-
-        
-        // ✅ כל משתמש יכול לראות רק את עצמו
-        [HttpGet("{id}")]
-        [Authorize]
-        [Authorize(Policy = "Admin")]
-        public async Task<ActionResult<UserDTO>> GetUserById(int id)
-        {
-            var user = await _userService.getUserByIdAsync(id);
-            if (user == null)
-                return NotFound();
-
-            var userIdFromToken = uint.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
-
-            if (userIdFromToken != id && userRole != "Admin")
-                return Forbid(); // חסימת גישה
-
-            return user;
-        }
 
         // ✅ עדכון פרופיל אישי (משתמש יכול לעדכן רק את עצמו)
 
@@ -108,10 +97,14 @@ namespace PaperDreams_Server.Controllers
         public async Task<ActionResult> UpdateUser(int id, [FromBody] UserPostModel userPostModel)
         {
             var userDto = _mapper.Map<UserDTO>(userPostModel);
-            //var userIdFromToken =  int.Parse(User.FindFirst("userId")?.Value);
-             
-            ///if (userIdFromToken != id)
-               // return Forbid("userIdFromToken != id"); // חסימת גישה אם ה-ID לא תואם
+            var userIdFromToken =  int.Parse(User.FindFirst("userId")?.Value);
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("in update user ");
+            Console.WriteLine(userIdFromToken);
+            Console.WriteLine("----------------------------");
+
+            if (userIdFromToken != id)
+                return Forbid("userIdFromToken != id"); // חסימת גישה אם ה-ID לא תואם
 
             if (!string.IsNullOrEmpty(userDto.Role) && userDto.Role != "string")
                 return BadRequest("You cannot change your role.");
