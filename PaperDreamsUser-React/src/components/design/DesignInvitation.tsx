@@ -125,6 +125,7 @@ export default () => {
             return;
 
         setSaveAndDownload(true);
+
         const dataUrl = canvas.toDataURL({ format: "png" });
 
         const blob = await (await fetch(dataUrl)).blob();
@@ -165,7 +166,7 @@ export default () => {
             console.error("Error saving invitation:", error);
             alert("שגיאה בשמירת ההזמנה.");
         }finally{
-        setSaveAndDownload(false);
+            setSaveAndDownload(false);
         }
     };
 
@@ -224,7 +225,7 @@ export default () => {
                             onClick={handleSaveAndDownload}
                             style={{ fontSize: '18px', gap: '15px', color: 'black', marginTop: "20px", padding: "10px 15px", cursor: "pointer", border: '2px solid var(--primary-color)' }}
                         >
-                           {saveAndDownload ? ' לשמירה והורדה': <CircularProgress size={40} color="primary" /> }
+                           {!saveAndDownload ? ' לשמירה והורדה': <CircularProgress size={40} color="primary" /> }
                         </Button>
                         <Button
                             startIcon={<PrintIcon sx={{ color: 'var(--primary-color)' }} />}
