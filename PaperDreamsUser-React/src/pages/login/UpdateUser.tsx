@@ -249,7 +249,7 @@ const UpdateUser = () => {
                     fullWidth
                     type="submit"
                     disabled={loading}
-                    onSubmit={handleSubmit}
+                    onClick={handleSubmit}
                 >
                     {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : "שמירת שינויים"}
                 </Button>
