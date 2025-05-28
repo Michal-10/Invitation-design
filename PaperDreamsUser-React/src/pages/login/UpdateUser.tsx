@@ -89,10 +89,10 @@
 // export default UpdateUser;
 
 
-import { Box, Button, CircularProgress, IconButton, Modal, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, IconButton, Paper, TextField, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { FormEvent, useRef, useState } from "react";
-import { styleModal } from "../../models/style";
+// import { styleModal } from "../../models/style";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/Store";
 import { User } from "../../models/User";
@@ -101,7 +101,8 @@ import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 
 const UpdateUser = () => {
-    const [openModal, setOpenModal] = useState(true);
+    // const [openModal, setOpenModal] = useState(true);
+    const [ , setOpenModal] = useState(true);
     const [loading, setLoading] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
     const [errors, setErrors] = useState<{ email: null | string, phone: null | string }>({ email: null, phone: null });
@@ -199,6 +200,10 @@ const UpdateUser = () => {
         //         </Modal>
         //     );
         // };
+
+
+
+
         <Box
             component={motion.div}
             initial={{ opacity: 0 }}
@@ -226,27 +231,32 @@ const UpdateUser = () => {
                     border: "1.5px solid #ff6f61",
                 }}
             >
+
                 <IconButton onClick={() => setOpenModal(false)} sx={{ position: 'absolute', top: 13, right: 13 }}>
                     <CloseIcon />
                 </IconButton>
-                <form onSubmit={handleSubmit} style={{ direction: "ltr" }}>
-                    <Typography variant="h5" sx={{ color: 'black', margin: '10px', fontWeight: 'bold', textAlign: 'center' }}>עדכון משתמש</Typography>
-                    <TextField label='firstName' defaultValue={user.firstName} variant="filled" margin="normal" fullWidth inputRef={firstNameRef} />
-                    <TextField label='lastName' defaultValue={user.lastName} variant="filled" margin="normal" fullWidth inputRef={lastNameRef} />
-                    <TextField label='email' defaultValue={user.email} variant="filled" margin="normal" fullWidth type="email" inputRef={emailRef} />
-                    {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-                    <TextField label='password' defaultValue={user.password} variant="filled" margin="normal" fullWidth type="password" inputRef={passwordRef} /
-                     {serverError && <Typography color="error" sx={{ mt: 1 }}>{serverError}</Typography>
-                     <Button
-                         sx={{ backgroundColor: 'var(--primary-color)', mt: 2 }}
-                         variant="contained"
-                         fullWidth
-                         type="submit"
-                         disabled={loading}
-                     >
-                         {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : "שמירת שינויים"}
-                     </Button>
-                 </form>
+
+                <Typography variant="h5" sx={{ color: 'black', margin: '10px', fontWeight: 'bold', textAlign: 'center' }}>עדכון משתמש</Typography>
+                <TextField label='firstName' defaultValue={user.firstName} variant="filled" margin="normal" fullWidth inputRef={firstNameRef} />
+                <TextField label='lastName' defaultValue={user.lastName} variant="filled" margin="normal" fullWidth inputRef={lastNameRef} />
+                <TextField label='email' defaultValue={user.email} variant="filled" margin="normal" fullWidth type="email" inputRef={emailRef} />
+                {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+                <TextField label='password' defaultValue={user.password} variant="filled" margin="normal" fullWidth type="password" inputRef={passwordRef} />
+                {serverError && <Typography color="error" sx={{ mt: 1 }}>{serverError}</Typography>}
+                <Button
+                    sx={{ backgroundColor: 'var(--primary-color)', mt: 2 }}
+                    variant="contained"
+                    fullWidth
+                    type="submit"
+                    disabled={loading}
+                    onSubmit={handleSubmit}
+                >
+                    {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : "שמירת שינויים"}
+                </Button>
+
+
+
+
             </Paper>
         </Box>
     );
