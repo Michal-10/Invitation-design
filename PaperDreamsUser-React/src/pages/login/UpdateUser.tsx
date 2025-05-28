@@ -52,6 +52,7 @@ const UpdateUser = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setServerError(null);
+        setErrors({ email: null, phone: null, password:null });
 
         const validPassword = checkPassword();
         if(!validPassword){
