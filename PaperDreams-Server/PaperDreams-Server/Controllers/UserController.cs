@@ -90,11 +90,11 @@ namespace PaperDreams_Server.Controllers
 
         // ✅ עדכון פרופיל אישי (משתמש יכול לעדכן רק את עצמו)
 
-        [HttpPut("update-profile/{id}")]
+        [HttpPut("update-profile")]
 
         //[Authorize]
         //[Authorize(Policy = "Admin")]
-        public async Task<ActionResult> UpdateUser(int id, [FromBody] UserPostModel userPostModel)
+        public async Task<ActionResult> UpdateUser( [FromBody] UserPostModel userPostModel)
         {
             var userDto = _mapper.Map<UserDTO>(userPostModel);
             var userIdFromToken =  int.Parse(User.FindFirst("userId")?.Value);
@@ -103,13 +103,14 @@ namespace PaperDreams_Server.Controllers
             Console.WriteLine(userIdFromToken);
             Console.WriteLine("----------------------------");
 
-            if (userIdFromToken != id)
-                return Forbid("userIdFromToken != id"); // חסימת גישה אם ה-ID לא תואם
+            //if (userIdFromToken != id)
+            //    return Forbid("userIdFromToken != id"); // חסימת גישה אם ה-ID לא תואם
 
             if (!string.IsNullOrEmpty(userDto.Role) && userDto.Role != "string")
                 return BadRequest("You cannot change your role.");
 
-            var isSuccess = await _userService.UpdateUserAsync(id, userDto);
+            //var isSuccess = await _userService.UpdateUserAsync(id, userDto);
+            var isSuccess = await _userService.UpdateUserAsync(userIdFromToken, userDto);
             if (isSuccess!=null)
                 return Ok(new { message = "Profile updated successfully.", token = isSuccess, user = userDto });
 

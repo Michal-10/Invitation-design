@@ -101,10 +101,14 @@ export const updateUser = createAsyncThunk("updateUser",
     try {
       console.log("userId");
 
+console.log("in updateUserSlice");
 
-      const response = await axios.put(`${import.meta.env.VITE_API_URL}/user/update-profile/${decodeToken()?.decoded.userId}`, user,
+      // const response = await axios.put(`${import.meta.env.VITE_API_URL}/user/update-profile/${decodeToken()?.decoded.userId}`, user,
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/user/update-profile`, user,
         { headers: { Authorization: `Bearer ${sessionStorage.getItem('userToken')}` } }
       );
+      console.log("after updateUserSlice");
+      
       return response.data;
 
     } catch (error: any) {
