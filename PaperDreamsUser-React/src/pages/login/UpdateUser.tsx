@@ -57,6 +57,7 @@ const UpdateUser = () => {
         const validPassword = checkPassword();
         if(!validPassword){
             setErrors({...errors, password:'לא הוזנה סיסמא, שדה חובה'});
+            return;
         }
 
         const validEmail = checkEmail();
