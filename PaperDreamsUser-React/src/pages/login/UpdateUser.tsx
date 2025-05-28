@@ -51,6 +51,7 @@ const UpdateUser = () => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        setServerError(null);
 
         const validPassword = checkPassword();
         if(!validPassword){
@@ -65,7 +66,6 @@ const UpdateUser = () => {
             return;
         }
         setLoading(true);
-        setServerError(null);
 
         console.log("user before update:");
         console.log(user);
