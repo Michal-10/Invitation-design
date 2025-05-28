@@ -53,8 +53,8 @@ export default function AuthPage() {
         .unwrap();
       navigate("/"); // Redirect to home page after successful login/register
     } catch (err: any) {
-      setError("משתמש לא קיים במערכת");
-      // alert("המשתמש לא קיים במערכת");
+      setError("משתמש קיים במערכת");
+      // alert("המשתמש קיים במערכת");
       // alert("the mail or password it's wrong");
       console.log(err);
 

@@ -58,6 +58,10 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("in ngoninit users");
+    console.log("isloading");
+    console.log(this.isLoading);
+    
     this.isLoading = true;
 
     this.userService.users$.subscribe(users => {
@@ -67,6 +71,10 @@ export class UsersComponent implements OnInit {
 
       this.users = users;
       this.isLoading = false;
+      
+    console.log("in ngoninit users after");
+    console.log("isloading");
+    console.log(this.isLoading);
     });
 
     // טוען פעם ראשונה את המשתמשים
