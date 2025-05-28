@@ -14,7 +14,7 @@ const UpdateUser = () => {
     const [, setOpenModal] = useState(true);
     const [loading, setLoading] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
-    const [errors, setErrors] = useState<{ email: null | string, phone: null | string }>({ email: null, phone: null });
+    const [errors, setErrors] = useState<{ email: null | string, phone: null | string, password: null | string }>({ email: null, phone: null, password:null });
 
     const user = useSelector((state: RootState) => state.user.user);
     const dispatch = useDispatch<AppDispatch>();
@@ -39,14 +39,29 @@ const UpdateUser = () => {
         return true;
     };
 
+    const checkPassword = (): boolean => {
+        if (!passwordRef.current?.value) {
+            setErrors(prevErrors => ({ ...prevErrors, password: "שדה זה הוא חובה" }));
+            return false;
+        } else {
+            setErrors(prevErrors => ({ ...prevErrors, password: null }));
+            return true;
+        }
+    };
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setServerError(null);
 
-        const valid = checkEmail();
-        if (!valid) {
-            alert("פרמטרים לא חוקיים");
+        const validPassword = checkPassword();
+        if(!validPassword){
+            setErrors({...errors, password:'לא הוזנה סיסמא, שדה חובה'});
+        }
+
+        const validEmail = checkEmail();
+        if (!validEmail) {
+            setErrors({...errors, email:'אימייל לא חוקי'});
             setLoading(false);
             return;
         }
@@ -117,6 +132,8 @@ const UpdateUser = () => {
                 <TextField label='email' defaultValue={user.email} variant="filled" margin="normal" fullWidth type="email" inputRef={emailRef} />
                 {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
                 <TextField label='password' defaultValue={user.password} variant="filled" margin="normal" fullWidth type="password" inputRef={passwordRef} helperText={'שדה חובה'} required/>
+                {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+                <br/>
                 {serverError && <Typography color="error" sx={{ mt: 1 }}>{serverError}</Typography>}
                 <Button
                     sx={{ backgroundColor: 'var(--primary-color)', mt: 2 }}
