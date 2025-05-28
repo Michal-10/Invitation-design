@@ -105,9 +105,6 @@ namespace PaperDreams_Server.Service.services
                 userEntity.UpdatedAt = DateTime.Now;
                 userEntity.PasswordHash = userDto.Password;
                 var resUser = await _userRepository.UpdateUserAsync(id,userEntity);
-                Console.WriteLine("after repo");
-                Console.WriteLine(resUser.Id);
-                Console.WriteLine("after repo");
                 if (resUser != null)
                     return _jwtService.GenerateToken(resUser);
             }

@@ -15,56 +15,6 @@ using System.Threading.Tasks;
 
 namespace PaperDreams_Server.Service.services
 {
-    //public class JwtService : IJwtService //יצירת JWT Token
-    //{
-        //private readonly string _secret;
-        //private readonly string _issuer;
-        //private readonly string _audience;
-        //private object tokenHandler;
-
-        //public JwtService(IConfiguration configuration)
-        //{
-        //    _secret = configuration["Jwt:Secret"] ?? throw new ArgumentNullException("Jwt:Secret is missing");
-        //    _issuer = configuration["Jwt:Issuer"] ?? throw new ArgumentNullException("Jwt:Issuer is missing");
-        //    _audience = configuration["Jwt:Audience"] ?? throw new ArgumentNullException("Jwt:Audience is missing");
-        //}
-
-        //public string GenerateToken(User user)
-        //{
-        //    Console.WriteLine($"User ID: {user.Id}");
-
-        //    var claims = new List<Claim>
-        //    {
-        //        // שמו של ה-Claim שקשור ל- userId שונה ל- "userId"
-        //        new Claim("userId", user.Id.ToString()),  // שים לב לשם "userId" במקום "NameIdentifier"
-        //        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-        //        new Claim(ClaimTypes.Name, user.FirstName ?? ""), // טיפול ב-null
-        //        // new Claim(ClaimTypes.Role, user.Roles),
-        //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        //    };
-
-        //    if (user.Roles != null)
-        //    {
-        //        claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role.RoleName)));
-        //    }
-
-        //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secret));
-        //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        //    // הגדרת זמן תפוגה לשעתיים
-        //    var expiration = DateTime.UtcNow.Add(TimeSpan.FromHours(2));
-
-        //    var token = new JwtSecurityToken(
-        //        _issuer,
-        //        _audience,
-        //        claims,
-        //        expires: expiration,
-        //        signingCredentials: creds
-        //    );
-
-        //    return new JwtSecurityTokenHandler().WriteToken(token);
-        //}
-
         public class JwtService : IJwtService
         {
             private readonly string _secret;
@@ -93,20 +43,15 @@ namespace PaperDreams_Server.Service.services
                     new Claim("name", user.FirstName ?? user.LastName ?? ""),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
-
-                // הוספת תפקידים כ-Claims
-                //if (user.Roles != null)
-                //{
                     foreach (var role in user.Roles)
                     {
                         claims.Add(new Claim("roles", role.RoleName)); // הוספת תפקיד כ-Claim
                     }
-                //}
 
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secret));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                // הגדרת זמן תפוגה (2 שעות)
+                //  זמן תפוגה 2 שעות
                 var expiration = DateTime.UtcNow.AddHours(2);
 
                 var token = new JwtSecurityToken(
