@@ -134,7 +134,7 @@ const UpdateUser = () => {
                 {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
                 <TextField label='password' defaultValue={user.password} variant="filled" margin="normal" fullWidth type="password" inputRef={passwordRef} helperText={'שדה חובה'} required/>
                 {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-                <br/>
+
                 {serverError && <Typography color="error" sx={{ mt: 1 }}>{serverError}</Typography>}
                 <Button
                     sx={{ backgroundColor: 'var(--primary-color)', mt: 2 }}
