@@ -103,19 +103,13 @@ namespace PaperDreams_Server.Service.services
             {
                 var userEntity = _mapper.Map<User>(userDto);
                 userEntity.UpdatedAt = DateTime.Now;
-                Console.WriteLine("*/*/*/*/*/*/*/*/*/*/*/*/*");
                 userEntity.PasswordHash = userDto.Password;
-                Console.WriteLine("in user update service ");
-                Console.WriteLine("userEntity.Id   ", userEntity.Id);
-                Console.WriteLine(userEntity.Id);
-                Console.WriteLine("userEntity.to   ", userEntity.ToString());
-                Console.WriteLine("*/*/*/*/*/*/*/*/*/*/*/*/*");
-                var res = await _userRepository.UpdateUserAsync(id,userEntity);
+                var resUser = await _userRepository.UpdateUserAsync(id,userEntity);
                 Console.WriteLine("after repo");
-                Console.WriteLine(userEntity.Id);
+                Console.WriteLine(resUser.Id);
                 Console.WriteLine("after repo");
-                if (res)
-                    return _jwtService.GenerateToken(userEntity);
+                if (resUser != null)
+                    return _jwtService.GenerateToken(resUser);
             }
             return null;
         }

@@ -39,11 +39,11 @@ namespace PaperDreams_Server.Data.Repositories
             return await _dataContext.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> UpdateUserAsync(int id, User user)
+        public async Task<User> UpdateUserAsync(int id, User user)
         {
             var userEntity = await GetUserByIdAsync(id);
             if (userEntity == null)
-                return false;
+                return null;
 
             // עדכון רק שדות מותרים
             //if (!string.IsNullOrEmpty(user.FirstName))
@@ -63,7 +63,8 @@ namespace PaperDreams_Server.Data.Repositories
 
             //_dataContext.Users.Update(userEntity);
             _dataContext.Users.Update(userEntity);
-            return await _dataContext.SaveChangesAsync() > 0;
+            await _dataContext.SaveChangesAsync() ;
+            return userEntity;
         }
 
         public async Task<bool> DeleteUserAsync(int id)

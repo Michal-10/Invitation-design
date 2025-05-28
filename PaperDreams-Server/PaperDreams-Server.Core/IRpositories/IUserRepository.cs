@@ -14,7 +14,7 @@ namespace PaperDreams_Server.Core.IRpositories
         Task<List<string>> GetEmailUsersAsync();
         Task<User> GetUserByIdAsync(int id);
         public Task<bool> AddUserAsync(User card);
-        public Task<bool> UpdateUserAsync(int id, User card);
+        public Task<User> UpdateUserAsync(int id, User card);
         public Task<bool> DeleteUserAsync(int id);
     }
 }
