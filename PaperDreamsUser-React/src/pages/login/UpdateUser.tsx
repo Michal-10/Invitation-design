@@ -39,33 +39,46 @@ const UpdateUser = () => {
         return true;
     };
 
-    const checkPassword = (): boolean => {
-        if (!passwordRef.current?.value) {
-            // setErrors(prevErrors => ({ ...prevErrors, password: "שדה זה הוא חובה" }));
-            return false;
-        } else {
-            // setErrors(prevErrors => ({ ...prevErrors, password: null }));
-            return true;
-        }
-    };
-
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setServerError(null);
         setErrors({ email: null, phone: null, password:null });
 
-        const validPassword = checkPassword();
-        if(!validPassword){
-            setErrors({...errors, password:'לא הוזנה סיסמא, שדה חובה'});
+        // const validPassword = checkPassword();
+        // if(!validPassword){
+        //     setErrors({...errors, password:'לא הוזנה סיסמא, שדה חובה'});
+        //     return;
+        // }
 
-            return;
+        // const validEmail = checkEmail();
+        // if (!validEmail) {
+        //     setErrors({...errors, email:'אימייל לא חוקי'});
+        //     return;
+        // }
+
+
+        const newErrors: typeof errors = { email: null, phone: null, password: null };
+
+        // בדיקת סיסמה
+        if (!passwordRef.current?.value) {
+            newErrors.password = "לא הוזנה סיסמא, שדה חובה";
         }
-
+    
+        // בדיקת אימייל
         const validEmail = checkEmail();
         if (!validEmail) {
-            setErrors({...errors, email:'אימייל לא חוקי'});
+            newErrors.email = "אימייל לא חוקי";
+        }
+    
+        // עדכון השגיאות
+        setErrors(newErrors);
+    
+        // אם יש לפחות שגיאה אחת - עצור
+        if (Object.values(newErrors).some(error => error !== null)) {
             return;
         }
+
+
         setLoading(true);
 
         console.log("user before update:");
