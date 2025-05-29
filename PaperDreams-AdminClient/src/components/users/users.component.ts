@@ -14,7 +14,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ParseDatePipe } from '../../pipes/parse-date.pipe';
 
 @Component({
   selector: 'app-users',
@@ -31,7 +30,6 @@ import { ParseDatePipe } from '../../pipes/parse-date.pipe';
     MatTooltipModule,
     MatProgressSpinnerModule,
     FormsModule,
-    ParseDatePipe
 ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']

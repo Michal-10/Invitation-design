@@ -102,6 +102,10 @@ const initialUser = () => {
 
     try {
         const decoded = jwtDecode<User>(token);
+        console.log("decodede Tokem ");
+        console.log(decoded);
+        
+        
 
         return {
             id: decoded.id,
