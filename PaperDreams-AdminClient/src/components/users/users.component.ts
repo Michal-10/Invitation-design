@@ -63,15 +63,17 @@ export class UsersComponent implements OnInit {
       this.users = users;
       this.isLoading = false;
     });
-    
+
     this.usersService.getAllUsers().subscribe({
-      error: (err) => {
+      error: () => {
         Swal.fire({
           title: 'שגיאה בהתחברות',
           text: 'מנהל לא מחובר',
           icon: 'error',
           confirmButtonText: 'אישור',
           confirmButtonColor: '#5c6bc0'
+        }).then(()=>{
+          localStorage.setItem('isLoggedIn','false');
         });
       }
     });

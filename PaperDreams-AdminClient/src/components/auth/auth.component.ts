@@ -78,7 +78,7 @@ export class AuthComponent {
         });
         this.isLoading = false;
       },
-      error: (err) => {
+      error: () => {
         Swal.fire({
           title: 'שגיאה בהתחברות',
           text:  'אירעה שגיאה בהתחברות, סיסמא לא תקינה',
