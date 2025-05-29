@@ -78,7 +78,7 @@ export class UsersComponent implements OnInit {
     });
 
     // טוען פעם ראשונה את המשתמשים
-    this.userService.refreshUsers();
+    this.userService.refreshUsers();//hfuk kvjzhr adht, 401
   }
 
   initForm(): void {
