@@ -21,8 +21,6 @@ export class MarketingService {
   }
   
   sendMarketingEmail( content: string ): Observable<any> {
-    console.log("in marketingService before sendMarketingEmail");
-    console.log(content);
     
     return this.http.post(
       `${environment.apiUrl}/Marketing/send`,

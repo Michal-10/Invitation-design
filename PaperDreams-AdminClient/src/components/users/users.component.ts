@@ -56,27 +56,15 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("in ngoninit users");
-    console.log("isloading");
-    
+
     this.isLoading = true;
-    console.log(this.isLoading);
 
     this.userService.users$.subscribe(users => {
-      console.log("Users received from service:", users);
-      console.log(users);
-
-
       this.users = users;
       this.isLoading = false;
-      
-    console.log("in ngoninit users after");
-    console.log("isloading");
-    console.log(this.isLoading);
     });
 
-    // טוען פעם ראשונה את המשתמשים
-    this.userService.refreshUsers();//hfuk kvjzhr adht, 401
+    this.userService.refreshUsers();
   }
 
   initForm(): void {

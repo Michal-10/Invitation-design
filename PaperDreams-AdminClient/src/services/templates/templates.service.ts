@@ -21,7 +21,6 @@ export class TemplatesService {
 
   async getDownloadURL(fileName: string) {
     try {
-      console.log("getDownloadURL fileName: " + fileName);
       const res = await axios.get(`${this.apiUrl}/upload/download-url/${fileName}`);
       return res.data;
     } catch (error) {
@@ -52,24 +51,12 @@ export class TemplatesService {
   }
 
   async uploadFileToAWS(file: File) {
-
-    console.log("in uploas file to AWS");
-    console.log(file);
-    
     if (!file) return;
 
     try {
       const res = await axios.get(`${this.apiUrl}/upload/presigned-url?fileName=${file.name}`);
-      console.log("res");
-      
-      console.log(res);
-      console.log(file);
-
       await this.uploadToS3(file, res.data);
 
-      console.log("הקובץ הועלה בהצלחה ל-S3!");
-
-      console.log("--------------before api/TextUpload/upload --------------- ");
       return res.data;
 
     } catch (error) {
@@ -80,15 +67,9 @@ export class TemplatesService {
   async uploadToS3(file: File, presignedUrl: string) {
     try {
 
-      console.log("uploadToS3");
-      console.log(presignedUrl);
-      console.log(file);
-
       await axios.put(presignedUrl, file, {
         headers: { "Content-Type": file.type },
       });
-
-      console.log("הקובץ הועלה בהצלחה ל-S3!");
 
     } catch (error) {
       console.error("Error uploading file to S3:", error);

@@ -48,13 +48,8 @@ export class TemplatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("ngOnInit in template component add template");
 
     this.categoryService.getCategories().subscribe((data) => {
-      console.log("in ngOnInit template component");
-      console.log("categories: ");
-
-      console.log(data);
       this.categories = data;
     });
   }
@@ -65,8 +60,6 @@ export class TemplatesComponent implements OnInit {
 
   async submit(): Promise<void> {
     this.isUploading = true; 
-    console.log("in submit function in template component");
-    console.log("this.selectedFile: before rename");
 
     if (this.templateForm.invalid || !this.selectedFile) {
          Swal.fire({
@@ -93,14 +86,7 @@ export class TemplatesComponent implements OnInit {
 
       // שמירת הקובץ החדש במקום הישן
       this.selectedFile = renamedFile;
-      console.log("this.selectedFile: after rename");
-      console.log(this.selectedFile);
-
-
-      console.log("in submit function in template component");
       const presignedUrl = await this.templateService.uploadFileToAWS(this.selectedFile);
-      console.log('presignedUrl', presignedUrl);
-
       await this.templateService.uploadToS3(this.selectedFile, presignedUrl);
 
       const templateData = {
@@ -108,12 +94,7 @@ export class TemplatesComponent implements OnInit {
         name: this.selectedFile.name,
         imageUrl: presignedUrl, 
       };
-
-      console.log("templateData: ");
-      console.log(templateData);
-
       sessionStorage.setItem('categoryId', this.templateForm.value.categoryId);
-      console.log("categoryId: **************" + this.templateForm.value.categoryId);
 
       this.templateService.createTemplate(templateData).subscribe(async (res) => {
         Swal.fire({
@@ -123,16 +104,11 @@ export class TemplatesComponent implements OnInit {
           timer: 1500,
           showConfirmButton: false
         });
-        console.log("in template component in createTemplate subscribe");
-        console.log("templateData: " + templateData);
-        console.log("res: ");
-        console.log(res);
         sessionStorage.setItem('template', JSON.stringify(res));
 
         const updatedFileName = res.name; // עדכון שם הקובץ שנשמר ב-AWS
 
         const presignedUrl = await this.templateService.uploadFileToAWS(this.selectedFile);
-        console.log('presignedUrl', presignedUrl);
 
         await this.templateService.uploadToS3(this.selectedFile, presignedUrl);
 

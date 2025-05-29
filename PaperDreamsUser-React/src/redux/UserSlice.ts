@@ -6,8 +6,6 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../pages/firebase";
 import { jwtDecode } from "jwt-decode";
 
-
-
 export const loginRegister = createAsyncThunk("loginRegister",
   async ({ user, status }: { user: Partial<User>, status: string }, thunkAPI) => {
     try {
@@ -33,19 +31,6 @@ export const loginRegister = createAsyncThunk("loginRegister",
   }
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const googleLogin = createAsyncThunk("googleLogin", async ({ mode }: { mode: string }, thunkAPI) => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
@@ -61,26 +46,13 @@ export const googleLogin = createAsyncThunk("googleLogin", async ({ mode }: { mo
     };
 
     const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/${mode}`, userData);
-
     sessionStorage.setItem("userToken", response.data.token);
-
     return response.data;
 
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
-
-
-
-
-
-
-
-
-
-
-
 
 export const updateUser = createAsyncThunk("updateUser",
   async ({ user }: { user: Partial<User> }, thunkAPI) => {
@@ -102,11 +74,6 @@ const initialUser = () => {
 
     try {
         const decoded = jwtDecode<User>(token);
-        console.log("decodede Tokem ");
-        console.log(decoded);
-        
-        
-
         return {
             id: decoded.id,
             firstName: decoded.firstName,
@@ -121,9 +88,6 @@ const initialUser = () => {
         return {} as User;
     }
 };
-
-
-
 
 const userSlice = createSlice({
   name: "user",
@@ -148,7 +112,6 @@ const userSlice = createSlice({
           firstName: decodedToken?.decoded.firstName ?? action.payload.user.firstName,
           lastName: action.payload.user.lastName,
           email: decodedToken?.decoded.email ?? action.payload.user.email,
-          // password: action.payload.user.password,
           role: action.payload.user.role,
           created_at: action.payload.user.created_at,
           updatedAt: action.payload.user.updatedAt
@@ -173,7 +136,6 @@ const userSlice = createSlice({
           firstName: decodedToken?.decoded.firstName ?? action.payload.user.firstName,
           lastName: action.payload.user.lastName,
           email: decodedToken?.decoded.email ?? action.payload.user.email,
-          // password: action.payload.user.password,
           role: action.payload.user.role,
           created_at: action.payload.user.created_at,
           updatedAt: action.payload.user.updatedAt,
@@ -198,7 +160,6 @@ const userSlice = createSlice({
           firstName: decodedToken?.decoded.firstName ?? action.payload.user.firstName,
           lastName: action.payload.user.lastName,
           email: decodedToken?.decoded.email ?? action.payload.user.email,
-          // password: action.payload.user.password,
           role: action.payload.user.role,
           created_at: action.payload.user.created_at,
           updatedAt: action.payload.user.updatedAt,

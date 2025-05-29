@@ -61,7 +61,6 @@ export class FieldPlacementComponent implements OnInit {
       this.categoryFieldService.getFieldsByCategory(categoryId).subscribe({
         next: (res) => {
           this.fields = res;
-          console.log('Fields loaded:', this.fields);
         },
         error: (err) => {
           Swal.fire({
@@ -105,7 +104,6 @@ export class FieldPlacementComponent implements OnInit {
 
   // זו הפונקציה שנקראת כאשר התמונה סיימה להיטען ב-DOM
   onTemplateImageLoad(): void {
-    console.log('Template image has finished loading in the DOM. Proceeding to place fields.');
       this.addFieldsOnTEmplates();
   }
 
@@ -150,7 +148,6 @@ export class FieldPlacementComponent implements OnInit {
           };
 
           try {
-            console.log(`Placing new field: ${field.field.name} at (${payload.x}, ${payload.y}) relative to image.`);
             const response = await this.templateFieldService.addFieldToTemplate(payload).toPromise();
             this.positions[field.field.id] = {
               x: response.x,
@@ -164,7 +161,6 @@ export class FieldPlacementComponent implements OnInit {
           currentY += lineHeight;
         }
       }
-      console.log('All fields placed or loaded. Final positions:', this.positions);
 
     } catch (err) {
       Swal.fire({
@@ -285,7 +281,6 @@ export class FieldPlacementComponent implements OnInit {
 
     this.templateFieldService.updateTemplateFieldPosition(templateFieldId, payload).subscribe({
       next: () => {
-        console.log('Position updated:', payload);
         const fieldId = this.draggingField.field.id;
         this.positions[fieldId] = {
           x: Math.round(x),

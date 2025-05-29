@@ -30,12 +30,10 @@ export class MarketingEmailComponent {
   }
 
   generateMarketingText(): void {
-    console.log("Generating marketing text...");
 
     this.statusMessage = 'מייצר תוכן שיווקי...';
     this.marketingService.generateMarketingText().subscribe({
       next: (res) => {
-        console.log("after generating marketing text:", res);
 
         this.emailContent = res.text;
         this.statusMessage = 'נוצר תוכן שיווקי!';
