@@ -14,6 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -50,7 +51,8 @@ export class UsersComponent implements OnInit {
     private usersService: UsersService,
     private authService: AuthService,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+     private router: Router
   ) {
     this.initForm();
   }
@@ -74,6 +76,7 @@ export class UsersComponent implements OnInit {
           confirmButtonColor: '#5c6bc0'
         }).then(()=>{
           localStorage.setItem('isLoggedIn','false');
+          this.router.navigate(['/']);
         });
       }
     });
