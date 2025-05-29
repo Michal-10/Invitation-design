@@ -64,7 +64,8 @@ const UpdateUser = () => {
             firstName: firstNameRef.current?.value || user.firstName,
             lastName: lastNameRef.current?.value || user.lastName,
             email: emailRef.current?.value || user.email,
-            password: passwordRef.current?.value || user.password
+            password: passwordRef.current?.value 
+            // || user.password
         };
 
         try {
@@ -117,7 +118,9 @@ const UpdateUser = () => {
                 <TextField label='lastName' defaultValue={user.lastName} variant="filled" margin="normal" fullWidth inputRef={lastNameRef} />
                 <TextField label='email' defaultValue={user.email} variant="filled" margin="normal" fullWidth type="email" inputRef={emailRef} />
                 {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-                <TextField label='password' defaultValue={user.password} variant="filled" margin="normal" fullWidth type="password" inputRef={passwordRef} helperText={'שדה חובה'} required/>
+                <TextField label='password' 
+                // defaultValue={user.password}
+                 variant="filled" margin="normal" fullWidth type="password" inputRef={passwordRef} helperText={'שדה חובה'} required/>
                 {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
 
                 {serverError && <Typography color="error" sx={{ mt: 1 }}>{serverError}</Typography>}
