@@ -20,7 +20,6 @@ export class MarketingService {
     );
   }
   
-  // שליחת תוכן שיווקי לשרת
   sendMarketingEmail( content: string ): Observable<any> {
     console.log("in marketingService before sendMarketingEmail");
     console.log(content);
@@ -37,10 +36,4 @@ export class MarketingService {
     );
   }
 
-  private getAuthHeaders() {
-    const token = localStorage.getItem('token');
-    return {
-      headers: new HttpHeaders({ Authorization: `Bearer ${token}` })
-    };
-  }
 }
