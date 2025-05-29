@@ -63,16 +63,12 @@ export class UsersComponent implements OnInit {
       this.users = users;
       this.isLoading = false;
     });
-
-    // this.usersService.refreshUsers()
+    
     this.usersService.getAllUsers().subscribe({
-      // next: () => {
-      //   // this.users = users;
-      // },
       error: (err) => {
         Swal.fire({
           title: 'שגיאה בהתחברות',
-          text: 'אירעה שגיאה בהתחברות, סיסמא לא תקינה',
+          text: 'מנהל לא מחובר',
           icon: 'error',
           confirmButtonText: 'אישור',
           confirmButtonColor: '#5c6bc0'
