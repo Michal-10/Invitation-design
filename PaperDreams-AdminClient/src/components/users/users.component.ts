@@ -123,7 +123,7 @@ export class UsersComponent implements OnInit {
       error: () => {
         Swal.fire({
           title: 'שגיאה',
-          text: 'אירעה שגיאה בהוספת המשתמש',
+          text: 'ארעה שגיאה בהוספת משתמש, משתמש קיים במערכת' ,
           icon: 'error',
           confirmButtonText: 'אישור',
           confirmButtonColor: '#5c6bc0'

@@ -39,18 +39,16 @@
     </div>
     }
   </div>
-  @if(isLoading){
-  <div class="loading-spinner">
-    <mat-spinner color="primary"></mat-spinner>
-  </div>
-  }
-
-  @if (!isLoading && users.length === 0) {
-  <div class="empty-state">
-    <mat-icon>people_outline</mat-icon>
-    <h2>אין משתמשים להצגה</h2>
-    <p>לחץ על "הוסף משתמש חדש" כדי להתחיל</p>
-  </div>
+  @if (isLoading) {
+    <div class="loading-spinner">
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+  } @else if (users.length === 0) {
+    <div class="empty-state">
+      <mat-icon>people_outline</mat-icon>
+      <h2>אין משתמשים להצגה</h2>
+      <p>לחץ על "הוסף משתמש חדש" כדי להתחיל</p>
+    </div>
   }
 </div>
 
