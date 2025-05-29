@@ -13,7 +13,8 @@ export class MarketingService {
   // קריאה ל-AI ליצירת תוכן שיווקי
   generateMarketingText(): Observable<{ text: string }> {
     return this.http.post<{ text: string }>(
-      `https://invitationline-aiserver.onrender.com/marketing/generate`,
+      `https://invitationline-ai.onrender.com/marketing/generate`,
+      // `https://invitationline-aiserver.onrender.com/marketing/generate`,
       {},
       { responseType: 'json' }
     );

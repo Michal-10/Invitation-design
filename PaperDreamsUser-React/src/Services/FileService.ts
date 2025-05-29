@@ -23,7 +23,8 @@ export const getText = async (file: File) => {
     formData.append("event_type", eventType);
 
     try {
-        const response = await fetch(`https://invitationline-aiserver.onrender.com/upload/`, {
+        // const response = await fetch(`https://invitationline-aiserver.onrender.com/upload/`, {
+        const response = await fetch(`https://invitationline-ai.onrender.com/upload/`, {
             method: "POST",
             body: formData,
         });
