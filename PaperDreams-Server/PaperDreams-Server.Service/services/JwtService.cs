@@ -45,7 +45,7 @@ namespace PaperDreams_Server.Service.services
 
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim("userId", user.Id.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    //new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim("email", user.Email),
                     new Claim("firstName", user.FirstName ?? ""),
                     new Claim("lastName", user.LastName ?? ""),
