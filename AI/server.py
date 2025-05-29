@@ -269,7 +269,7 @@ def extract_date_from_text(text):
     """ פונקציה לחילוץ תאריך מתוך טקסט """
     date_pattern = r"(\d{1,2})[./-](\d{1,2})[./-](\d{4})"
     matches = re.findall(date_pattern, text)
-    print("Matches found:", matches)  # הדפסת התאריכים שנמצאו
+    # print("Matches found:", matches)  # הדפסת התאריכים שנמצאו
 
     if matches:
         for match in matches:
@@ -299,7 +299,7 @@ async def upload_file(file: UploadFile = File(...), event_type: str = Form(...))
     # בדיקה וסינון סוג הקובץ
     if file.content_type == "application/pdf":
         extracted_text = extract_text_from_pdf(io.BytesIO(file_bytes))
-        print(extracted_text)
+        # print(extracted_text)
     elif file.content_type.startswith("image/"):
         extracted_text = extract_text_from_image(file_bytes)
     elif file.content_type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
@@ -312,15 +312,14 @@ async def upload_file(file: UploadFile = File(...), event_type: str = Form(...))
 
     # חילוץ תאריך מהטקסט (לא חובה להוסיף לשימוש ב-AI בלבד)
     extracted_date = extract_date_from_text(extracted_text)
-    print(extracted_date)
+    # print(extracted_date)
 
     if event_type == "חתונה":
         extraction_prompt = """
-        You are an AI that extracts wedding invitation details from Hebrew and English text.  
-        Please identify and extract dates written in both Gregorian (secular) and Hebrew calendar formats, 
-        and convert all dates to DD-MM-YYYY format in the output JSON.  
-
-        Always return **ONLY** a valid JSON object with the following structure:  
+        You are an AI that extracts wedding invitation details from Hebrew and English text.
+        You must identify and extract any date mentioned, including Hebrew calendar dates written in Hebrew words like "כ"ז סיון", 
+        and convert all dates to the Gregorian calendar in DD-MM-YYYY format.
+        Return a valid JSON object only with this structure:
         {
             "שם כלה": "שם הכלה",
             "שם חתן": "שם החתן",
@@ -328,16 +327,15 @@ async def upload_file(file: UploadFile = File(...), event_type: str = Form(...))
             "שעה": "שעה",
             "מקום": "מקום"
         }
-        If a field is missing, set its value to null.  
-        Respond **only** with the JSON object (nothing else).  
+        If a field is missing, set it to null.
+        Respond only with the JSON object, no explanations or extra text.
         """
     else:
         extraction_prompt = """
-        You are an AI that extracts birthday invitation details from Hebrew and English text.  
-        Please identify and extract dates written in both Gregorian (secular) and Hebrew calendar formats, 
-        and convert all dates to DD-MM-YYYY format in the output JSON.
-
-        Always return **ONLY** a valid JSON object with the following structure:  
+        You are an AI that extracts birthday invitation details from Hebrew and English text.
+        You must identify and extract any date mentioned, including Hebrew calendar dates written in Hebrew words like "כ"ז סיון",
+        and convert all dates to the Gregorian calendar in DD-MM-YYYY format.
+        Return a valid JSON object only with this structure:
         {
             "שם": "שם",
             "תאריך": "DD-MM-YYYY",
@@ -346,8 +344,8 @@ async def upload_file(file: UploadFile = File(...), event_type: str = Form(...))
             "סוג": "סוג",
             "גיל": "גיל"
         }
-        If a field is missing, set its value to null.  
-        Respond **only** with the JSON object (nothing else).  
+        If a field is missing, set it to null.
+        Respond only with the JSON object, no explanations or extra text.
         """
 
     if not extraction_prompt:
