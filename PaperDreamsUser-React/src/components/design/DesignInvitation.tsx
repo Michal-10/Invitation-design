@@ -225,7 +225,7 @@ export default () => {
                             onClick={handleSaveAndDownload}
                             style={{ fontSize: '18px', gap: '15px', color: 'black', marginTop: "20px", padding: "10px 15px", cursor: "pointer", border: '2px solid var(--primary-color)' }}
                         >
-                           {!saveAndDownload ? ' לשמירה והורדה': <CircularProgress size={40} color="primary" /> }
+                           {saveAndDownload ? <CircularProgress size={40} color="primary" /> : ' לשמירה והורדה'}
                         </Button>
                         <Button
                             startIcon={<PrintIcon sx={{ color: 'var(--primary-color)' }} />}
