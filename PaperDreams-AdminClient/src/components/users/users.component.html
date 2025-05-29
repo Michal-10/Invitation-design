@@ -9,62 +9,52 @@
     </div>
   </div>
 
-  <div class="users-grid">
-    @for (user of users; track user.id) {
-    <div class="user-card">
-      <div class="user-header">
-        <div class="avatar-circle">{{this.getUserInitials(user)}}</div>
-        <div class="user-name"> {{user.firstName + ' ' + user.lastName}}</div>
-      </div>
-
-      <div class="user-details">
-        <div class="user-detail-row">
-          <mat-icon class="email-icon">email</mat-icon>
-          <span>{{user.email}}</span>
-        </div>
-        <!-- <div class="user-detail-row"> -->
-        <!-- <mat-icon class="calendar-icon">calendar_today</mat-icon> -->
-        <!-- <span>{{ user.createdAt | parseDate | date:'dd/MM/yyyy' }}</span> -->
-        <!-- </div> -->
-      </div>
-
-      <div class="user-actions">
-        <button mat-icon-button (click)="startEdit(user)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button (click)="deleteUser(user.id)" color="warn">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-    </div>
-    }
-  </div>
-
+  <!-- תנאים מסודרים -->
   @if (isLoading) {
-  <div class="loading-spinner">
-    <mat-spinner color="primary" style="font-size: larger;"></mat-spinner>
-  </div>
+    <div class="loading-spinner">
+      <mat-spinner color="primary" style="font-size: larger;"></mat-spinner>
+    </div>
+  } @else if (users.length === 0) {
+    <div class="empty-state">
+      <mat-icon>people_outline</mat-icon>
+      <h2>אין משתמשים להצגה</h2>
+      <p>לחץ על "הוסף משתמש חדש" כדי להתחיל</p>
+    </div>
   } @else {
-  @if (users.length === 0){
-  <div class="empty-state">
-    <mat-icon>people_outline</mat-icon>
-    <h2>אין משתמשים להצגה</h2>
-    <p>לחץ על "הוסף משתמש חדש" כדי להתחיל</p>
-  </div>
-  }
+    <div class="users-grid">
+      @for (user of users; track user.id) {
+        <div class="user-card">
+          <div class="user-header">
+            <div class="avatar-circle">{{ this.getUserInitials(user) }}</div>
+            <div class="user-name">{{ user.firstName + ' ' + user.lastName }}</div>
+          </div>
+
+          <div class="user-details">
+            <div class="user-detail-row">
+              <mat-icon class="email-icon">email</mat-icon>
+              <span>{{ user.email }}</span>
+            </div>
+          </div>
+
+          <div class="user-actions">
+            <button mat-icon-button (click)="startEdit(user)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteUser(user.id)" color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
   }
 </div>
 
-
-
-
-
+<!-- טופס עריכה / הוספה -->
 <ng-template #editDialog>
   <div class="content-wrapper page-transition">
-    <!-- <div class="card"> -->
     <div class="card-header">
       <div class="card-title">
-        <!-- <i class="material-icons">cloud_upload</i> -->
         {{ add_user ? 'הוספת משתמש חדש' : 'עריכת משתמש' }}
       </div>
     </div>
@@ -75,40 +65,40 @@
           <input matInput formControlName="firstName" />
           <mat-icon matPrefix>person</mat-icon>
           @if(userForm.get('firstName')?.hasError('required')){
-          <mat-error>שדה חובה</mat-error>
+            <mat-error>שדה חובה</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="custom-form-field">
-          <mat-label>>שם משפחה</mat-label>
+          <mat-label>שם משפחה</mat-label>
           <input matInput formControlName="lastName" />
           <mat-icon matPrefix>person</mat-icon>
-          @if(userForm.get('lastNmae')?.hasError('required')){
-          <mat-error>שדה חובה</mat-error>
+          @if(userForm.get('lastName')?.hasError('required')){
+            <mat-error>שדה חובה</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="custom-form-field">
-          <mat-label>>אימייל </mat-label>
+          <mat-label>אימייל</mat-label>
           <mat-icon matPrefix>email</mat-icon>
           <input matInput type="email" formControlName="email" />
           @if(userForm.get('email')?.hasError('required')){
-          <mat-error>שדה חובה</mat-error>
+            <mat-error>שדה חובה</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>סיסמה</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
           <mat-icon matPrefix>lock</mat-icon>
           <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
             <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
           @if(userForm.get('password')?.hasError('required')){
-          <mat-error>שדה חובה</mat-error>
+            <mat-error>שדה חובה</mat-error>
           }
-          @if(!add_user) {
-          <mat-hint>השאר ריק אם אינך רוצה לשנות את הסיסמה</mat-hint>
+          @if(!add_user){
+            <mat-hint>השאר ריק אם אינך רוצה לשנות את הסיסמה</mat-hint>
           }
         </mat-form-field>
 
@@ -118,13 +108,12 @@
             [disabled]="userForm.invalid || (add_user && !userForm.get('password')?.value)"
             (click)="add_user ? addUser() : saveUser()">
             {{ add_user ? 'הוסף' : 'שמור' }}
-            @if(isLoadingSave) {
-            <mat-spinner color="#fff" diameter="20"></mat-spinner>
+            @if (isLoadingSave) {
+              <mat-spinner color="#fff" diameter="20"></mat-spinner>
             }
           </button>
         </div>
       </form>
-      <!-- </div> -->
     </div>
   </div>
 </ng-template>
