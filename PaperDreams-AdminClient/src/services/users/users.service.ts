@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment.prod';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UsersService {
 
   private apiUrl = environment.apiUrl;
   private usersSubject = new BehaviorSubject<User[]>([]);

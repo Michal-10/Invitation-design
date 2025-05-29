@@ -77,7 +77,6 @@ export class TemplatesService {
     }
   };
 
-
   createTemplate(data: any) {
     return this.http.post<any>(`${this.apiUrl}/templates/add`, data,
       this.getAuthHeaders()

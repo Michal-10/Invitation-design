@@ -1,7 +1,7 @@
 
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { User } from '../../models/user';
-import { UserService } from '../../services/users/users.service';
+import { UsersService } from '../../services/users/users.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -47,7 +47,7 @@ export class UsersComponent implements OnInit {
   new: any;
 
   constructor(
-    private userService: UserService,
+    private usersService: UsersService,
     private authService: AuthService,
     private fb: FormBuilder,
     private dialog: MatDialog
@@ -59,12 +59,26 @@ export class UsersComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.userService.users$.subscribe(users => {
+    this.usersService.users$.subscribe(users => {
       this.users = users;
       this.isLoading = false;
     });
 
-    this.userService.refreshUsers();
+    // this.usersService.refreshUsers()
+    this.usersService.getAllUsers().subscribe({
+      // next: () => {
+      //   // this.users = users;
+      // },
+      error: (err) => {
+        Swal.fire({
+          title: 'שגיאה בהתחברות',
+          text: 'אירעה שגיאה בהתחברות, סיסמא לא תקינה',
+          icon: 'error',
+          confirmButtonText: 'אישור',
+          confirmButtonColor: '#5c6bc0'
+        });
+      }
+    });
   }
 
   initForm(): void {
@@ -95,7 +109,7 @@ export class UsersComponent implements OnInit {
       updatedAt: new Date()
     };
 
-    this.userService.addUser(user).subscribe({
+    this.usersService.addUser(user).subscribe({
       next: () => {
         this.dialogRef.close();
         Swal.fire({
@@ -162,7 +176,7 @@ export class UsersComponent implements OnInit {
       password: formValue.password || ''
     };
 
-    this.userService.updateUser(this.editingUserId, updatedUser).subscribe({
+    this.usersService.updateUser(this.editingUserId, updatedUser).subscribe({
       next: () => {
         this.isLoadingSave = false;
         this.dialogRef.close();
@@ -198,7 +212,7 @@ export class UsersComponent implements OnInit {
       cancelButtonText: 'ביטול'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.deleteUser(id).subscribe({
+        this.usersService.deleteUser(id).subscribe({
           next: () => {
             Swal.fire({
               title: 'נמחק!',
