@@ -39,9 +39,10 @@
     </div>
     }
   </div>
+
   @if (isLoading) {
     <div class="loading-spinner">
-      <mat-spinner color="primary"></mat-spinner>
+      <mat-spinner color="primary" style="font-size: larger;"></mat-spinner>
     </div>
   } @else if (users.length === 0) {
     <div class="empty-state">
