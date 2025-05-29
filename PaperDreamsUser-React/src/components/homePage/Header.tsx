@@ -108,7 +108,7 @@ const Header: React.FC = () => {
                         alignItems="center"
                         sx={{ justifyContent: 'flex-end' }}
                     >
-                        {user?.id && token && (
+                        {user?.firstName && token && (
                             <>
                                 <Button
                                     color={active === '/' ? 'primary' : 'inherit'}
