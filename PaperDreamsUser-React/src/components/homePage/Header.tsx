@@ -6,21 +6,22 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { motion } from 'framer-motion';
+import PersonIcon from '@mui/icons-material/Person';
 import BrushIcon from '@mui/icons-material/Brush';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/Store';
 import theme from '../../theme';
 
-const getUserNameFromToken = (token: string | null): string => {
-    if (!token) return '';
-    try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        return payload?.name || '';
-    } catch {
-        return 'John Doe'; //ברירת מחדל
-    }
-};
+// const getUserNameFromToken = (token: string | null): string => {
+//     if (!token) return '';
+//     try {
+//         const payload = JSON.parse(atob(token.split('.')[1]));
+//         return payload?.name || '';
+//     } catch {
+//         return 'John Doe'; //ברירת מחדל
+//     }
+// };
 
 const Header: React.FC = () => {
     const navigate = useNavigate();
@@ -43,8 +44,9 @@ const Header: React.FC = () => {
         const storedToken = sessionStorage.getItem('userToken');
         setToken(storedToken);
         if (storedToken) {
-            const name = getUserNameFromToken(storedToken);
-            setUserName(name || user.email.charAt(0).toUpperCase() || '');
+            // const name = getUserNameFromToken(storedToken);
+            // setUserName(name || user.email.charAt(0).toUpperCase() || '');
+            setUserName(user.firstName.charAt(0) || user.lastName.charAt(0))
         }
     }, [location.pathname, user]);
 
@@ -136,7 +138,7 @@ const Header: React.FC = () => {
                             <>
                                 <IconButton onClick={handleMenuClick}>
                                     <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
-                                        {userName.charAt(0).toUpperCase()}
+                                        {userName.charAt(0).toUpperCase() || <PersonIcon />}
                                     </Avatar>
                                 </IconButton>
                                 <Menu
