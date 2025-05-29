@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-field-placement',
@@ -31,6 +32,8 @@ export class FieldPlacementComponent implements OnInit {
   draggingField: any = null;
   dragOffset = { x: 0, y: 0 };
   unsavedChanges: boolean = false;
+  isPlacingFields: boolean = false;
+
 
   @ViewChild('templateImage') templateImageRef!: ElementRef;
   @ViewChild('imageContainer') imageContainerRef!: ElementRef;
@@ -53,9 +56,11 @@ export class FieldPlacementComponent implements OnInit {
   }
 
   loadFieldsFromCategory(): void {
+    this.isPlacingFields = true;
     const categoryId = Number(sessionStorage.getItem('categoryId'));
     if (categoryId >= 0) {
-      this.categoryFieldService.getFieldsByCategory(categoryId).subscribe({
+      this.categoryFieldService.getFieldsByCategory(categoryId).pipe(finalize(() => this.isPlacingFields = false)) 
+      .subscribe({
         next: (res) => {
           this.fields = res;
           console.log('Fields loaded:', this.fields);

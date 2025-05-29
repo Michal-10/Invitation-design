@@ -46,6 +46,12 @@
               </div>
             }
           </div>
+          @if (isPlacingFields) {
+            <div class="field-loading-overlay">
+              <mat-spinner diameter="50" color="accent"></mat-spinner>
+              <p>טוען שדות...</p>
+            </div>
+          }
         </div>
       </div>
     </div>
