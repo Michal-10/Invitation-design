@@ -12,6 +12,8 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<any[]> {
+    console.log("in service");
+    
     return this.http.get<any[]>(this.apiUrl, this.getAuthHeaders());
   }
 

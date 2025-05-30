@@ -50,6 +50,10 @@ export class TemplatesComponent implements OnInit {
   ngOnInit(): void {
 
     this.categoryService.getCategories().subscribe((data) => {
+      console.log("in getCaetg on Init");
+      console.log(data);
+      
+      
       this.categories = data;
     });
   }
