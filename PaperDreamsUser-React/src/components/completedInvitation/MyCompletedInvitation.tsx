@@ -71,7 +71,7 @@ export default function MyCompletedInvitationPage() {
           </Box>
 
           <Grid container spacing={3} justifyContent="center" mt={1}>
-            {list.map((item, index) => (
+            { list.length >0 ? list.map((item, index) => (
               <Grid item xs={12} sm={6} md={4} key={index} display="flex" justifyContent="center">
                 <ShowCompletedInvitation
                   fileName={item.name}
@@ -80,7 +80,11 @@ export default function MyCompletedInvitationPage() {
                   onToggleSelect={toggleSelect}
                 />
               </Grid>
-            ))}
+            )):
+            <Typography variant="h6" fontWeight={400}>
+            אין הזמנות מושלמות  
+            </Typography>
+            }
           </Grid>
         </>
       )}
