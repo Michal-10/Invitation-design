@@ -31,9 +31,6 @@ namespace PaperDreams_Server.Controllers
 
             var fromEmail = _config["Email:User"];
             var password = _config["Email:Password"];
-            Console.WriteLine("---------------");
-            Console.WriteLine("emain   "+fromEmail+"    upass   "+password );
-            Console.WriteLine("---------------");
 
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
@@ -50,19 +47,6 @@ namespace PaperDreams_Server.Controllers
                     {
                         From = new MailAddress(fromEmail, "הזמנות אונליין"),
                         Subject = "מייל שיווקי עבורך",
-                        //    Body = $@"
-                        //<div dir='rtl'>
-                        //    <p>
-                        //        {content}
-                        //      </p>
-                        //    <hr style='margin:20px 0;' />
-                        //    <div style='color: #555;'>
-                        //        <p style='margin:0;'>בברכה,<br />צוות invitatioline</p>
-                        //    </div>
-                        //</div>",
-
-
-
                         Body = $@"
                             <div dir='rtl' style='font-family:Arial,sans-serif; font-size:14px; color:#333;'>
                                 <p>{content}</p>
@@ -97,7 +81,6 @@ namespace PaperDreams_Server.Controllers
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Failed to send to {recipient}. Error: {ex.Message}");
-                    //Console.WriteLine($"שגיאה בשליחת מייל ל: {recipient}, שגיאה: {ex.Message}");
                     // אפשר להמשיך לשולח את השאר גם אם אחד נפל
                 }
             }

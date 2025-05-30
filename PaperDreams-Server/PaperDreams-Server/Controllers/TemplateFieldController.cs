@@ -23,13 +23,6 @@ namespace PaperDreams_Server.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/<TemplateFieldController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET api/<TemplateFieldController>/5
         [HttpGet("{id}")]
         public async Task<IEnumerable<TemplateFieldDTO>> GetFieldsByTemplate(int id)
@@ -51,12 +44,6 @@ namespace PaperDreams_Server.Controllers
         [HttpPut("update/{id}")]
         public async Task<ActionResult<TemplateFieldDTO>> Put(int id, [FromBody] TemplateFieldPostModel templateFieldPM)
         {
-            //var templateFieldDTO = _mapper.Map<TemplateFieldDTO>(templateFieldPM);
-            //templateFieldDTO.Id = id; // Ensure the ID is set for updating
-            //var result = await _templateFieldService.UpdateAsync(id, templateFieldDTO);
-            //return Ok(result);
-
-
             var templateFieldDTO = _mapper.Map<TemplateFieldDTO>(templateFieldPM);
             var createdTemplateField = await _templateFieldService.UpdateAsync(id,templateFieldDTO);
             if (createdTemplateField == null)

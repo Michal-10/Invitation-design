@@ -10,8 +10,6 @@ namespace PaperDreams_Server.Core.Iservices
     public interface ICategoryService
     {
         Task<IEnumerable<CategoryDTO>> GetAllAsync();
-        Task<CategoryDTO> GetByIdAsync(int id);
         Task<bool> AddAsync(CategoryDTO model);
-        Task<bool> DeleteAsync(int id);
     }
 }

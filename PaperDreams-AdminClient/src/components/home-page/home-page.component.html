@@ -14,17 +14,6 @@
       </div>
   
       <div class="features-container">
-        <!-- @for( feature of features; i = $index){
-<div 
-          
-          class="feature-card floating-card"
-          [style.animation-delay.s]="i * 0.2">
-          <div class="card-icon">{{ feature.icon }}</div>
-          <h3 class="card-title">{{ feature.title }}</h3>
-          <p class="card-description">{{ feature.description }}</p>
-          <div class="card-glow"></div>
-        </div>
-        } -->
         @for (feature of features; let i = $index; track $index) {
             <div 
               class="feature-card floating-card"

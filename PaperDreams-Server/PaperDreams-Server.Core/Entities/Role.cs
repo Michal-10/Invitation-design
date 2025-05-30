@@ -13,7 +13,7 @@ namespace PaperDreams_Server.Core.Entities
         [Key]
         public int Id { get; set; }
         
-        public string RoleName { get; set; } //(לדוגמה: Admin, Editor, User)
+        public string RoleName { get; set; } 
         
         public string Description { get; set; }
         
@@ -23,7 +23,6 @@ namespace PaperDreams_Server.Core.Entities
         
         public ICollection<User> Users { get; set; }
         
-        public ICollection<Permissions> Roles { get; set; }
 
     }
 }

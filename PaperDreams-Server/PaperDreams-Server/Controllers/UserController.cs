@@ -27,6 +27,7 @@ namespace PaperDreams_Server.Controllers
             _userService = userService;
             _mapper = mapper;
         }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterPostModel registerPostModel)
         {
@@ -44,7 +45,6 @@ namespace PaperDreams_Server.Controllers
             });
         }
 
-        // ✅ התחברות
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginPostModel loginPostModel)
         {
@@ -62,54 +62,22 @@ namespace PaperDreams_Server.Controllers
             });
         }
 
-        // ✅ רק מנהל יכול לראות את כל המשתמשים
         [HttpGet]
         [Authorize(Policy = "Admin")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
         {
             return Ok(await _userService.GetAllUsersAsync());
         }
-        
-        //[HttpGet("{id}")]
-        //[Authorize]
-        //[Authorize(Policy = "Admin")]
-        //public async Task<ActionResult<UserDTO>> GetUserById(int id)
-        //{
-        //    var user = await _userService.getUserByIdAsync(id);
-        //    if (user == null)
-        //        return NotFound();
-
-        //    var userIdFromToken = uint.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        //    var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
-
-        //    if (userIdFromToken != id && userRole != "Admin")
-        //        return Forbid(); // חסימת גישה
-
-        //    return user;
-        //}
-
-        // ✅ עדכון פרופיל אישי (משתמש יכול לעדכן רק את עצמו)
 
         [HttpPut("update-profile")]
-
-        //[Authorize]
-        //[Authorize(Policy = "Admin")]
         public async Task<ActionResult> UpdateUser( [FromBody] UserPostModel userPostModel)
         {
             var userDto = _mapper.Map<UserDTO>(userPostModel);
             var userIdFromToken =  int.Parse(User.FindFirst("userId")?.Value);
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("in update user ");
-            Console.WriteLine(userIdFromToken);
-            Console.WriteLine("----------------------------");
-
-            //if (userIdFromToken != id)
-            //    return Forbid("userIdFromToken != id"); // חסימת גישה אם ה-ID לא תואם
 
             if (!string.IsNullOrEmpty(userDto.Role) && userDto.Role != "string")
                 return BadRequest("You cannot change your role.");
 
-            //var isSuccess = await _userService.UpdateUserAsync(id, userDto);
             var isSuccess = await _userService.UpdateUserAsync(userIdFromToken, userDto);
             if (isSuccess!=null)
                 return Ok(new { message = "Profile updated successfully.", token = isSuccess, user = userDto });
@@ -118,10 +86,8 @@ namespace PaperDreams_Server.Controllers
         }
 
 
-        // ✅ מחיקת משתמש (Admin בלבד)
         [HttpDelete("{id}")]
         [Authorize(Policy = "Admin")]
-        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteUser(int id)
         {
             bool isSuccess = await _userService.DeleteUserAsync(id);

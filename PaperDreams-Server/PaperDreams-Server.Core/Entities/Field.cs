@@ -13,7 +13,6 @@ namespace PaperDreams_Server.Core.Entities
         public string Name { get; set; }
         public ICollection<TemplateField> TemplateFields { get; set; }
 
-        // public ICollection<CategoryField> CategoryFields { get; set; }
 
     }
 }

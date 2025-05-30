@@ -40,7 +40,7 @@ export const googleLogin = createAsyncThunk("googleLogin", async ({ mode }: { mo
       FirstName: user.displayName?.split(" ")[0] ?? "Unknown",
       LastName: user.displayName?.split(" ")[1] ?? "User",
       Email: user.email,
-      Password: user.uid, // סיסמה מזוהה לפי UID מגוגל (לא נחשפת)
+      Password: user.uid, 
       Role: "user",
       UpdatedAt: new Date()
     };

@@ -25,13 +25,9 @@ namespace PaperDreams_Server.Data.Repositories
 
         public async Task<TemplateField> AddAsync(TemplateField model)
         {
-            //     await _context.TemplateField.AddAsync(model);
-
-            //    return await _context.SaveChangesAsync() > 0 ;
-
             await _context.TemplateField.AddAsync(model);
             await _context.SaveChangesAsync();
-            return model; // After saving, the model's Id property will be populated
+            return model; 
 
         }
 

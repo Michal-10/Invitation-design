@@ -25,7 +25,5 @@ namespace PaperDreams_Server.Core.Entities
         public User User { get; set; }
 
 
-        //public ICollection<CategoryField> CategoryFields { get; set; }
-
     }
 }

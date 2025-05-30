@@ -18,7 +18,7 @@ namespace PaperDreams_Server.Data.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<CategoryField>> GetFieldsByCategory(int categoryId)//get by category
+        public async Task<IEnumerable<CategoryField>> GetFieldsByCategory(int categoryId)
         {
             return await _context.CategoryField.Where(u => u.CategoryId == categoryId).Include(u=>u.Field).ToListAsync();
         }

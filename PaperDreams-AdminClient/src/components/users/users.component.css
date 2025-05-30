@@ -58,7 +58,6 @@ body {
   transform: scale(1.02);
 }
 
-/* שורה עליונה: אווטאר + שם */
 .user-header {
   display: flex;
   align-items: center;
@@ -85,7 +84,6 @@ body {
   font-weight: bold;
 }
 
-/* שורת פרטים: מייל + תאריך */
 .user-details {
   font-size: 15px;
   color: #555;
@@ -108,7 +106,6 @@ body {
   color: #2575fc;
 }
 
-/* כפתורי אקשן */
 .user-actions {
   display: flex;
   justify-content: center;
@@ -134,21 +131,15 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
-  /* מרכז אופקית */
   align-items: center;
-  /* מרכז אנכית */
   background-color: rgba(255, 255, 255, 0.5);
-  /* רקע שקוף אופציונלי */
   z-index: 9999;
-  /* מעל כל שאר האלמנטים */
 }
 
-/* עטיפת עמוד */
 .content-wrapper {
   direction: rtl;
 }
 
-/* כרטיס */
 .card {
   background: white;
   border-radius: 12px;
@@ -196,9 +187,6 @@ body {
   margin-bottom: 20px;
 }
 
-
-
-/* כפתור ראשי */
 .form-actions {
   display: flex;
   justify-content: flex-end;
@@ -236,7 +224,6 @@ body {
   }
 }
 
-/* אנימציית מעבר */
 .page-transition {
   animation: fadeIn 0.3s ease;
 }
@@ -281,7 +268,6 @@ body {
   }
 }
 
-/* רספונסיביות */
 @media (max-width: 768px) {
   .card {
     margin: 0 10px;

@@ -22,10 +22,6 @@
           <mat-icon class="email-icon">email</mat-icon>
           <span>{{user.email}}</span>
         </div>
-        <!-- <div class="user-detail-row"> -->
-        <!-- <mat-icon class="calendar-icon">calendar_today</mat-icon> -->
-        <!-- <span>{{ user.createdAt | parseDate | date:'dd/MM/yyyy' }}</span> -->
-        <!-- </div> -->
       </div>
 
       <div class="user-actions">
@@ -61,10 +57,8 @@
 
 <ng-template #editDialog>
   <div class="content-wrapper page-transition">
-    <!-- <div class="card"> -->
     <div class="card-header">
       <div class="card-title">
-        <!-- <i class="material-icons">cloud_upload</i> -->
         {{ add_user ? 'הוספת משתמש חדש' : 'עריכת משתמש' }}
       </div>
     </div>
@@ -124,7 +118,6 @@
           </button>
         </div>
       </form>
-      <!-- </div> -->
     </div>
   </div>
 </ng-template>

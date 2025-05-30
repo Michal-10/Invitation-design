@@ -12,9 +12,6 @@ namespace PaperDreams_Server.Core.IRpositories
         Task<int> GetTotalTemplatesAsync();
         Task<int> GetTotalFieldsAsync();
         Task<List<StatisticDto>> GetTemplatesGroupedByCategoryAsync();
-
-
-
         Task<List<StatisticDto>> GetDailyLoginStatsAsync();
         Task<List<StatisticDto>> GetDailyActiveUsersAsync();
 

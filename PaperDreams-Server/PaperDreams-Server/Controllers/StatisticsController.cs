@@ -42,9 +42,6 @@ namespace PaperDreams_Server.Controllers
         [HttpGet("daily-logins")]
         public async Task<IActionResult> GetDailyLogins()
         {
-            //var stats = await _statisticsService.GetDailyLoginStatsAsync();
-            //return Ok(stats);
-
             try
             {
                 var data = await _statisticsService.GetDailyLoginStatsAsync();
@@ -61,10 +58,6 @@ namespace PaperDreams_Server.Controllers
         [HttpGet("active-users-daily")]
         public async Task<IActionResult> GetDailyActiveUsers()
         {
-            //var data = await _statisticsService.GetDailyActiveUsersAsync();
-            //return Ok(data);
-
-
             try
             {
                 var data = await _statisticsService.GetDailyActiveUsersAsync();

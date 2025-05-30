@@ -16,27 +16,7 @@ export class TemplateFieldService {
   updateTemplateFieldPosition(id:number, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/update/${id}`, data);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
   getTemplateFieldsByTemplateId(templateId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/${templateId}`);
   }

@@ -302,7 +302,6 @@
     transform: translateX(-5px);
   }
   
-  /* אנימציות */
   @keyframes colorWave {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -358,7 +357,6 @@
     }
   }
   
-  /* Responsive */
   @media (max-width: 1200px) {
     .main-grid {
       grid-template-columns: 1fr 1fr;

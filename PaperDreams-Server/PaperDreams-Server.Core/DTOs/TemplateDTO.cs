@@ -11,17 +11,6 @@ namespace PaperDreams_Server.Core.DTOs
 {
     public class TemplateDTO
     {
-        //public int Id { get; set; }
-        //public string Name { get; set; }
-        //public string Description { get; set; }
-        //public string ImageUrl { get; set; }
-        //public int Category { get; set; }
-
-        //public DateTime CreatedAt { get; set; }
-        //public DateTime UpdatedAt { get; set; }
-
-        ///*--------------------------------*/
-        //public int UserId { get; set; }  
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -31,7 +20,6 @@ namespace PaperDreams_Server.Core.DTOs
         public DateTime UpdatedAt { get; set; }
         public int UserId { get; set; }
 
-        // ✅ נוסיף את רשימת השדות של התבנית
         public List<TemplateFieldDTO> TemplateFields { get; set; }
     }
  

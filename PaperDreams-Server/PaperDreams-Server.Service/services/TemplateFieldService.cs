@@ -25,10 +25,6 @@ namespace PaperDreams_Server.Service.services
 
         public async Task<TemplateFieldDTO> AddAsync(TemplateFieldDTO model)
         {
-            //var templateField = _mapper.Map<TemplateField>(model);
-            //return await _templateFieldRepository.AddAsync(templateField);
-
-
             var templateField = _mapper.Map<TemplateField>(model);
             var addedEntity = await _templateFieldRepository.AddAsync(templateField);
             return _mapper.Map<TemplateFieldDTO>(addedEntity);
@@ -49,16 +45,6 @@ namespace PaperDreams_Server.Service.services
             var template = await _templateFieldRepository.UpdateAsync(templateField);
 
             return _mapper.Map<TemplateFieldDTO>(template);
-            //var deleteResult = await _templateFieldRepository.DeleteAsync(id);
-            //if (deleteResult)
-            //{
-            //    var templateField = _mapper.Map<TemplateField>(model);
-            //    templateField.Id = 0;
-            //    //var new_templateField = new TemplateField() { X = model.X, Y = model.Y, FieldId = model.FieldId, TemplateId = model.TemplateId };
-            //    var template = await _templateFieldRepository.AddAsync(templateField);
-            //    return _mapper.Map<TemplateFieldDTO>(template);
-            //}
-            //return null;
 
         }
 

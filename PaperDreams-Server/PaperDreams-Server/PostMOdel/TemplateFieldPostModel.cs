@@ -2,7 +2,6 @@
 {
     public class TemplateFieldPostModel
     {
-
         public int TemplateId { get; set; }
         public int FieldId { get; set; }
         public int x { get; set; }

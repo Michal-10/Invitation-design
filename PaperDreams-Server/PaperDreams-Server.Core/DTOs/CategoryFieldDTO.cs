@@ -9,7 +9,6 @@ namespace PaperDreams_Server.Core.DTOs
 {
     public class CategoryFieldDTO
     {
-        //public int FieldId { get; set; }
         public Field Field { get; set; }
     }
 }

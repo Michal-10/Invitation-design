@@ -11,9 +11,7 @@ namespace PaperDreams_Server.Core.Iservices
     {
         Task<IEnumerable<CompletedInvitationDTO>> GetAllCompletedInvitationsAsync();
         Task<IEnumerable<CompletedInvitationDTO>> GetCompletedInvitationsByUserAsync(int userId);
-        Task<IEnumerable<CompletedInvitationDTO>> GetAllCompletedInvitationsByCategoryAsync(int category);
 
         Task<bool> CreateCompletedInvitationAsync(CompletedInvitationDTO invitationDTO);
-        Task<bool> DeleteCompletedInvitationAsync(int id);
     }
 }

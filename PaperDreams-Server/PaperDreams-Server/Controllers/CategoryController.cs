@@ -34,41 +34,16 @@ namespace PaperDreams_Server.Controllers
             return Ok(templates);
         }
 
-        // GET api/<CategoryController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
         // POST api/<CategoryController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CategoryPostModel model)
         {
 
-            //var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             var categoryDto = _mapper.Map<CategoryDTO>(model);
-            //categoryDto.UserId = userIdFromToken;
             await _categoryService.AddAsync(categoryDto);
             return Ok( categoryDto);
         }
 
-        //// PUT api/<CategoryController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        // DELETE api/<CategoryController>/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-
-            bool isSuccess = await _categoryService.DeleteAsync(id);
-            if (isSuccess)
-                return Ok("User deleted successfully.");
-
-            return NotFound("User not found.");
-        }
+      
     }
 }

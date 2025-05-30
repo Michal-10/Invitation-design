@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Box, CircularProgress, Typography, Button, useTheme } from "@mui/material"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import { Category } from "../models/Category"
+import { Category } from "../../models/Category"
 import { motion } from "framer-motion"
 import CategoryIcon from "@mui/icons-material/Category"
 
@@ -96,7 +96,6 @@ export default function ChooseCategoryPage() {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    // bgcolor: isSelected ? theme.palette.primary.light : theme.palette.background.paper,
                     border: `2px solid ${isSelected ? theme.palette.primary.main : "transparent"}`,
                     boxShadow: isSelected
                       ? "0 0 10px rgba(0,0,0,0.1)"

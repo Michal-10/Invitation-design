@@ -35,10 +35,8 @@ var s3Client = new AmazonS3Client(credentials, region);
 
 builder.Services.AddSingleton<IAmazonS3>(s3Client);
 
-// הוספת Controller
 builder.Services.AddControllers();
 
-// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -73,7 +71,6 @@ builder.Services.AddDbContext<DataContext>();
 // הוספת Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
-//builder.Services.AddScoped<ITextUploadRepository, TextUploadRepository>();
 builder.Services.AddScoped<ICompletedInvitationRepository, CompletedInvitationRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryFieldRepository, CategoryFieldRepository>();
@@ -87,26 +84,17 @@ builder.Services.AddAutoMapper(typeof(MappingProfile), typeof(PostModelMappingPr
 builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<IUserService, UserService>();
-//builder.Services.AddScoped<ITextUploadService, TextUploadService>();
 builder.Services.AddScoped<ICompletedInvitationService, CompletedInvitationService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryFieldService, CategoryFieldService>();
 builder.Services.AddScoped<ITemplateFieldService, TemplateFieldService>();
 builder.Services.AddScoped<IStatisticsService, StatisticsService>();
-builder.Services.AddScoped<ITokenContextService, TokenContextService>();
 builder.Services.AddHttpContextAccessor();
-
-
 
 
 //הגדרת CORS
 builder.Services.AddCors(options =>
 {
-    //options.AddPolicy("AllowClients", policy =>
-    //{
-
-        //policy.SetIsOriginAllowed(_ => true)
-        //.AllowAnyMethod().AllowAnyHeader().AllowCredentials();
         options.AddPolicy("AllowClients", policy =>
         {
             policy.WithOrigins(
@@ -116,30 +104,9 @@ builder.Services.AddCors(options =>
                     "https://invitationline-admin-rst8.onrender.com")
                   .AllowAnyHeader()
                   .AllowAnyMethod(). 
-                  AllowCredentials(); // ✅ חשוב מאוד!
+                  AllowCredentials(); 
         });
-
-    //});
 });
-
-
-
-
-
-
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowClients",
-//        builder => builder.AllowAnyOrigin()
-//                        .AllowAnyMethod()
-//                        .AllowAnyHeader());
-//});
-
-
-
-
-
-
 
 // הוספת JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -161,24 +128,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
-    //options.AddPolicy("EditorOrAdmin", policy => policy.RequireRole("Editor", "Admin"));
     options.AddPolicy("User", policy => policy.RequireRole("User"));
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
 app.UseSwagger();
 app.UseSwaggerUI();
-//}
 
 app.UseHttpsRedirection();
 
 app.UseCors("AllowClients");
 
-app.UseAuthentication(); // 🔑 הוספתי את זה כאן!
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllers();

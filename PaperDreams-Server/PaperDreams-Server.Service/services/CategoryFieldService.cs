@@ -20,7 +20,7 @@ namespace PaperDreams_Server.Service.services
             _categoryFieldRepository = categoryFieldRepository;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<CategoryFieldDTO>> GetFieldsByCategory(int categoryId)//get by category
+        public async Task<IEnumerable<CategoryFieldDTO>> GetFieldsByCategory(int categoryId)
         {
             var categoryFields = await _categoryFieldRepository.GetFieldsByCategory(categoryId);
             return _mapper.Map<IEnumerable<CategoryFieldDTO>>(categoryFields);

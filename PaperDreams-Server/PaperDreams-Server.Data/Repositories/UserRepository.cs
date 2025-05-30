@@ -45,23 +45,16 @@ namespace PaperDreams_Server.Data.Repositories
             if (userEntity == null)
                 return null;
 
-            // עדכון רק שדות מותרים
-            //if (!string.IsNullOrEmpty(user.FirstName))
             userEntity.FirstName = user.FirstName;
 
-            //if (!string.IsNullOrEmpty(  user.LastName))
             userEntity.LastName = user.LastName;
 
-            //if (!string.IsNullOrEmpty(user.Email))
             userEntity.Email = user.Email;
 
-            // אם המשתמש סיפק סיסמה חדשה, נצפין אותה
-            //if (!string.IsNullOrEmpty(user.PasswordHash))
             userEntity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
 
             userEntity.Roles = userEntity.Roles;
 
-            //_dataContext.Users.Update(userEntity);
             _dataContext.Users.Update(userEntity);
             await _dataContext.SaveChangesAsync() ;
             return userEntity;
@@ -73,11 +66,11 @@ namespace PaperDreams_Server.Data.Repositories
            
             if (user == null)
             {
-                return false; // לא נמצא, מחזיר false 
+                return false; 
             }
 
             _dataContext.Users.Remove(user);
-            return await _dataContext.SaveChangesAsync() > 0; //נמחק בהצלחה
+            return await _dataContext.SaveChangesAsync() > 0; 
         }
 
     }

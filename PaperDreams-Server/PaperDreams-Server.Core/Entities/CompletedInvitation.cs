@@ -21,12 +21,10 @@ namespace PaperDreams_Server.Core.Entities
 
         [ForeignKey(nameof(TemplateId))]
         public int TemplateId { get; set; }
-        public Template Template { get; set; }  // קשר לתבנית שנבחרה להזמנה
+        public Template Template { get; set; }  
 
 
         public string ImageUrl { get; set; }
-
-        //public int EventType { get; set; }
 
         public string Content { get; set; }
         public int Category { get; set; }

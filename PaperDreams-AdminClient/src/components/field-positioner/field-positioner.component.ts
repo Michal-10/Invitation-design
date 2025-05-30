@@ -345,7 +345,7 @@ export class FieldPlacementComponent implements OnInit {
           showConfirmButton: false
         }).then(() => {
           this.unsavedChanges = false;
-          this.router.navigate(['/']); // ✅ הניווט מתבצע רק אחרי סיום ההודעה
+          this.router.navigate(['/']); 
         });
       }
     });

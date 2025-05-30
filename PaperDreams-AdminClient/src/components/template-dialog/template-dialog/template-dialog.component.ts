@@ -74,7 +74,7 @@ export class TemplateDialogComponent {
     const templateData = {
       ...this.templateForm.value,
       name: this.selectedFile.name,
-      imageUrl: '', // Add logic for image URL if needed
+      imageUrl: '', 
     };
 
     this.dialogRef.close(templateData);

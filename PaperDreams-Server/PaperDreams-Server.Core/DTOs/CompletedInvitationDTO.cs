@@ -12,7 +12,6 @@ namespace PaperDreams_Server.Core.DTOs
         public int UserId { get; set; }
         public int Category { get; set; }
         public string Name { get; set; }
-
         public string ImageUrl { get; set; }
         public int TemplateId { get; set; }
         public string Content { get; set; }

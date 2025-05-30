@@ -35,11 +35,11 @@ namespace PaperDreams_Server.Data.Repositories
             var category = await GetByIdAsync(id);
             if (category == null)
             {
-                return false; // לא נמצא, מחזיר false
+                return false; 
             }
 
             _context.Categories.Remove(category);
-            return await _context.SaveChangesAsync() > 0; //נמחק בהצלחה
+            return await _context.SaveChangesAsync() > 0; 
         }
     }
 }

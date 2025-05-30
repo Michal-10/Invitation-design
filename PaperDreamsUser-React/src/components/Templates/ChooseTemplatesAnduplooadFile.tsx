@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { Template } from "../../models/Template";
 import UploadFile from "../UploadFile";
 import ShowTemplate from "./ShowTemplate";
-import ProcessingInvitation from "../ProcessingInvitation";
+import ProcessingInvitation from "./ProcessingInvitation";
 import { Invitation } from "../../models/invitation";
 import { useDispatch } from "react-redux";
 import { setInvitation } from "../../redux/InvitationSlice";

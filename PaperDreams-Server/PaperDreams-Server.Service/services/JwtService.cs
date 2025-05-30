@@ -30,32 +30,23 @@ namespace PaperDreams_Server.Service.services
 
         public string GenerateToken(User user)
         {
-            // מוודא כי ה-User לא null
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
             var claims = new List<Claim>
                 {
-                    //new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // שימוש ב-ClaimTypes.NameIdentifier
-                    //new Claim("userId", user.Id.ToString()), // הוספת ה-Claim הזה כדי להימנע מבעיה
-                    //new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    //new Claim(ClaimTypes.Name, user.FirstName ?? ""),
-                    //new Claim("name", user.FirstName ?? user.LastName ?? ""),
-                    //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim("userId", user.Id.ToString()),
-                    //new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim("email", user.Email),
                     new Claim("firstName", user.FirstName ?? ""),
                     new Claim("lastName", user.LastName ?? ""),
-                    new Claim("created_at", user.created_at.ToString("o")), // בפורמט ISO
+                    new Claim("created_at", user.created_at.ToString("o")), 
                     new Claim("updatedAt", user.UpdatedAt.ToString("o")),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
             foreach (var role in user.Roles)
             {
-                claims.Add(new Claim("roles", role.RoleName)); // הוספת תפקיד כ-Claim
+                claims.Add(new Claim("roles", role.RoleName)); 
             }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secret));

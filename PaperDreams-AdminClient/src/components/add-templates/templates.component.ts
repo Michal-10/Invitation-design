@@ -79,12 +79,10 @@ export class TemplatesComponent implements OnInit {
       const extension = originalFile.name.split('.').pop(); 
       const newFileName = originalFile.name.split('.')[0] + '_' + timestamp + '.' + extension;
 
-      // יצירת קובץ חדש עם שם חדש
       const renamedFile = new File([originalFile], newFileName, {
         type: originalFile.type,
       });
 
-      // שמירת הקובץ החדש במקום הישן
       this.selectedFile = renamedFile;
       const presignedUrl = await this.templateService.uploadFileToAWS(this.selectedFile);
       await this.templateService.uploadToS3(this.selectedFile, presignedUrl);

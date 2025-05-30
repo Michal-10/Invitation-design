@@ -29,12 +29,6 @@ namespace PaperDreams_Server.Service.services
             return _mapper.Map<IEnumerable<CategoryDTO>>(categories);
         }
 
-        public async Task<CategoryDTO> GetByIdAsync(int id)
-        {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            return _mapper.Map<CategoryDTO>(category);
-        }
-
         public async Task<bool> AddAsync(CategoryDTO model)
         {
             var category = _mapper.Map<CategoryDto>(model);
@@ -43,12 +37,6 @@ namespace PaperDreams_Server.Service.services
             return await _categoryRepository.AddAsync(category);
         }
 
-        public async Task<bool> DeleteAsync(int id)
-        {
-            return await _categoryRepository.DeleteAsync(id);
-
-        }
-
-    
+       
     }
 }

@@ -38,7 +38,6 @@ export class MarketingEmailComponent {
         this.emailContent = res.text;
         this.statusMessage = 'נוצר תוכן שיווקי!';
         
-        // עדכון תוכן העורך אם יש צורך
         if (this.quillEditor) {
           this.quillEditor.root.innerHTML = res.text;
         }
