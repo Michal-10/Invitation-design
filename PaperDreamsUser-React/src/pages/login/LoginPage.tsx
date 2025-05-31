@@ -27,7 +27,6 @@ export default function AuthPage() {
   const lastNameRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async () => {
-    setLoading(true);
     setError("");
 
     const email = emailRef.current?.value || "";
@@ -39,6 +38,7 @@ export default function AuthPage() {
       setError("יש למלא אימייל וסיסמה");
       return;
     }
+    setLoading(true);
 
     try {
       await dispatch(
