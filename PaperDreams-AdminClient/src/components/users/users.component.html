@@ -1,4 +1,4 @@
-<div class="users-container">
+<!-- <div class="users-container">
   <div class="page-header">
     <h1>ניהול משתמשים</h1>
     <div class="add-user-container">
@@ -114,6 +114,123 @@
             {{ add_user ? 'הוסף' : 'שמור' }}
             @if(isLoadingSave) {
             <mat-spinner color="#fff" diameter="20"></mat-spinner>
+            }
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template> -->
+
+
+<div class="users-container">
+  <div class="page-header">
+    <h1>ניהול משתמשים</h1>
+    <div class="add-user-container">
+      <button mat-raised-button (click)="openAddUserDialog()">
+        <mat-icon class="add-icon">person_add</mat-icon>
+        הוסף משתמש חדש
+      </button>
+    </div>
+  </div>
+
+  <div class="users-grid">
+    @for (user of users; track user.id) {
+      <div class="user-card">
+        <div class="user-header">
+          <div class="avatar-circle">{{ getUserInitials(user) }}</div>
+          <div class="user-name">{{ user.firstName + ' ' + user.lastName }}</div>
+        </div>
+
+        <div class="user-details">
+          <div class="user-detail-row">
+            <mat-icon class="email-icon">email</mat-icon>
+            <span>{{ user.email }}</span>
+          </div>
+        </div>
+
+        <div class="user-actions">
+          <button mat-icon-button (click)="deleteUser(user.id)" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-spinner">
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+  } @else {
+    @if (users.length === 0) {
+      <div class="empty-state">
+        <mat-icon>people_outline</mat-icon>
+        <h2>אין משתמשים להצגה</h2>
+        <p>לחץ על "הוסף משתמש חדש" כדי להתחיל</p>
+      </div>
+    }
+  }
+</div>
+
+<ng-template #editDialog>
+  <div class="content-wrapper page-transition">
+    <div class="card-header">
+      <div class="card-title">הוספת משתמש חדש</div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="userForm">
+        <mat-form-field appearance="outline" class="custom-form-field">
+          <mat-label>שם פרטי</mat-label>
+          <input matInput formControlName="firstName" />
+          <mat-icon matPrefix>person</mat-icon>
+          @if(userForm.get('firstName')?.hasError('required')) {
+            <mat-error>שדה חובה</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="custom-form-field">
+          <mat-label>שם משפחה</mat-label>
+          <input matInput formControlName="lastName" />
+          <mat-icon matPrefix>person</mat-icon>
+          @if(userForm.get('lastName')?.hasError('required')) {
+            <mat-error>שדה חובה</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="custom-form-field">
+          <mat-label>אימייל</mat-label>
+          <mat-icon matPrefix>email</mat-icon>
+          <input matInput type="email" formControlName="email" />
+          @if(userForm.get('email')?.hasError('required')) {
+            <mat-error>שדה חובה</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>סיסמה</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if(userForm.get('password')?.hasError('required')) {
+            <mat-error>שדה חובה</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-button (click)="this.dialogRef.close();" class="btn-primary">ביטול</button>
+          <button
+            mat-raised-button
+            color="primary"
+            class="btn-primary"
+            [disabled]="userForm.invalid || !userForm.get('password')?.value"
+            (click)="addUser()"
+          >
+            הוסף
+            @if(isLoadingSave) {
+              <mat-spinner color="#fff" diameter="20"></mat-spinner>
             }
           </button>
         </div>
