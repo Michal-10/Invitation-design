@@ -38,15 +38,6 @@ export class UsersService {
     );
   }
 
-  // updateUser(id: number, user: User): Observable<any> {
-  //   return this.http.put<User>(`${this.apiUrl}/user/update-profile/${id}`, user, this.getAuthHeaders()).pipe(
-  //     tap(() => {
-  //       const current = this.usersSubject.getValue();
-  //       this.refreshUsers();
-  //     })
-  //   );
-  // }
-
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/user/${id}`, this.getAuthHeaders()).pipe(
       tap(() => {

@@ -143,14 +143,13 @@ export default () => {
                 name: newFile.name,
                 imageUrl: fileUrl,
                 userId: decodeToken()?.decoded.userId,
-                templateId: myTtemplate.id, //template.id,
+                templateId: myTtemplate.id, 
                 content: "הזמנה מושלמת",
             };
 
             await axios.post(`${import.meta.env.VITE_API_URL}/CompletedInvitation/add`, invitationData);
             await uploadFileToAWS(newFile);
 
-            // הורדת הקובץ
             const link = document.createElement("a");
             link.href = dataUrl;
             link.download = "invitation.png";

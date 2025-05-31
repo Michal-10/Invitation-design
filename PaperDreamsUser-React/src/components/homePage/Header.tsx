@@ -13,16 +13,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/Store';
 import theme from '../../theme';
 
-// const getUserNameFromToken = (token: string | null): string => {
-//     if (!token) return '';
-//     try {
-//         const payload = JSON.parse(atob(token.split('.')[1]));
-//         return payload?.name || '';
-//     } catch {
-//         return 'John Doe'; //ברירת מחדל
-//     }
-// };
-
 const Header: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -44,8 +34,6 @@ const Header: React.FC = () => {
         const storedToken = sessionStorage.getItem('userToken');
         setToken(storedToken);
         if (storedToken) {
-            // const name = getUserNameFromToken(storedToken);
-            // setUserName(name || user.email.charAt(0).toUpperCase() || '');
             setUserName(user.firstName.charAt(0) || user.lastName.charAt(0))
         }
     }, [location.pathname, user]);

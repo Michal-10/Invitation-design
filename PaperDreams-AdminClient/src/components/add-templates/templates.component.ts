@@ -104,7 +104,7 @@ export class TemplatesComponent implements OnInit {
         });
         sessionStorage.setItem('template', JSON.stringify(res));
 
-        const updatedFileName = res.name; // עדכון שם הקובץ שנשמר ב-AWS
+        const updatedFileName = res.name;
 
         const presignedUrl = await this.templateService.uploadFileToAWS(this.selectedFile);
 

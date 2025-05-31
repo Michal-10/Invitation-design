@@ -46,7 +46,7 @@ export default function MyCompletedInvitationPage() {
               mb: 5,
               borderRadius: 4,
               textAlign: "center",
-              bgcolor: "primary.main", // צבע רקע
+              bgcolor: "primary.main", 
               color: "white",
             }}
           >

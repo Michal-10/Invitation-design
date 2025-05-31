@@ -42,7 +42,7 @@ export class AnalyticsComponent implements OnInit {
   dailyLoginsData: number[] = [];
   dailyActiveUsersLabels: string[] = [];
   dailyActiveUsersData: number[] = [];
-  selectedChart: 'pie' | 'bar' | 'line' = 'pie'; // ברירת מחדל
+  selectedChart: 'pie' | 'bar' | 'line' = 'pie'; 
 
 
   constructor(private analyticsService: AnalyticsService) { }
@@ -54,12 +54,12 @@ export class AnalyticsComponent implements OnInit {
       this.templatesByCategoryData = data.map(d => d.count);
     });
     this.analyticsService.getDailyLogins().subscribe(data => {
-      this.dailyLoginsLabels = data.map(d => new Date(d.date).toLocaleDateString('he-IL')); // Display only the date
+      this.dailyLoginsLabels = data.map(d => new Date(d.date).toLocaleDateString('he-IL'));  
       this.dailyLoginsData = data.map(d => d.count);
     });
     
     this.analyticsService.getDailyActiveUsers().subscribe(data => {
-      this.dailyActiveUsersLabels = data.map(d => new Date(d.date).toLocaleDateString('he-IL')); // Display date
+      this.dailyActiveUsersLabels = data.map(d => new Date(d.date).toLocaleDateString('he-IL')); 
       this.dailyActiveUsersData = data.map(d => d.count); 
     });
   }
