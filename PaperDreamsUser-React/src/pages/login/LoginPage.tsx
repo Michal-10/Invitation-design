@@ -35,6 +35,11 @@ export default function AuthPage() {
     const firstName = firstNameRef.current?.value || "";
     const lastName = lastNameRef.current?.value || "";
 
+    if (!email || !password) {
+      setError("יש למלא אימייל וסיסמה");
+      return;
+    }
+
     try {
       await dispatch(
         loginRegister({
