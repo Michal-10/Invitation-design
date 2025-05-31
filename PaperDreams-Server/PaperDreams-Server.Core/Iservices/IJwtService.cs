@@ -9,7 +9,6 @@ namespace PaperDreams_Server.Core.Iservices
 {
     public interface IJwtService
     {
-        //public string GenerateToken(User user);
         public string GenerateToken(User user);
 
     }

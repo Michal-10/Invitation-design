@@ -22,7 +22,7 @@ namespace PaperDreams_Server.Controllers
 
         // GET: api/<CategoryFieldController>
         [HttpGet("category/{categoryId}")]
-        public async Task<IEnumerable<CategoryFieldDTO>> GetFieldsByCategory(int categoryId)//get by category
+        public async Task<IEnumerable<CategoryFieldDTO>> GetFieldsByCategory(int categoryId)
         {
             return await _categoryFieldService.GetFieldsByCategory(categoryId);
         }

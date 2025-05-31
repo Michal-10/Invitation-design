@@ -9,8 +9,7 @@ namespace PaperDreams_Server
         public PostModelMappingProfile()
         {
             CreateMap<TemplatePostModel, TemplateDTO>().ReverseMap(); ;
-            CreateMap<CompletedInvitationPostModel, CompletedInvitationDTO>().ReverseMap(); ;
-            //CreateMap<TextUploadPostModel, TextUploadDTO>().ReverseMap(); ;
+            CreateMap<CompletedInvitationPostModel, CompletedInvitationDTO>().ReverseMap(); 
             CreateMap<UserPostModel, UserDTO>().ReverseMap();
             CreateMap<RegisterPostModel, UserDTO>().ReverseMap();
             CreateMap<LoginPostModel, UserDTO>().ReverseMap();
@@ -18,7 +17,7 @@ namespace PaperDreams_Server
             CreateMap<TemplateDTO, TemplatePostModel>().ReverseMap(); 
             CreateMap<TemplateFieldDTO, TemplateFieldPostModel>().ReverseMap();
             CreateMap<TemplateFieldPostModel, TemplateFieldDTO>()
-    .ForMember(dest => dest.FieldId, opt => opt.MapFrom(src => src.FieldId)).ReverseMap();
+            .ForMember(dest => dest.FieldId, opt => opt.MapFrom(src => src.FieldId)).ReverseMap();
 
         }
     }

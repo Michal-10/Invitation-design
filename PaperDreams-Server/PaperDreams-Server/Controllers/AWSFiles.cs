@@ -35,9 +35,8 @@ namespace PaperDreams_Server.Controllers
             {
                 BucketName = _bucketName,
                 Key = fileName,
-                Verb = HttpVerb.PUT, // מאפשר העלאה
+                Verb = HttpVerb.PUT, 
                 Expires = DateTime.UtcNow.AddMinutes(5),
-                // = "image/jpeg" // או סוג הקובץ המתאים
                 ContentType = GetContentType(fileName)
             };
 

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PaperDreams_Server.Service.services
 {
-    public class UserService:IUserService //שירות משתמשים
+    public class UserService:IUserService 
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -26,11 +26,10 @@ namespace PaperDreams_Server.Service.services
             _jwtService = jwtService;
         }
 
-        // ✅ רישום משתמש חדש
         public async Task<(string Token, UserDTO User)> RegisterAsync(UserDTO userDto)
         {
             if ((await _userRepository.GetUsersAsync()).Any(u => u.Email == userDto.Email))
-                return (null, null); // משתמש כבר קיים
+                return (null, null); 
 
             var newUser = _mapper.Map<User>(userDto);
             var role = _mapper.Map<Role>(userDto.Role);
@@ -50,22 +49,19 @@ namespace PaperDreams_Server.Service.services
             return (token, userResponse);
         }
 
-        // ✅ התחברות
         public async Task<(string Token, UserDTO User)> LoginAsync(UserDTO userDto)
         {
             var user = (await _userRepository.GetUsersAsync()).FirstOrDefault(u => u.Email == userDto.Email);
             if (user == null || !VerifyPassword(userDto.Password, user.PasswordHash))
-                return (null, null); // אימייל או סיסמה שגויים
+                return (null, null); 
 
             var token = _jwtService.GenerateToken(user);
 
-            // מיפוי המשתמש חזרה ל-DTO כדי לא לחשוף מידע רגיש
             var userResponse = _mapper.Map<UserDTO>(user);
 
             return (token, userResponse);
         }
 
-        // ✅ החזרת רשימת משתמשים (Admin בלבד)
         public async Task<IEnumerable<UserDTO>> GetAllUsersAsync()
         {
             var users = await _userRepository.GetUsersAsync();
@@ -76,13 +72,6 @@ namespace PaperDreams_Server.Service.services
         {
             return await _userRepository.GetEmailUsersAsync();
         }
-
-        //// ✅ החזרת משתמש לפי ID
-        //public async Task<UserDTO> getUserByIdAsync(int id)
-        //{
-        //    return _mapper.Map<UserDTO>(await _userRepository.GetUserByIdAsync(id));
-        //}
-
         public async Task<bool> AddUserAsync(UserDTO user)
         {
             var userEntity = _mapper.Map<User>(user);
@@ -111,19 +100,17 @@ namespace PaperDreams_Server.Service.services
             return null;
         }
 
-        // ✅ מחיקת משתמש (Admin בלבד)
         public async Task<bool> DeleteUserAsync(int id)
         {
             var userFind = await _userRepository.GetUserByIdAsync(id);
             if (userFind == null)
             {
-                return false; // משתמש לא נמצא
+                return false; 
             }
             await _userRepository.DeleteUserAsync(id);
             return true;
         }
 
-        // ✅ פונקציות עזר להצפנה
         private string HashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);

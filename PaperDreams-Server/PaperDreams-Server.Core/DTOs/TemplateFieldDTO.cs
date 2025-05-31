@@ -13,7 +13,7 @@ namespace PaperDreams_Server.Core.DTOs
         public FieldDTO Field { get; set; }
         public int FieldId { get; set; }
         public int X { get; set; }
-            public int Y { get; set; }
+        public int Y { get; set; }
     }
 
     
