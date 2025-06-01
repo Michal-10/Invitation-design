@@ -55,7 +55,7 @@ namespace PaperDreams_Server.Controllers
                                     <p style='margin:0; font-weight:bold;'>🎉 InvitationLine – <span style='font-style:italic;'>כי כל פרט חשוב</span></p>
                                     <p style='margin:4px 0;'>🎨 עיצוב חכם להזמנות, תבניות מותאמות אישית ועוד</p>
                                     <p style='margin:4px 0;'>🌐 
-                                        <a href='https://invitationline.onrender.com' style='color:#0066cc; text-decoration:none;'>www.invitationline.com</a>
+                                        <a href='https://invitationline-vmg0.onrender.com' style='color:#0066cc; text-decoration:none;'>www.invitationline.com</a>
                                     </p>
                                     <p style='margin:4px 0;'>📧 
                                         <a href='mailto:noreply.invitationline@gmail.com?subject=פנייה%20לשירות%20לקוחות&body=שלום%20צוות%20InvitationLine%2C%0A%0Aברצוני%20לפנות%20אליכם%20בעניין%20...' 
